@@ -82,7 +82,7 @@ export function HeroSection() {
       <section className="section hero" style={{ scrollSnapAlign: "start" }}>
         {/* B&W video — no loop, pauses at midpoint */}
         <video ref={videoRef} className="hero-video" autoPlay muted playsInline>
-          <source src="/hero-video.mp4" type="video/mp4" />
+          <source src="/media/home/hero-video.mp4" type="video/mp4" />
         </video>
 
         <div className="hero-overlay" />
