@@ -4,8 +4,7 @@ import { SiteHeader } from "@/components/site-header"
 import { useEffect, useRef, useState } from "react"
 
 const HEADLINE = "Where precision meets care."
-const SUBTEXT_DELAY_MS = 180
-const ACTIONS_DELAY_MS = 360
+const HEADLINE_LETTERS = Array.from(HEADLINE)
 
 export function HeroSection() {
   const videoRef = useRef<HTMLVideoElement>(null)
@@ -41,6 +40,19 @@ export function HeroSection() {
 
     let raf: number
     let done = false
+    let visibleLetterCount = 0
+    const letters = Array.from(text.querySelectorAll<HTMLElement>(".hero-letter"))
+
+    const revealLetters = (count: number) => {
+      const nextCount = Math.min(letters.length, Math.max(0, count))
+      if (nextCount <= visibleLetterCount) return
+
+      for (let i = visibleLetterCount; i < nextCount; i += 1) {
+        letters[i]?.classList.add("is-visible")
+      }
+
+      visibleLetterCount = nextCount
+    }
 
     const tick = () => {
       if (!video.duration) {
@@ -56,6 +68,7 @@ export function HeroSection() {
         text.style.transform = "translateX(0)"
         text.style.filter = "none"
         text.style.opacity = "1"
+        revealLetters(letters.length)
         setSettled(true)
         return
       }
@@ -63,9 +76,11 @@ export function HeroSection() {
       if (!done) {
         const x = -18 + p * 36 // -18vw → 0vw
         const blur = 12 * Math.max(0, 1 - p * 2) // 12px → 0px
+        const letterProgress = Math.min(1, Math.max(0, (p - 0.04) / 0.42))
         text.style.transform = `translateX(${x}vw)`
         text.style.filter = `blur(${blur}px)`
         text.style.opacity = String(Math.min(1, p / 0.06)) // quick fade-in
+        revealLetters(Math.ceil(letterProgress * letters.length))
         raf = requestAnimationFrame(tick)
       }
     }
@@ -79,7 +94,7 @@ export function HeroSection() {
       <SiteHeader overlay />
 
       {/* ─── HERO ─────────────────────────────────────────── */}
-      <section className="section hero" style={{ scrollSnapAlign: "start" }}>
+      <section className="section hero">
         {/* B&W video — no loop, pauses at midpoint */}
         <video ref={videoRef} className="hero-video" autoPlay muted playsInline>
           <source src="/hero-video.mp4" type="video/mp4" />
@@ -95,20 +110,23 @@ export function HeroSection() {
           ref={textRef}
           style={{ opacity: 0 }}
         >
-          <h1 className="hero-headline">{HEADLINE}</h1>
+          <h1 className="hero-headline" aria-label={HEADLINE}>
+            {HEADLINE_LETTERS.map((letter, index) => (
+              <span
+                key={`${letter}-${index}`}
+                aria-hidden="true"
+                className={letter === " " ? "hero-letter space" : "hero-letter"}
+              >
+                {letter === " " ? "\u00A0" : letter}
+              </span>
+            ))}
+          </h1>
 
-          {/* Supporting copy appears after the headline settles in place */}
-          <p
-            className="hero-sub"
-            style={{ animationDelay: `${SUBTEXT_DELAY_MS}ms` }}
-          >
+          <p className="hero-sub">
             Evidence-based pain management delivered by a multidisciplinary team
             of specialists. Covered by OHIP when referred.
           </p>
-          <div
-            className="hero-actions"
-            style={{ animationDelay: `${ACTIONS_DELAY_MS}ms` }}
-          >
+          <div className="hero-actions">
             <a href="tel:2897529388" className="btn-primary">
               Request a Consultation
             </a>
