@@ -2,9 +2,9 @@ import Link from "next/link"
 
 export function SiteFooter() {
   return (
-    <footer className="footer" style={{ borderTop: "1px solid var(--sand)" }}>
+    <footer className="footer">
       <span className="footer-left">
-        © Precision Pain Centre. All rights reserved.
+        &copy; Precision Pain Centre. All rights reserved.
       </span>
       <div className="footer-right">
         <a href="tel:2897529388">289-752-9388</a>

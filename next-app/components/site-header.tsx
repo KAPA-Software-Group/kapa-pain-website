@@ -20,15 +20,12 @@ type SiteHeaderProps = {
 export function SiteHeader({ overlay = false }: SiteHeaderProps) {
   const pathname = usePathname()
   const [menuOpen, setMenuOpen] = useState(false)
-  const [scrolled, setScrolled] = useState(!overlay)
-
-  useEffect(() => {
-    setMenuOpen(false)
-  }, [pathname])
+  const [scrolled, setScrolled] = useState(
+    () => !overlay || (typeof window !== "undefined" && window.scrollY > 60)
+  )
 
   useEffect(() => {
     if (!overlay) {
-      setScrolled(true)
       return
     }
 
@@ -62,6 +59,7 @@ export function SiteHeader({ overlay = false }: SiteHeaderProps) {
               <Link
                 href={item.href}
                 className={pathname === item.href ? "is-active" : undefined}
+                onClick={() => setMenuOpen(false)}
               >
                 {item.label}
               </Link>
@@ -101,6 +99,7 @@ export function SiteHeader({ overlay = false }: SiteHeaderProps) {
               ]
                 .filter(Boolean)
                 .join(" ")}
+              onClick={() => setMenuOpen(false)}
             >
               {item.label}
             </Link>
