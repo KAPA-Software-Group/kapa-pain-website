@@ -14,7 +14,6 @@ export function HeroShaderBg({ speed = 0.25, className }: HeroShaderBgProps) {
         style={{ width: "100%", height: "100%" }}
         colors={["#F1EADA", "#E8DDD0", "#CEC1A8", "#b59e7d"]}
         speed={speed}
-        backgroundColor="#F1EADA"
       />
     </div>
   )

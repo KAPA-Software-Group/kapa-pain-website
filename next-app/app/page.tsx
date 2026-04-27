@@ -1,4 +1,5 @@
 import { HeroSection } from "@/components/hero-section"
+import { SiteFooter } from "@/components/site-footer"
 
 export default function Home() {
   return (
@@ -15,7 +16,8 @@ export default function Home() {
             </div>
             <div className="phil-right">
               <h2 className="display-heading phil-heading reveal reveal-delay-1">
-                Chronic pain deserves more than a prescription. It deserves a plan.
+                Chronic pain deserves more than a prescription. It deserves a
+                plan.
               </h2>
               <p className="phil-body reveal reveal-delay-2">
                 We built Precision Pain Centre around a single conviction: every
@@ -152,10 +154,7 @@ export default function Home() {
                 desc: "Ongoing monitoring, adjustments, and specialist follow-up are built into your care from the start.",
               },
             ].map((s, i) => (
-              <div
-                key={s.n}
-                className={`step reveal reveal-delay-${i + 1}`}
-              >
+              <div key={s.n} className={`step reveal reveal-delay-${i + 1}`}>
                 <span className="step-num">{s.n}</span>
                 <h3 className="step-title">{s.title}</h3>
                 <p className="step-desc">{s.desc}</p>
@@ -174,12 +173,26 @@ export default function Home() {
           </h2>
           <div className="cond-grid">
             {[
-              "Chronic Back Pain", "Neck Pain", "Osteoarthritis", "Sciatica",
-              "Sports Injuries", "Disc Herniation", "Facet Joint Pain", "Sacroiliac Pain",
-              "Fibromyalgia", "Neuropathic Pain", "Migraines", "Cluster Headaches",
-              "Shoulder Pain", "Knee Pain", "Complex Regional Pain", "Post-Surgical Pain",
+              "Chronic Back Pain",
+              "Neck Pain",
+              "Osteoarthritis",
+              "Sciatica",
+              "Sports Injuries",
+              "Disc Herniation",
+              "Facet Joint Pain",
+              "Sacroiliac Pain",
+              "Fibromyalgia",
+              "Neuropathic Pain",
+              "Migraines",
+              "Cluster Headaches",
+              "Shoulder Pain",
+              "Knee Pain",
+              "Complex Regional Pain",
+              "Post-Surgical Pain",
             ].map((c) => (
-              <div key={c} className="cond-item">{c}</div>
+              <div key={c} className="cond-item">
+                {c}
+              </div>
             ))}
           </div>
         </div>
@@ -197,29 +210,54 @@ export default function Home() {
               <span className="loc-tag">Main Clinic</span>
               <div className="loc-city">Brampton</div>
               <address className="loc-address">
-                Unit 200 &amp; 502<br />
-                18 Kensington Road<br />
+                Unit 200 &amp; 502
+                <br />
+                18 Kensington Road
+                <br />
                 Brampton, ON &nbsp; L6T 4S5
               </address>
-              <a href="tel:2897529388" className="loc-phone">289-752-9388</a>
+              <a href="tel:2897529388" className="loc-phone">
+                289-752-9388
+              </a>
               <div className="loc-divider" />
-              <div className="hours-row"><span className="h-day">Mon – Fri</span><span className="h-time">9:00 am – 5:00 pm</span></div>
-              <div className="hours-row"><span className="h-day">Saturday</span><span className="h-time">By Appointment</span></div>
-              <div className="hours-row"><span className="h-day">Sunday</span><span className="h-time">Closed</span></div>
+              <div className="hours-row">
+                <span className="h-day">Mon – Fri</span>
+                <span className="h-time">9:00 am – 5:00 pm</span>
+              </div>
+              <div className="hours-row">
+                <span className="h-day">Saturday</span>
+                <span className="h-time">By Appointment</span>
+              </div>
+              <div className="hours-row">
+                <span className="h-day">Sunday</span>
+                <span className="h-time">Closed</span>
+              </div>
             </div>
             <div className="loc-card reveal reveal-delay-3">
               <span className="loc-tag">Second Location</span>
               <div className="loc-city">Hamilton</div>
               <address className="loc-address">
-                Unit 101<br />
+                Unit 101
+                <br />
                 25 Charlton Ave E<br />
                 Hamilton, ON &nbsp; L8N 1Y2
               </address>
-              <a href="tel:2897529388" className="loc-phone">289-752-9388</a>
+              <a href="tel:2897529388" className="loc-phone">
+                289-752-9388
+              </a>
               <div className="loc-divider" />
-              <div className="hours-row"><span className="h-day">Mon – Fri</span><span className="h-time">9:00 am – 5:00 pm</span></div>
-              <div className="hours-row"><span className="h-day">Saturday</span><span className="h-time">By Appointment</span></div>
-              <div className="hours-row"><span className="h-day">Sunday</span><span className="h-time">Closed</span></div>
+              <div className="hours-row">
+                <span className="h-day">Mon – Fri</span>
+                <span className="h-time">9:00 am – 5:00 pm</span>
+              </div>
+              <div className="hours-row">
+                <span className="h-day">Saturday</span>
+                <span className="h-time">By Appointment</span>
+              </div>
+              <div className="hours-row">
+                <span className="h-day">Sunday</span>
+                <span className="h-time">Closed</span>
+              </div>
             </div>
           </div>
         </div>
@@ -230,7 +268,11 @@ export default function Home() {
         <div className="cta-inner">
           <div className="section-label reveal">Begin Your Care</div>
           <h2 className="cta-heading reveal reveal-delay-1">
-            Take the first step<br />toward a life<br />with less pain.
+            Take the first step
+            <br />
+            toward a life
+            <br />
+            with less pain.
           </h2>
           <p className="cta-sub reveal reveal-delay-2">
             A referral from your family physician is all you need to begin.
@@ -261,17 +303,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ─── FOOTER ──────────────────────────────────────── */}
-      <footer className="footer" style={{ borderTop: "1px solid var(--sand)" }}>
-        <span className="footer-left">
-          © 2024 Precision Pain Centre. All rights reserved.
-        </span>
-        <div className="footer-right">
-          <a href="tel:2897529388">289-752-9388</a>
-          <a href="mailto:info@precisioncare.ca">info@precisioncare.ca</a>
-          <a href="#">Privacy</a>
-        </div>
-      </footer>
+      <SiteFooter />
     </>
   )
 }
