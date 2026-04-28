@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import type { CSSProperties } from "react"
 import Link from "next/link"
 import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
@@ -9,6 +10,24 @@ import {
   patientProcedureSharedExpectations,
   patientProcedureUrgentCareNotes,
 } from "@/lib/patient-procedures"
+
+const hubPathwaySteps = [
+  {
+    title: "Assessment",
+    description:
+      "Review history, function, prior treatment, and imaging to understand the likely pain source.",
+  },
+  {
+    title: "Targeted Treatment",
+    description:
+      "Use image-guided injections, blocks, or ablation when they fit the diagnosis and care plan.",
+  },
+  {
+    title: "Recovery & Follow-Up",
+    description:
+      "Track response, follow aftercare instructions, and adjust the next step based on results.",
+  },
+]
 
 export const metadata: Metadata = {
   title: "Patient Procedures | Precision Pain Centre",
@@ -29,9 +48,9 @@ export default function PatientProceduresPage() {
               <div className="procedure-hero-copy-wrap">
                 <h1 className="inner-hero-title">Patient Procedures</h1>
                 <p className="inner-hero-copy procedure-hero-copy">
-                  Explore how Precision Care Centre approaches assessment,
-                  diagnosis, image-guided treatment, recovery, and follow-up
-                  across the clinic&apos;s core pain procedures.
+                  Patient-friendly information about chronic pain assessment,
+                  image-guided procedures, recovery expectations, and when to
+                  contact the clinic.
                 </p>
                 <div className="procedure-hero-actions">
                   <a href="tel:2897529388" className="btn-primary">
@@ -65,13 +84,10 @@ export default function PatientProceduresPage() {
                   </p>
                 </div>
                 <div className="procedure-fact">
-                  <span className="procedure-fact-label">
-                    How To Use This Hub
-                  </span>
+                  <span className="procedure-fact-label">How To Start</span>
                   <p className="procedure-fact-value">
                     Start with assessment if your diagnosis is still evolving,
-                    then move into the specific procedure pages that match your
-                    care plan
+                    or choose the procedure family that matches your care plan
                   </p>
                 </div>
               </div>
@@ -79,71 +95,101 @@ export default function PatientProceduresPage() {
           </div>
         </section>
 
-        <section className="procedure-section">
+        <section className="procedure-section procedure-hub-intro-section">
           <div className="section-inner">
             <div className="procedure-section-header">
               <div className="section-label">Clinic Approach</div>
               <h2 className="procedure-section-title">
-                One section, organized by real decision points.
+                A clear path from assessment to targeted care.
               </h2>
+              <p className="procedure-section-copy">
+                Precision Care Centre uses a multidisciplinary approach to
+                identify the source of pain, match treatment to the diagnosis,
+                and support recovery with practical follow-up guidance.
+              </p>
             </div>
 
-            <div className="procedure-intro-grid">
-              <p className="procedure-paragraph">
-                This section is designed as a hub with dedicated pages for major
-                procedure families. Patients should not have to dig through one
-                oversized page or open a chain of hidden accordions to find
-                recovery instructions, risks, alternatives, or when to contact
-                the clinic.
-              </p>
-              <p className="procedure-paragraph">
-                The structure reflects how care decisions are actually made:
-                assessment first, then diagnostic and therapeutic procedures,
-                then advanced options when needed. That makes the information
-                easier to scan, easier to trust, and easier to use before a
-                consultation.
-              </p>
+            <div className="procedure-pathway" aria-label="Care pathway">
+              {hubPathwaySteps.map((step, index) => (
+                <article
+                  key={step.title}
+                  className="procedure-pathway-step"
+                  style={{ "--stagger": index } as CSSProperties}
+                >
+                  <span className="procedure-pathway-number">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <h3>{step.title}</h3>
+                  <p>{step.description}</p>
+                </article>
+              ))}
             </div>
           </div>
         </section>
 
-        {patientProcedureHubGroups.map((group) => (
-          <section key={group.title} className="procedure-section">
+        {patientProcedureHubGroups.map((group, groupIndex) => (
+          <section
+            key={group.title}
+            id={group.title
+              .toLowerCase()
+              .replaceAll(" ", "-")
+              .replaceAll("&", "and")}
+            className="procedure-section procedure-hub-group-section"
+          >
             <div className="section-inner">
-              <div className="procedure-section-header">
-                <div className="section-label">Procedure Group</div>
-                <h2 className="procedure-section-title">{group.title}</h2>
-                <p className="procedure-section-copy">{group.description}</p>
-              </div>
+              <div className="procedure-group-layout">
+                <div className="procedure-group-aside">
+                  <div className="section-label">Procedure Group</div>
+                  <span className="procedure-group-number">
+                    {String(groupIndex + 1).padStart(2, "0")}
+                  </span>
+                  <h2 className="procedure-section-title">{group.title}</h2>
+                  <p className="procedure-section-copy">{group.description}</p>
+                </div>
 
-              <div className="procedure-card-grid">
-                {group.slugs.map((slug) => {
-                  const page = patientProcedurePages.find(
-                    (entry) => entry.slug === slug
-                  )
+                <div className="procedure-card-grid procedure-hub-card-grid">
+                  {group.slugs.map((slug, cardIndex) => {
+                    const page = patientProcedurePages.find(
+                      (entry) => entry.slug === slug
+                    )
 
-                  if (!page) {
-                    return null
-                  }
+                    if (!page) {
+                      return null
+                    }
 
-                  return (
-                    <article key={page.slug} className="procedure-card">
-                      <h3 className="procedure-card-title">{page.title}</h3>
-                      <p className="procedure-card-copy">{page.cardSummary}</p>
-                      <ul className="procedure-card-list">
-                        {page.cardHighlights.map((highlight) => (
-                          <li key={highlight}>{highlight}</li>
-                        ))}
-                      </ul>
-                      <Link
-                        href={getPatientProcedureHref(page.slug)}
-                        className="procedure-card-link"
+                    return (
+                      <article
+                        key={page.slug}
+                        className="procedure-card procedure-hub-card"
+                        style={{ "--stagger": cardIndex } as CSSProperties}
                       >
-                        View procedure details
-                      </Link>
-                    </article>
-                  )
-                })}
+                        <div className="procedure-card-topline">
+                          <span className="procedure-card-index">
+                            {String(cardIndex + 1).padStart(2, "0")}
+                          </span>
+                          <span className="procedure-card-eyebrow">
+                            {page.eyebrow}
+                          </span>
+                        </div>
+                        <h3 className="procedure-card-title">{page.title}</h3>
+                        <p className="procedure-card-copy">
+                          {page.cardSummary}
+                        </p>
+                        <ul className="procedure-card-list">
+                          {page.cardHighlights.map((highlight) => (
+                            <li key={highlight}>{highlight}</li>
+                          ))}
+                        </ul>
+                        <Link
+                          href={getPatientProcedureHref(page.slug)}
+                          className="procedure-card-link"
+                        >
+                          <span>View Procedure Details</span>
+                        </Link>
+                      </article>
+                    )
+                  })}
+                </div>
               </div>
             </div>
           </section>
@@ -154,7 +200,7 @@ export default function PatientProceduresPage() {
             <div className="procedure-section-header">
               <div className="section-label">What Patients Can Expect</div>
               <h2 className="procedure-section-title">
-                Consistent standards across the section.
+                What patients can expect across procedures.
               </h2>
             </div>
 
@@ -174,12 +220,12 @@ export default function PatientProceduresPage() {
             <div className="procedure-section-header">
               <div className="section-label">Safety</div>
               <h2 className="procedure-section-title">
-                Red flags should stay visible.
+                Symptoms that need prompt medical attention.
               </h2>
               <p className="procedure-section-copy">
-                Each dedicated page includes procedure-specific aftercare and
-                contact guidance. The symptoms below are examples of the kind of
-                red flags that should never be hidden behind collapsed content.
+                Procedure-specific aftercare may vary. Contact the clinic or
+                seek urgent care if you develop concerning symptoms after an
+                injection or procedure.
               </p>
             </div>
 
