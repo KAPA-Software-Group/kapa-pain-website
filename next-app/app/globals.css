@@ -1624,6 +1624,20 @@ body {
     white-space: normal;
     max-width: 92vw;
   }
+  .hero-text-track {
+    align-items: flex-start;
+    padding: 0 32px;
+    text-align: left;
+  }
+  .hero-sub {
+    max-width: 330px;
+    margin: 18px 0 34px;
+  }
+  .hero-actions {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 18px;
+  }
   .inner-hero {
     min-height: auto;
   }

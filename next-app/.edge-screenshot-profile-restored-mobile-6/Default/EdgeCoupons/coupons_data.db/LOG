@@ -1,0 +1,5 @@
+2026/04/28-16:22:18.844 8684 Creating DB C:\Users\Aymen\Desktop\Kapa\kapa-pain-website\next-app\.edge-screenshot-profile-restored-mobile-6\Default\EdgeCoupons/coupons_data.db since it was missing.
+2026/04/28-16:22:18.850 8684 Reusing MANIFEST C:\Users\Aymen\Desktop\Kapa\kapa-pain-website\next-app\.edge-screenshot-profile-restored-mobile-6\Default\EdgeCoupons/coupons_data.db/MANIFEST-000001
+2026/04/28-16:22:18.857 d708 Level-0 table #5: started
+2026/04/28-16:22:18.859 d708 Level-0 table #5: 682129 bytes OK
+2026/04/28-16:22:18.861 d708 Delete type=0 #3
