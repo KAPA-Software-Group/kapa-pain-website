@@ -1,11 +1,5 @@
-import { PlaceholderPage } from "@/components/placeholder-page"
+import { redirect } from "next/navigation"
 
 export default function ServicesPage() {
-  return (
-    <PlaceholderPage
-      eyebrow="Services"
-      title="Services"
-      description="Detailed treatment and procedure information will be added here."
-    />
-  )
+  redirect("/patient-procedures")
 }

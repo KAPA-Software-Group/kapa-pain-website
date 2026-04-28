@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation"
 import { useEffect, useState } from "react"
 
 const NAV_ITEMS = [
-  { href: "/services", label: "Services" },
+  { href: "/patient-procedures", label: "Patient Procedures" },
   { href: "/doctors", label: "Doctors" },
   { href: "/locations", label: "Locations" },
   { href: "/contact-us", label: "Contact Us" },
@@ -23,6 +23,8 @@ export function SiteHeader({ overlay = false }: SiteHeaderProps) {
   const [scrolled, setScrolled] = useState(
     () => !overlay || (typeof window !== "undefined" && window.scrollY > 60)
   )
+  const isActivePath = (href: string) =>
+    pathname === href || pathname.startsWith(`${href}/`)
 
   useEffect(() => {
     if (!overlay) {
@@ -58,7 +60,7 @@ export function SiteHeader({ overlay = false }: SiteHeaderProps) {
             <li key={item.href}>
               <Link
                 href={item.href}
-                className={pathname === item.href ? "is-active" : undefined}
+                className={isActivePath(item.href) ? "is-active" : undefined}
                 onClick={() => setMenuOpen(false)}
               >
                 {item.label}
@@ -95,7 +97,7 @@ export function SiteHeader({ overlay = false }: SiteHeaderProps) {
               href={item.href}
               className={[
                 "mobile-nav-link",
-                pathname === item.href ? "is-active" : "",
+                isActivePath(item.href) ? "is-active" : "",
               ]
                 .filter(Boolean)
                 .join(" ")}
