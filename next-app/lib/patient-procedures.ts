@@ -63,7 +63,7 @@ export const patientProcedurePages: ProcedurePage[] = [
     ],
     intro: [
       "Precision Care Centre uses a multidisciplinary approach to chronic pain assessment and management. The goal is to identify the likely pain source as accurately as possible and build a plan that fits the patient's condition, function, and prior treatment history.",
-      "This page is not about one single procedure. It explains how the clinic evaluates persistent pain, uses medication thoughtfully, and combines procedures, rehabilitation guidance, and follow-up into one coordinated pathway.",
+      "Care may include medication planning, image-guided procedures, rehabilitation guidance, lifestyle modification, and follow-up as symptoms change.",
     ],
     sections: [
       {
@@ -709,10 +709,10 @@ export const patientProcedurePages: ProcedurePage[] = [
         title: "Evidence and off-label use",
         tone: "muted",
         bullets: [
-          "The source material describes high-level evidence supporting efficacy",
+          "Clinical evidence has reported meaningful symptom improvement in selected patients",
           "Clinical trials, including Olmsted et al., 2019, are cited as showing meaningful improvement in PTSD symptoms",
-          "The document notes positive outcomes in over 80% of treated patients",
-          "The clinic material also states that this is considered an off-label treatment in this setting",
+          "Published outcomes and clinic materials describe positive responses in many treated patients",
+          "This is considered an off-label treatment in this setting",
         ],
       },
       {
@@ -771,7 +771,7 @@ export const patientProcedurePages: ProcedurePage[] = [
     metaDescription:
       "Review advanced pain procedures at Precision Care Centre, including pulsed radiofrequency, cryoablation, genicular artery embolization, vertebroplasty, and kyphoplasty.",
     cardSummary:
-      "A grouped page for higher-complexity procedures that deserve visibility but do not each need a standalone patient page at this stage.",
+      "Advanced image-guided options for selected chronic or complex pain conditions when standard therapies have not provided enough relief.",
     cardHighlights: [
       "Advanced, minimally invasive interventions",
       "Image-guided planning and delivery",
