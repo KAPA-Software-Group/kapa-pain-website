@@ -116,9 +116,6 @@ export default function PatientProceduresPage() {
                   className="procedure-pathway-step"
                   style={{ "--stagger": index } as CSSProperties}
                 >
-                  <span className="procedure-pathway-number">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
                   <h3>{step.title}</h3>
                   <p>{step.description}</p>
                 </article>
@@ -127,7 +124,7 @@ export default function PatientProceduresPage() {
           </div>
         </section>
 
-        {patientProcedureHubGroups.map((group, groupIndex) => (
+        {patientProcedureHubGroups.map((group) => (
           <section
             key={group.title}
             id={group.title
@@ -140,9 +137,6 @@ export default function PatientProceduresPage() {
               <div className="procedure-group-layout">
                 <div className="procedure-group-aside">
                   <div className="section-label">Procedure Group</div>
-                  <span className="procedure-group-number">
-                    {String(groupIndex + 1).padStart(2, "0")}
-                  </span>
                   <h2 className="procedure-section-title">{group.title}</h2>
                   <p className="procedure-section-copy">{group.description}</p>
                 </div>

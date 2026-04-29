@@ -1208,15 +1208,49 @@ body {
   }
 }
 
+@keyframes procedureHeroDrift {
+  0% {
+    background-position:
+      0% 0%,
+      0% 0%,
+      0% 0%,
+      0% 50%;
+  }
+  50% {
+    background-position:
+      18% 8%,
+      -12% 16%,
+      0% 0%,
+      100% 50%;
+  }
+  100% {
+    background-position:
+      0% 0%,
+      0% 0%,
+      0% 0%,
+      0% 50%;
+  }
+}
+
+@keyframes procedureHeroSweep {
+  0% {
+    transform: translateX(-34%) skewX(-18deg);
+    opacity: 0.18;
+  }
+  45% {
+    opacity: 0.34;
+  }
+  100% {
+    transform: translateX(34%) skewX(-18deg);
+    opacity: 0.18;
+  }
+}
+
 .procedure-shell {
   background:
     linear-gradient(rgba(62, 57, 51, 0.045) 1px, transparent 1px),
     linear-gradient(90deg, rgba(62, 57, 51, 0.035) 1px, transparent 1px),
-    radial-gradient(
-      circle at top right,
-      rgba(159, 118, 87, 0.16),
-      transparent 28%
-    ),
+    linear-gradient(135deg, rgba(159, 118, 87, 0.1), transparent 34%),
     linear-gradient(180deg, rgba(246, 239, 227, 0.94) 0%, var(--page-a) 100%);
   background-size:
     44px 44px,
@@ -1225,46 +1259,70 @@ body {
     auto;
 }
 .procedure-hero {
-  min-height: auto;
+  min-height: 100vh;
+  min-height: 100svh;
   position: relative;
   overflow: hidden;
+  align-items: center;
   background:
+    linear-gradient(115deg, rgba(246, 239, 227, 0.08) 0 1px, transparent 1px),
+    linear-gradient(35deg, rgba(246, 239, 227, 0.055) 0 1px, transparent 1px),
     linear-gradient(
       135deg,
-      rgba(31, 29, 26, 0.98) 0%,
-      rgba(53, 48, 42, 0.96) 42%,
-      rgba(118, 83, 61, 0.9) 100%
+      rgba(31, 29, 26, 1) 0%,
+      rgba(48, 45, 41, 0.98) 38%,
+      rgba(84, 67, 54, 0.96) 68%,
+      rgba(39, 35, 31, 1) 100%
     ),
-    radial-gradient(
-      circle at 78% 12%,
-      rgba(246, 239, 227, 0.2),
-      transparent 34%
+    linear-gradient(
+      90deg,
+      rgba(159, 118, 87, 0.18),
+      rgba(246, 239, 227, 0.1),
+      rgba(159, 118, 87, 0.16)
     );
+  background-size:
+    112px 112px,
+    168px 168px,
+    auto,
+    220% 100%;
+  animation: procedureHeroDrift 18s ease-in-out infinite;
 }
 .procedure-hero::before {
   content: "";
   position: absolute;
-  inset: 20% -10% auto auto;
-  width: 520px;
-  height: 520px;
-  border: 1px solid rgba(246, 239, 227, 0.14);
-  border-radius: 50%;
-  transform: rotate(-18deg);
+  inset: 0;
+  background:
+    linear-gradient(90deg, transparent, rgba(246, 239, 227, 0.11), transparent),
+    repeating-linear-gradient(
+      90deg,
+      transparent 0 78px,
+      rgba(246, 239, 227, 0.045) 78px 79px
+    );
+  clip-path: polygon(0 16%, 100% 0, 100% 76%, 0 100%);
+  mix-blend-mode: screen;
+  animation: procedureHeroSweep 11s var(--ease) infinite alternate;
 }
 .procedure-hero::after {
   content: "";
   position: absolute;
-  right: 7%;
-  bottom: -96px;
-  width: 260px;
-  height: 260px;
-  border-radius: 50%;
-  background: rgba(246, 239, 227, 0.08);
-  filter: blur(2px);
+  inset: auto 0 0 0;
+  height: 34%;
+  background: linear-gradient(
+    180deg,
+    transparent,
+    rgba(31, 29, 26, 0.22) 38%,
+    rgba(31, 29, 26, 0.58)
+  );
+  pointer-events: none;
 }
 .procedure-hero-content {
-  padding-top: 158px;
-  padding-bottom: 80px;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 132px;
+  padding-bottom: 84px;
   position: relative;
   z-index: 1;
 }
@@ -1472,15 +1530,20 @@ body {
 .procedure-pathway-step::after {
   content: "";
   position: absolute;
-  right: -48px;
-  bottom: -52px;
-  width: 156px;
-  height: 156px;
-  border: 1px solid rgba(159, 118, 87, 0.24);
-  border-radius: 50%;
+  right: 26px;
+  bottom: 24px;
+  width: 124px;
+  height: 38px;
+  background:
+    linear-gradient(90deg, rgba(159, 118, 87, 0.5), transparent),
+    repeating-linear-gradient(
+      90deg,
+      rgba(159, 118, 87, 0.24) 0 1px,
+      transparent 1px 12px
+    );
+  clip-path: polygon(0 55%, 76% 55%, 100% 100%, 16% 100%);
+  opacity: 0.62;
 }
-.procedure-pathway-number,
-.procedure-group-number,
 .procedure-card-index {
   font-family: var(--f-sans);
   font-size: 10px;
@@ -1488,11 +1551,7 @@ body {
   letter-spacing: 0.16em;
   text-transform: uppercase;
 }
-.procedure-pathway-number {
-  color: var(--clay-dark);
-}
 .procedure-pathway-step h3 {
-  margin-top: 54px;
   font-family: var(--f-serif);
   font-size: 30px;
   font-weight: 300;
@@ -1516,11 +1575,6 @@ body {
 .procedure-group-aside {
   position: sticky;
   top: 112px;
-}
-.procedure-group-number {
-  display: inline-flex;
-  margin: 24px 0 18px;
-  color: rgba(159, 118, 87, 0.84);
 }
 .procedure-card-grid {
   display: grid;
@@ -1702,11 +1756,7 @@ body {
 }
 .procedure-cta-section {
   background:
-    radial-gradient(
-      circle at 84% 24%,
-      rgba(159, 118, 87, 0.2),
-      transparent 24%
-    ),
+    linear-gradient(135deg, rgba(159, 118, 87, 0.22), transparent 46%),
     var(--page-dark);
 }
 .procedure-cta-grid {
@@ -2057,9 +2107,6 @@ body {
   .procedure-pathway-step {
     min-height: auto;
   }
-  .procedure-pathway-step h3 {
-    margin-top: 42px;
-  }
   .procedure-hero-actions {
     flex-direction: column;
     align-items: flex-start;
@@ -2141,6 +2188,8 @@ body {
   }
 }
 @media (prefers-reduced-motion: reduce) {
+  .procedure-hero,
+  .procedure-hero::before,
   .procedure-facts,
   .procedure-hub-card,
   .procedure-pathway-step,
