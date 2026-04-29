@@ -134,15 +134,6 @@ export default function HeroText({
       )}
     >
       <div
-        className="pointer-events-none absolute inset-0 opacity-[0.05] dark:opacity-[0.15]"
-        style={{
-          backgroundImage:
-            "linear-gradient(to right, #888 1px, transparent 1px), linear-gradient(to bottom, #888 1px, transparent 1px)",
-          backgroundSize: "clamp(20px, 5vw, 60px) clamp(20px, 5vw, 60px)",
-        }}
-      />
-
-      <div
         className={cn(
           "relative z-10 flex w-full flex-col items-center px-4",
           contentClassName
@@ -156,34 +147,23 @@ export default function HeroText({
               lineClassName
             )}
           >
-            {animationDone ? (
-              <span
-                className={cn(
-                  "min-w-0 max-w-full whitespace-normal text-zinc-900 dark:text-white",
-                  characterClassName
-                )}
-              >
-                {text}
-              </span>
-            ) : (
-              words.map((word, wordIndex) => {
-                return (
-                  <span
-                    key={`${word}-${wordIndex}`}
-                    className="inline-flex shrink-0 whitespace-nowrap"
-                    style={{
-                      marginRight: wordIndex < words.length - 1 ? "0.55em" : 0,
-                    }}
-                  >
-                    {Array.from(word).map((char) => {
-                      const index = characterIndex
-                      characterIndex += 1
-                      return renderCharacter(char, index)
-                    })}
-                  </span>
-                )
-              })
-            )}
+            {words.map((word, wordIndex) => {
+              return (
+                <span
+                  key={`${word}-${wordIndex}`}
+                  className="inline-flex shrink-0 whitespace-nowrap"
+                  style={{
+                    marginRight: wordIndex < words.length - 1 ? "0.55em" : 0,
+                  }}
+                >
+                  {Array.from(word).map((char) => {
+                    const index = characterIndex
+                    characterIndex += 1
+                    return renderCharacter(char, index)
+                  })}
+                </span>
+              )
+            })}
           </motion.div>
         </AnimatePresence>
       </div>
@@ -206,8 +186,6 @@ export default function HeroText({
         </div>
       ) : null}
 
-      <div className="absolute left-8 top-8 h-12 w-12 border-l border-t border-zinc-200 dark:border-zinc-800" />
-      <div className="absolute bottom-8 right-8 h-12 w-12 border-b border-r border-zinc-200 dark:border-zinc-800" />
     </div>
   )
 }

@@ -51,7 +51,11 @@ export function SiteHeader({ overlay = false }: SiteHeaderProps) {
   return (
     <nav className={navClassName}>
       <Link href="/" className="nav-logo">
-        Precision Pain Centre
+        <img
+          src="/media/logo/Logo.png"
+          alt="Precision Pain Centre"
+          className="nav-logo-img"
+        />
       </Link>
 
       <div className="nav-right">

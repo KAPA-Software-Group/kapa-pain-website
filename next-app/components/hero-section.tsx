@@ -5,6 +5,13 @@ import HeroText from "@/components/ui/hero-shutter-text"
 import { useCallback, useEffect, useRef, useState } from "react"
 
 const HEADLINE = "Where precision meets care."
+const DISCIPLINES = [
+  "Interventional Radiology",
+  "Sports Medicine Physicians",
+  "Chronic Pain Specialists",
+  "Orthopaedic Surgeons",
+  "Neurologists",
+]
 
 export function HeroSection() {
   const videoRef = useRef<HTMLVideoElement>(null)
@@ -74,11 +81,10 @@ export function HeroSection() {
             className="h-auto min-h-0 max-w-[300px] items-start justify-center bg-transparent px-0 dark:bg-transparent md:max-w-none"
             contentClassName="items-start px-0"
             lineClassName="justify-start md:flex-nowrap"
-            textClassName="font-sans text-[44px] font-semibold uppercase tracking-normal text-vanilla [text-shadow:0_6px_64px_rgba(20,14,8,0.78),0_2px_14px_rgba(20,14,8,0.58)] md:text-[clamp(28px,3.55vw,56px)]"
+            textClassName="hero-shutter-headline text-[40px] font-semibold uppercase tracking-normal text-vanilla [text-shadow:0_6px_64px_rgba(20,14,8,0.78),0_2px_14px_rgba(20,14,8,0.58)] md:text-[clamp(28px,3.25vw,52px)]"
           />
 
-          {settled ? (
-            <>
+          <div className={["hero-support", settled ? "is-visible" : ""].join(" ")}>
               <p className="hero-sub">
                 Evidence-based pain management delivered by a multidisciplinary
                 team of specialists. Covered by OHIP when referred.
@@ -91,8 +97,22 @@ export function HeroSection() {
                   Our Specialties
                 </a>
               </div>
-            </>
-          ) : null}
+          </div>
+        </div>
+
+        <div className="hero-disciplines">
+          <h2 className="hero-disciplines-heading">
+            Refining the Art
+            <br />
+            of Modern Medicine.
+          </h2>
+          <div className="hero-disciplines-list">
+            {DISCIPLINES.map((discipline) => (
+              <span key={discipline} className="hero-discipline">
+                {discipline}
+              </span>
+            ))}
+          </div>
         </div>
       </section>
     </>
