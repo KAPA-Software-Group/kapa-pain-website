@@ -4,6 +4,9 @@ import Link from "next/link"
 import { ProcedurePathwayScroll } from "@/components/procedure-pathway-scroll"
 import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
+import assessmentImage from "@/public/media/Patient Procedures/AssessmentImage.png"
+import followUpImage from "@/public/media/Patient Procedures/FollowUpImage.png"
+import igpImage from "@/public/media/Patient Procedures/IGPImage.png"
 import {
   getPatientProcedureHref,
   patientProcedureHubGroups,
@@ -21,6 +24,8 @@ const hubPathwaySteps = [
     visualTitle: "Assessment Snapshot",
     visualCopy:
       "Placeholder for intake, imaging review, and baseline function visuals.",
+    imageSrc: assessmentImage,
+    imageAlt: "Clinician reviewing a patient assessment",
     accent: "#8d6b55",
   },
   {
@@ -31,6 +36,8 @@ const hubPathwaySteps = [
     visualTitle: "Procedure Planning",
     visualCopy:
       "Placeholder for image-guided planning, anatomy views, and treatment focus.",
+    imageSrc: igpImage,
+    imageAlt: "Image-guided procedure planning",
     accent: "#6f8b8f",
   },
   {
@@ -41,6 +48,8 @@ const hubPathwaySteps = [
     visualTitle: "Recovery Monitoring",
     visualCopy:
       "Placeholder for aftercare guidance, progress checks, and next-step review.",
+    imageSrc: followUpImage,
+    imageAlt: "Patient follow-up and recovery discussion",
     accent: "#7c815e",
   },
 ]

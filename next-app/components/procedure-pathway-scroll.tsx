@@ -1,5 +1,6 @@
 "use client"
 
+import Image, { type ImageProps } from "next/image"
 import { useEffect, useRef, useState } from "react"
 import type { CSSProperties } from "react"
 
@@ -9,6 +10,8 @@ type ProcedurePathwayStep = {
   description: string
   visualTitle: string
   visualCopy: string
+  imageSrc?: ImageProps["src"]
+  imageAlt?: string
   accent: string
 }
 
@@ -28,40 +31,12 @@ export function ProcedurePathwayScroll({
   const shellRef = useRef<HTMLDivElement>(null)
   const cardsRef = useRef<(HTMLElement | null)[]>([])
   const activeStepRef = useRef(0)
-  const frameRef = useRef(0)
   const measureFrameRef = useRef(0)
-  const progressRef = useRef(0)
-  const targetProgressRef = useRef(0)
   const [activeStep, setActiveStep] = useState(0)
 
   useEffect(() => {
     const shell = shellRef.current
     if (!shell) return
-
-    const animateProgress = () => {
-      const current = progressRef.current
-      const target = targetProgressRef.current
-      const next = current + (target - current) * 0.22
-      const settled = Math.abs(target - next) < 0.001
-
-      progressRef.current = settled ? target : next
-      shell.style.setProperty(
-        "--pathway-progress",
-        progressRef.current.toFixed(4)
-      )
-
-      if (!settled) {
-        frameRef.current = window.requestAnimationFrame(animateProgress)
-      } else {
-        frameRef.current = 0
-      }
-    }
-
-    const startProgressAnimation = () => {
-      if (frameRef.current) return
-
-      frameRef.current = window.requestAnimationFrame(animateProgress)
-    }
 
     const measure = () => {
       measureFrameRef.current = 0
@@ -70,16 +45,16 @@ export function ProcedurePathwayScroll({
       if (!cards.length) return
 
       const focusY = window.innerHeight * 0.5
-      const centers = cards.map((card) => {
-        const rect = card.getBoundingClientRect()
-        return rect.top + rect.height * 0.5
-      })
-      const firstCenter = centers[0] ?? focusY
-      const lastCenter = centers[centers.length - 1] ?? firstCenter
-      const distance = Math.max(lastCenter - firstCenter, 1)
+      const cardRects = cards.map((card) => card.getBoundingClientRect())
+      const firstRect = cardRects[0]
+      const lastRect = cardRects[cardRects.length - 1]
+      const centers = cardRects.map((rect) => rect.top + rect.height * 0.5)
+      const pathwayStart = firstRect.top
+      const pathwayEnd = lastRect.bottom
+      const pathwayDistance = Math.max(pathwayEnd - pathwayStart, 1)
       const progress = Math.min(
         1,
-        Math.max(0, (focusY - firstCenter) / distance)
+        Math.max(0, (focusY - pathwayStart) / pathwayDistance)
       )
       const nextIndex = centers.reduce((bestIndex, center, index) => {
         const currentDistance = Math.abs(center - focusY)
@@ -88,8 +63,7 @@ export function ProcedurePathwayScroll({
         return currentDistance < bestDistance ? index : bestIndex
       }, 0)
 
-      targetProgressRef.current = progress
-      startProgressAnimation()
+      shell.style.setProperty("--pathway-progress", progress.toFixed(4))
 
       if (activeStepRef.current !== nextIndex) {
         activeStepRef.current = nextIndex
@@ -108,10 +82,6 @@ export function ProcedurePathwayScroll({
     window.addEventListener("resize", requestUpdate)
 
     return () => {
-      if (frameRef.current) {
-        window.cancelAnimationFrame(frameRef.current)
-      }
-
       if (measureFrameRef.current) {
         window.cancelAnimationFrame(measureFrameRef.current)
       }
@@ -178,23 +148,40 @@ export function ProcedurePathwayScroll({
                     <p>{step.description}</p>
                   </div>
 
-                  <div className="procedure-pathway-card-visual" aria-hidden="true">
+                  <div
+                    className="procedure-pathway-card-visual"
+                    aria-hidden={step.imageSrc ? undefined : true}
+                  >
                     <div className="procedure-pathway-card-visual-frame">
-                      <div className="procedure-pathway-card-visual-grid" />
-                      <div className="procedure-pathway-card-visual-glow" />
-                      <div className="procedure-pathway-card-visual-copy">
-                        <span>Placeholder Visual</span>
-                        <strong>{step.visualTitle}</strong>
-                        <p>{step.visualCopy}</p>
-                      </div>
-                      <div className="procedure-pathway-card-visual-badge">
-                        <span>{step.title}</span>
-                      </div>
-                      <div className="procedure-pathway-card-visual-lines">
-                        <span />
-                        <span />
-                        <span />
-                      </div>
+                      {step.imageSrc ? (
+                        <Image
+                          src={step.imageSrc}
+                          alt={step.imageAlt ?? ""}
+                          fill
+                          sizes="(max-width: 700px) calc(100vw - 96px), (max-width: 1100px) 45vw, 320px"
+                          className="procedure-pathway-card-image"
+                        />
+                      ) : (
+                        <>
+                          <div className="procedure-pathway-card-visual-grid" />
+                          <div className="procedure-pathway-card-visual-glow" />
+                          <div className="procedure-pathway-card-visual-copy">
+                            <span>Placeholder Visual</span>
+                            <strong>{step.visualTitle}</strong>
+                            <p>{step.visualCopy}</p>
+                          </div>
+                          <div className="procedure-pathway-card-visual-lines">
+                            <span />
+                            <span />
+                            <span />
+                          </div>
+                        </>
+                      )}
+                      {!step.imageSrc && (
+                        <div className="procedure-pathway-card-visual-badge">
+                          <span>{step.title}</span>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>

@@ -1801,6 +1801,38 @@ body {
       color-mix(in srgb, var(--step-accent) 34%, rgba(31, 29, 26, 0.95))
     );
 }
+.procedure-pathway-card-visual-frame:has(.procedure-pathway-card-image) {
+  isolation: isolate;
+  overflow: visible;
+  border: 0;
+  background: transparent;
+}
+.procedure-pathway-card-image {
+  object-fit: cover;
+  object-position: center;
+  filter: saturate(0.94) contrast(1.02);
+  z-index: 1;
+}
+.procedure-pathway-card-visual-frame:has(.procedure-pathway-card-image)::before {
+  content: "";
+  position: absolute;
+  inset: 12px -12px -12px 12px;
+  z-index: 0;
+  border: 1px solid color-mix(in srgb, var(--step-accent) 38%, rgba(62, 57, 51, 0.16));
+  background: color-mix(in srgb, var(--step-accent) 9%, transparent);
+  box-shadow: 0 16px 34px rgba(31, 29, 26, 0.08);
+  pointer-events: none;
+}
+.procedure-pathway-card-visual-frame:has(.procedure-pathway-card-image)::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background:
+    linear-gradient(180deg, rgba(31, 29, 26, 0.24), transparent 42%),
+    linear-gradient(0deg, rgba(31, 29, 26, 0.16), transparent 48%);
+  pointer-events: none;
+}
 .procedure-pathway-card-visual-grid {
   position: absolute;
   inset: 0;
@@ -1874,6 +1906,7 @@ body {
   position: absolute;
   right: 18px;
   top: 18px;
+  z-index: 3;
   display: grid;
   gap: 6px;
   justify-items: end;
