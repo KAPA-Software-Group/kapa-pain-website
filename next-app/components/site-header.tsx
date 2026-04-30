@@ -21,6 +21,8 @@ export function SiteHeader({ overlay = false }: SiteHeaderProps) {
   const pathname = usePathname()
   const [menuOpen, setMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(!overlay)
+  const [inRoadmap, setInRoadmap] = useState(false)
+  const [scrollingDown, setScrollingDown] = useState(true)
   const isActivePath = (href: string) =>
     pathname === href || pathname.startsWith(`${href}/`)
 
@@ -32,6 +34,43 @@ export function SiteHeader({ overlay = false }: SiteHeaderProps) {
     window.addEventListener("scroll", onScroll, { passive: true })
     return () => window.removeEventListener("scroll", onScroll)
   }, [overlay])
+
+  useEffect(() => {
+    let lastY = window.scrollY
+    const onScroll = () => {
+      const y = window.scrollY
+      setScrollingDown(y >= lastY)
+      lastY = y
+    }
+    window.addEventListener("scroll", onScroll, { passive: true })
+    return () => window.removeEventListener("scroll", onScroll)
+  }, [])
+
+  useEffect(() => {
+    const roadEl = document.querySelector(".pj-road-scroll")
+    if (!roadEl) return
+    const obs = new IntersectionObserver(
+      ([entry]) => setInRoadmap(entry.isIntersecting),
+      { threshold: 0.01 }
+    )
+    obs.observe(roadEl)
+    return () => obs.disconnect()
+  }, [])
+
+  if (inRoadmap && scrollingDown) {
+    return (
+      <button
+        className="nav-back-arrow"
+        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+        aria-label="Back to top"
+      >
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+          <path d="M9 2L4 7L9 12" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+        Back
+      </button>
+    )
+  }
 
   const navClassName = [
     "nav",

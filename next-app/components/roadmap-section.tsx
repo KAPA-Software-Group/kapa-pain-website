@@ -3,10 +3,10 @@
 import { useEffect, useRef } from "react"
 
 const SVG_H      = 3200
-const SCENE_W    = 1340
-const SVG_OFFSET = 270
-const CARD_W     = 228
-const CARD_GAP   = 68
+const SCENE_W    = 1800
+const SVG_OFFSET = 500
+const CARD_W     = 440
+const CARD_GAP   = 90
 
 const ROAD_D = "M 400 0 C 400 180 280 300 250 460 C 220 620 560 700 572 870 C 584 1040 268 1130 238 1300 C 208 1470 545 1555 562 1720 C 579 1885 318 1960 298 2120 C 278 2280 476 2360 490 2520 C 504 2680 400 2820 400 3200"
 
@@ -45,7 +45,7 @@ export function RoadmapSection() {
 
     const getScale = () => Math.min(1, window.innerWidth / SCENE_W)
 
-    // Position cards and dots based on path geometry
+    // Place milestone dots on the SVG road and pin cards to the sticky viewport
     const dotsGroup = dotsRef.current
     MILESTONES.forEach((m, i) => {
       const pt = _path.getPointAtLength(m.t * pathLen)
@@ -67,25 +67,25 @@ export function RoadmapSection() {
         dotsGroup.appendChild(inner)
       }
 
+      // Stack cards evenly on the left; each slot is 100vh / numMilestones tall
       const card = cardsRef.current[i]
       if (card) {
-        const ptInScene = SVG_OFFSET + pt.x
-        card.style.left = m.side === "right"
-          ? `${ptInScene + CARD_GAP}px`
-          : `${ptInScene - CARD_GAP - CARD_W}px`
-        card.style.top = `${pt.y - 54}px`
+        const slotVh = 100 / MILESTONES.length
+        card.style.top = `calc(${i * slotVh}vh + 12px)`
       }
     })
 
     function update() {
       const scale      = getScale()
       const scrollTop  = window.scrollY
-      const roadTop    = _scroll.offsetTop
+      const roadTop    = _scroll.getBoundingClientRect().top + window.scrollY
       const scrollable = _scroll.offsetHeight - window.innerHeight
       const progress   = Math.max(0, Math.min(1, (scrollTop - roadTop) / scrollable))
 
-      const translateY = -progress * (SVG_H - window.innerHeight / scale)
-      _scene.style.transform       = `translateX(-50%) translateY(${translateY}px) scale(${scale})`
+      const translateY  = -progress * (SVG_H - window.innerHeight / scale)
+      const leftOffset  = (window.innerWidth - SCENE_W) / 2
+      _scene.style.left            = `${leftOffset}px`
+      _scene.style.transform       = `translateY(${translateY}px) scale(${scale})`
       _scene.style.transformOrigin = "top center"
 
       const carLen = progress * pathLen
@@ -108,8 +108,7 @@ export function RoadmapSection() {
 
       cardsRef.current.forEach((card, i) => {
         if (!card) return
-        // threshold offset: -0.09 so KM 0 shows immediately at progress=0
-        if (progress >= MILESTONES[i].t - 0.09) card.classList.add("show")
+        if (progress >= MILESTONES[i].t - 0.04) card.classList.add("show")
         else card.classList.remove("show")
       })
     }
@@ -209,20 +208,21 @@ export function RoadmapSection() {
               </svg>
             </div>
 
-            {/* Milestone cards */}
-            {MILESTONES.map((m, i) => (
-              <div
-                key={i}
-                ref={el => { cardsRef.current[i] = el }}
-                className={`pj-mc pj-mc--${m.side}`}
-              >
-                <div className="pj-mc-step">{m.km}</div>
-                <div className="pj-mc-title">{m.title}</div>
-                <p className="pj-mc-desc">{m.desc}</p>
-              </div>
-            ))}
-
           </div>
+
+          {/* Milestone cards — outside the scene so they stay pinned in the viewport */}
+          {MILESTONES.map((m, i) => (
+            <div
+              key={i}
+              ref={el => { cardsRef.current[i] = el }}
+              className={`pj-mc pj-mc--${m.side}`}
+            >
+              <div className="pj-mc-step">{m.km}</div>
+              <div className="pj-mc-title">{m.title}</div>
+              <p className="pj-mc-desc">{m.desc}</p>
+            </div>
+          ))}
+
         </div>
       </div>
     </>
