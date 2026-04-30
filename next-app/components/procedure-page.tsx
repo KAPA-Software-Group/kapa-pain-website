@@ -24,7 +24,7 @@ export function ProcedurePageView({ page }: ProcedurePageViewProps) {
 
   return (
     <>
-      <SiteHeader />
+      <SiteHeader overlay />
 
       <main className="page-shell procedure-shell">
         <section className="inner-hero procedure-hero">

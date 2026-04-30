@@ -15,7 +15,7 @@ export function PlaceholderPage({
 }: PlaceholderPageProps) {
   return (
     <>
-      <SiteHeader />
+      <SiteHeader overlay />
 
       <main className="page-shell">
         <section className="inner-hero">

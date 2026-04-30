@@ -63,7 +63,7 @@ export const metadata: Metadata = {
 export default function PatientProceduresPage() {
   return (
     <>
-      <SiteHeader />
+      <SiteHeader overlay />
 
       <main className="page-shell procedure-shell">
         <section className="inner-hero procedure-hero">
@@ -141,14 +141,20 @@ export default function PatientProceduresPage() {
             className="procedure-section procedure-hub-group-section"
           >
             <div className="section-inner">
-              <div className="procedure-group-layout">
+              <div
+                className="procedure-group-layout"
+                data-card-count={group.slugs.length}
+              >
                 <div className="procedure-group-aside">
                   <div className="section-label">Procedure Group</div>
                   <h2 className="procedure-section-title">{group.title}</h2>
                   <p className="procedure-section-copy">{group.description}</p>
                 </div>
 
-                <div className="procedure-card-grid procedure-hub-card-grid">
+                <div
+                  className="procedure-card-grid procedure-hub-card-grid"
+                  data-card-count={group.slugs.length}
+                >
                   {group.slugs.map((slug, cardIndex) => {
                     const page = patientProcedurePages.find(
                       (entry) => entry.slug === slug
@@ -165,9 +171,6 @@ export default function PatientProceduresPage() {
                         style={{ "--stagger": cardIndex } as CSSProperties}
                       >
                         <div className="procedure-card-topline">
-                          <span className="procedure-card-index">
-                            {String(cardIndex + 1).padStart(2, "0")}
-                          </span>
                           <span className="procedure-card-eyebrow">
                             {page.eyebrow}
                           </span>

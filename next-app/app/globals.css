@@ -1582,6 +1582,9 @@ body {
 .procedure-hub-intro-section .section-inner {
   padding-bottom: 88px;
 }
+.procedure-hub-group-section .section-inner {
+  max-width: 1400px;
+}
 .procedure-section-muted {
   background: rgba(220, 207, 186, 0.2);
 }
@@ -2041,13 +2044,14 @@ body {
 }
 .procedure-group-layout {
   display: grid;
-  grid-template-columns: minmax(240px, 0.48fr) minmax(0, 1fr);
-  gap: 48px;
+  grid-template-columns: minmax(190px, 0.26fr) minmax(0, 1fr);
+  gap: clamp(28px, 3vw, 42px);
   align-items: start;
 }
 .procedure-group-aside {
   position: sticky;
   top: 112px;
+  max-width: 300px;
 }
 .procedure-card-grid {
   display: grid;
@@ -2056,6 +2060,16 @@ body {
 }
 .procedure-hub-card-grid {
   gap: 18px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.procedure-hub-card-grid[data-card-count="1"] {
+  grid-template-columns: minmax(0, 1fr);
+}
+.procedure-hub-card-grid[data-card-count="3"] {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.procedure-hub-card-grid[data-card-count="4"] {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 .procedure-card {
   display: flex;
@@ -2070,7 +2084,8 @@ body {
 .procedure-hub-card {
   position: relative;
   overflow: hidden;
-  padding: 30px;
+  min-width: 0;
+  padding: clamp(24px, 2vw, 30px);
   background:
     linear-gradient(
       180deg,
@@ -2086,6 +2101,32 @@ body {
     background 0.42s ease;
   animation: procedureFloatIn 0.72s var(--ease) both;
   animation-delay: calc(var(--stagger) * 80ms);
+}
+.procedure-hub-card-grid[data-card-count="1"] .procedure-hub-card {
+  min-height: 320px;
+  justify-content: space-between;
+}
+.procedure-hub-card-grid[data-card-count="3"] .procedure-card-topline,
+.procedure-hub-card-grid[data-card-count="4"] .procedure-card-topline {
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 8px;
+}
+.procedure-hub-card-grid[data-card-count="3"] .procedure-card-eyebrow,
+.procedure-hub-card-grid[data-card-count="4"] .procedure-card-eyebrow {
+  text-align: left;
+}
+.procedure-hub-card-grid[data-card-count="3"] .procedure-card-title,
+.procedure-hub-card-grid[data-card-count="4"] .procedure-card-title {
+  overflow-wrap: anywhere;
+  hyphens: auto;
+  line-height: 1.12;
+}
+.procedure-hub-card-grid[data-card-count="3"] .procedure-card-title {
+  font-size: clamp(23px, 1.8vw, 28px);
+}
+.procedure-hub-card-grid[data-card-count="4"] .procedure-card-title {
+  font-size: clamp(21px, 1.35vw, 24px);
 }
 .procedure-hub-card::before {
   content: "";
@@ -2147,6 +2188,7 @@ body {
   font-weight: 300;
   line-height: 1.15;
   color: var(--mahogany);
+  overflow-wrap: break-word;
 }
 .procedure-card-copy {
   font-family: var(--f-sans);
