@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import type { CSSProperties } from "react"
 import Link from "next/link"
+import { ProcedurePathwayScroll } from "@/components/procedure-pathway-scroll"
 import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
 import {
@@ -14,18 +15,33 @@ import {
 const hubPathwaySteps = [
   {
     title: "Assessment",
+    eyebrow: "Step 01",
     description:
       "Review history, function, prior treatment, and imaging to understand the likely pain source.",
+    visualTitle: "Assessment Snapshot",
+    visualCopy:
+      "Placeholder for intake, imaging review, and baseline function visuals.",
+    accent: "#8d6b55",
   },
   {
     title: "Targeted Treatment",
+    eyebrow: "Step 02",
     description:
       "Use image-guided injections, blocks, or ablation when they fit the diagnosis and care plan.",
+    visualTitle: "Procedure Planning",
+    visualCopy:
+      "Placeholder for image-guided planning, anatomy views, and treatment focus.",
+    accent: "#6f8b8f",
   },
   {
     title: "Recovery & Follow-Up",
+    eyebrow: "Step 03",
     description:
       "Track response, follow aftercare instructions, and adjust the next step based on results.",
+    visualTitle: "Recovery Monitoring",
+    visualCopy:
+      "Placeholder for aftercare guidance, progress checks, and next-step review.",
+    accent: "#7c815e",
   },
 ]
 
@@ -97,30 +113,12 @@ export default function PatientProceduresPage() {
 
         <section className="procedure-section procedure-hub-intro-section">
           <div className="section-inner">
-            <div className="procedure-section-header">
-              <div className="section-label">Clinic Approach</div>
-              <h2 className="procedure-section-title">
-                A clear path from assessment to targeted care.
-              </h2>
-              <p className="procedure-section-copy">
-                Precision Care Centre uses a multidisciplinary approach to
-                identify the source of pain, match treatment to the diagnosis,
-                and support recovery with practical follow-up guidance.
-              </p>
-            </div>
-
-            <div className="procedure-pathway" aria-label="Care pathway">
-              {hubPathwaySteps.map((step, index) => (
-                <article
-                  key={step.title}
-                  className="procedure-pathway-step"
-                  style={{ "--stagger": index } as CSSProperties}
-                >
-                  <h3>{step.title}</h3>
-                  <p>{step.description}</p>
-                </article>
-              ))}
-            </div>
+            <ProcedurePathwayScroll
+              label="Clinic Approach"
+              title="A clear path from assessment to targeted care."
+              copy="Precision Care Centre uses a multidisciplinary approach to identify the source of pain, match treatment to the diagnosis, and support recovery with practical follow-up guidance."
+              steps={hubPathwaySteps}
+            />
           </div>
         </section>
 
