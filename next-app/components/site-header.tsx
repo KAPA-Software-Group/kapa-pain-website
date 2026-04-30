@@ -20,21 +20,14 @@ type SiteHeaderProps = {
 export function SiteHeader({ overlay = false }: SiteHeaderProps) {
   const pathname = usePathname()
   const [menuOpen, setMenuOpen] = useState(false)
-  const [scrolled, setScrolled] = useState(
-    () => !overlay || (typeof window !== "undefined" && window.scrollY > 60)
-  )
+  const [scrolled, setScrolled] = useState(!overlay)
   const isActivePath = (href: string) =>
     pathname === href || pathname.startsWith(`${href}/`)
 
   useEffect(() => {
-    if (!overlay) {
-      return
-    }
+    if (!overlay) return
 
-    const onScroll = () => {
-      setScrolled(window.scrollY > 60)
-    }
-
+    const onScroll = () => setScrolled(window.scrollY > 60)
     onScroll()
     window.addEventListener("scroll", onScroll, { passive: true })
     return () => window.removeEventListener("scroll", onScroll)
@@ -56,6 +49,7 @@ export function SiteHeader({ overlay = false }: SiteHeaderProps) {
           alt="Precision Pain Centre"
           className="nav-logo-img"
         />
+        <span className="nav-logo-name">Precision Care Centre</span>
       </Link>
 
       <div className="nav-right">

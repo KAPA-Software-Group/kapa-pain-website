@@ -1,4 +1,5 @@
 import { HeroSection } from "@/components/hero-section"
+import { RoadmapSection } from "@/components/roadmap-section"
 import { SiteFooter } from "@/components/site-footer"
 
 export default function Home() {
@@ -6,32 +7,8 @@ export default function Home() {
     <>
       <HeroSection />
 
-      {/* ═══ 02  PHILOSOPHY ════════════════════════════════ */}
-      <section className="section philosophy">
-        <div className="section-inner">
-          <div className="section-label reveal">Our Philosophy</div>
-          <div className="philosophy-grid">
-            <div className="phil-left reveal">
-              <span className="phil-num">01</span>
-            </div>
-            <div className="phil-right">
-              <h2 className="display-heading phil-heading reveal reveal-delay-1">
-                Chronic pain deserves more than a prescription. It deserves a
-                plan.
-              </h2>
-              <p className="phil-body reveal reveal-delay-2">
-                We built Precision Pain Centre around a single conviction: every
-                patient deserves specialist-led, evidence-based care — without
-                financial barriers, without excessive wait times, and without
-                compromise. Our multidisciplinary team works together to
-                understand your pain from every angle and treat it with the
-                precision it demands.
-              </p>
-              <div className="phil-rule reveal reveal-delay-3" />
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* ═══ 02  PHILOSOPHY + ROADMAP ═════════════════════ */}
+      <RoadmapSection />
 
       {/* ═══ 03  SERVICES ══════════════════════════════════ */}
       <section className="section services" id="specialties">
