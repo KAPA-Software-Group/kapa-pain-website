@@ -30,8 +30,6 @@ export default function HeroText({
   const words = text.trim().split(/\s+/).filter(Boolean)
 
   useEffect(() => {
-    setAnimationDone(false)
-
     const durationMs = (characters.length * 0.04 + 1.25) * 1000
     const timer = window.setTimeout(() => {
       setAnimationDone(true)
@@ -47,6 +45,10 @@ export default function HeroText({
   )
 
   let characterIndex = 0
+  const replayAnimation = () => {
+    setAnimationDone(false)
+    setCount((c) => c + 1)
+  }
 
   const renderCharacter = (char: string, i: number) => (
     <div key={`${char}-${i}`} className="group relative overflow-hidden px-[0.1vw]">
@@ -173,7 +175,7 @@ export default function HeroText({
           <motion.button
             whileHover={{ scale: 1.1, rotate: 180 }}
             whileTap={{ scale: 0.9 }}
-            onClick={() => setCount((c) => c + 1)}
+            onClick={replayAnimation}
             className="rounded-full bg-zinc-900 p-4 text-white shadow-2xl transition-colors duration-300 dark:bg-white dark:text-black"
             aria-label="Replay shutter animation"
           >

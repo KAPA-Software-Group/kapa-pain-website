@@ -46,15 +46,13 @@ export function ProcedurePathwayScroll({
 
       const focusY = window.innerHeight * 0.5
       const cardRects = cards.map((card) => card.getBoundingClientRect())
-      const firstRect = cardRects[0]
-      const lastRect = cardRects[cardRects.length - 1]
       const centers = cardRects.map((rect) => rect.top + rect.height * 0.5)
-      const pathwayStart = firstRect.top
-      const pathwayEnd = lastRect.bottom
-      const pathwayDistance = Math.max(pathwayEnd - pathwayStart, 1)
+      const firstCenter = centers[0]
+      const lastCenter = centers[centers.length - 1]
+      const pathwayDistance = Math.max(lastCenter - firstCenter, 1)
       const progress = Math.min(
         1,
-        Math.max(0, (focusY - pathwayStart) / pathwayDistance)
+        Math.max(0, (focusY - firstCenter) / pathwayDistance)
       )
       const nextIndex = centers.reduce((bestIndex, center, index) => {
         const currentDistance = Math.abs(center - focusY)

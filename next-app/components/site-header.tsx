@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import Image from "next/image"
 import { usePathname } from "next/navigation"
 import { useEffect, useState } from "react"
 
@@ -83,9 +84,13 @@ export function SiteHeader({ overlay = false }: SiteHeaderProps) {
   return (
     <nav className={navClassName}>
       <Link href="/" className="nav-logo">
-        <img
+        <Image
           src="/media/logo/Logo.png"
           alt="Precision Pain Centre"
+          width={96}
+          height={64}
+          sizes="64px"
+          priority
           className="nav-logo-img"
         />
         <span className="nav-logo-name">Precision Care Centre</span>
