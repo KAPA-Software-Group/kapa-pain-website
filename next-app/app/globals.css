@@ -1207,6 +1207,162 @@ body {
   color: var(--mahogany);
 }
 
+/* ─── LOCATIONS PAGE ────────────────────────────────────────── */
+.loc-page-body {
+  background: var(--vanilla);
+  position: relative;
+  isolation: isolate;
+}
+.loc-page-list {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 56px 120px;
+}
+.loc-page-list-detail {
+  max-width: 900px;
+}
+.loc-page-row {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 80px;
+  align-items: start;
+  padding: 72px 0;
+  border-top: 1px solid var(--hairline);
+}
+.loc-page-row:first-child {
+  border-top: none;
+  padding-top: 80px;
+}
+.loc-page-meta {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+.loc-page-num {
+  font-family: var(--f-sans);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  color: var(--stone);
+}
+.loc-page-badge {
+  font-family: var(--f-sans);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 2px;
+}
+.loc-page-badge-open {
+  background: rgba(159, 118, 87, 0.1);
+  color: var(--clay-dark);
+  border: 1px solid rgba(159, 118, 87, 0.22);
+}
+.loc-page-badge-soon {
+  background: rgba(146, 139, 128, 0.09);
+  color: var(--stone);
+  border: 1px solid rgba(146, 139, 128, 0.18);
+}
+.loc-page-name {
+  font-family: var(--f-serif);
+  font-size: clamp(56px, 8vw, 96px);
+  font-weight: 300;
+  font-style: italic;
+  line-height: 0.92;
+  letter-spacing: -0.04em;
+  color: var(--mahogany);
+  margin-bottom: 32px;
+}
+.loc-page-address {
+  font-family: var(--f-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 2;
+  color: var(--mahogany);
+  opacity: 0.65;
+  font-style: normal;
+}
+.loc-page-address-lg {
+  font-size: 16px;
+  opacity: 0.72;
+}
+.loc-page-right {
+  padding-top: 6px;
+}
+.loc-page-contact-label {
+  font-family: var(--f-sans);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--clay-dark);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.loc-page-contact-label::before {
+  content: "";
+  display: block;
+  width: 20px;
+  height: 1px;
+  background: var(--clay);
+  flex-shrink: 0;
+}
+.loc-page-contact-line {
+  font-family: var(--f-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 2;
+  color: var(--mahogany);
+  opacity: 0.68;
+  text-decoration: none;
+  display: block;
+  transition:
+    opacity 0.25s,
+    color 0.25s;
+}
+a.loc-page-contact-line:hover {
+  opacity: 1;
+  color: var(--clay-dark);
+}
+.loc-page-coords {
+  font-family: var(--f-sans);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  color: var(--stone);
+  margin-top: 24px;
+  margin-bottom: 28px;
+  font-variant-numeric: tabular-nums;
+}
+.loc-page-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+.loc-page-map-link {
+  font-family: var(--f-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--clay-dark);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(159, 118, 87, 0.32);
+  padding-bottom: 2px;
+  transition:
+    border-color 0.25s,
+    color 0.25s;
+}
+.loc-page-map-link:hover {
+  color: var(--clay);
+  border-color: var(--clay);
+}
+
 /* ─── CTA ───────────────────────────────────────────────────── */
 .cta-section {
   background:
@@ -2381,6 +2537,16 @@ body {
 }
 
 /* ─── RESPONSIVE ────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .loc-page-row {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .loc-page-list {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+}
 @media (max-width: 1024px) {
   .nav {
     padding: 24px 32px;
@@ -2761,6 +2927,22 @@ body {
   }
   .loc-card:last-child {
     border-bottom: none;
+  }
+  .loc-page-row {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .loc-page-list {
+    padding-left: 32px;
+    padding-right: 32px;
+    padding-bottom: 80px;
+  }
+  .loc-page-row:first-child {
+    padding-top: 56px;
+  }
+  .loc-page-row {
+    padding-top: 52px;
+    padding-bottom: 52px;
   }
   .cta-actions {
     flex-direction: column;

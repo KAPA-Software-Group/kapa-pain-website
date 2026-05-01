@@ -157,3 +157,1549 @@ Caused by:
     1: Unable to open static sorted file referenced from 00001254.meta
     2: Unable to open static sorted file 00001249.sst
     3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (18380) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for Pattern::new_internal (TaskId 149432))
+
+Caused by:
+    0: Looking up data for TaskId 149432 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (20700) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for resolve_internal (TaskId 392819))
+
+Caused by:
+    0: Looking up data for TaskId 392819 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (15772) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for realpath_with_links (TaskId 44234))
+
+Caused by:
+    0: Looking up data for TaskId 44234 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (15772) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for realpath_with_links (TaskId 44234))
+
+Caused by:
+    0: Looking up data for TaskId 44234 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (23532) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for AsyncModule::is_self_async (TaskId 191306))
+
+Caused by:
+    0: Looking up data for TaskId 191306 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (20700) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for resolve_internal (TaskId 392819))
+
+Caused by:
+    0: Looking up data for TaskId 392819 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (29544) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for resolve_internal (TaskId 392819))
+
+Caused by:
+    0: Looking up data for TaskId 392819 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (23532) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for AsyncModule::is_self_async (TaskId 191306))
+
+Caused by:
+    0: Looking up data for TaskId 191306 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (29544) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <EcmascriptModuleAsset as Module>::is_self_async (TaskId 57888))
+
+Caused by:
+    0: Looking up data for TaskId 57888 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (7640) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for AsyncModule::is_self_async (TaskId 191306))
+
+Caused by:
+    0: Looking up data for TaskId 191306 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (2152) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for realpath_with_links (TaskId 44234))
+
+Caused by:
+    0: Looking up data for TaskId 44234 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (7640) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for resolve_internal (TaskId 34950))
+
+Caused by:
+    0: Looking up data for TaskId 34950 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (29544) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for Pattern::new_internal (TaskId 151446))
+
+Caused by:
+    0: Looking up data for TaskId 151446 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (29544) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for ResolvedMap::lookup (TaskId 206735))
+
+Caused by:
+    0: Looking up data for TaskId 206735 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (23532) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <ModuleAssetContext as AssetContext>::process (TaskId 192703))
+
+Caused by:
+    0: Looking up data for TaskId 192703 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (29544) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for ResolvedMap::lookup (TaskId 206735))
+
+Caused by:
+    0: Looking up data for TaskId 206735 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (23532) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <ModuleAssetContext as AssetContext>::process (TaskId 192703))
+
+Caused by:
+    0: Looking up data for TaskId 192703 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (15772) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for resolve_internal (TaskId 34950))
+
+Caused by:
+    0: Looking up data for TaskId 34950 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (15772) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for resolve_internal (TaskId 34950))
+
+Caused by:
+    0: Looking up data for TaskId 34950 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (24812) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <BrowserChunkingContext as ChunkingContext>::chunk_item_id_from_ident (TaskId 58707))
+
+Caused by:
+    0: Looking up data for TaskId 58707 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (24812) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <BrowserChunkingContext as ChunkingContext>::chunk_item_id_from_ident (TaskId 58707))
+
+Caused by:
+    0: Looking up data for TaskId 58707 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (15772) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for EcmascriptModuleAsset::analyze (TaskId 203238))
+
+Caused by:
+    0: Looking up data for TaskId 203238 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (7640) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <ModuleAssetContext as AssetContext>::resolve_asset (TaskId 205616))
+
+Caused by:
+    0: Looking up data for TaskId 205616 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (7640) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <ModuleAssetContext as AssetContext>::resolve_asset (TaskId 205616))
+
+Caused by:
+    0: Looking up data for TaskId 205616 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (18380) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <BrowserChunkingContext as ChunkingContext>::chunk_item_id_from_ident (TaskId 58707))
+
+Caused by:
+    0: Looking up data for TaskId 58707 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (18380) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <BrowserChunkingContext as ChunkingContext>::chunk_item_id_from_ident (TaskId 58707))
+
+Caused by:
+    0: Looking up data for TaskId 58707 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (2152) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <BrowserChunkingContext as ChunkingContext>::chunk_item_id_from_ident (TaskId 58707))
+
+Caused by:
+    0: Looking up data for TaskId 58707 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (2152) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <BrowserChunkingContext as ChunkingContext>::chunk_item_id_from_ident (TaskId 58707))
+
+Caused by:
+    0: Looking up data for TaskId 58707 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (18380) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <AssetIdent as ValueToString>::to_string (TaskId 8978))
+
+Caused by:
+    0: Looking up data for TaskId 8978 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (18380) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <BrowserChunkingContext as ChunkingContext>::is_reference_unused (TaskId 168789))
+
+Caused by:
+    0: Looking up data for TaskId 168789 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (18380) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <AssetIdent as ValueToString>::to_string (TaskId 43617))
+
+Caused by:
+    0: Looking up data for TaskId 43617 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (20700) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <ModuleAssetContext as AssetContext>::process (TaskId 192703))
+
+Caused by:
+    0: Looking up data for TaskId 192703 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (18380) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <EcmascriptModuleAsset as EcmascriptAnalyzable>::module_content_options (TaskId 69259))
+
+Caused by:
+    0: Looking up data for TaskId 69259 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (23532) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for EcmascriptModuleContent::new (TaskId 212008))
+
+Caused by:
+    0: Looking up data for TaskId 212008 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (18380) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <EsmAssetReference as ModuleReference>::resolve_reference (TaskId 632613))
+
+Caused by:
+    0: Looking up data for TaskId 632613 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (29544) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <ModuleAssetContext as AssetContext>::resolve_options (TaskId 6499))
+
+Caused by:
+    0: Looking up data for TaskId 6499 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (7640) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for EsmAssetReference::get_referenced_asset (TaskId 74126))
+
+Caused by:
+    0: Looking up data for TaskId 74126 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (18380) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <ModuleAssetContext as AssetContext>::resolve_options (TaskId 6499))
+
+Caused by:
+    0: Looking up data for TaskId 6499 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (23532) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <BrowserChunkingContext as ChunkingContext>::chunk_item_id_from_ident (TaskId 58707))
+
+Caused by:
+    0: Looking up data for TaskId 58707 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (23532) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <BrowserChunkingContext as ChunkingContext>::chunk_item_id_from_ident (TaskId 58707))
+
+Caused by:
+    0: Looking up data for TaskId 58707 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (20700) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <AssetIdent as ValueToString>::to_string (TaskId 8978))
+
+Caused by:
+    0: Looking up data for TaskId 8978 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (29544) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <ModuleAssetContext as AssetContext>::resolve_options (TaskId 6499))
+
+Caused by:
+    0: Looking up data for TaskId 6499 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (15772) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <ModuleAssetContext as AssetContext>::resolve_options (TaskId 6499))
+
+Caused by:
+    0: Looking up data for TaskId 6499 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (15772) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <ModuleAssetContext as AssetContext>::resolve_options (TaskId 6499))
+
+Caused by:
+    0: Looking up data for TaskId 6499 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (15772) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <ModuleAssetContext as AssetContext>::resolve_options (TaskId 6499))
+
+Caused by:
+    0: Looking up data for TaskId 6499 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (29544) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <ModuleAssetContext as AssetContext>::resolve_options (TaskId 6499))
+
+Caused by:
+    0: Looking up data for TaskId 6499 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (20700) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for primary_chunkable_referenced_modules (TaskId 133394))
+
+Caused by:
+    0: Looking up data for TaskId 133394 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (29544) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <ModuleAssetContext as AssetContext>::resolve_options (TaskId 6499))
+
+Caused by:
+    0: Looking up data for TaskId 6499 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (20700) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for primary_chunkable_referenced_modules (TaskId 133394))
+
+Caused by:
+    0: Looking up data for TaskId 133394 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (29544) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <ModuleAssetContext as AssetContext>::resolve_options (TaskId 6499))
+
+Caused by:
+    0: Looking up data for TaskId 6499 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (7640) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <ModuleAssetContext as AssetContext>::resolve_asset (TaskId 205616))
+
+Caused by:
+    0: Looking up data for TaskId 205616 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (7640) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <ModuleAssetContext as AssetContext>::resolve_asset (TaskId 205616))
+
+Caused by:
+    0: Looking up data for TaskId 205616 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (20700) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for resolve_internal (TaskId 2047))
+
+Caused by:
+    0: Looking up data for TaskId 2047 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (23532) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <ModuleAssetContext as AssetContext>::resolve_options (TaskId 6499))
+
+Caused by:
+    0: Looking up data for TaskId 6499 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (18380) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <ModuleAssetContext as AssetContext>::resolve_options (TaskId 6499))
+
+Caused by:
+    0: Looking up data for TaskId 6499 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (2152) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <ModuleAssetContext as AssetContext>::resolve_options (TaskId 6499))
+
+Caused by:
+    0: Looking up data for TaskId 6499 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (23532) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <BrowserChunkingContext as ChunkingContext>::chunk_item_id_from_ident (TaskId 58707))
+
+Caused by:
+    0: Looking up data for TaskId 58707 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (23532) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <BrowserChunkingContext as ChunkingContext>::chunk_item_id_from_ident (TaskId 58707))
+
+Caused by:
+    0: Looking up data for TaskId 58707 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (2152) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for EsmAssetReference::get_referenced_asset (TaskId 74126))
+
+Caused by:
+    0: Looking up data for TaskId 74126 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (18380) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <ModuleAssetContext as AssetContext>::resolve_options (TaskId 6499))
+
+Caused by:
+    0: Looking up data for TaskId 6499 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (2152) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <ModuleAssetContext as AssetContext>::resolve_options (TaskId 6499))
+
+Caused by:
+    0: Looking up data for TaskId 6499 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (7640) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <EcmascriptChunkType as ChunkType>::chunk_item_size (TaskId 630962))
+
+Caused by:
+    0: Looking up data for TaskId 630962 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (7640) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <EcmascriptChunkType as ChunkType>::chunk_item_size (TaskId 630962))
+
+Caused by:
+    0: Looking up data for TaskId 630962 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (29544) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <ModuleAssetContext as AssetContext>::resolve_options (TaskId 6499))
+
+Caused by:
+    0: Looking up data for TaskId 6499 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (29544) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <ModuleAssetContext as AssetContext>::resolve_options (TaskId 6499))
+
+Caused by:
+    0: Looking up data for TaskId 6499 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (2152) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <ModuleAssetContext as AssetContext>::resolve_options (TaskId 6499))
+
+Caused by:
+    0: Looking up data for TaskId 6499 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (24812) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <ModuleAssetContext as AssetContext>::resolve_options (TaskId 6499))
+
+Caused by:
+    0: Looking up data for TaskId 6499 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (23532) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <ModuleAssetContext as AssetContext>::resolve_options (TaskId 6499))
+
+Caused by:
+    0: Looking up data for TaskId 6499 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (20700) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <ModuleAssetContext as AssetContext>::resolve_options (TaskId 6499))
+
+Caused by:
+    0: Looking up data for TaskId 6499 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (29544) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <ModuleAssetContext as AssetContext>::resolve_options (TaskId 6499))
+
+Caused by:
+    0: Looking up data for TaskId 6499 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (29544) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <ModuleAssetContext as AssetContext>::resolve_options (TaskId 6499))
+
+Caused by:
+    0: Looking up data for TaskId 6499 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (29544) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <ModuleAssetContext as AssetContext>::resolve_options (TaskId 6499))
+
+Caused by:
+    0: Looking up data for TaskId 6499 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (18380) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <ModuleAssetContext as AssetContext>::resolve_options (TaskId 6499))
+
+Caused by:
+    0: Looking up data for TaskId 6499 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (20700) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for ResolveOrigin::resolve_options (TaskId 35518))
+
+Caused by:
+    0: Looking up data for TaskId 35518 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (15772) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <ModuleAssetContext as AssetContext>::resolve_options (TaskId 6499))
+
+Caused by:
+    0: Looking up data for TaskId 6499 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (18380) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <EcmascriptChunkType as ChunkType>::chunk_item_size (TaskId 630962))
+
+Caused by:
+    0: Looking up data for TaskId 630962 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (15772) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <BrowserChunkingContext as ChunkingContext>::chunk_item_id_from_ident (TaskId 58707))
+
+Caused by:
+    0: Looking up data for TaskId 58707 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (15772) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <BrowserChunkingContext as ChunkingContext>::chunk_item_id_from_ident (TaskId 58707))
+
+Caused by:
+    0: Looking up data for TaskId 58707 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (29544) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <ModuleAssetContext as AssetContext>::resolve_options (TaskId 6499))
+
+Caused by:
+    0: Looking up data for TaskId 6499 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (29544) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <ModuleAssetContext as AssetContext>::resolve_options (TaskId 6499))
+
+Caused by:
+    0: Looking up data for TaskId 6499 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (18380) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <BrowserChunkingContext as ChunkingContext>::is_reference_unused (TaskId 168789))
+
+Caused by:
+    0: Looking up data for TaskId 168789 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (18380) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <BrowserChunkingContext as ChunkingContext>::is_reference_unused (TaskId 168789))
+
+Caused by:
+    0: Looking up data for TaskId 168789 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (24812) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for EcmascriptChunkItemContent::new (TaskId 70377))
+
+Caused by:
+    0: Looking up data for TaskId 70377 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (2152) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for ResolvedMap::lookup (TaskId 206735))
+
+Caused by:
+    0: Looking up data for TaskId 206735 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (23532) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <EsmAssetReference as ModuleReference>::resolve_reference (TaskId 314220))
+
+Caused by:
+    0: Looking up data for TaskId 314220 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (15772) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <AssetIdent as ValueToString>::to_string (TaskId 8978))
+
+Caused by:
+    0: Looking up data for TaskId 8978 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (2152) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <EsmAssetReference as ModuleReference>::resolve_reference (TaskId 314220))
+
+Caused by:
+    0: Looking up data for TaskId 314220 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (18380) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <EsmAssetReference as ModuleReference>::resolve_reference (TaskId 383816))
+
+Caused by:
+    0: Looking up data for TaskId 383816 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (15772) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <EsmAssetReference as ModuleReference>::resolve_reference (TaskId 321676))
+
+Caused by:
+    0: Looking up data for TaskId 321676 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (23532) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <EsmAssetReference as ModuleReference>::resolve_reference (TaskId 321676))
+
+Caused by:
+    0: Looking up data for TaskId 321676 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (18380) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <EsmAssetReference as ModuleReference>::resolve_reference (TaskId 314220))
+
+Caused by:
+    0: Looking up data for TaskId 314220 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (7640) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <ModuleAssetContext as AssetContext>::resolve_asset (TaskId 325374))
+
+Caused by:
+    0: Looking up data for TaskId 325374 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (20700) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <EsmAssetReference as ModuleReference>::resolve_reference (TaskId 152156))
+
+Caused by:
+    0: Looking up data for TaskId 152156 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (29544) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for ResolveOrigin::resolve_options (TaskId 178044))
+
+Caused by:
+    0: Looking up data for TaskId 178044 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (29544) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for ResolveOrigin::resolve_options (TaskId 178044))
+
+Caused by:
+    0: Looking up data for TaskId 178044 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (15772) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <ModuleAssetContext as AssetContext>::resolve_asset (TaskId 205616))
+
+Caused by:
+    0: Looking up data for TaskId 205616 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (2152) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <ModuleAssetContext as AssetContext>::resolve_asset (TaskId 470573))
+
+Caused by:
+    0: Looking up data for TaskId 470573 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (2152) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <BrowserChunkingContext as ChunkingContext>::chunk_item_id_from_ident (TaskId 58707))
+
+Caused by:
+    0: Looking up data for TaskId 58707 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (2152) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <BrowserChunkingContext as ChunkingContext>::chunk_item_id_from_ident (TaskId 58707))
+
+Caused by:
+    0: Looking up data for TaskId 58707 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (18380) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <NodeJsChunkingContext as ChunkingContext>::chunk_item_id_from_ident (TaskId 69689))
+
+Caused by:
+    0: Looking up data for TaskId 69689 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (23532) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <BrowserChunkingContext as ChunkingContext>::chunk_item_id_from_ident (TaskId 58707))
+
+Caused by:
+    0: Looking up data for TaskId 58707 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (18380) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <NodeJsChunkingContext as ChunkingContext>::chunk_item_id_from_ident (TaskId 69689))
+
+Caused by:
+    0: Looking up data for TaskId 69689 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (23532) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <BrowserChunkingContext as ChunkingContext>::chunk_item_id_from_ident (TaskId 58707))
+
+Caused by:
+    0: Looking up data for TaskId 58707 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (7640) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for EsmAssetReference::get_referenced_asset (TaskId 74126))
+
+Caused by:
+    0: Looking up data for TaskId 74126 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (20700) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <EcmascriptChunkType as ChunkType>::chunk_item_size (TaskId 630962))
+
+Caused by:
+    0: Looking up data for TaskId 630962 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (23532) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <BrowserChunkingContext as ChunkingContext>::chunk_item_id_from_ident (TaskId 58707))
+
+Caused by:
+    0: Looking up data for TaskId 58707 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (23532) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <BrowserChunkingContext as ChunkingContext>::chunk_item_id_from_ident (TaskId 58707))
+
+Caused by:
+    0: Looking up data for TaskId 58707 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (2152) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <BrowserChunkingContext as ChunkingContext>::chunk_item_id_from_ident (TaskId 58707))
+
+Caused by:
+    0: Looking up data for TaskId 58707 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (2152) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <BrowserChunkingContext as ChunkingContext>::chunk_item_id_from_ident (TaskId 58707))
+
+Caused by:
+    0: Looking up data for TaskId 58707 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (24812) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <BrowserChunkingContext as ChunkingContext>::chunk_item_id_from_ident (TaskId 58707))
+
+Caused by:
+    0: Looking up data for TaskId 58707 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (24812) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <BrowserChunkingContext as ChunkingContext>::chunk_item_id_from_ident (TaskId 58707))
+
+Caused by:
+    0: Looking up data for TaskId 58707 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (7640) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <BrowserChunkingContext as ChunkingContext>::chunk_item_id_from_ident (TaskId 58707))
+
+Caused by:
+    0: Looking up data for TaskId 58707 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (7640) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <BrowserChunkingContext as ChunkingContext>::chunk_item_id_from_ident (TaskId 58707))
+
+Caused by:
+    0: Looking up data for TaskId 58707 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (24812) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <BrowserChunkingContext as ChunkingContext>::chunk_item_id_from_ident (TaskId 58707))
+
+Caused by:
+    0: Looking up data for TaskId 58707 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (7640) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <BrowserChunkingContext as ChunkingContext>::chunk_item_id_from_ident (TaskId 58707))
+
+Caused by:
+    0: Looking up data for TaskId 58707 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (24812) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <BrowserChunkingContext as ChunkingContext>::chunk_item_id_from_ident (TaskId 58707))
+
+Caused by:
+    0: Looking up data for TaskId 58707 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (7640) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <BrowserChunkingContext as ChunkingContext>::chunk_item_id_from_ident (TaskId 58707))
+
+Caused by:
+    0: Looking up data for TaskId 58707 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (23532) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <BrowserChunkingContext as ChunkingContext>::chunk_item_id_from_ident (TaskId 58707))
+
+Caused by:
+    0: Looking up data for TaskId 58707 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (23532) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <BrowserChunkingContext as ChunkingContext>::chunk_item_id_from_ident (TaskId 58707))
+
+Caused by:
+    0: Looking up data for TaskId 58707 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (29544) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <EcmascriptModuleAsset as EcmascriptAnalyzable>::module_content_options (TaskId 69259))
+
+Caused by:
+    0: Looking up data for TaskId 69259 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (15772) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <BrowserChunkingContext as ChunkingContext>::chunk_item_id_from_ident (TaskId 58707))
+
+Caused by:
+    0: Looking up data for TaskId 58707 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (15772) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <BrowserChunkingContext as ChunkingContext>::chunk_item_id_from_ident (TaskId 58707))
+
+Caused by:
+    0: Looking up data for TaskId 58707 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (29544) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <EcmascriptModuleAsset as EcmascriptAnalyzable>::module_content_options (TaskId 69259))
+
+Caused by:
+    0: Looking up data for TaskId 69259 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (29544) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <EcmascriptModuleAsset as EcmascriptAnalyzable>::module_content_options (TaskId 69259))
+
+Caused by:
+    0: Looking up data for TaskId 69259 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (29544) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <BrowserChunkingContext as ChunkingContext>::chunk_item_id_from_ident (TaskId 58707))
+
+Caused by:
+    0: Looking up data for TaskId 58707 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (2152) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <BrowserChunkingContext as ChunkingContext>::chunk_item_id_from_ident (TaskId 58707))
+
+Caused by:
+    0: Looking up data for TaskId 58707 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (2152) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <BrowserChunkingContext as ChunkingContext>::chunk_item_id_from_ident (TaskId 58707))
+
+Caused by:
+    0: Looking up data for TaskId 58707 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (18380) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <BrowserChunkingContext as ChunkingContext>::chunk_item_id_from_ident (TaskId 58707))
+
+Caused by:
+    0: Looking up data for TaskId 58707 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (7640) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <BrowserChunkingContext as ChunkingContext>::chunk_item_id_from_ident (TaskId 58707))
+
+Caused by:
+    0: Looking up data for TaskId 58707 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (20700) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <BrowserChunkingContext as ChunkingContext>::chunk_item_id_from_ident (TaskId 58707))
+
+Caused by:
+    0: Looking up data for TaskId 58707 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (2152) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <EsmAssetReference as ModuleReference>::resolve_reference (TaskId 152156))
+
+Caused by:
+    0: Looking up data for TaskId 152156 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (2152) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <EsmAssetReference as ModuleReference>::resolve_reference (TaskId 152156))
+
+Caused by:
+    0: Looking up data for TaskId 152156 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (24812) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for AsyncModule::is_self_async (TaskId 191306))
+
+Caused by:
+    0: Looking up data for TaskId 191306 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (29544) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for EcmascriptModuleAsset::analyze (TaskId 203238))
+
+Caused by:
+    0: Looking up data for TaskId 203238 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (29544) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for EcmascriptModuleAsset::analyze (TaskId 203238))
+
+Caused by:
+    0: Looking up data for TaskId 203238 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (29544) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for EcmascriptModuleAsset::analyze (TaskId 203238))
+
+Caused by:
+    0: Looking up data for TaskId 203238 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (23532) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for read_matches (TaskId 418946))
+
+Caused by:
+    0: Looking up data for TaskId 418946 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (29544) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for read_matches (TaskId 25310))
+
+Caused by:
+    0: Looking up data for TaskId 25310 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (29544) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for read_matches (TaskId 25310))
+
+Caused by:
+    0: Looking up data for TaskId 25310 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (18380) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for EcmascriptModuleContent::new (TaskId 212008))
+
+Caused by:
+    0: Looking up data for TaskId 212008 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (18380) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for EcmascriptModuleContent::new (TaskId 212008))
+
+Caused by:
+    0: Looking up data for TaskId 212008 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (23532) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for read_matches (TaskId 348830))
+
+Caused by:
+    0: Looking up data for TaskId 348830 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (24812) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for resolve_internal (TaskId 34950))
+
+Caused by:
+    0: Looking up data for TaskId 34950 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (24812) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for resolve_internal (TaskId 34950))
+
+Caused by:
+    0: Looking up data for TaskId 34950 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (29544) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for read_matches (TaskId 16021))
+
+Caused by:
+    0: Looking up data for TaskId 16021 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (29544) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for read_matches (TaskId 16021))
+
+Caused by:
+    0: Looking up data for TaskId 16021 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (15772) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for EcmascriptModuleContent::new (TaskId 212008))
+
+Caused by:
+    0: Looking up data for TaskId 212008 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (2152) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <BrowserChunkingContext as ChunkingContext>::chunk_item_id_from_ident (TaskId 58707))
+
+Caused by:
+    0: Looking up data for TaskId 58707 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (2152) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <BrowserChunkingContext as ChunkingContext>::chunk_item_id_from_ident (TaskId 58707))
+
+Caused by:
+    0: Looking up data for TaskId 58707 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (20700) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <BrowserChunkingContext as ChunkingContext>::chunk_item_id_from_ident (TaskId 58707))
+
+Caused by:
+    0: Looking up data for TaskId 58707 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (20700) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <BrowserChunkingContext as ChunkingContext>::chunk_item_id_from_ident (TaskId 58707))
+
+Caused by:
+    0: Looking up data for TaskId 58707 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (18380) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <BrowserChunkingContext as ChunkingContext>::chunk_item_id_from_ident (TaskId 58707))
+
+Caused by:
+    0: Looking up data for TaskId 58707 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (18380) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <BrowserChunkingContext as ChunkingContext>::chunk_item_id_from_ident (TaskId 58707))
+
+Caused by:
+    0: Looking up data for TaskId 58707 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (23532) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <BrowserChunkingContext as ChunkingContext>::chunk_item_id_from_ident (TaskId 58707))
+
+Caused by:
+    0: Looking up data for TaskId 58707 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (2152) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <BrowserChunkingContext as ChunkingContext>::chunk_item_id_from_ident (TaskId 58707))
+
+Caused by:
+    0: Looking up data for TaskId 58707 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (2152) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <BrowserChunkingContext as ChunkingContext>::chunk_item_id_from_ident (TaskId 58707))
+
+Caused by:
+    0: Looking up data for TaskId 58707 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (2152) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <BrowserChunkingContext as ChunkingContext>::chunk_item_id_from_ident (TaskId 58707))
+
+Caused by:
+    0: Looking up data for TaskId 58707 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (24812) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for SourceMapReference::new (TaskId 18405))
+
+Caused by:
+    0: Looking up data for TaskId 18405 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (2152) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <BrowserChunkingContext as ChunkingContext>::chunk_item_id_from_ident (TaskId 58707))
+
+Caused by:
+    0: Looking up data for TaskId 58707 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (20700) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <BrowserChunkingContext as ChunkingContext>::chunk_item_id_from_ident (TaskId 58707))
+
+Caused by:
+    0: Looking up data for TaskId 58707 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (15772) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <BrowserChunkingContext as ChunkingContext>::chunk_item_id_from_ident (TaskId 58707))
+
+Caused by:
+    0: Looking up data for TaskId 58707 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (2152) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <BrowserChunkingContext as ChunkingContext>::chunk_item_id_from_ident (TaskId 58707))
+
+Caused by:
+    0: Looking up data for TaskId 58707 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (2152) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <BrowserChunkingContext as ChunkingContext>::chunk_item_id_from_ident (TaskId 58707))
+
+Caused by:
+    0: Looking up data for TaskId 58707 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (2152) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <BrowserChunkingContext as ChunkingContext>::chunk_item_id_from_ident (TaskId 58707))
+
+Caused by:
+    0: Looking up data for TaskId 58707 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (24812) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <BrowserChunkingContext as ChunkingContext>::chunk_item_id_from_ident (TaskId 58707))
+
+Caused by:
+    0: Looking up data for TaskId 58707 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (23532) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for get_type (TaskId 63999))
+
+Caused by:
+    0: Looking up data for TaskId 63999 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (23532) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for get_type (TaskId 63999))
+
+Caused by:
+    0: Looking up data for TaskId 63999 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (20700) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for <BrowserChunkingContext as ChunkingContext>::chunk_item_id_from_ident (TaskId 58707))
+
+Caused by:
+    0: Looking up data for TaskId 58707 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (29544) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for PlainIssue::from_issue (TaskId 139133))
+
+Caused by:
+    0: Looking up data for TaskId 139133 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+thread 'tokio-runtime-worker' (29544) panicked at C:\actions-runner\_work\next.js\next.js\turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:156:17:
+Failed to restore task data (corrupted database or bug): Data for PlainIssue::from_issue (TaskId 139133))
+
+Caused by:
+    0: Looking up data for TaskId 139133 from database failed
+    1: Unable to open static sorted file referenced from 00001254.meta
+    2: Unable to open static sorted file 00001249.sst
+    3: The system cannot find the file specified. (os error 2)
+
+-----
+[1m[31mFATAL[39m[0m: An unexpected Turbopack error occurred. A panic log has been written to C:\Users\aymen\AppData\Local\Temp\next-panic-2a8e72eaaeba33e58b509170c627ea82.log.
+
+To help make Turbopack better, report this error by ]8;;https://github.com/vercel/next.js/discussions/new?category=turbopack-error-report&title=Turbopack%20Error%3A%20Failed%20to%20restore%20task%20data%20%28corrupted%20database%20or%20bug%29%3A%20Data%20for%20PlainIssue%3A%3Afrom_issue%20%28TaskId%20139133%29%29&body=Turbopack%20version%3A%20%60dc98c04f%60%0ANext.js%20version%3A%20%600.0.0%60%0A%0AError%20message%3A%0A%60%60%60%0AFailed%20to%20restore%20task%20data%20%28corrupted%20database%20or%20bug%29%3A%20Data%20for%20PlainIssue%3A%3Afrom_issue%20%28TaskId%20139133%29%29%0A%0ADebug%20info%3A%0A-%20Execution%20of%20subscribe_issues_and_diags_operation%20failed%0A-%20Failed%20to%20restore%20task%20data%20%28corrupted%20database%20or%20bug%29%3A%20Data%20for%20PlainIssue%3A%3Afrom_issue%20%28TaskId%20139133%29%29%0A%20%20%0A%20%20Caused%20by%3A%0A%20%20%20%20%20%200%3A%20Looking%20up%20data%20for%20TaskId%20139133%20from%20database%20failed%0A%20%20%20%20%20%201%3A%20Unable%20to%20open%20static%20sorted%20file%20referenced%20from%2000001254.meta%0A%20%20%20%20%20%202%3A%20Unable%20to%20open%20static%20sorted%20file%2000001249.sst%0A%20%20%20%20%20%203%3A%20The%20system%20cannot%20find%20the%20file%20specified.%20%28os%20error%202%29%0A%60%60%60&labels=Turbopack,Turbopack%20Panic%20Backtrace\clicking here.]8;;\
+-----
+
+Error: Turbopack build failed with 1 errors:
+./next-app/app
+Error: Next.js inferred your workspace root, but it may not be correct.
+    We couldn't find the Next.js package (next/package.json) from the project directory: C:\Users\aymen\OneDrive\Desktop\KAPA\Pain Website\next-app\app
+     To fix this, set turbopack.root in your Next.js config, or ensure the Next.js package is resolvable from this directory.
+    Note: For security and performance reasons, files outside of the project directory will not be compiled.
+    See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+
+    at ignore-listed frames
