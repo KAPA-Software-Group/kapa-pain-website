@@ -72,9 +72,6 @@ export default function ServicesPage() {
                 <Link href="/contact-us" className="btn-primary">
                   Contact the Clinic
                 </Link>
-                <Link href="/contact-us" className="btn-ghost">
-                  Contact the Clinic
-                </Link>
               </div>
             </div>
           </div>
