@@ -5,8 +5,37 @@ import Image from "next/image"
 import { usePathname } from "next/navigation"
 import { useEffect, useState } from "react"
 
+const PROCEDURE_GROUPS = [
+  {
+    label: "Assessment & Planning",
+    items: [
+      {
+        href: "/patient-procedures/chronic-pain-assessment-medical-management",
+        label: "Chronic Pain Assessment & Medical Management",
+      },
+    ],
+  },
+  {
+    label: "Nerve & Spine",
+    items: [
+      { href: "/patient-procedures/nerve-hydrodissection", label: "Nerve Hydrodissection" },
+      { href: "/patient-procedures/nerve-blocks-diagnostic-injections", label: "Nerve Blocks & Diagnostic Injections" },
+      { href: "/patient-procedures/radiofrequency-ablation", label: "Radiofrequency Ablation" },
+      { href: "/patient-procedures/epidural-injections", label: "Epidural Injections" },
+    ],
+  },
+  {
+    label: "Joint & Specialized",
+    items: [
+      { href: "/patient-procedures/arthritis-joint-injections", label: "Arthritis Joint Injections" },
+      { href: "/patient-procedures/stellate-ganglion-block", label: "Stellate Ganglion Block" },
+      { href: "/patient-procedures/advanced-specialized-procedures", label: "Advanced & Specialized Procedures" },
+    ],
+  },
+]
+
 const NAV_ITEMS = [
-  { href: "/patient-procedures", label: "Patient Procedures" },
+  { href: "/patient-procedures", label: "Patient Procedures", dropdown: true },
   { href: "/doctors", label: "Doctors" },
   { href: "/locations", label: "Locations" },
   { href: "/contact-us", label: "Contact Us" },
@@ -29,7 +58,6 @@ export function SiteHeader({ overlay = false }: SiteHeaderProps) {
 
   useEffect(() => {
     if (!overlay) return
-
     const onScroll = () => setScrolled(window.scrollY > 60)
     onScroll()
     window.addEventListener("scroll", onScroll, { passive: true })
@@ -98,17 +126,66 @@ export function SiteHeader({ overlay = false }: SiteHeaderProps) {
 
       <div className="nav-right">
         <ul className="nav-links">
-          {NAV_ITEMS.map((item) => (
-            <li key={item.href}>
-              <Link
-                href={item.href}
-                className={isActivePath(item.href) ? "is-active" : undefined}
-                onClick={() => setMenuOpen(false)}
-              >
-                {item.label}
-              </Link>
-            </li>
-          ))}
+          {NAV_ITEMS.map((item) =>
+            item.dropdown ? (
+              <li key={item.href} className="nav-dropdown-item">
+                <Link
+                  href={item.href}
+                  className={isActivePath(item.href) ? "is-active" : undefined}
+                  onClick={() => setMenuOpen(false)}
+                >
+                  {item.label}
+                  <svg
+                    className="nav-chevron"
+                    width="9"
+                    height="6"
+                    viewBox="0 0 9 6"
+                    fill="none"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M1 1L4.5 5L8 1"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </Link>
+
+                <div className="nav-dropdown" role="menu">
+                  {PROCEDURE_GROUPS.map((group) => (
+                    <div key={group.label} className="nav-dropdown-group">
+                      <span className="nav-dropdown-group-label">{group.label}</span>
+                      <ul className="nav-dropdown-list">
+                        {group.items.map((sub) => (
+                          <li key={sub.href}>
+                            <Link
+                              href={sub.href}
+                              className={pathname === sub.href ? "is-active" : undefined}
+                              onClick={() => setMenuOpen(false)}
+                            >
+                              {sub.label}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+              </li>
+            ) : (
+              <li key={item.href}>
+                <Link
+                  href={item.href}
+                  className={isActivePath(item.href) ? "is-active" : undefined}
+                  onClick={() => setMenuOpen(false)}
+                >
+                  {item.label}
+                </Link>
+              </li>
+            )
+          )}
         </ul>
 
         <a href="tel:2897529388" className="nav-cta">
@@ -128,26 +205,63 @@ export function SiteHeader({ overlay = false }: SiteHeaderProps) {
 
       <div
         id="site-mobile-nav"
-        className={["mobile-nav", menuOpen ? "is-open" : ""]
-          .filter(Boolean)
-          .join(" ")}
+        className={["mobile-nav", menuOpen ? "is-open" : ""].filter(Boolean).join(" ")}
       >
         <div className="mobile-nav-links">
-          {NAV_ITEMS.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={[
-                "mobile-nav-link",
-                isActivePath(item.href) ? "is-active" : "",
-              ]
-                .filter(Boolean)
-                .join(" ")}
-              onClick={() => setMenuOpen(false)}
-            >
-              {item.label}
-            </Link>
-          ))}
+          {NAV_ITEMS.map((item) =>
+            item.dropdown ? (
+              <div key={item.href} className="mobile-nav-procedure">
+                <Link
+                  href={item.href}
+                  className={[
+                    "mobile-nav-link",
+                    isActivePath(item.href) ? "is-active" : "",
+                  ]
+                    .filter(Boolean)
+                    .join(" ")}
+                  onClick={() => setMenuOpen(false)}
+                >
+                  {item.label}
+                </Link>
+                <div className="mobile-nav-sublinks">
+                  {PROCEDURE_GROUPS.map((group) => (
+                    <div key={group.label} className="mobile-nav-subgroup">
+                      <span className="mobile-nav-subgroup-label">{group.label}</span>
+                      {group.items.map((sub) => (
+                        <Link
+                          key={sub.href}
+                          href={sub.href}
+                          className={[
+                            "mobile-nav-sublink",
+                            pathname === sub.href ? "is-active" : "",
+                          ]
+                            .filter(Boolean)
+                            .join(" ")}
+                          onClick={() => setMenuOpen(false)}
+                        >
+                          {sub.label}
+                        </Link>
+                      ))}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ) : (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={[
+                  "mobile-nav-link",
+                  isActivePath(item.href) ? "is-active" : "",
+                ]
+                  .filter(Boolean)
+                  .join(" ")}
+                onClick={() => setMenuOpen(false)}
+              >
+                {item.label}
+              </Link>
+            )
+          )}
         </div>
         <a href="tel:2897529388" className="mobile-nav-cta">
           Call 289-752-9388
