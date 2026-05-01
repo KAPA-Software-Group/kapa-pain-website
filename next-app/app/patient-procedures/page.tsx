@@ -77,9 +77,9 @@ export default function PatientProceduresPage() {
                 contact the clinic.
               </p>
               <div className="procedure-hero-actions">
-                <a href="tel:2897529388" className="btn-primary">
-                  Call to Discuss Your Options
-                </a>
+                <Link href="/contact-us" className="btn-primary">
+                  Contact the Clinic
+                </Link>
                 <Link
                   href={getPatientProcedureHref(
                     "chronic-pain-assessment-medical-management"
@@ -230,9 +230,9 @@ export default function PatientProceduresPage() {
 
             <div className="procedure-cta-panel">
               <div className="procedure-cta-actions">
-                <a href="tel:2897529388" className="btn-primary">
-                  Call to Discuss Your Options
-                </a>
+                <Link href="/contact-us" className="btn-primary">
+                  Contact the Clinic
+                </Link>
                 <Link
                   href={getPatientProcedureHref(
                     "chronic-pain-assessment-medical-management"

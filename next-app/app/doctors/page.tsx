@@ -404,9 +404,9 @@ export default function DoctorsPage() {
                 radiology, anesthesiology, and nurse practitioner expertise.
               </p>
               <div className="procedure-hero-actions">
-                <a href="tel:2897529388" className="btn-primary">
-                  Call the Clinic
-                </a>
+                <Link href="/contact-us" className="btn-primary">
+                  Contact the Clinic
+                </Link>
                 <Link href="/referrals" className="btn-ghost">
                   Referral Information
                 </Link>
@@ -462,10 +462,7 @@ export default function DoctorsPage() {
 
             <div className="procedure-cta-panel">
               <div className="procedure-cta-actions">
-                <a href="tel:2897529388" className="btn-primary">
-                  Call 289-752-9388
-                </a>
-                <Link href="/contact-us" className="btn-ghost">
+                <Link href="/contact-us" className="btn-primary">
                   Contact the Clinic
                 </Link>
               </div>

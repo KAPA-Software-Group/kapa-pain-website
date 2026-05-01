@@ -34,8 +34,15 @@ const PROCEDURE_GROUPS = [
   },
 ]
 
+const SERVICES_ITEMS = [
+  { href: "/services/image-guided-procedures", label: "Image Guided Procedures" },
+  { href: "/services/medication-management", label: "Medication Management" },
+  { href: "/services/fluoroscopy", label: "Fluoroscopy" },
+]
+
 const NAV_ITEMS = [
-  { href: "/patient-procedures", label: "Patient Procedures", dropdown: true },
+  { href: "/patient-procedures", label: "Patient Procedures", dropdown: "procedures" as const },
+  { href: "/services", label: "Services", dropdown: "services" as const },
   { href: "/doctors", label: "Doctors" },
   { href: "/locations", label: "Locations" },
   { href: "/contact-us", label: "Contact Us" },
@@ -154,11 +161,30 @@ export function SiteHeader({ overlay = false }: SiteHeaderProps) {
                 </Link>
 
                 <div className="nav-dropdown" role="menu">
-                  {PROCEDURE_GROUPS.map((group) => (
-                    <div key={group.label} className="nav-dropdown-group">
-                      <span className="nav-dropdown-group-label">{group.label}</span>
+                  {item.dropdown === "procedures" ? (
+                    PROCEDURE_GROUPS.map((group) => (
+                      <div key={group.label} className="nav-dropdown-group">
+                        <span className="nav-dropdown-group-label">{group.label}</span>
+                        <ul className="nav-dropdown-list">
+                          {group.items.map((sub) => (
+                            <li key={sub.href}>
+                              <Link
+                                href={sub.href}
+                                className={pathname === sub.href ? "is-active" : undefined}
+                                onClick={() => setMenuOpen(false)}
+                              >
+                                {sub.label}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    ))
+                  ) : (
+                    <div className="nav-dropdown-group">
+                      <span className="nav-dropdown-group-label">Services</span>
                       <ul className="nav-dropdown-list">
-                        {group.items.map((sub) => (
+                        {SERVICES_ITEMS.map((sub) => (
                           <li key={sub.href}>
                             <Link
                               href={sub.href}
@@ -171,7 +197,7 @@ export function SiteHeader({ overlay = false }: SiteHeaderProps) {
                         ))}
                       </ul>
                     </div>
-                  ))}
+                  )}
                 </div>
               </li>
             ) : (
@@ -224,10 +250,30 @@ export function SiteHeader({ overlay = false }: SiteHeaderProps) {
                   {item.label}
                 </Link>
                 <div className="mobile-nav-sublinks">
-                  {PROCEDURE_GROUPS.map((group) => (
-                    <div key={group.label} className="mobile-nav-subgroup">
-                      <span className="mobile-nav-subgroup-label">{group.label}</span>
-                      {group.items.map((sub) => (
+                  {item.dropdown === "procedures" ? (
+                    PROCEDURE_GROUPS.map((group) => (
+                      <div key={group.label} className="mobile-nav-subgroup">
+                        <span className="mobile-nav-subgroup-label">{group.label}</span>
+                        {group.items.map((sub) => (
+                          <Link
+                            key={sub.href}
+                            href={sub.href}
+                            className={[
+                              "mobile-nav-sublink",
+                              pathname === sub.href ? "is-active" : "",
+                            ]
+                              .filter(Boolean)
+                              .join(" ")}
+                            onClick={() => setMenuOpen(false)}
+                          >
+                            {sub.label}
+                          </Link>
+                        ))}
+                      </div>
+                    ))
+                  ) : (
+                    <div className="mobile-nav-subgroup">
+                      {SERVICES_ITEMS.map((sub) => (
                         <Link
                           key={sub.href}
                           href={sub.href}
@@ -243,7 +289,7 @@ export function SiteHeader({ overlay = false }: SiteHeaderProps) {
                         </Link>
                       ))}
                     </div>
-                  ))}
+                  )}
                 </div>
               </div>
             ) : (
@@ -263,9 +309,9 @@ export function SiteHeader({ overlay = false }: SiteHeaderProps) {
             )
           )}
         </div>
-        <a href="tel:2897529388" className="mobile-nav-cta">
-          Call 289-752-9388
-        </a>
+        <Link href="/contact-us" className="mobile-nav-cta">
+          Contact the Clinic
+        </Link>
       </div>
     </nav>
   )

@@ -47,9 +47,9 @@ export function PlaceholderPage({
                 <Link href="/" className="btn-primary">
                   Back to Home
                 </Link>
-                <a href="mailto:info@precisioncare.ca" className="btn-ghost">
-                  Email the Clinic
-                </a>
+                <Link href="/contact-us" className="btn-ghost">
+                  Contact the Clinic
+                </Link>
               </div>
             </article>
           </div>

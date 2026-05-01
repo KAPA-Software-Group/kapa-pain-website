@@ -443,10 +443,7 @@ export default function LocationsPage() {
                 access.
               </p>
               <div className="procedure-hero-actions">
-                <a href={contactPhoneHref} className="btn-primary">
-                  Call {contactPhone}
-                </a>
-                <Link href="/contact-us" className="btn-ghost">
+                <Link href="/contact-us" className="btn-primary">
                   Contact the Clinic
                 </Link>
               </div>
@@ -492,12 +489,9 @@ export default function LocationsPage() {
 
             <div className="procedure-cta-panel" data-locations-reveal="cta">
               <div className="procedure-cta-actions">
-                <a href={contactPhoneHref} className="btn-primary">
-                  Call {contactPhone}
-                </a>
-                <a href={`mailto:${contactEmail}`} className="btn-ghost">
-                  Email the Clinic
-                </a>
+                <Link href="/contact-us" className="btn-primary">
+                  Contact the Clinic
+                </Link>
               </div>
             </div>
           </div>

@@ -1,3 +1,4 @@
+import Link from "next/link"
 import { HeroSection } from "@/components/hero-section"
 import { RoadmapSection } from "@/components/roadmap-section"
 import { SiteFooter } from "@/components/site-footer"
@@ -256,12 +257,9 @@ export default function Home() {
             We&apos;ll take care of the rest.
           </p>
           <div className="cta-actions reveal reveal-delay-3">
-            <a href="tel:2897529388" className="btn-primary">
-              Call 289-752-9388
-            </a>
-            <a href="mailto:info@precisioncare.ca" className="btn-ghost">
-              info@precisioncare.ca
-            </a>
+            <Link href="/contact-us" className="btn-primary">
+              Contact the Clinic
+            </Link>
           </div>
         </div>
         <div className="cta-footer reveal reveal-delay-4">

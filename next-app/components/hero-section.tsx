@@ -1,5 +1,6 @@
 "use client"
 
+import Link from "next/link"
 import { SiteHeader } from "@/components/site-header"
 import HeroText from "@/components/ui/hero-shutter-text"
 import { useCallback, useEffect, useRef, useState } from "react"
@@ -90,9 +91,9 @@ export function HeroSection() {
                 team of specialists. Covered by OHIP when referred.
               </p>
               <div className="hero-actions">
-                <a href="tel:2897529388" className="btn-primary">
+                <Link href="/contact-us" className="btn-primary">
                   Request a Consultation
-                </a>
+                </Link>
                 <a href="#specialties" className="btn-ghost">
                   Our Specialties
                 </a>

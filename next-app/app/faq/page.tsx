@@ -249,9 +249,9 @@ export default function FaqPage() {
                 coverage, clinic visits, imaging, languages, and parking.
               </p>
               <div className="procedure-hero-actions">
-                <a href="tel:2897529388" className="btn-primary">
-                  Call the Clinic
-                </a>
+                <Link href="/contact-us" className="btn-primary">
+                  Contact the Clinic
+                </Link>
                 <Link href="/referrals" className="btn-ghost">
                   Referral Information
                 </Link>
@@ -330,11 +330,8 @@ export default function FaqPage() {
 
               <div className="flex flex-col gap-4 sm:flex-row lg:flex-col">
                 <Link href="/contact-us" className="btn-primary">
-                  Email the Clinic
+                  Contact the Clinic
                 </Link>
-                <a href="tel:2897529388" className="btn-ghost">
-                  Call 289-752-9388
-                </a>
               </div>
             </div>
           </div>
