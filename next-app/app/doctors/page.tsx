@@ -112,10 +112,45 @@ const doctorsPageStyles = `
 
   .doctors-page-scope .doctors-profile {
     align-items: stretch;
+    padding: clamp(78px, 9vw, 128px) 0;
+    border-top-color: rgba(159, 118, 87, 0.22);
   }
 
   .doctors-page-scope .doctors-profile-copy {
     min-width: 0;
+  }
+
+  .doctors-page-scope .doctors-profile:first-child {
+    padding-top: clamp(18px, 3vw, 36px);
+  }
+
+  .doctors-page-scope .doctors-profile-heading {
+    gap: 20px;
+  }
+
+  .doctors-page-scope .doctors-profile-role {
+    position: relative;
+    max-width: 100%;
+    padding: 12px 16px 12px 20px;
+    border-color: rgba(159, 118, 87, 0.36);
+    background:
+      linear-gradient(
+        135deg,
+        rgba(159, 118, 87, 0.14),
+        rgba(246, 239, 227, 0.58)
+      ),
+      rgba(246, 239, 227, 0.7);
+    box-shadow: 0 14px 32px rgba(31, 29, 26, 0.045);
+    font-size: 12px;
+    letter-spacing: 0.14em;
+  }
+
+  .doctors-page-scope .doctors-profile-role::before {
+    content: "";
+    position: absolute;
+    inset: 8px auto 8px 8px;
+    width: 3px;
+    background: rgba(159, 118, 87, 0.62);
   }
 
   .doctors-page-scope .doctors-quote-card {
@@ -185,6 +220,7 @@ const doctorsPageStyles = `
   @media (max-width: 1024px) {
     .doctors-page-scope .doctors-profile {
       align-items: start;
+      padding: 64px 0;
     }
 
     .doctors-page-scope .doctors-quote-card {
@@ -201,6 +237,24 @@ const doctorsPageStyles = `
       margin-top: 0;
       max-width: none;
       padding: 24px;
+    }
+
+    .doctors-page-scope .doctors-profile {
+      padding: 56px 0;
+    }
+
+    .doctors-page-scope .doctors-profile:first-child {
+      padding-top: 0;
+    }
+
+    .doctors-page-scope .doctors-profile-heading {
+      gap: 16px;
+    }
+
+    .doctors-page-scope .doctors-profile-role {
+      padding: 11px 14px 11px 18px;
+      font-size: 11px;
+      letter-spacing: 0.12em;
     }
 
     .doctors-page-scope .doctors-quote-card {
