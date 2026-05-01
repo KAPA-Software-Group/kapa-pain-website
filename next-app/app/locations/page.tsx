@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import Link from "next/link"
+import Script from "next/script"
 import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
 
@@ -110,6 +111,10 @@ const locationsPageStyles = `
     min-height: 360px;
     border-right: none;
     border-bottom: 1px solid var(--hairline);
+    transition:
+      border-color 280ms ease,
+      box-shadow 280ms ease,
+      transform 520ms var(--ease);
   }
 
   .locations-page-card:nth-child(2n) {
@@ -183,6 +188,10 @@ const locationsPageStyles = `
     filter: sepia(0.58) saturate(0.72) hue-rotate(338deg) contrast(0.9)
       brightness(1.04);
     opacity: 0.88;
+    transform: scale(1);
+    transition:
+      opacity 420ms ease,
+      transform 720ms var(--ease);
   }
 
   .locations-page-actions {
@@ -208,6 +217,43 @@ const locationsPageStyles = `
 
   .locations-page-card[data-coming-soon="true"] .locations-page-address {
     margin-bottom: 0;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .locations-page-card:hover {
+      border-color: rgba(159, 118, 87, 0.34);
+      box-shadow: 0 30px 72px rgba(31, 29, 26, 0.08);
+      transform: translateY(-3px);
+    }
+
+    .locations-page-card[data-coming-soon="true"]:hover {
+      box-shadow: 0 18px 46px rgba(31, 29, 26, 0.05);
+      transform: translateY(-2px);
+    }
+
+    .locations-page-card:hover .locations-page-map iframe {
+      opacity: 0.96;
+      transform: scale(1.015);
+    }
+  }
+
+  .locations-reveal-root.is-reveal-enabled .locations-page-scope [data-locations-reveal],
+  .locations-reveal-root.is-reveal-enabled .procedure-cta-section [data-locations-reveal] {
+    opacity: 0;
+    transform: translate3d(0, 18px, 0);
+    transition:
+      opacity 700ms var(--ease),
+      transform 700ms var(--ease),
+      border-color 280ms ease,
+      box-shadow 280ms ease;
+    will-change: opacity, transform;
+  }
+
+  .locations-reveal-root.is-reveal-enabled .locations-page-scope [data-locations-reveal].is-loaded,
+  .locations-reveal-root.is-reveal-enabled .procedure-cta-section [data-locations-reveal].is-loaded {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+    will-change: auto;
   }
 
   @media (max-width: 1024px) {
@@ -242,6 +288,56 @@ const locationsPageStyles = `
       min-height: auto;
     }
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    .locations-page-card,
+    .locations-page-map iframe,
+    .locations-reveal-root.is-reveal-enabled .locations-page-scope [data-locations-reveal],
+    .locations-reveal-root.is-reveal-enabled .locations-page-scope [data-locations-reveal].is-loaded,
+    .locations-reveal-root.is-reveal-enabled .procedure-cta-section [data-locations-reveal],
+    .locations-reveal-root.is-reveal-enabled .procedure-cta-section [data-locations-reveal].is-loaded {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+`
+
+const locationsRevealScript = `
+  (() => {
+    const loadReveals = () => {
+      const root = document.querySelector("[data-locations-reveal-root]");
+      if (!root) return;
+
+      root.classList.add("is-reveal-enabled");
+
+      const revealItems = Array.from(root.querySelectorAll("[data-locations-reveal]"));
+
+      if (!("IntersectionObserver" in window)) {
+        revealItems.forEach((item) => item.classList.add("is-loaded"));
+        return;
+      }
+
+      const observer = new IntersectionObserver(
+        (entries, activeObserver) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+
+            entry.target.classList.add("is-loaded");
+            activeObserver.unobserve(entry.target);
+          });
+        },
+        {
+          rootMargin: "0px 0px -12% 0px",
+          threshold: 0.14,
+        }
+      );
+
+      revealItems.forEach((item) => observer.observe(item));
+    };
+
+    window.requestAnimationFrame(loadReveals);
+  })();
 `
 
 type LocationCardProps = (typeof locationCards)[number]
@@ -259,6 +355,7 @@ function LocationCard({
     <article
       className="loc-card locations-page-card"
       data-coming-soon={isComingSoon}
+      data-locations-reveal="card"
     >
       <div>
         <span className="loc-tag">Clinic Location</span>
@@ -324,9 +421,17 @@ export default function LocationsPage() {
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: locationsPageStyles }} />
+      <Script
+        id="locations-reveal-script"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{ __html: locationsRevealScript }}
+      />
       <SiteHeader overlay />
 
-      <main className="page-shell">
+      <main
+        className="page-shell locations-reveal-root"
+        data-locations-reveal-root
+      >
         <section className="inner-hero procedure-hero">
           <div className="section-inner procedure-hero-content">
             <div className="procedure-hero-grid">
@@ -351,7 +456,11 @@ export default function LocationsPage() {
               <div className="procedure-facts">
                 <div className="procedure-fact">
                   <span className="procedure-fact-label">Cities</span>
-                  <p className="procedure-fact-value">4 Ontario locations</p>
+                  <p className="procedure-fact-value">
+                    2 Current Locations
+                    <br />
+                    2 Coming Soon
+                  </p>
                 </div>
                 <div className="procedure-fact">
                   <span className="procedure-fact-label">Current Sites</span>
@@ -368,7 +477,7 @@ export default function LocationsPage() {
 
         <section className="procedure-section locations-page-scope">
           <div className="section-inner">
-            <div className="locations-page-intro">
+            <div className="locations-page-intro" data-locations-reveal="intro">
               <div>
                 <div className="section-label">Clinic Locations</div>
                 <h2 className="procedure-section-title">
@@ -402,7 +511,7 @@ export default function LocationsPage() {
               </p>
             </div>
 
-            <div className="procedure-cta-panel">
+            <div className="procedure-cta-panel" data-locations-reveal="cta">
               <div className="procedure-cta-actions">
                 <a href={contactPhoneHref} className="btn-primary">
                   Call {contactPhone}
