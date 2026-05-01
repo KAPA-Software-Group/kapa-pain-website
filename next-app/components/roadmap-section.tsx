@@ -12,23 +12,6 @@ const CAR_EXIT_PAD = 90
 
 const ROAD_D = "M 400 0 C 400 180 280 300 250 460 C 220 620 560 700 572 870 C 584 1040 268 1130 238 1300 C 208 1470 545 1555 562 1720 C 579 1885 318 1960 298 2120 C 278 2280 476 2360 490 2520 C 504 2680 400 2820 400 3200"
 
-const NERVE_BRANCHES = [
-  "M 388 210 C 300 218 248 252 190 306",
-  "M 412 335 C 500 342 560 382 620 448",
-  "M 267 552 C 178 562 126 604 76 668",
-  "M 470 715 C 562 724 626 768 690 838",
-  "M 552 924 C 640 940 694 992 742 1062",
-  "M 305 1106 C 218 1120 154 1164 92 1234",
-  "M 252 1394 C 166 1410 110 1458 58 1530",
-  "M 522 1544 C 612 1560 670 1608 724 1680",
-  "M 536 1814 C 624 1834 684 1888 732 1960",
-  "M 324 1996 C 236 2014 172 2066 116 2140",
-  "M 312 2264 C 226 2284 164 2338 112 2414",
-  "M 476 2432 C 566 2452 626 2508 676 2584",
-  "M 484 2706 C 572 2728 632 2790 680 2872",
-  "M 408 2948 C 318 2970 258 3032 208 3112",
-]
-
 type Zone = "storm" | "transition" | "serenity"
 const MILESTONES: { km: string; title: string; desc: string; side: "left"|"right"; t: number; zone: Zone }[] = [
   { km: "KM 0",  title: "GP Referral",             desc: "Ask your family physician for a referral. Most treatments are covered by OHIP once referred.",             side: "right", t: 0.07, zone: "storm"      },
@@ -346,17 +329,18 @@ export function RoadmapSection() {
               </g>
 
               {/* Storm ridges — full 1800px width */}
-              <path d="M 0 700 L 0 255 L 100 155 L 220 235 L 340 95 L 450 185 L 540 55 L 640 140 L 720 22 L 820 95 L 900 12 L 980 88 L 1060 18 L 1160 95 L 1260 28 L 1370 105 L 1460 38 L 1570 118 L 1670 48 L 1800 105 L 1800 700 Z" fill="#0a1118" opacity="0.95"/>
-              <path d="M 0 840 L 0 450 L 120 368 L 240 445 L 360 328 L 480 408 L 580 295 L 700 375 L 810 262 L 920 345 L 1040 248 L 1160 328 L 1270 235 L 1380 315 L 1490 228 L 1600 308 L 1700 222 L 1800 295 L 1800 840 Z" fill="#081018" opacity="0.78"/>
+              <path d="M 0 860 L 0 430 L 96 318 L 166 372 L 292 196 L 398 338 L 492 142 L 612 326 L 724 88 L 852 316 L 952 126 L 1078 330 L 1186 104 L 1310 318 L 1416 176 L 1538 352 L 1646 236 L 1800 360 L 1800 860 Z" fill="#081018" opacity="0.92"/>
+              <path d="M 276 218 L 292 196 L 336 255 L 306 240 L 286 276 Z M 468 190 L 492 142 L 536 210 L 504 194 L 486 238 Z M 692 154 L 724 88 L 772 172 L 736 150 L 712 206 Z M 930 168 L 952 126 L 996 196 L 962 180 L 946 224 Z M 1158 160 L 1186 104 L 1238 192 L 1198 170 L 1178 224 Z" fill="rgba(190,210,225,0.16)"/>
               <path d="M 0 1080 L 0 760 Q 200 700 400 768 Q 600 828 800 728 Q 1000 628 1200 748 Q 1400 848 1600 748 Q 1700 698 1800 728 L 1800 1080 Z" fill="#0d1820" opacity="0.86"/>
 
-              {/* Transition terrain */}
-              <path d="M 0 2060 Q 300 1890 600 1960 Q 900 2030 1200 1890 Q 1500 1750 1800 1850 L 1800 2160 L 0 2160 Z" fill="#162a1c" opacity="0.8"/>
-              <path d="M 0 2180 Q 350 2060 700 2120 Q 1050 2180 1350 2040 Q 1600 1930 1800 2010 L 1800 2240 L 0 2240 Z" fill="#1c3622" opacity="0.7"/>
+              {/* Transition mountains */}
+              <path d="M 0 2260 L 0 1910 L 96 1840 L 178 1888 L 292 1748 L 420 1902 L 540 1778 L 650 1884 L 786 1708 L 922 1894 L 1042 1760 L 1168 1886 L 1308 1722 L 1440 1896 L 1558 1782 L 1682 1880 L 1800 1818 L 1800 2260 Z" fill="#173120" opacity="0.7"/>
+              <path d="M 0 2400 L 0 2054 L 160 1984 L 300 2060 L 468 1932 L 636 2068 L 790 1968 L 954 2076 L 1132 1940 L 1310 2070 L 1464 1960 L 1626 2052 L 1800 1988 L 1800 2400 Z" fill="#24472b" opacity="0.62"/>
+              <path d="M 0 2680 Q 320 2500 650 2558 Q 960 2612 1240 2476 Q 1540 2330 1800 2450 L 1800 2840 L 0 2840 Z" fill="#2d5531" opacity="0.58"/>
 
               {/* Serene meadow hills */}
-              <path d="M 0 2740 Q 300 2590 600 2650 Q 900 2710 1200 2570 Q 1500 2430 1800 2560 L 1800 3200 L 0 3200 Z" fill="#2d5c32" opacity="0.75"/>
-              <path d="M 0 2900 Q 360 2790 720 2850 Q 1080 2910 1400 2770 Q 1620 2680 1800 2750 L 1800 3200 L 0 3200 Z" fill="#3e7044" opacity="0.84"/>
+              <path d="M 0 2760 Q 300 2610 600 2670 Q 900 2730 1200 2590 Q 1500 2450 1800 2580 L 1800 3200 L 0 3200 Z" fill="#35683a" opacity="0.68"/>
+              <path d="M 0 2920 Q 360 2810 720 2870 Q 1080 2930 1400 2790 Q 1620 2700 1800 2770 L 1800 3200 L 0 3200 Z" fill="#477a4b" opacity="0.78"/>
               <path d="M 0 3070 Q 450 2995 900 3030 Q 1350 3065 1800 2970 L 1800 3200 L 0 3200 Z" fill="#558c5a" opacity="0.9"/>
               <path d="M 0 3140 Q 500 3095 900 3118 Q 1300 3142 1800 3100 L 1800 3200 L 0 3200 Z" fill="#6aa870" opacity="0.65"/>
 
@@ -392,20 +376,6 @@ export function RoadmapSection() {
                   <stop offset="0%"   stopColor="rgba(245,197,24,0.22)"/>
                   <stop offset="100%" stopColor="rgba(245,197,24,0)"/>
                 </radialGradient>
-                <linearGradient id="pjSpineBone" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0%" stopColor="#fff5dc"/>
-                  <stop offset="46%" stopColor="#d8b982"/>
-                  <stop offset="100%" stopColor="#8a6335"/>
-                </linearGradient>
-                <linearGradient id="pjSpineCord" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="rgba(165,210,235,0.84)"/>
-                  <stop offset="48%" stopColor="rgba(245,197,24,0.92)"/>
-                  <stop offset="100%" stopColor="rgba(255,244,200,0.9)"/>
-                </linearGradient>
-                <linearGradient id="pjNerveStroke" x1="0" y1="0" x2="1" y2="0">
-                  <stop offset="0%" stopColor="rgba(245,197,24,0.56)"/>
-                  <stop offset="100%" stopColor="rgba(165,210,235,0)"/>
-                </linearGradient>
                 <clipPath id="pjStormClip">
                   <rect x="-200" y="-100" width="1200" height="1900"/>
                 </clipPath>
