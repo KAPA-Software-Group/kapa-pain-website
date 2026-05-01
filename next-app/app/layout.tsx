@@ -1,4 +1,4 @@
-import type { Metadata } from "next"
+import type { Metadata, Viewport } from "next"
 import { DM_Sans, Spectral } from "next/font/google"
 import "./globals.css"
 
@@ -30,6 +30,12 @@ export const metadata: Metadata = {
     "pain management",
     "multidisciplinary",
   ],
+}
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
 }
 
 export default function RootLayout({
