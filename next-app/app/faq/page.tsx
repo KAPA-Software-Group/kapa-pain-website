@@ -355,9 +355,9 @@ export default function FaqPage() {
               </div>
 
               <div className="flex flex-col gap-4 sm:flex-row lg:flex-col">
-                <a href="mailto:info@precisioncare.ca" className="btn-primary">
+                <Link href="/contact-us" className="btn-primary">
                   Email the Clinic
-                </a>
+                </Link>
                 <a href="tel:2897529388" className="btn-ghost">
                   Call 289-752-9388
                 </a>
