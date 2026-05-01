@@ -29,34 +29,18 @@ export function ProcedurePageView({ page }: ProcedurePageViewProps) {
       <main className="page-shell procedure-shell">
         <section className="inner-hero procedure-hero">
           <div className="section-inner procedure-hero-content">
-            <Link href="/patient-procedures" className="procedure-breadcrumb">
-              Patient Procedures
-            </Link>
-
-            <div className="procedure-hero-grid">
-              <div className="procedure-hero-copy-wrap">
-                <div className="section-label">{page.eyebrow}</div>
-                <h1 className="inner-hero-title">{page.title}</h1>
-                <p className="inner-hero-copy procedure-hero-copy">
-                  {page.description}
-                </p>
-                <div className="procedure-hero-actions">
-                  <a href="tel:2897529388" className="btn-primary">
-                    Call to Discuss Treatment
-                  </a>
-                  <Link href="/referrals" className="btn-ghost">
-                    Referral Information
-                  </Link>
-                </div>
-              </div>
-
-              <div className="procedure-facts">
-                {page.quickFacts.map((fact) => (
-                  <div key={fact.label} className="procedure-fact">
-                    <span className="procedure-fact-label">{fact.label}</span>
-                    <p className="procedure-fact-value">{fact.value}</p>
-                  </div>
-                ))}
+            <div className="procedure-hero-centered">
+              <h1 className="inner-hero-title">{page.title}</h1>
+              <p className="inner-hero-copy procedure-hero-copy">
+                {page.description}
+              </p>
+              <div className="procedure-hero-actions">
+                <a href="tel:2897529388" className="btn-primary">
+                  Call to Discuss Treatment
+                </a>
+                <Link href="/referrals" className="btn-ghost">
+                  Referral Information
+                </Link>
               </div>
             </div>
           </div>
@@ -90,7 +74,7 @@ export function ProcedurePageView({ page }: ProcedurePageViewProps) {
               </h2>
             </div>
 
-            <div className="procedure-intro-grid">
+            <div className="procedure-detail-intro">
               {page.intro.map((paragraph) => (
                 <p key={paragraph} className="procedure-paragraph">
                   {paragraph}
@@ -110,7 +94,6 @@ export function ProcedurePageView({ page }: ProcedurePageViewProps) {
           >
             <div className="section-inner">
               <div className="procedure-section-header">
-                <div className="section-label">Patient Information</div>
                 <h2 className="procedure-section-title">{section.title}</h2>
               </div>
 

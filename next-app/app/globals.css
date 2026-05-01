@@ -1497,6 +1497,28 @@ select {
   }
 }
 
+@keyframes procedureBulletIn {
+  from {
+    opacity: 0;
+    transform: translateX(-14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes procedureSectionReveal {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .procedure-shell {
   background:
     linear-gradient(rgba(62, 57, 51, 0.045) 1px, transparent 1px),
@@ -2387,17 +2409,42 @@ select {
 }
 .procedure-bullet-list {
   display: grid;
-  gap: 14px;
-  max-width: 920px;
-  padding-left: 22px;
+  gap: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--hairline);
 }
 .procedure-bullet-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 22px 0;
+  border-bottom: 1px solid var(--hairline);
   font-family: var(--f-sans);
   font-size: 15px;
   font-weight: 300;
-  line-height: 1.9;
+  line-height: 1.75;
   color: rgba(88, 71, 56, 0.82);
-  padding-left: 4px;
+  animation: procedureBulletIn 0.48s var(--ease) both;
+}
+.procedure-bullet-list li::before {
+  content: "";
+  flex-shrink: 0;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(159, 118, 87, 0.72);
+  margin-top: 0.6em;
+}
+.procedure-bullet-list li:nth-child(1) { animation-delay: 0.04s; }
+.procedure-bullet-list li:nth-child(2) { animation-delay: 0.10s; }
+.procedure-bullet-list li:nth-child(3) { animation-delay: 0.16s; }
+.procedure-bullet-list li:nth-child(4) { animation-delay: 0.22s; }
+.procedure-bullet-list li:nth-child(5) { animation-delay: 0.28s; }
+.procedure-bullet-list li:nth-child(6) { animation-delay: 0.34s; }
+.procedure-bullet-list li:nth-child(7) { animation-delay: 0.40s; }
+.procedure-section-alert .procedure-bullet-list li::before {
+  background: rgba(109, 60, 46, 0.58);
 }
 .procedure-cta-section {
   background:
@@ -2472,6 +2519,60 @@ select {
 }
 .procedure-related-section {
   background: rgba(220, 207, 186, 0.16);
+}
+
+/* ── Procedure detail page ────────────────────────────────── */
+.procedure-hero-centered {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  max-width: 920px;
+  margin: 0 auto;
+}
+.procedure-hero-centered .inner-hero-title {
+  max-width: 920px;
+}
+.procedure-hero-centered .procedure-hero-copy {
+  max-width: 640px;
+}
+.procedure-hero-centered .procedure-hero-actions {
+  justify-content: center;
+}
+.procedure-detail-intro {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  max-width: 820px;
+  padding-left: 28px;
+  border-left: 3px solid rgba(159, 118, 87, 0.38);
+}
+.procedure-detail-intro .procedure-paragraph {
+  font-size: 16px;
+  line-height: 1.95;
+  color: rgba(88, 71, 56, 0.84);
+}
+@supports (animation-timeline: view()) {
+  .procedure-section {
+    animation: procedureSectionReveal linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 14%;
+  }
+  .procedure-bullet-list li {
+    animation: procedureBulletIn linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 40%;
+  }
+  .procedure-bullet-list li:nth-child(1),
+  .procedure-bullet-list li:nth-child(2),
+  .procedure-bullet-list li:nth-child(3),
+  .procedure-bullet-list li:nth-child(4),
+  .procedure-bullet-list li:nth-child(5),
+  .procedure-bullet-list li:nth-child(6),
+  .procedure-bullet-list li:nth-child(7) {
+    animation-delay: 0ms;
+  }
 }
 
 /* ─── DOCTORS PAGE ──────────────────────────────────────────── */
@@ -2978,6 +3079,16 @@ select {
   .procedure-hero-actions {
     flex-direction: column;
     align-items: flex-start;
+  }
+  .procedure-hero-centered {
+    text-align: left;
+    align-items: flex-start;
+  }
+  .procedure-hero-centered .procedure-hero-actions {
+    align-items: flex-start;
+  }
+  .procedure-detail-intro {
+    padding-left: 20px;
   }
   .procedure-nav-strip {
     position: static;
