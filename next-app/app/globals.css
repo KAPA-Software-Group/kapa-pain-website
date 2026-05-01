@@ -2474,6 +2474,131 @@ select {
   background: rgba(220, 207, 186, 0.16);
 }
 
+/* ─── DOCTORS PAGE ──────────────────────────────────────────── */
+.doctors-hero-grid {
+  align-items: stretch;
+}
+.doctors-intro-section {
+  background: rgba(220, 207, 186, 0.14);
+}
+.doctors-intro-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(280px, 0.75fr);
+  gap: clamp(32px, 5vw, 72px);
+  align-items: end;
+}
+.doctors-intro-grid .section-label {
+  margin-bottom: 34px;
+}
+.doctors-intro-copy {
+  margin-top: 0;
+  max-width: 560px;
+}
+.doctors-profile-section .section-inner {
+  max-width: 1320px;
+}
+.doctors-profile-list {
+  display: grid;
+}
+.doctors-profile {
+  display: grid;
+  grid-template-columns: minmax(0, 1.14fr) minmax(300px, 0.76fr);
+  gap: clamp(32px, 5vw, 72px);
+  align-items: start;
+  padding: clamp(56px, 7vw, 92px) 0;
+  border-top: 1px solid var(--hairline);
+}
+.doctors-profile:first-child {
+  padding-top: 0;
+  border-top: none;
+}
+.doctors-profile:last-child {
+  padding-bottom: 0;
+}
+.doctors-profile[data-quote-side="left"] .doctors-profile-copy {
+  order: 2;
+}
+.doctors-profile[data-quote-side="left"] .doctors-quote-card {
+  order: 1;
+}
+.doctors-profile-heading {
+  display: grid;
+  gap: 16px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid rgba(62, 57, 51, 0.14);
+}
+.doctors-profile-name {
+  max-width: 760px;
+}
+.doctors-profile-credentials {
+  margin-top: 8px;
+  font-family: var(--f-sans);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(88, 71, 56, 0.56);
+}
+.doctors-profile-role {
+  width: fit-content;
+  padding: 10px 14px;
+  border: 1px solid rgba(159, 118, 87, 0.24);
+  background: rgba(246, 239, 227, 0.48);
+  font-family: var(--f-sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  line-height: 1.5;
+  text-transform: uppercase;
+  color: var(--clay-dark);
+}
+.doctors-profile-bio {
+  display: grid;
+  gap: 18px;
+  margin-top: 28px;
+}
+.doctors-profile-bio p {
+  font-family: var(--f-sans);
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.95;
+  color: rgba(88, 71, 56, 0.82);
+}
+.doctors-inline-link {
+  color: var(--mahogany);
+  text-decoration: underline;
+  text-decoration-color: rgba(159, 118, 87, 0.5);
+  text-underline-offset: 4px;
+  transition:
+    color 0.3s ease,
+    text-decoration-color 0.3s ease;
+}
+.doctors-inline-link:hover {
+  color: var(--clay-dark);
+  text-decoration-color: var(--clay-dark);
+}
+.doctors-quote-card {
+  position: sticky;
+  top: 112px;
+  min-height: 280px;
+  justify-content: space-between;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(246, 239, 227, 0.92),
+      rgba(229, 222, 211, 0.56)
+    ),
+    rgba(246, 239, 227, 0.72);
+}
+.doctors-quote {
+  font-family: var(--f-serif);
+  font-size: clamp(28px, 3vw, 42px);
+  font-style: italic;
+  font-weight: 300;
+  line-height: 1.16;
+  color: var(--mahogany);
+}
+
 /* ─── FOOTER ────────────────────────────────────────────────── */
 .footer {
   padding: 40px 56px;
@@ -2599,12 +2724,23 @@ select {
   .procedure-cta-grid,
   .procedure-intro-grid,
   .procedure-group-layout,
+  .doctors-intro-grid,
+  .doctors-profile,
   .procedure-card-grid {
     grid-template-columns: 1fr;
   }
   .procedure-hub-card-grid[data-card-count="3"],
   .procedure-hub-card-grid[data-card-count="4"] {
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+  }
+  .doctors-profile[data-quote-side="left"] .doctors-profile-copy,
+  .doctors-profile[data-quote-side="left"] .doctors-quote-card {
+    order: initial;
+  }
+  .doctors-quote-card {
+    position: relative;
+    top: auto;
+    min-height: 240px;
   }
   .procedure-group-aside {
     position: static;
@@ -2857,6 +2993,22 @@ select {
   .procedure-cta-section .section-inner {
     padding-top: 60px;
     padding-bottom: 60px;
+  }
+  .doctors-intro-grid .section-label {
+    margin-bottom: 26px;
+  }
+  .doctors-profile {
+    gap: 26px;
+    padding: 48px 0;
+  }
+  .doctors-profile-heading {
+    padding-bottom: 22px;
+  }
+  .doctors-profile-role {
+    max-width: 100%;
+  }
+  .doctors-quote-card {
+    min-height: auto;
   }
   .procedure-card {
     padding: 24px;
