@@ -180,11 +180,72 @@ export default function FaqPage() {
             }
           }
 
+          .faq-motion-row {
+            animation: faq-rise 620ms ease-out both;
+            animation-delay: var(--faq-delay, 70ms);
+            interpolate-size: allow-keywords;
+            will-change: opacity, transform;
+          }
+
+          .faq-motion-row::details-content {
+            block-size: 0;
+            overflow: hidden;
+            transition:
+              block-size 680ms var(--ease),
+              content-visibility 680ms allow-discrete;
+          }
+
+          .faq-motion-row[open]::details-content {
+            block-size: auto;
+          }
+
+          @keyframes faq-answer-reveal {
+            from {
+              opacity: 0;
+              transform: translateY(-14px) scale(0.985);
+              filter: blur(4px);
+            }
+            to {
+              opacity: 1;
+              transform: translateY(0) scale(1);
+              filter: blur(0);
+            }
+          }
+
+          @keyframes faq-answer-wash {
+            from {
+              opacity: 0;
+              transform: scaleX(0.84);
+            }
+            to {
+              opacity: 1;
+              transform: scaleX(1);
+            }
+          }
+
+          details[open] .faq-answer-inner {
+            animation: faq-answer-reveal 520ms var(--ease) both;
+          }
+
+          details[open] .faq-answer-anchor {
+            animation: faq-answer-wash 560ms var(--ease) both;
+            transform-origin: left center;
+          }
+
           @media (prefers-reduced-motion: reduce) {
             .faq-motion-row {
               animation: none !important;
               opacity: 1 !important;
               transform: none !important;
+              will-change: auto !important;
+            }
+
+            details[open] .faq-answer-inner,
+            details[open] .faq-answer-anchor {
+              animation: none !important;
+              opacity: 1 !important;
+              transform: none !important;
+              filter: none !important;
             }
           }
         `}
@@ -240,8 +301,7 @@ export default function FaqPage() {
                     className="faq-motion-row group relative overflow-hidden rounded-[8px] border border-[color:var(--hairline)] bg-[linear-gradient(135deg,rgba(246,239,227,0.92),rgba(229,222,211,0.5))] opacity-0 shadow-[0_20px_48px_rgba(31,29,26,0.04)] transition-[background,border-color,box-shadow,transform] duration-500 ease-out open:border-[rgba(159,118,87,0.34)] open:bg-[linear-gradient(135deg,var(--surface-strong),rgba(216,203,187,0.34))] open:shadow-[0_30px_72px_rgba(31,29,26,0.08)] hover:-translate-y-[3px] hover:border-[rgba(159,118,87,0.34)] hover:bg-[linear-gradient(135deg,var(--surface-strong),rgba(216,203,187,0.28))] hover:shadow-[0_30px_72px_rgba(31,29,26,0.08)]"
                     style={
                       {
-                        animation: "faq-rise 620ms ease-out forwards",
-                        animationDelay: `${index * 70}ms`,
+                        "--faq-delay": `${(index + 1) * 70}ms`,
                       } as CSSProperties
                     }
                   >
@@ -267,9 +327,10 @@ export default function FaqPage() {
                         </svg>
                       </span>
                     </summary>
-                    <div className="grid grid-rows-[0fr] border-t border-transparent transition-[grid-template-rows,border-color] duration-500 ease-out group-open:grid-rows-[1fr] group-open:border-[color:var(--hairline)]">
+                    <div className="max-h-0 overflow-hidden border-t border-transparent transition-[max-height,border-color] duration-700 ease-out group-open:max-h-[40rem] group-open:border-[color:var(--hairline)]">
                       <div className="min-h-0 overflow-hidden">
-                        <div className="translate-y-1 px-5 pb-6 pt-5 font-sans text-[14px] font-light leading-7 text-[rgba(62,57,51,0.72)] opacity-0 transition-[opacity,transform] duration-500 ease-out group-open:translate-y-0 group-open:opacity-100 sm:px-6 sm:text-[15px] [&_a]:font-medium [&_a]:text-[color:var(--clay-dark)] [&_a]:underline-offset-4 [&_a:hover]:underline [&_li+li]:mt-2 [&_li::marker]:text-[color:var(--clay-dark)] [&_p+p]:mt-4 [&_ul]:mt-4 [&_ul]:list-disc [&_ul]:pl-5 [&_ul+p]:mt-4">
+                        <div className="faq-answer-inner px-5 pb-6 pt-5 font-sans text-[14px] font-light leading-7 text-[rgba(62,57,51,0.72)] opacity-0 sm:px-6 sm:text-[15px] [&_a]:font-medium [&_a]:text-[color:var(--clay-dark)] [&_a]:underline-offset-4 [&_a:hover]:underline [&_li+li]:mt-2 [&_li::marker]:text-[color:var(--clay-dark)] [&_p+p]:mt-4 [&_ul]:mt-4 [&_ul]:list-disc [&_ul]:pl-5 [&_ul+p]:mt-4">
+                          <div className="faq-answer-anchor mb-4 h-px w-full bg-[linear-gradient(90deg,var(--clay),transparent)] opacity-0" />
                           {item.answer}
                         </div>
                       </div>
