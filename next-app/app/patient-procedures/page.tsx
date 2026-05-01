@@ -68,53 +68,26 @@ export default function PatientProceduresPage() {
       <main className="page-shell procedure-shell">
         <section className="inner-hero procedure-hero">
           <div className="section-inner procedure-hero-content">
-            <div className="section-label">Patient Procedures</div>
-            <div className="procedure-hero-grid procedure-hub-hero-grid">
-              <div className="procedure-hero-copy-wrap">
-                <h1 className="inner-hero-title">Patient Procedures</h1>
-                <p className="inner-hero-copy procedure-hero-copy">
-                  Patient-friendly information about chronic pain assessment,
-                  image-guided procedures, recovery expectations, and when to
-                  contact the clinic.
-                </p>
-                <div className="procedure-hero-actions">
-                  <a href="tel:2897529388" className="btn-primary">
-                    Call to Discuss Your Options
-                  </a>
-                  <Link
-                    href={getPatientProcedureHref(
-                      "chronic-pain-assessment-medical-management"
-                    )}
-                    className="btn-ghost"
-                  >
-                    Start With Assessment
-                  </Link>
-                </div>
-              </div>
-
-              <div className="procedure-facts">
-                <div className="procedure-fact">
-                  <span className="procedure-fact-label">Care Model</span>
-                  <p className="procedure-fact-value">
-                    Multidisciplinary, image-guided, and personalized
-                  </p>
-                </div>
-                <div className="procedure-fact">
-                  <span className="procedure-fact-label">
-                    What You Will Find
-                  </span>
-                  <p className="procedure-fact-value">
-                    Clear explanations, candidacy guidance, recovery details,
-                    and safety information
-                  </p>
-                </div>
-                <div className="procedure-fact">
-                  <span className="procedure-fact-label">How To Start</span>
-                  <p className="procedure-fact-value">
-                    Start with assessment if your diagnosis is still evolving,
-                    or choose the procedure family that matches your care plan
-                  </p>
-                </div>
+            <div className="procedure-hero-centered">
+              <div className="section-label">Patient Procedures</div>
+              <h1 className="inner-hero-title">Patient Procedures</h1>
+              <p className="inner-hero-copy procedure-hero-copy">
+                Patient-friendly information about chronic pain assessment,
+                image-guided procedures, recovery expectations, and when to
+                contact the clinic.
+              </p>
+              <div className="procedure-hero-actions">
+                <a href="tel:2897529388" className="btn-primary">
+                  Call to Discuss Your Options
+                </a>
+                <Link
+                  href={getPatientProcedureHref(
+                    "chronic-pain-assessment-medical-management"
+                  )}
+                  className="btn-ghost"
+                >
+                  Start With Assessment
+                </Link>
               </div>
             </div>
           </div>

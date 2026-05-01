@@ -148,21 +148,6 @@ const faqItems: FaqItem[] = [
   },
 ]
 
-const faqFacts = [
-  {
-    label: "Referral Required",
-    value: "Patients are booked after the clinic receives a physician referral.",
-  },
-  {
-    label: "Coverage",
-    value: "Ontario residents referred by a family physician are covered by OHIP.",
-  },
-  {
-    label: "Before Your Visit",
-    value: "Imaging can be sent ahead of time so physicians can review it.",
-  },
-] as const
-
 export default function FaqPage() {
   return (
     <>
@@ -254,33 +239,22 @@ export default function FaqPage() {
       <main className="page-shell">
         <section className="inner-hero procedure-hero">
           <div className="section-inner procedure-hero-content">
-            <div className="procedure-hero-grid doctors-hero-grid">
-              <div className="procedure-hero-copy-wrap">
-                <div className="section-label">Patient Questions</div>
-                <h1 className="inner-hero-title">
-                  Frequently Asked Questions
-                </h1>
-                <p className="inner-hero-copy procedure-hero-copy">
-                  Answers to common questions about appointments, referrals,
-                  coverage, clinic visits, imaging, languages, and parking.
-                </p>
-                <div className="procedure-hero-actions">
-                  <a href="tel:2897529388" className="btn-primary">
-                    Call the Clinic
-                  </a>
-                  <Link href="/referrals" className="btn-ghost">
-                    Referral Information
-                  </Link>
-                </div>
-              </div>
-
-              <div className="procedure-facts">
-                {faqFacts.map((fact) => (
-                  <div key={fact.label} className="procedure-fact">
-                    <span className="procedure-fact-label">{fact.label}</span>
-                    <p className="procedure-fact-value">{fact.value}</p>
-                  </div>
-                ))}
+            <div className="procedure-hero-centered">
+              <div className="section-label">Patient Questions</div>
+              <h1 className="inner-hero-title">
+                Frequently Asked Questions
+              </h1>
+              <p className="inner-hero-copy procedure-hero-copy">
+                Answers to common questions about appointments, referrals,
+                coverage, clinic visits, imaging, languages, and parking.
+              </p>
+              <div className="procedure-hero-actions">
+                <a href="tel:2897529388" className="btn-primary">
+                  Call the Clinic
+                </a>
+                <Link href="/referrals" className="btn-ghost">
+                  Referral Information
+                </Link>
               </div>
             </div>
           </div>

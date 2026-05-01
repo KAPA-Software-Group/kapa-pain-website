@@ -60,22 +60,6 @@ const doctors = [
   },
 ] as const
 
-const teamFacts = [
-  {
-    label: "Clinical Team",
-    value: "4 pain-focused specialists",
-  },
-  {
-    label: "Care Model",
-    value: "Interventional, anesthesiology, and nurse practitioner expertise",
-  },
-  {
-    label: "Clinical Focus",
-    value:
-      "Image-guided pain care, spine intervention, and chronic pain planning",
-  },
-] as const
-
 const doctorsPageStyles = `
   .doctors-page-scope.doctors-intro-section .section-inner {
     max-width: 1320px;
@@ -411,32 +395,21 @@ export default function DoctorsPage() {
       >
         <section className="inner-hero procedure-hero doctors-hero">
           <div className="section-inner procedure-hero-content">
-            <div className="procedure-hero-grid doctors-hero-grid">
-              <div className="procedure-hero-copy-wrap">
-                <div className="section-label">Medical Team</div>
-                <h1 className="inner-hero-title">Meet Our Team</h1>
-                <p className="inner-hero-copy procedure-hero-copy">
-                  Meet the clinicians behind Precision Care Centre&apos;s
-                  multidisciplinary pain care, including interventional
-                  radiology, anesthesiology, and nurse practitioner expertise.
-                </p>
-                <div className="procedure-hero-actions">
-                  <a href="tel:2897529388" className="btn-primary">
-                    Call the Clinic
-                  </a>
-                  <Link href="/referrals" className="btn-ghost">
-                    Referral Information
-                  </Link>
-                </div>
-              </div>
-
-              <div className="procedure-facts">
-                {teamFacts.map((fact) => (
-                  <div key={fact.label} className="procedure-fact">
-                    <span className="procedure-fact-label">{fact.label}</span>
-                    <p className="procedure-fact-value">{fact.value}</p>
-                  </div>
-                ))}
+            <div className="procedure-hero-centered">
+              <div className="section-label">Medical Team</div>
+              <h1 className="inner-hero-title">Meet Our Team</h1>
+              <p className="inner-hero-copy procedure-hero-copy">
+                Meet the clinicians behind Precision Care Centre&apos;s
+                multidisciplinary pain care, including interventional
+                radiology, anesthesiology, and nurse practitioner expertise.
+              </p>
+              <div className="procedure-hero-actions">
+                <a href="tel:2897529388" className="btn-primary">
+                  Call the Clinic
+                </a>
+                <Link href="/referrals" className="btn-ghost">
+                  Referral Information
+                </Link>
               </div>
             </div>
           </div>

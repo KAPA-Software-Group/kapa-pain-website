@@ -371,18 +371,29 @@ export default function ContactUsPage() {
       <main className="page-shell contact-page-scope">
         <style>{contactPageStyles}</style>
 
-        <section className="inner-hero">
-          <div className="section-inner inner-hero-content">
-            <div className="section-label">Get In Touch</div>
-            <h1 className="inner-hero-title">Contact Us</h1>
-            <p className="inner-hero-copy">
-              Questions about a referral, a procedure, or scheduling? Reach the
-              clinic directly, or send us a note and our team will be in touch.
-            </p>
+        <section className="inner-hero procedure-hero">
+          <div className="section-inner procedure-hero-content">
+            <div className="procedure-hero-centered">
+              <div className="section-label">Get In Touch</div>
+              <h1 className="inner-hero-title">Contact Us</h1>
+              <p className="inner-hero-copy procedure-hero-copy">
+                Questions about a referral, a procedure, or scheduling? Reach
+                the clinic directly, or send us a note and our team will be in
+                touch.
+              </p>
+              <div className="procedure-hero-actions">
+                <a href={contactPhoneHref} className="btn-primary">
+                  Call the Clinic
+                </a>
+                <a href="#contact-form" className="btn-ghost">
+                  Send a Message
+                </a>
+              </div>
+            </div>
           </div>
         </section>
 
-        <section className="page-placeholder">
+        <section className="page-placeholder" id="contact-form">
           <div className="section-inner">
             <div className="contact-layout">
               <aside className="contact-info-panel">

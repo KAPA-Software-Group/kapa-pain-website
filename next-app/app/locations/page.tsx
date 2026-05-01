@@ -434,42 +434,21 @@ export default function LocationsPage() {
       >
         <section className="inner-hero procedure-hero">
           <div className="section-inner procedure-hero-content">
-            <div className="procedure-hero-grid">
-              <div className="procedure-hero-copy-wrap">
-                <div className="section-label">Clinic Access</div>
-                <h1 className="inner-hero-title">Locations</h1>
-                <p className="inner-hero-copy procedure-hero-copy">
-                  Browse Precision Care Centre locations in Toronto, Brampton,
-                  Hamilton, and Guelph, with contact details and direct clinic
-                  access.
-                </p>
-                <div className="procedure-hero-actions">
-                  <a href={contactPhoneHref} className="btn-primary">
-                    Call {contactPhone}
-                  </a>
-                  <Link href="/contact-us" className="btn-ghost">
-                    Contact the Clinic
-                  </Link>
-                </div>
-              </div>
-
-              <div className="procedure-facts">
-                <div className="procedure-fact">
-                  <span className="procedure-fact-label">Cities</span>
-                  <p className="procedure-fact-value">
-                    2 Current Locations
-                    <br />
-                    2 Coming Soon
-                  </p>
-                </div>
-                <div className="procedure-fact">
-                  <span className="procedure-fact-label">Current Sites</span>
-                  <p className="procedure-fact-value">Brampton and Hamilton</p>
-                </div>
-                <div className="procedure-fact">
-                  <span className="procedure-fact-label">Contact</span>
-                  <p className="procedure-fact-value">{contactPhone}</p>
-                </div>
+            <div className="procedure-hero-centered">
+              <div className="section-label">Clinic Access</div>
+              <h1 className="inner-hero-title">Locations</h1>
+              <p className="inner-hero-copy procedure-hero-copy">
+                Browse Precision Care Centre locations in Toronto, Brampton,
+                Hamilton, and Guelph, with contact details and direct clinic
+                access.
+              </p>
+              <div className="procedure-hero-actions">
+                <a href={contactPhoneHref} className="btn-primary">
+                  Call {contactPhone}
+                </a>
+                <Link href="/contact-us" className="btn-ghost">
+                  Contact the Clinic
+                </Link>
               </div>
             </div>
           </div>
