@@ -14,41 +14,44 @@ const SERVICES = [
   {
     href: "/services/image-guided-procedures",
     eyebrow: "Precision Targeting",
-    title: "Image Guided Procedures",
+    title: "Image-Guided Procedures",
     summary:
-      "Real-time imaging technology used to precisely place injections and instruments for maximum accuracy and safety.",
+      "We offer fluoroscopic-guided and ultrasound-guided injections to locate the injection site with the utmost accuracy. With a correct injection, physicians can make a more accurate diagnosis, better understand where the pain originates, and help alleviate pain.",
     highlights: [
+      "Fluoroscopic-guided injections",
       "Ultrasound-guided injections",
-      "Minimally invasive approach",
-      "Reduced procedural risk",
-      "Improved treatment accuracy",
+      "More accurate diagnosis",
+      "Precise pain-source targeting",
     ],
+    visual: "Guided injection image",
   },
   {
     href: "/services/medication-management",
     eyebrow: "Ongoing Care",
     title: "Medication Management",
     summary:
-      "Comprehensive review, prescription, and monitoring of pain medications tailored to your diagnosis and tolerance.",
+      "Medication management ensures you are given the right medication and medication combinations to adequately control and reduce pain to achieve therapeutic outcomes. This process includes initial and ongoing medication review.",
     highlights: [
-      "Personalized medication plans",
-      "Opioid and adjunct therapy",
-      "Regular monitoring and titration",
-      "Side effect management",
+      "Initial medication review",
+      "Ongoing medication review",
+      "Therapeutic outcome planning",
+      "Risk-aware pain control",
     ],
+    visual: "Medication review image",
   },
   {
     href: "/services/fluoroscopy",
     eyebrow: "Imaging Guidance",
     title: "Fluoroscopy",
     summary:
-      "Live X-ray imaging used during spinal and joint procedures to ensure precise needle placement and contrast confirmation.",
+      "We offer fluoroscopy-guided injections to provide real-time imaging and locate the injection site with a high level of accuracy. This allows physicians to place medication more precisely, improve diagnosis, and help relieve pain in areas such as the spine, hip, knee, and shoulder.",
     highlights: [
-      "Real-time X-ray guidance",
-      "Spinal injection accuracy",
-      "Contrast dye confirmation",
-      "Used for epidurals and facet joints",
+      "Real-time imaging",
+      "Precise medication placement",
+      "Spine, hip, knee, and shoulder care",
+      "Improved diagnostic clarity",
     ],
+    visual: "Fluoroscopy image",
   },
 ]
 
@@ -106,6 +109,12 @@ export default function ServicesPage() {
                     </span>
                   </div>
                   <h3 className="procedure-card-title">{service.title}</h3>
+                  <div
+                    className="service-overview-visual"
+                    aria-label="Image placeholder"
+                  >
+                    <span>{service.visual}</span>
+                  </div>
                   <p className="procedure-card-copy">{service.summary}</p>
                   <ul className="procedure-card-list">
                     {service.highlights.map((h) => (
