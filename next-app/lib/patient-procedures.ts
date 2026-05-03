@@ -3,12 +3,26 @@ export type ProcedureCard = {
   description: string
 }
 
+export type ProcedureVisual = {
+  label: string
+  title: string
+  copy: string
+}
+
+export type ProcedureInfoBox = {
+  title: string
+  body: string
+}
+
 export type ProcedureSection = {
   title: string
   intro?: string[]
+  paragraphs?: string[]
   bullets?: string[]
   cards?: ProcedureCard[]
   tone?: "default" | "muted" | "alert"
+  visual?: ProcedureVisual
+  infoBox?: ProcedureInfoBox
 }
 
 export type ProcedurePage = {
@@ -68,6 +82,11 @@ export const patientProcedurePages: ProcedurePage[] = [
     sections: [
       {
         title: "What the assessment includes",
+        visual: {
+          label: "Image placeholder",
+          title: "Initial consultation",
+          copy: "Best suited for an image of a physician reviewing imaging with a patient or conducting a clinical assessment.",
+        },
         bullets: [
           "Review of medical history and prior treatments",
           "Focused physical examination",
@@ -77,6 +96,9 @@ export const patientProcedurePages: ProcedurePage[] = [
       },
       {
         title: "How medical management is approached",
+        paragraphs: [
+          "Medical management at Precision Care Centre is tailored to the type and pattern of pain. The goal is to reduce reliance on opioids wherever possible while applying evidence-based pharmacologic strategies that target the underlying pain mechanism.",
+        ],
         bullets: [
           "Non-opioid medications such as anti-inflammatories and neuropathic agents",
           "Targeted pharmacologic therapy based on the type of pain",
@@ -96,6 +118,10 @@ export const patientProcedurePages: ProcedurePage[] = [
       },
       {
         title: "Goals of care",
+        infoBox: {
+          title: "The broader aim",
+          body: "The goal is not simply to reduce pain scores, but to improve a patient's ability to function, participate in rehabilitation, and engage with daily life. Treatment is planned with long-term sustainability in mind.",
+        },
         bullets: [
           "Reduce pain",
           "Improve function and mobility",
@@ -147,6 +173,11 @@ export const patientProcedurePages: ProcedurePage[] = [
     sections: [
       {
         title: "Common treatment areas",
+        visual: {
+          label: "Image placeholder",
+          title: "Ultrasound-guided nerve approach",
+          copy: "Best suited for an image of an ultrasound probe positioned near the arm, wrist, or leg during a nerve hydrodissection procedure.",
+        },
         cards: [
           {
             title: "Sciatic nerve",
@@ -172,6 +203,9 @@ export const patientProcedurePages: ProcedurePage[] = [
       },
       {
         title: "What patients may notice afterward",
+        paragraphs: [
+          "The experience after nerve hydrodissection varies from patient to patient. Some notice improvement shortly after the procedure, while others find that relief builds gradually over several days to weeks as inflammation decreases and the nerve settles.",
+        ],
         bullets: [
           "Mild soreness or bruising at the injection site",
           "A feeling of fullness where the fluid was injected",
@@ -198,11 +232,9 @@ export const patientProcedurePages: ProcedurePage[] = [
       },
       {
         title: "Why this procedure is considered",
-        bullets: [
-          "Minimally invasive and does not involve surgery",
-          "Quick recovery",
-          "Performed with ultrasound for accuracy",
-          "May reduce pain and improve function",
+        paragraphs: [
+          "Nerve hydrodissection is chosen when a nerve appears to be restricted, irritated, or under pressure from surrounding tissue, and when a minimally invasive approach is appropriate.",
+          "The procedure does not involve surgery. Ultrasound guidance allows the physician to visualize the nerve in real time and place the fluid precisely. Recovery is generally brief, and most patients resume light activity within one to two days.",
         ],
       },
     ],
@@ -249,6 +281,11 @@ export const patientProcedurePages: ProcedurePage[] = [
     sections: [
       {
         title: "Common procedures on this page",
+        visual: {
+          label: "Image placeholder",
+          title: "Fluoroscopy-guided nerve block",
+          copy: "Best suited for an image of fluoroscopy or ultrasound guidance being used during a spinal or peripheral nerve injection.",
+        },
         cards: [
           {
             title: "Medial branch blocks",
@@ -274,6 +311,9 @@ export const patientProcedurePages: ProcedurePage[] = [
       },
       {
         title: "How diagnostic injections are interpreted",
+        paragraphs: [
+          "A key purpose of some nerve blocks is diagnostic. By precisely targeting a nerve or joint and observing the pain response, the physician can gain important information about the likely source of the patient's symptoms — information that shapes the next treatment decision.",
+        ],
         bullets: [
           "Short-term pain relief after the injection can help confirm the diagnosis",
           "Temporary pain relief may last a few hours to up to one day, depending on the medication used",
@@ -283,6 +323,10 @@ export const patientProcedurePages: ProcedurePage[] = [
       },
       {
         title: "Activity instructions after diagnostic injections",
+        infoBox: {
+          title: "Why the pain journal matters",
+          body: "The pain journal you receive is a clinical tool, not just a formality. Recording how your pain responds — and bringing that record to your follow-up appointment — directly shapes what treatment is recommended next. It is one of the most useful things you can do after this type of injection.",
+        },
         bullets: [
           "Stay active on the day of the procedure",
           "Perform activities that normally bring on the pain if you have been instructed to do so",
@@ -364,6 +408,9 @@ export const patientProcedurePages: ProcedurePage[] = [
     sections: [
       {
         title: "When radiofrequency ablation is commonly used",
+        paragraphs: [
+          "Radiofrequency ablation is most appropriate when a diagnostic injection has already confirmed that a specific nerve is contributing to the patient's pain. It represents a logical next step in the treatment pathway — moving from a short-term diagnostic block toward a longer-lasting therapeutic result.",
+        ],
         bullets: [
           "Facet joint pain",
           "Chronic knee pain, including pain after knee replacement",
@@ -373,6 +420,11 @@ export const patientProcedurePages: ProcedurePage[] = [
       },
       {
         title: "What to expect after the procedure",
+        visual: {
+          label: "Image placeholder",
+          title: "Post-procedure recovery",
+          copy: "Best suited for an image that conveys low-intensity recovery following a minimally invasive pain procedure.",
+        },
         bullets: [
           "Mild soreness, burning, or swelling",
           "A temporary increase in pain in some patients",
@@ -382,6 +434,10 @@ export const patientProcedurePages: ProcedurePage[] = [
       },
       {
         title: "Aftercare and activity",
+        infoBox: {
+          title: "Recovery timeline",
+          body: "Most patients can return to light activity the day after the procedure. Full benefit often builds over 2 to 4 weeks as nerve activity decreases. Strenuous exercise should be avoided for at least one week.",
+        },
         bullets: [
           "Apply ice packs for 10 to 15 minutes at a time",
           "Take acetaminophen (Tylenol) if needed",
@@ -445,6 +501,11 @@ export const patientProcedurePages: ProcedurePage[] = [
     sections: [
       {
         title: "Types of epidural injections",
+        visual: {
+          label: "Image placeholder",
+          title: "Epidural injection approaches",
+          copy: "Best suited for a spine anatomy diagram or fluoroscopy image showing the epidural space and needle placement.",
+        },
         cards: [
           {
             title: "Interlaminar epidural",
@@ -465,6 +526,10 @@ export const patientProcedurePages: ProcedurePage[] = [
       },
       {
         title: "What is injected and why it matters",
+        paragraphs: [
+          "Most epidural injections include a corticosteroid to reduce inflammation around the affected nerve or nerves. A local anesthetic is often added to provide short-term pain relief and, in some diagnostic cases, to help confirm the injection target.",
+          "Contrast dye is used under fluoroscopic guidance to confirm that the needle is correctly positioned before medication is delivered. Patients with a known allergy to contrast dye should notify the clinic before the procedure.",
+        ],
         bullets: [
           "Steroid to reduce inflammation",
           "Local anesthetic for short-term pain relief",
@@ -485,6 +550,10 @@ export const patientProcedurePages: ProcedurePage[] = [
       {
         title: "Important preparation notes",
         tone: "muted",
+        infoBox: {
+          title: "Before your appointment",
+          body: "Blood thinner timing varies by injection type and site. Confirm with the clinic well in advance of your appointment date so you have time to adjust your medications safely under physician guidance.",
+        },
         bullets: [
           "If you take blood thinners such as Apixaban, Rivaroxaban, Heparin, or Warfarin, timing matters before the procedure",
           "Cervical injections are listed as stopping 5 days before",
@@ -506,12 +575,15 @@ export const patientProcedurePages: ProcedurePage[] = [
       },
       {
         title: "Benefits, aftercare, and alternatives",
+        paragraphs: [
+          "Epidural injections are minimally invasive and performed with image guidance for safety and accuracy. They may reduce inflammation, relieve nerve pain, improve function, and in some cases delay or avoid the need for surgery.",
+          "After the procedure, apply ice packs for 10 to 15 minutes at a time and take acetaminophen if needed. Avoid strenuous activity for 24 to 48 hours before gradually returning to normal activity over a few days.",
+        ],
         bullets: [
-          "These procedures are minimally invasive and performed with image guidance for safety and accuracy",
-          "They may reduce inflammation, relieve pain, improve function, and in some cases delay or avoid surgery",
-          "Apply ice packs for 10 to 15 minutes at a time and take acetaminophen (Tylenol) if needed",
-          "Avoid strenuous activity for 24 to 48 hours and gradually return to normal activity over a few days",
-          "Alternatives can include medications, physiotherapy, activity modification, other injections, surgery in selected cases, or no treatment",
+          "Medications and physiotherapy as alternatives",
+          "Activity modification and other injections",
+          "Surgery in selected cases depending on the diagnosis",
+          "No treatment is also a valid option depending on the situation",
         ],
       },
       {
@@ -588,6 +660,11 @@ export const patientProcedurePages: ProcedurePage[] = [
       },
       {
         title: "Common joints and conditions treated",
+        visual: {
+          label: "Image placeholder",
+          title: "Joint injection site",
+          copy: "Best suited for an image of an ultrasound-guided injection into the knee or shoulder joint.",
+        },
         bullets: [
           "Knee, shoulder, hip, and other small or large joints",
           "Osteoarthritis",
@@ -598,10 +675,9 @@ export const patientProcedurePages: ProcedurePage[] = [
       },
       {
         title: "What is injected",
-        bullets: [
-          "Corticosteroid to reduce inflammation",
-          "Local anesthetic for short-term pain relief and, in some cases, diagnostic information",
-          "Hyaluronic acid to improve joint lubrication",
+        paragraphs: [
+          "The most common injection combines a corticosteroid with a local anesthetic. The steroid reduces inflammation inside the joint, while the local anesthetic provides immediate short-term relief and can help confirm the joint as the pain source.",
+          "Hyaluronic acid injections improve joint lubrication and may reduce stiffness, particularly in knee osteoarthritis. Platelet-rich plasma (PRP) uses the patient's own blood to support healing and may be appropriate in selected cases.",
         ],
       },
       {
@@ -616,11 +692,13 @@ export const patientProcedurePages: ProcedurePage[] = [
       },
       {
         title: "Aftercare and benefits",
+        paragraphs: [
+          "These procedures are minimally invasive and image-guided, offering a focused approach to joint pain with a straightforward recovery. They can offer meaningful improvement in pain and mobility, reduce the need for ongoing medication, and in some cases help delay or avoid surgery.",
+        ],
         bullets: [
           "Apply ice packs for 10 to 15 minutes at a time",
           "Take acetaminophen (Tylenol) if needed",
           "Avoid strenuous activity for 24 to 48 hours and gradually return to normal activities",
-          "These procedures are minimally invasive and may reduce pain, improve joint function, and help delay or avoid surgery",
         ],
       },
       {
@@ -688,6 +766,9 @@ export const patientProcedurePages: ProcedurePage[] = [
     sections: [
       {
         title: "Symptoms and conditions it may help",
+        paragraphs: [
+          "The stellate ganglion block is most often considered for patients with symptoms driven by sympathetic nervous system overactivation. By temporarily reducing that activity, some patients experience significant relief in hyperarousal, anxiety, and PTSD-related symptoms — often quickly enough to improve engagement with other therapies.",
+        ],
         bullets: [
           "Post-traumatic stress disorder (PTSD)",
           "Complex regional pain syndrome (CRPS)",
@@ -698,6 +779,11 @@ export const patientProcedurePages: ProcedurePage[] = [
       },
       {
         title: "Expected benefits and treatment role",
+        visual: {
+          label: "Image placeholder",
+          title: "Stellate ganglion anatomy",
+          copy: "Best suited for an illustration or ultrasound image showing the neck anatomy and the stellate ganglion location relative to surrounding structures.",
+        },
         bullets: [
           "Reduction in PTSD symptoms",
           "Reduction in CRPS symptoms",
@@ -708,6 +794,10 @@ export const patientProcedurePages: ProcedurePage[] = [
       {
         title: "Evidence and off-label use",
         tone: "muted",
+        infoBox: {
+          title: "Off-label context",
+          body: "The use of stellate ganglion block for PTSD and related conditions is considered off-label. Patients should discuss the available evidence, realistic expectations, and the role this treatment plays within a broader care plan before proceeding.",
+        },
         bullets: [
           "Clinical evidence has reported meaningful symptom improvement in selected patients",
           "Clinical trials, including Olmsted et al., 2019, are cited as showing meaningful improvement in PTSD symptoms",
@@ -740,9 +830,9 @@ export const patientProcedurePages: ProcedurePage[] = [
       },
       {
         title: "Contraindications and alternatives",
-        bullets: [
-          "Tell the clinic if you have an allergy to local anesthetics such as bupivacaine or Sensorcaine",
-          "Alternatives can include psychotherapy, pharmacological treatments such as SSRIs, and other PTSD interventions",
+        paragraphs: [
+          "Patients with a known allergy to local anesthetics such as bupivacaine or Sensorcaine should not proceed with this procedure. Other contraindications and safety considerations will be reviewed individually by the treating physician.",
+          "Alternative treatments for PTSD and related conditions include psychotherapy, pharmacological options such as SSRIs, and other evidence-based interventions. This block is typically part of a broader care plan rather than a standalone treatment.",
         ],
       },
       {
@@ -823,6 +913,14 @@ export const patientProcedurePages: ProcedurePage[] = [
       },
       {
         title: "Why these procedures may be considered",
+        visual: {
+          label: "Image placeholder",
+          title: "Advanced procedure suite",
+          copy: "Best suited for an image of a modern interventional radiology or pain procedure room with imaging equipment visible.",
+        },
+        paragraphs: [
+          "Advanced procedures are not a first step. They are considered when standard therapies — including medications, rehabilitative care, and conventional image-guided injections — have not provided sufficient relief, or when a more targeted minimally invasive option is clinically appropriate.",
+        ],
         bullets: [
           "When the pain condition is complex or chronic",
           "When a more targeted minimally invasive option is needed",
@@ -833,6 +931,10 @@ export const patientProcedurePages: ProcedurePage[] = [
       {
         title: "Planning, recovery, and risk discussion",
         tone: "muted",
+        infoBox: {
+          title: "Individualized planning",
+          body: "Each of these procedures involves a unique recovery profile and set of risks. Your physician will review the specific technique, expected benefit, limitations, and safety considerations with you individually before any procedure is scheduled.",
+        },
         bullets: [
           "Procedure-specific preparation, recovery expectations, aftercare, and risks vary across this group",
           "Your treating physician will review the exact technique, expected benefit, limitations, and safety considerations during consultation",

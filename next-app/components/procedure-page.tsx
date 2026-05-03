@@ -3,9 +3,26 @@ import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
 import {
   type ProcedurePage,
+  type ProcedureVisual,
   getPatientProcedureHref,
   patientProcedurePages,
 } from "@/lib/patient-procedures"
+
+function ProcedureImagePlaceholder({ visual }: { visual: ProcedureVisual }) {
+  return (
+    <div className="service-image-placeholder compact">
+      <div className="service-image-grid" />
+      <div className="service-image-scan" />
+      <div className="service-image-marker service-image-marker-primary" />
+      <div className="service-image-marker service-image-marker-secondary" />
+      <div className="service-image-copy">
+        <span>{visual.label}</span>
+        <strong>{visual.title}</strong>
+        <p>{visual.copy}</p>
+      </div>
+    </div>
+  )
+}
 
 const toAnchorId = (value: string) =>
   value
@@ -65,6 +82,25 @@ export function ProcedurePageView({ page }: ProcedurePageViewProps) {
           </div>
         </section>
 
+        {page.quickFacts.length > 0 ? (
+          <section className="procedure-facts-strip">
+            <div className="section-inner">
+              <div className="procedure-quick-facts">
+                {page.quickFacts.map((fact) => (
+                  <div key={fact.label} className="procedure-quick-fact">
+                    <span className="procedure-quick-fact-label">
+                      {fact.label}
+                    </span>
+                    <strong className="procedure-quick-fact-value">
+                      {fact.value}
+                    </strong>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+        ) : null}
+
         <section id="overview" className="procedure-section">
           <div className="section-inner">
             <div className="procedure-section-header">
@@ -97,34 +133,71 @@ export function ProcedurePageView({ page }: ProcedurePageViewProps) {
                 <h2 className="procedure-section-title">{section.title}</h2>
               </div>
 
-              {section.intro ? (
-                <div className="procedure-intro-grid procedure-section-intro">
-                  {section.intro.map((paragraph) => (
-                    <p key={paragraph} className="procedure-paragraph">
-                      {paragraph}
-                    </p>
-                  ))}
-                </div>
-              ) : null}
+              <div
+                className={
+                  section.visual ? "procedure-section-with-visual" : undefined
+                }
+              >
+                <div>
+                  {section.intro ? (
+                    <div className="procedure-intro-grid procedure-section-intro">
+                      {section.intro.map((paragraph) => (
+                        <p key={paragraph} className="procedure-paragraph">
+                          {paragraph}
+                        </p>
+                      ))}
+                    </div>
+                  ) : null}
 
-              {section.cards ? (
-                <div className="procedure-card-grid">
-                  {section.cards.map((card) => (
-                    <article key={card.title} className="procedure-card">
-                      <h3 className="procedure-card-title">{card.title}</h3>
-                      <p className="procedure-card-copy">{card.description}</p>
-                    </article>
-                  ))}
-                </div>
-              ) : null}
+                  {section.paragraphs ? (
+                    <div className="procedure-section-paragraphs">
+                      {section.paragraphs.map((paragraph) => (
+                        <p key={paragraph} className="procedure-paragraph">
+                          {paragraph}
+                        </p>
+                      ))}
+                    </div>
+                  ) : null}
 
-              {section.bullets ? (
-                <ul className="procedure-bullet-list">
-                  {section.bullets.map((bullet) => (
-                    <li key={bullet}>{bullet}</li>
-                  ))}
-                </ul>
-              ) : null}
+                  {section.cards ? (
+                    <div className="procedure-card-grid">
+                      {section.cards.map((card) => (
+                        <article key={card.title} className="procedure-card">
+                          <h3 className="procedure-card-title">{card.title}</h3>
+                          <p className="procedure-card-copy">
+                            {card.description}
+                          </p>
+                        </article>
+                      ))}
+                    </div>
+                  ) : null}
+
+                  {section.bullets ? (
+                    <ul className="procedure-bullet-list">
+                      {section.bullets.map((bullet) => (
+                        <li key={bullet}>{bullet}</li>
+                      ))}
+                    </ul>
+                  ) : null}
+
+                  {section.infoBox ? (
+                    <div className="procedure-info-box">
+                      <p className="procedure-info-box-title">
+                        {section.infoBox.title}
+                      </p>
+                      <p className="procedure-info-box-body">
+                        {section.infoBox.body}
+                      </p>
+                    </div>
+                  ) : null}
+                </div>
+
+                {section.visual ? (
+                  <div className="procedure-section-visual">
+                    <ProcedureImagePlaceholder visual={section.visual} />
+                  </div>
+                ) : null}
+              </div>
             </div>
           </section>
         ))}
