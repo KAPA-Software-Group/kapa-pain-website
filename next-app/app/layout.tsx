@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next"
-import { DM_Sans, Spectral } from "next/font/google"
+import { DM_Sans, Spectral, JetBrains_Mono } from "next/font/google"
 import "./globals.css"
 
 const dmSans = DM_Sans({
@@ -14,6 +14,13 @@ const spectral = Spectral({
   weight: ["200", "300", "400"],
   style: ["normal", "italic"],
   variable: "--font-serif",
+  display: "swap",
+})
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  variable: "--font-mono",
   display: "swap",
 })
 
@@ -46,7 +53,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${dmSans.variable} ${spectral.variable}`}
+      className={`${dmSans.variable} ${spectral.variable} ${jetbrainsMono.variable}`}
     >
       <body className="antialiased">{children}</body>
     </html>

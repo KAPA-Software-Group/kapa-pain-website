@@ -2,86 +2,73 @@
 
 import { useEffect, useRef } from "react"
 
-const SVG_H      = 3200
+const SVG_H      = 1600
 const SCENE_W    = 1800
 const SVG_OFFSET = 500
-const CARD_W     = 440
-const CARD_GAP   = 100
-const ENTRY_EXIT_PORTION = 0.1
-const CAR_EXIT_PAD = 90
+const CARD_GAP   = 80
 
-const ROAD_D = "M 400 0 C 400 180 280 300 250 460 C 220 620 560 700 572 870 C 584 1040 268 1130 238 1300 C 208 1470 545 1555 562 1720 C 579 1885 318 1960 298 2120 C 278 2280 476 2360 490 2520 C 504 2680 400 2820 400 3200"
+const ROAD_OVERLAY_D = "M 400 -600 C 400 -430 330 -330 370 -210 C 415 -95 400 -35 400 0 C 400 110 285 175 280 285 C 274 420 560 470 540 610 C 522 735 300 770 320 910 C 340 1055 555 1095 520 1230 C 490 1350 390 1435 400 1600 C 404 1680 402 1760 400 1840"
+const ROAD_TRAVEL_D = "M 400 0 C 400 110 285 175 280 285 C 274 420 560 470 540 610 C 522 735 300 770 320 910 C 340 1055 555 1095 520 1230 C 490 1350 390 1435 400 1600"
 
-type Zone = "storm" | "transition" | "serenity"
-const MILESTONES: { km: string; title: string; desc: string; side: "left"|"right"; t: number; zone: Zone }[] = [
-  { km: "KM 0",  title: "GP Referral",             desc: "Ask your family physician for a referral. Most treatments are covered by OHIP once referred.",             side: "right", t: 0.07, zone: "storm"      },
-  { km: "KM 18", title: "Initial Consultation",     desc: "A specialist reviews your history, symptoms, and imaging — without rush or assumptions.",                  side: "left",  t: 0.24, zone: "storm"      },
-  { km: "KM 34", title: "Multidisciplinary Review", desc: "Your case is assessed across five specialties before any path is proposed.",                               side: "right", t: 0.41, zone: "transition" },
-  { km: "KM 50", title: "Personalised Care Plan",   desc: "A strategy built around your condition and response — a plan, not a protocol.",                            side: "left",  t: 0.58, zone: "transition" },
-  { km: "KM 67", title: "Treatment & Procedures",   desc: "Image-guided injections, regenerative therapy, and integrated care — delivered with precision.",           side: "right", t: 0.75, zone: "serenity"   },
-  { km: "KM 83", title: "Monitoring & Adjustment",  desc: "Regular follow-ups track your progress and adjust your plan based on real outcomes.",                      side: "left",  t: 0.92, zone: "serenity"   },
+const MILESTONES: { km: string; t: number; side: "left"|"right"; zone: string; terrain: string; light: string }[] = [
+  { km:"KM 00", t:0.05, side:"right", zone:"The first mile",     terrain:"rough",       light:"overcast" },
+  { km:"KM 18", t:0.22, side:"left",  zone:"Listening",          terrain:"rocky",       light:"diffuse"  },
+  { km:"KM 34", t:0.39, side:"right", zone:"Many minds",         terrain:"clearing",    light:"breaking" },
+  { km:"KM 50", t:0.56, side:"left",  zone:"A path of your own", terrain:"settling",    light:"warm"     },
+  { km:"KM 67", t:0.74, side:"right", zone:"Precision",          terrain:"open ground", light:"golden"   },
+  { km:"KM 83", t:0.92, side:"left",  zone:"Lasting relief",     terrain:"meadow",      light:"radiant"  },
 ]
 
-const mkRain = (seed: number, n: number) =>
-  Array.from({ length: n }, (_, i) => ({
-    x:   ((i * 31 + seed * 17) % 1000) - 100,
-    y:   ((i * 73 + seed * 29) % 700),
-    len: 14 + (i % 5) * 7,
-    w:   0.55 + (i % 3) * 0.3,
-    op:  0.18 + (i % 5) * 0.07,
-  }))
-const RAIN_A = mkRain(1, 22)
-const RAIN_B = mkRain(7, 18)
-const RAIN_C = mkRain(13, 16)
+const MILESTONE_CONTENT = [
+  { title:"GP referral",              desc:"Ask your family physician for a referral. Most treatments are covered by OHIP once referred — no out-of-pocket starting line.",       foot:"Day 1 · paperwork-free for you",       stop:"Stop 01 / 06" },
+  { title:"Initial consultation",     desc:"A specialist reviews your history, symptoms, and imaging — without rush or assumptions. The conversation that should have happened sooner.", foot:"Average visit · 45 minutes",           stop:"Stop 02 / 06" },
+  { title:"Multidisciplinary review", desc:"Your case is assessed across five specialties before any path is proposed. Five sets of eyes; one coherent plan.",                    foot:"Five disciplines · one room",          stop:"Stop 03 / 06" },
+  { title:"Personalised care plan",   desc:"A strategy built around your condition and response — a plan, not a protocol. Adjusted as we learn what your body answers to.",       foot:"Built for you, not from a template",   stop:"Stop 04 / 06" },
+  { title:"Treatment & procedures",   desc:"Image-guided injections, regenerative therapy, and integrated care — delivered at the source, with millimetric precision.",           foot:"Onsite fluoroscopy & ultrasound",       stop:"Stop 05 / 06" },
+  { title:"Monitoring & adjustment",  desc:"Regular follow-ups track your progress and adjust your plan based on real outcomes. Care that doesn't end at the procedure.",         foot:"Outcomes reviewed · quarterly",        stop:"Stop 06 / 06" },
+]
 
-// Sky gradient stops — used to compute sticky background at car's current y
-const SKY_STOPS: [number, string][] = [
-  [0,    "#0c1018"],
-  [0.22, "#0f1622"],
-  [0.44, "#1a2638"],
-  [0.62, "#2a4a6a"],
-  [0.78, "#7fb8d4"],
-  [0.88, "#c8e4ee"],
-  [1.0,  "#fce4b0"],
+const TONE_STOPS: [number, [number, number, number]][] = [
+  [0.00, [216, 210, 196]],
+  [0.20, [223, 216, 200]],
+  [0.45, [230, 220, 204]],
+  [0.65, [236, 221, 199]],
+  [0.85, [240, 220, 190]],
+  [1.00, [243, 216, 176]],
 ]
 
 function lerp(a: number, b: number, t: number) {
   return a + (b - a) * Math.max(0, Math.min(1, t))
 }
-function easeOutCubic(t: number) {
-  return 1 - Math.pow(1 - Math.max(0, Math.min(1, t)), 3)
-}
-function easeInCubic(t: number) {
-  return Math.pow(Math.max(0, Math.min(1, t)), 3)
-}
-function lerpHex(c1: string, c2: string, t: number) {
-  const p = (h: string) => [parseInt(h.slice(1,3),16), parseInt(h.slice(3,5),16), parseInt(h.slice(5,7),16)]
-  const [r1,g1,b1] = p(c1), [r2,g2,b2] = p(c2)
-  return `rgb(${Math.round(lerp(r1,r2,t))},${Math.round(lerp(g1,g2,t))},${Math.round(lerp(b1,b2,t))})`
-}
-function skyColor(t: number): string {
-  for (let i = 0; i < SKY_STOPS.length - 1; i++) {
-    const [p0, c0] = SKY_STOPS[i], [p1, c1] = SKY_STOPS[i + 1]
-    if (t <= p1) return lerpHex(c0, c1, (t - p0) / (p1 - p0))
+
+function toneAt(p: number): string {
+  for (let i = 0; i < TONE_STOPS.length - 1; i++) {
+    const [p0, c0] = TONE_STOPS[i]
+    const [p1, c1] = TONE_STOPS[i + 1]
+    if (p <= p1) {
+      const t = (p - p0) / (p1 - p0)
+      return `rgb(${Math.round(lerp(c0[0],c1[0],t))},${Math.round(lerp(c0[1],c1[1],t))},${Math.round(lerp(c0[2],c1[2],t))})`
+    }
   }
-  return SKY_STOPS[SKY_STOPS.length - 1][1]
+  const c = TONE_STOPS[TONE_STOPS.length - 1][1]
+  return `rgb(${c[0]},${c[1]},${c[2]})`
 }
 
 export function RoadmapSection() {
-  const scrollRef   = useRef<HTMLDivElement>(null)
-  const sceneRef    = useRef<HTMLDivElement>(null)
-  const pathRef     = useRef<SVGPathElement>(null)
-  const carRef      = useRef<HTMLDivElement>(null)
-  const carGlowRef  = useRef<SVGEllipseElement>(null)
-  const dotsRef     = useRef<SVGGElement>(null)
-  const cardsRef    = useRef<(HTMLDivElement | null)[]>([])
-  const stickyRef   = useRef<HTMLDivElement>(null)
-  // bg SVG refs
-  const rainRef     = useRef<SVGGElement>(null)
-  const fogRef      = useRef<SVGRectElement>(null)
-  const sunRef      = useRef<SVGGElement>(null)
-  const lightRef    = useRef<SVGEllipseElement>(null)
-  const cloudsRef   = useRef<SVGGElement>(null)
+  const scrollRef      = useRef<HTMLDivElement>(null)
+  const sceneRef       = useRef<HTMLDivElement>(null)
+  const pathRef        = useRef<SVGPathElement>(null)
+  const carRef         = useRef<HTMLDivElement>(null)
+  const carGlowRef     = useRef<SVGEllipseElement>(null)
+  const dotsRef        = useRef<SVGGElement>(null)
+  const cardsRef       = useRef<(HTMLDivElement | null)[]>([])
+  const stickyRef      = useRef<HTMLDivElement>(null)
+  const sunRef         = useRef<SVGGElement>(null)
+  const progReadRef    = useRef<HTMLSpanElement>(null)
+  const progBarRef     = useRef<HTMLSpanElement>(null)
+  const climateBarRef  = useRef<HTMLDivElement>(null)
+  const terrainReadRef = useRef<HTMLSpanElement>(null)
+  const lightReadRef   = useRef<HTMLSpanElement>(null)
 
   useEffect(() => {
     const path   = pathRef.current
@@ -91,117 +78,116 @@ export function RoadmapSection() {
     const sticky = stickyRef.current
     if (!path || !car || !scene || !scroll || !sticky) return
 
-    const roadPath = path
-    const roadCar = car
-    const roadScene = scene
-    const roadScroll = scroll
-    const roadSticky = sticky
+    // narrow to non-nullable for closures
+    const _path   = path   as SVGPathElement
+    const _car    = car    as HTMLDivElement
+    const _scene  = scene  as HTMLDivElement
+    const _scroll = scroll as HTMLDivElement
+    const _sticky = sticky as HTMLDivElement
 
-    const pathLen  = roadPath.getTotalLength()
-    const getScale = () => Math.min(1, window.innerWidth / SCENE_W)
-
-    const milestonePoints = MILESTONES.map((m) =>
-      roadPath.getPointAtLength(m.t * pathLen)
-    )
+    const pathLen  = _path.getTotalLength()
+    const getScale = () => Math.min(1, Math.max(0.45, window.innerWidth / SCENE_W))
+    const milestonePoints = MILESTONES.map(m => _path.getPointAtLength(m.t * pathLen))
 
     dotsRef.current?.replaceChildren()
-
-    MILESTONES.forEach((_m, i) => {
+    MILESTONES.forEach((_, i) => {
       const pt = milestonePoints[i]
       const dg = dotsRef.current
-      if (dg) {
-        const outer = document.createElementNS("http://www.w3.org/2000/svg","circle")
-        outer.setAttribute("cx",String(pt.x)); outer.setAttribute("cy",String(pt.y))
-        outer.setAttribute("r","10"); outer.setAttribute("fill","rgba(245,197,24,0.10)")
-        dg.appendChild(outer)
-        const inner = document.createElementNS("http://www.w3.org/2000/svg","circle")
-        inner.setAttribute("cx",String(pt.x)); inner.setAttribute("cy",String(pt.y))
-        inner.setAttribute("r","4.5"); inner.setAttribute("fill","#F5C518"); inner.setAttribute("opacity","0.8")
-        dg.appendChild(inner)
-      }
+      if (!dg) return
+
+      const ring = document.createElementNS("http://www.w3.org/2000/svg", "circle")
+      ring.setAttribute("cx", String(pt.x))
+      ring.setAttribute("cy", String(pt.y))
+      ring.setAttribute("r", "11")
+      ring.setAttribute("fill", "rgba(159,118,87,0.12)")
+      dg.appendChild(ring)
+
+      const inner = document.createElementNS("http://www.w3.org/2000/svg", "circle")
+      inner.setAttribute("cx", String(pt.x))
+      inner.setAttribute("cy", String(pt.y))
+      inner.setAttribute("r", "4")
+      inner.setAttribute("fill", "#9f7657")
+      dg.appendChild(inner)
+
+      const pin = document.createElementNS("http://www.w3.org/2000/svg", "circle")
+      pin.setAttribute("cx", String(pt.x))
+      pin.setAttribute("cy", String(pt.y))
+      pin.setAttribute("r", "1.4")
+      pin.setAttribute("fill", "#f6efe3")
+      dg.appendChild(pin)
     })
 
     function update() {
-      const scale      = getScale()
-      const scrollTop  = window.scrollY
-      const roadTop    = roadScroll.getBoundingClientRect().top + window.scrollY
-      const scrollable = roadScroll.offsetHeight - window.innerHeight
-      const progress   = Math.max(0, Math.min(1, (scrollTop - roadTop) / scrollable))
+      const scale = getScale()
+      const top   = _scroll.getBoundingClientRect().top + window.scrollY
+      const range = _scroll.offsetHeight - window.innerHeight
+      const p     = Math.max(0, Math.min(1, (window.scrollY - top) / range))
 
-      const carLen = progress * pathLen
-      const carPt  = roadPath.getPointAtLength(carLen)
-      const p1     = roadPath.getPointAtLength(Math.max(0, carLen - 4))
-      const p2     = roadPath.getPointAtLength(Math.min(pathLen, carLen + 4))
+      const carLen = p * pathLen
+      const carPt  = _path.getPointAtLength(carLen)
+      const p1     = _path.getPointAtLength(Math.max(0, carLen - 4))
+      const p2     = _path.getPointAtLength(Math.min(pathLen, carLen + 4))
       const angle  = Math.atan2(p2.y - p1.y, p2.x - p1.x) * 180 / Math.PI - 90
 
-      const entryT = progress / ENTRY_EXIT_PORTION
-      const exitT = (progress - (1 - ENTRY_EXIT_PORTION)) / ENTRY_EXIT_PORTION
-      const carViewportY =
-        progress < ENTRY_EXIT_PORTION
-          ? lerp(window.innerHeight + CAR_EXIT_PAD, window.innerHeight / 2, easeOutCubic(entryT))
-          : progress > 1 - ENTRY_EXIT_PORTION
-            ? lerp(window.innerHeight / 2, -CAR_EXIT_PAD, easeInCubic(exitT))
-            : window.innerHeight / 2
-
-      const translateY = carViewportY - carPt.y * scale
+      const viewportAnchorY = lerp(0, window.innerHeight, p)
+      const translateY = viewportAnchorY - carPt.y * scale
       const leftOffset = (window.innerWidth - SCENE_W) / 2
-      roadScene.style.left            = `${leftOffset}px`
-      roadScene.style.transform       = `translateY(${translateY}px) scale(${scale})`
-      roadScene.style.transformOrigin = "top center"
+      _scene.style.left            = `${leftOffset}px`
+      _scene.style.transform       = `translateY(${translateY}px) scale(${scale})`
+      _scene.style.transformOrigin = "top center"
 
-      roadCar.style.left      = `${SVG_OFFSET + carPt.x}px`
-      roadCar.style.top       = `${carPt.y}px`
-      roadCar.style.transform = `translate(-50%, -50%) rotate(${angle}deg)`
+      _car.style.left      = `${SVG_OFFSET + carPt.x}px`
+      _car.style.top       = `${carPt.y}px`
+      _car.style.transform = `translate(-50%,-50%) rotate(${angle}deg)`
 
       const glow = carGlowRef.current
       if (glow) {
         glow.setAttribute("cx", String(carPt.x))
         glow.setAttribute("cy", String(carPt.y))
-        glow.setAttribute("opacity", progress > 0 && progress < 1 ? "1" : "0")
+        glow.setAttribute("opacity", (p > 0.005 && p < 0.995) ? "1" : "0")
       }
 
       cardsRef.current.forEach((card, i) => {
         if (!card) return
-
-        const pt = milestonePoints[i]
-        const anchorX =
-          window.innerWidth / 2 + (SVG_OFFSET + pt.x - SCENE_W / 2) * scale
+        const m      = MILESTONES[i]
+        const pt     = milestonePoints[i]
+        const anchorX = window.innerWidth / 2 + (SVG_OFFSET + pt.x - SCENE_W / 2) * scale
         const anchorY = translateY + pt.y * scale
-        const cardW = card.offsetWidth || CARD_W
-        const cardH = card.offsetHeight || 150
-        const gap = Math.max(28, CARD_GAP * scale)
-        const minX = 16
-        const maxX = window.innerWidth - cardW - minX
-        const rawLeft =
-          MILESTONES[i].side === "right"
-            ? anchorX + gap
-            : anchorX - gap - cardW
-        const left = Math.max(minX, Math.min(maxX, rawLeft))
-        const top = Math.max(18, Math.min(window.innerHeight - cardH - 18, anchorY - cardH / 2))
-        const connector =
-          MILESTONES[i].side === "right"
-            ? Math.max(0, left - anchorX)
-            : Math.max(0, anchorX - (left + cardW))
-
+        const cardW   = card.offsetWidth || 360
+        const cardH   = card.offsetHeight || 180
+        const gap     = Math.max(28, CARD_GAP * scale)
+        const minX    = 16
+        const maxX    = window.innerWidth - cardW - minX
+        const rawLeft = m.side === "right" ? anchorX + gap : anchorX - gap - cardW
+        const left    = Math.max(minX, Math.min(maxX, rawLeft))
+        const tp      = Math.max(80, Math.min(window.innerHeight - cardH - 80, anchorY - cardH / 2))
         card.style.left = `${left}px`
-        card.style.top = `${top}px`
-        card.style.setProperty("--pj-connector", `${connector}px`)
-
-        if (progress >= MILESTONES[i].t - 0.04) card.classList.add("show")
+        card.style.top  = `${tp}px`
+        if (p >= m.t - 0.07 && p <= m.t + 0.09) card.classList.add("show")
         else card.classList.remove("show")
       })
 
-      // Sticky background exactly matches bg SVG sky at car's y-position
-      roadSticky.style.backgroundColor = skyColor(carPt.y / SVG_H)
 
-      const stormT  = Math.max(0, 1 - progress / 0.42)
-      const sereneT = Math.max(0, (progress - 0.52) / 0.48)
+      const sun = sunRef.current
+      if (sun) sun.setAttribute("opacity", String(Math.min(1, Math.max(0, (p - 0.50) / 0.45)) * 0.95))
 
-      const rain    = rainRef.current;    if (rain)   rain.style.opacity   = String(stormT * 0.9)
-      const fog     = fogRef.current;     if (fog)    fog.setAttribute("opacity", String(stormT * 0.25))
-      const clouds  = cloudsRef.current;  if (clouds) clouds.style.opacity = String(Math.max(0.04, stormT))
-      const sun     = sunRef.current;     if (sun)    sun.style.opacity    = String(sereneT)
-      const light   = lightRef.current;   if (light)  light.setAttribute("opacity", String(sereneT * 0.18))
+      if (progReadRef.current) progReadRef.current.textContent = String(Math.round(p * 100)).padStart(3, "0") + "%"
+      if (progBarRef.current) progBarRef.current.style.setProperty("--pj-progress", `${p * 100}%`)
+      if (climateBarRef.current) climateBarRef.current.style.setProperty("--pj-progress", `${p * 100}%`)
+
+      let activeIdx = -1
+      for (let i = 0; i < MILESTONES.length; i++) {
+        if (p >= MILESTONES[i].t - 0.04) activeIdx = i
+      }
+
+      if (activeIdx === -1) {
+        if (terrainReadRef.current) terrainReadRef.current.textContent = "rough"
+        if (lightReadRef.current) lightReadRef.current.textContent = "overcast"
+      } else {
+        const m = MILESTONES[activeIdx]
+        if (terrainReadRef.current) terrainReadRef.current.textContent = m.terrain
+        if (lightReadRef.current) lightReadRef.current.textContent = m.light
+      }
     }
 
     let pending = false
@@ -221,231 +207,293 @@ export function RoadmapSection() {
 
   return (
     <>
-      {/* ── INTRO PORTAL ─────────────────────────────────────── */}
-      <section className="pj-intro">
-        <div className="pj-intro-atmosphere" aria-hidden="true">
-          <svg className="pj-intro-mountains" viewBox="0 0 1440 320" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0 320 L0 200 L60 140 L120 200 L180 100 L240 180 L290 80 L340 160 L390 60 L440 140 L490 40 L540 120 L590 30 L640 110 L690 20 L740 95 L795 25 L850 90 L905 15 L960 85 L1010 20 L1060 90 L1120 30 L1180 100 L1240 45 L1300 120 L1360 60 L1440 130 L1440 320 Z" fill="#0a0e18" opacity="0.95"/>
-            <path d="M0 320 L0 240 L80 185 L160 240 L220 170 L290 225 L350 165 L420 220 L480 155 L550 210 L610 150 L680 210 L740 160 L810 215 L870 155 L940 210 L1000 158 L1070 215 L1140 165 L1210 220 L1280 170 L1360 225 L1440 185 L1440 320 Z" fill="#070b14" opacity="0.8"/>
-          </svg>
-        </div>
+      {/* ── INTRO PORTAL ── */}
+      <section className="pj-intro" id="journey">
+        <div className="pj-intro-grid">
+          <div className="pj-intro-meta">
+            <span className="pj-intro-meta-label">02 — Your Journey</span>
+            <span className="pj-intro-meta-mark">a road, not a protocol</span>
+            <span className="pj-intro-meta-counter">CHAPTER 01 / 06</span>
+          </div>
 
-        <div className="pj-intro-content">
-          <div className="pj-intro-label">01 — Your Journey</div>
+          <div className="pj-portal">
+            <div className="pj-portal-text">
+              <h2 className="pj-portal-h">
+                <span className="word">Pain is</span>
+                <span className="word complex">complex</span>
+              </h2>
+              <p className="pj-portal-bridge">We make the path clear.</p>
+              <p className="pj-portal-body">
+                Six stops. One road. Your story, told the way it actually unfolds —
+                from the bumpy uncertainty of the first referral to the steady ground
+                of lasting relief.
+              </p>
+            </div>
 
-          <h2 className="pj-intro-h2">
-            <span className="pj-intro-line-a">Pain is</span>
-            <span className="pj-intro-line-b">complex.</span>
-          </h2>
+            <aside className="pj-portal-aside" aria-hidden="true">
+              <p className="pj-portal-stamp">
+                06<br/>
+                <span style={{ fontSize: "0.4em", opacity: 0.65 }}>stops</span>
+              </p>
+              <div className="pj-portal-stat">
+                <span className="k">Length</span>
+                <span className="v">Weeks, not months</span>
+              </div>
+              <div className="pj-portal-stat">
+                <span className="k">Coverage</span>
+                <span className="v">OHIP-accepted</span>
+              </div>
+              <div className="pj-portal-stat">
+                <span className="k">Disciplines</span>
+                <span className="v">Five, under one roof</span>
+              </div>
+            </aside>
+          </div>
 
-          <p className="pj-intro-bridge">We make the path clear.</p>
-
-          <p className="pj-intro-body">
-            Follow us through every milestone — from your first referral to lasting relief.
-            Six stops. One road. Your story.
-          </p>
-
-          <button className="pj-intro-hint" onClick={scrollToRoad} aria-label="Scroll to journey">
-            <svg width="16" height="20" viewBox="0 0 16 20" fill="none" aria-hidden="true">
-              <path d="M8 1v14M2 11l6 7 6-7" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-            scroll to follow the road
-          </button>
+          <div className="pj-portal-foot">
+            <button className="pj-hint" onClick={scrollToRoad}>
+              Scroll to follow the road
+              <span className="arrow" aria-hidden="true"/>
+            </button>
+            <div className="pj-portal-legend">
+              <span>uncertain</span>
+              <span className="swatch"/>
+              <span>relief</span>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* ── STICKY ROAD SCROLL ───────────────────────────────── */}
-      <div ref={scrollRef} className="pj-road-scroll">
+      {/* ── STICKY ROAD SCROLL ── */}
+      <div ref={scrollRef} className="pj-road-scroll" id="road">
         <div ref={stickyRef} className="pj-road-sticky">
-          <div ref={sceneRef} className="pj-road-scene">
 
-            {/* ── Full-width atmosphere (fills entire 1800px scene) ── */}
-            <svg
-              className="pj-bg-svg"
-              height={SVG_H}
-              viewBox={`0 0 1800 ${SVG_H}`}
-              preserveAspectRatio="none"
-              xmlns="http://www.w3.org/2000/svg"
-              aria-hidden="true"
-            >
-              <defs>
-                <linearGradient id="pjSky" x1="0" y1="0" x2="0" y2="1" gradientUnits="objectBoundingBox">
-                  <stop offset="0%"   stopColor="#0c1018"/>
-                  <stop offset="22%"  stopColor="#0f1622"/>
-                  <stop offset="44%"  stopColor="#1a2638"/>
-                  <stop offset="62%"  stopColor="#2a4a6a"/>
-                  <stop offset="78%"  stopColor="#7fb8d4"/>
-                  <stop offset="88%"  stopColor="#c8e4ee"/>
-                  <stop offset="100%" stopColor="#fce4b0"/>
-                </linearGradient>
-                <linearGradient id="pjGround" x1="0" y1="0" x2="0" y2="1" gradientUnits="objectBoundingBox">
-                  <stop offset="0%"   stopColor="#06090e"/>
-                  <stop offset="32%"  stopColor="#0c1520"/>
-                  <stop offset="56%"  stopColor="#142218"/>
-                  <stop offset="74%"  stopColor="#1e4024"/>
-                  <stop offset="88%"  stopColor="#3a6e40"/>
-                  <stop offset="100%" stopColor="#6aaa68"/>
-                </linearGradient>
-                <radialGradient id="pjSunHalo" cx="50%" cy="50%" r="50%">
-                  <stop offset="0%"   stopColor="rgba(255,235,140,0.5)"/>
-                  <stop offset="40%"  stopColor="rgba(255,210,80,0.18)"/>
-                  <stop offset="100%" stopColor="rgba(255,180,50,0)"/>
-                </radialGradient>
-                <radialGradient id="pjWarmLight" cx="50%" cy="50%" r="50%">
-                  <stop offset="0%"   stopColor="rgba(255,215,120,0.28)"/>
-                  <stop offset="100%" stopColor="rgba(255,200,80,0)"/>
-                </radialGradient>
-                <filter id="pjFog" x="-30%" y="-30%" width="160%" height="160%">
-                  <feGaussianBlur stdDeviation="16"/>
-                </filter>
-              </defs>
-
-              {/* Sky + ground fill */}
-              <rect x="0" y="0" width="1800" height={SVG_H} fill="url(#pjSky)"/>
-              <rect x="0" y="0" width="1800" height={SVG_H} fill="url(#pjGround)" opacity="0.65"/>
-
-              {/* Storm clouds — full width */}
-              <g ref={cloudsRef}>
-                {/* Left cluster */}
-                <ellipse cx="110"  cy="72"  rx="95"  ry="42"  fill="#141c2a"/>
-                <ellipse cx="175"  cy="48"  rx="72"  ry="36"  fill="#1a2336"/>
-                <ellipse cx="60"   cy="96"  rx="55"  ry="28"  fill="#0f1720"/>
-                <ellipse cx="310"  cy="130" rx="100" ry="35"  fill="#111926" opacity="0.75"/>
-                {/* Center cluster (around road at x=900) */}
-                <ellipse cx="760"  cy="52"  rx="115" ry="50"  fill="#10182a"/>
-                <ellipse cx="860"  cy="24"  rx="88"  ry="40"  fill="#182030"/>
-                <ellipse cx="700"  cy="76"  rx="68"  ry="30"  fill="#0e1622"/>
-                <ellipse cx="1000" cy="140" rx="110" ry="34"  fill="#111928" opacity="0.8"/>
-                <ellipse cx="900"  cy="200" rx="90"  ry="28"  fill="#0d1520" opacity="0.65"/>
-                {/* Right cluster */}
-                <ellipse cx="1340" cy="65"  rx="100" ry="44"  fill="#141c2a"/>
-                <ellipse cx="1450" cy="40"  rx="80"  ry="38"  fill="#182030"/>
-                <ellipse cx="1280" cy="90"  rx="65"  ry="28"  fill="#0e1622"/>
-                <ellipse cx="1600" cy="110" rx="85"  ry="36"  fill="#141c2a"/>
-                <ellipse cx="1680" cy="80"  rx="62"  ry="30"  fill="#0f1720"/>
-                {/* Lightning hints */}
-                <polyline points="222,182 238,222 227,222 246,272" fill="none" stroke="rgba(200,220,255,0.2)" strokeWidth="1.5"/>
-                <polyline points="900,152 916,188 903,188 920,228" fill="none" stroke="rgba(200,220,255,0.15)" strokeWidth="1.2"/>
-              </g>
-
-              {/* Storm ridges — full 1800px width */}
-              <path d="M 0 860 L 0 430 L 96 318 L 166 372 L 292 196 L 398 338 L 492 142 L 612 326 L 724 88 L 852 316 L 952 126 L 1078 330 L 1186 104 L 1310 318 L 1416 176 L 1538 352 L 1646 236 L 1800 360 L 1800 860 Z" fill="#081018" opacity="0.92"/>
-              <path d="M 276 218 L 292 196 L 336 255 L 306 240 L 286 276 Z M 468 190 L 492 142 L 536 210 L 504 194 L 486 238 Z M 692 154 L 724 88 L 772 172 L 736 150 L 712 206 Z M 930 168 L 952 126 L 996 196 L 962 180 L 946 224 Z M 1158 160 L 1186 104 L 1238 192 L 1198 170 L 1178 224 Z" fill="rgba(190,210,225,0.16)"/>
-              <path d="M 0 1080 L 0 760 Q 200 700 400 768 Q 600 828 800 728 Q 1000 628 1200 748 Q 1400 848 1600 748 Q 1700 698 1800 728 L 1800 1080 Z" fill="#0d1820" opacity="0.86"/>
-
-              {/* Transition mountains */}
-              <path d="M 0 2260 L 0 1910 L 96 1840 L 178 1888 L 292 1748 L 420 1902 L 540 1778 L 650 1884 L 786 1708 L 922 1894 L 1042 1760 L 1168 1886 L 1308 1722 L 1440 1896 L 1558 1782 L 1682 1880 L 1800 1818 L 1800 2260 Z" fill="#173120" opacity="0.7"/>
-              <path d="M 0 2400 L 0 2054 L 160 1984 L 300 2060 L 468 1932 L 636 2068 L 790 1968 L 954 2076 L 1132 1940 L 1310 2070 L 1464 1960 L 1626 2052 L 1800 1988 L 1800 2400 Z" fill="#24472b" opacity="0.62"/>
-              <path d="M 0 2680 Q 320 2500 650 2558 Q 960 2612 1240 2476 Q 1540 2330 1800 2450 L 1800 2840 L 0 2840 Z" fill="#2d5531" opacity="0.58"/>
-
-              {/* Serene meadow hills */}
-              <path d="M 0 2760 Q 300 2610 600 2670 Q 900 2730 1200 2590 Q 1500 2450 1800 2580 L 1800 3200 L 0 3200 Z" fill="#35683a" opacity="0.68"/>
-              <path d="M 0 2920 Q 360 2810 720 2870 Q 1080 2930 1400 2790 Q 1620 2700 1800 2770 L 1800 3200 L 0 3200 Z" fill="#477a4b" opacity="0.78"/>
-              <path d="M 0 3070 Q 450 2995 900 3030 Q 1350 3065 1800 2970 L 1800 3200 L 0 3200 Z" fill="#558c5a" opacity="0.9"/>
-              <path d="M 0 3140 Q 500 3095 900 3118 Q 1300 3142 1800 3100 L 1800 3200 L 0 3200 Z" fill="#6aa870" opacity="0.65"/>
-
-              {/* Sun glow (right of road in clear sky area) */}
-              <g ref={sunRef} style={{ opacity: 0 }}>
-                <ellipse cx="1400" cy="2680" rx="300" ry="300" fill="url(#pjSunHalo)"/>
-                <ellipse cx="1400" cy="2680" rx="60"  ry="60"  fill="rgba(255,240,160,0.18)"/>
-                {Array.from({ length: 10 }, (_, i) => {
-                  const a = (i * 36) * Math.PI / 180
-                  return <line key={i} x1={1400+Math.cos(a)*75} y1={2680+Math.sin(a)*75} x2={1400+Math.cos(a)*175} y2={2680+Math.sin(a)*175} stroke="rgba(255,220,100,0.11)" strokeWidth="18" strokeLinecap="round"/>
-                })}
-                <ellipse cx="900" cy="3060" rx="480" ry="130" fill="rgba(255,210,100,0.055)"/>
-              </g>
-
-              {/* Warm ground wash */}
-              <ellipse ref={lightRef} cx="900" cy={SVG_H * 0.88} rx="700" ry="240" fill="url(#pjWarmLight)" opacity="0"/>
-
-              {/* Storm fog */}
-              <rect ref={fogRef} x="0" y="0" width="1800" height="1300" fill="#8ab5cc" opacity="0.18" filter="url(#pjFog)"/>
-            </svg>
-
-            {/* ── Road SVG (800px, offset 500px — only road + rain) ── */}
-            <svg
-              className="pj-road-svg"
-              width="800"
-              height={SVG_H}
-              viewBox={`0 0 800 ${SVG_H}`}
-              xmlns="http://www.w3.org/2000/svg"
-              aria-hidden="true"
-            >
-              <defs>
-                <radialGradient id="pjCarGlow" cx="50%" cy="50%" r="50%">
-                  <stop offset="0%"   stopColor="rgba(245,197,24,0.22)"/>
-                  <stop offset="100%" stopColor="rgba(245,197,24,0)"/>
-                </radialGradient>
-                <clipPath id="pjStormClip">
-                  <rect x="-200" y="-100" width="1200" height="1900"/>
-                </clipPath>
-              </defs>
-
-              {/* Rain */}
-              <g ref={rainRef} clipPath="url(#pjStormClip)">
-                <g className="pj-rain-a">
-                  {RAIN_A.map((d,i) => <line key={i} x1={d.x} y1={d.y} x2={d.x-4} y2={d.y+d.len} stroke={`rgba(160,205,235,${d.op})`} strokeWidth={d.w} strokeLinecap="round"/>)}
-                </g>
-                <g className="pj-rain-b">
-                  {RAIN_B.map((d,i) => <line key={i} x1={d.x} y1={d.y} x2={d.x-4} y2={d.y+d.len} stroke={`rgba(140,190,225,${d.op})`} strokeWidth={d.w} strokeLinecap="round"/>)}
-                </g>
-                <g className="pj-rain-c">
-                  {RAIN_C.map((d,i) => <line key={i} x1={d.x} y1={d.y} x2={d.x-4} y2={d.y+d.len} stroke={`rgba(180,215,240,${d.op})`} strokeWidth={d.w} strokeLinecap="round"/>)}
-                </g>
-              </g>
-
-              {/* Reference path (invisible) */}
-              <path ref={pathRef} d={ROAD_D} fill="none" stroke="none"/>
-
-              {/* Road */}
-              <path d={ROAD_D} fill="none" stroke="rgba(80,55,15,0.6)"     strokeWidth="116" strokeLinecap="butt"/>
-              <path d={ROAD_D} fill="none" stroke="#332510"                 strokeWidth="94"  strokeLinecap="butt"/>
-              <path d={ROAD_D} fill="none" stroke="rgba(255,225,160,0.16)" strokeWidth="94"  strokeLinecap="butt"/>
-              <path d={ROAD_D} fill="none" stroke="#281e0d"                 strokeWidth="86"  strokeLinecap="butt"/>
-              <path d={ROAD_D} fill="none" stroke="#F5C518" strokeWidth="3" strokeDasharray="28 18" strokeLinecap="round"/>
-
-              <g ref={dotsRef}/>
-              <ellipse ref={carGlowRef} cx="400" cy="0" rx="46" ry="56" fill="url(#pjCarGlow)" opacity="0"/>
-            </svg>
-
-            {/* Car */}
-            <div ref={carRef} className="pj-car">
-              <svg width="32" height="50" viewBox="-16 -25 32 50" overflow="visible">
-                <rect x="-9"  y="-18" width="18" height="34" rx="5" fill="rgba(0,0,0,0.35)" transform="translate(1,2)"/>
-                <rect x="-9"  y="-18" width="18" height="34" rx="5" fill="#cdd8d0"/>
-                <rect x="-6"  y="-15" width="12" height="11" rx="2.5" fill="#162a1e" opacity="0.92"/>
-                <rect x="-5"  y="-14" width="4"  height="3"  rx="1"   fill="rgba(255,255,255,0.12)"/>
-                <rect x="-5"  y="6"   width="10" height="7"  rx="2"   fill="#162a1e" opacity="0.68"/>
-                <rect x="-14" y="-14" width="6"  height="9"  rx="2"   fill="#0c0c0c"/>
-                <rect x="8"   y="-14" width="6"  height="9"  rx="2"   fill="#0c0c0c"/>
-                <rect x="-14" y="7"   width="6"  height="9"  rx="2"   fill="#0c0c0c"/>
-                <rect x="8"   y="7"   width="6"  height="9"  rx="2"   fill="#0c0c0c"/>
-                <ellipse cx="-4"   cy="-20" rx="2.8" ry="2"   fill="rgba(255,235,160,0.7)"/>
-                <ellipse cx="4"    cy="-20" rx="2.8" ry="2"   fill="rgba(255,235,160,0.7)"/>
-                <ellipse cx="-4.5" cy="17"  rx="2"   ry="1.5" fill="rgba(200,60,60,0.5)"/>
-                <ellipse cx="4.5"  cy="17"  rx="2"   ry="1.5" fill="rgba(200,60,60,0.5)"/>
-              </svg>
+          <div className="pj-climate" aria-hidden="true">
+            <div className="pj-climate-row">
+              <span className="lbl">Terrain</span>
+              <span className="val" ref={terrainReadRef}>rough</span>
             </div>
-
+            <div className="pj-climate-row">
+              <span className="lbl">Light</span>
+              <span className="val" ref={lightReadRef}>overcast</span>
+            </div>
+            <div className="pj-climate-bar" ref={climateBarRef}/>
           </div>
 
-          {/* Milestone cards are positioned in viewport space from the road path. */}
+          <div ref={sceneRef} className="pj-road-scene">
+            {/* Atmospheric backdrop */}
+            {/* Fill divs extend above/below the 3200px SVG to cover translateY gaps */}
+            <div className="pj-scene-fill pj-scene-fill-top" aria-hidden="true" />
+            <div className="pj-scene-fill pj-scene-fill-bot" aria-hidden="true" />
+
+            <svg className="pj-bg-svg" viewBox="0 0 1800 3200" preserveAspectRatio="none"
+              xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="1800" height={SVG_H}>
+              <defs>
+                <linearGradient id="paperGrad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%"   stopColor="#d8d2c4"/>
+                  <stop offset="18%"  stopColor="#dfd8c8"/>
+                  <stop offset="40%"  stopColor="#e6dccc"/>
+                  <stop offset="62%"  stopColor="#ecddc7"/>
+                  <stop offset="82%"  stopColor="#f0dcbe"/>
+                  <stop offset="100%" stopColor="#f3d8b0"/>
+                </linearGradient>
+                <radialGradient id="coolHalo" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%"   stopColor="rgba(76,72,66,0.32)"/>
+                  <stop offset="100%" stopColor="rgba(76,72,66,0)"/>
+                </radialGradient>
+                <radialGradient id="sunHalo2" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%"   stopColor="rgba(220,180,120,0.45)"/>
+                  <stop offset="50%"  stopColor="rgba(180,140,90,0.18)"/>
+                  <stop offset="100%" stopColor="rgba(150,110,70,0)"/>
+                </radialGradient>
+                <filter id="paperGrain2">
+                  <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves={2} seed={5}/>
+                  <feColorMatrix values="0 0 0 0 0.3 0 0 0 0 0.27 0 0 0 0 0.22 0 0 0 0.06 0"/>
+                  <feComposite in2="SourceGraphic" operator="in"/>
+                </filter>
+                <pattern id="cracks2" width="60" height="60" patternUnits="userSpaceOnUse">
+                  <path d="M 0 12 L 16 18 L 22 6 M 30 28 L 44 22 L 52 38 M 12 50 L 28 42 L 36 56"
+                    stroke="rgba(62,57,51,0.18)" strokeWidth="0.6" fill="none"/>
+                </pattern>
+              </defs>
+
+              <rect width="1800" height="3200" fill="url(#paperGrad)"/>
+
+              {/* EARLY ZONE: cold, rough, jagged */}
+              <ellipse cx="900" cy="200" rx="1300" ry="700" fill="url(#coolHalo)" opacity="0.7"/>
+              <ellipse cx="600" cy="500" rx="800"  ry="500" fill="url(#coolHalo)" opacity="0.5"/>
+              <g opacity="0.85">
+                <path d="M 0 480 L 80 380 L 130 460 L 200 320 L 260 420 L 320 280 L 400 410 L 470 290 L 540 400 L 620 260 L 700 410 L 780 290 L 860 420 L 940 270 L 1020 400 L 1100 300 L 1180 420 L 1260 280 L 1340 410 L 1420 320 L 1500 430 L 1580 290 L 1660 420 L 1740 340 L 1800 400 L 1800 600 L 0 600 Z"
+                  fill="#3e3933" fillOpacity="0.34"/>
+                <path d="M 0 580 L 100 500 L 180 560 L 260 460 L 340 540 L 420 440 L 510 540 L 590 470 L 680 540 L 770 450 L 860 540 L 950 470 L 1040 540 L 1130 460 L 1220 540 L 1310 470 L 1400 540 L 1490 460 L 1580 540 L 1680 480 L 1800 540 L 1800 700 L 0 700 Z"
+                  fill="#3e3933" fillOpacity="0.22"/>
+              </g>
+              <rect x="0" y="600" width="1800" height="500" fill="url(#cracks2)" opacity="0.5"/>
+              <g fill="none" opacity="0.65">
+                <path d="M 220 760 L 220 700 M 220 720 L 200 695 M 220 730 L 240 700 M 220 745 L 205 720"
+                  stroke="rgba(62,57,51,0.5)" strokeWidth="1.2"/>
+                <path d="M 980 880 L 980 810 M 980 830 L 958 800 M 980 840 L 1002 808 M 980 855 L 962 832"
+                  stroke="rgba(62,57,51,0.5)" strokeWidth="1.2"/>
+                <path d="M 1340 980 L 1340 920 M 1340 940 L 1318 912 M 1340 950 L 1360 920"
+                  stroke="rgba(62,57,51,0.5)" strokeWidth="1.2"/>
+                <path d="M 320 1100 L 320 1030 M 320 1050 L 298 1020 M 320 1060 L 342 1028"
+                  stroke="rgba(62,57,51,0.5)" strokeWidth="1.2"/>
+              </g>
+              <g fill="rgba(62,57,51,0.4)">
+                <ellipse cx="180"  cy="1080" rx="14" ry="6"/>
+                <ellipse cx="280"  cy="1180" rx="10" ry="5"/>
+                <ellipse cx="1080" cy="1240" rx="16" ry="7"/>
+                <ellipse cx="1480" cy="1120" rx="12" ry="6"/>
+                <ellipse cx="540"  cy="900"  rx="9"  ry="4"/>
+                <ellipse cx="1280" cy="940"  rx="11" ry="5"/>
+              </g>
+
+              {/* MIDDLE ZONE: transition */}
+              <g opacity="0.6">
+                <path d="M 0 1700 Q 240 1620 480 1670 T 960 1680 T 1440 1670 T 1800 1672 L 1800 1820 L 0 1820 Z"
+                  fill="#9f7657" fillOpacity="0.10"/>
+                <path d="M 0 1780 Q 220 1720 460 1758 T 920 1760 T 1380 1758 T 1800 1750 L 1800 1820 L 0 1820 Z"
+                  fill="#9f7657" fillOpacity="0.08"/>
+              </g>
+              <g opacity="0.5">
+                <path d="M 200 1680 L 200 1620 M 200 1640 Q 188 1632 192 1620 M 200 1640 Q 212 1632 208 1620 M 200 1656 Q 188 1648 192 1636 M 200 1656 Q 212 1648 208 1636"
+                  stroke="rgba(62,57,51,0.4)" strokeWidth="1" fill="none"/>
+                <path d="M 1500 1720 L 1500 1660 M 1500 1680 Q 1488 1672 1492 1660 M 1500 1680 Q 1512 1672 1508 1660 M 1500 1696 Q 1488 1688 1492 1676"
+                  stroke="rgba(62,57,51,0.4)" strokeWidth="1" fill="none"/>
+              </g>
+
+              {/* LATE ZONE: warm, lush, sun */}
+              <g ref={sunRef} opacity={0}>
+                <ellipse cx="1280" cy="2620" rx="520" ry="380" fill="url(#sunHalo2)"/>
+                <ellipse cx="1280" cy="2620" rx="120" ry="120" fill="rgba(230,190,130,0.25)"/>
+                <g stroke="rgba(220,180,120,0.18)" strokeWidth="14" strokeLinecap="round">
+                  <line x1="1280" y1="2480" x2="1280" y2="2380"/>
+                  <line x1="1380" y1="2520" x2="1460" y2="2460"/>
+                  <line x1="1180" y1="2520" x2="1100" y2="2460"/>
+                  <line x1="1420" y1="2620" x2="1520" y2="2620"/>
+                  <line x1="1140" y1="2620" x2="1040" y2="2620"/>
+                </g>
+              </g>
+              <g opacity="0.85">
+                <path d="M 0 2540 Q 300 2400 620 2480 T 1180 2470 T 1620 2510 T 1800 2490 L 1800 2700 L 0 2700 Z" fill="#9f7657" fillOpacity="0.13"/>
+                <path d="M 0 2680 Q 280 2580 580 2630 T 1140 2620 T 1580 2650 T 1800 2640 L 1800 2820 L 0 2820 Z" fill="#9f7657" fillOpacity="0.16"/>
+                <path d="M 0 2820 Q 320 2740 640 2780 T 1240 2770 T 1640 2790 T 1800 2780 L 1800 2940 L 0 2940 Z" fill="#9f7657" fillOpacity="0.20"/>
+                <path d="M 0 2980 Q 360 2900 720 2940 T 1320 2930 T 1800 2920 L 1800 3100 L 0 3100 Z" fill="#9f7657" fillOpacity="0.24"/>
+              </g>
+              {/* Lush trees */}
+              <g>
+                <g transform="translate(220 2620)">
+                  <path d="M 0 0 L 0 -38" stroke="rgba(62,57,51,0.55)" strokeWidth="1.6"/>
+                  <ellipse cx="0"  cy="-46" rx="22" ry="18" fill="rgba(159,118,87,0.45)"/>
+                  <ellipse cx="-8" cy="-42" rx="14" ry="12" fill="rgba(159,118,87,0.55)"/>
+                  <ellipse cx="9"  cy="-50" rx="14" ry="12" fill="rgba(159,118,87,0.40)"/>
+                </g>
+                <g transform="translate(380 2700)">
+                  <path d="M 0 0 L 0 -32" stroke="rgba(62,57,51,0.5)" strokeWidth="1.4"/>
+                  <ellipse cx="0" cy="-38" rx="18" ry="15" fill="rgba(159,118,87,0.5)"/>
+                </g>
+                <g transform="translate(620 2780)">
+                  <path d="M 0 0 L 0 -42" stroke="rgba(62,57,51,0.55)" strokeWidth="1.6"/>
+                  <ellipse cx="0"   cy="-50" rx="24" ry="20" fill="rgba(159,118,87,0.48)"/>
+                  <ellipse cx="-10" cy="-46" rx="14" ry="13" fill="rgba(159,118,87,0.58)"/>
+                  <ellipse cx="11"  cy="-54" rx="14" ry="13" fill="rgba(159,118,87,0.42)"/>
+                </g>
+                <g transform="translate(1480 2660)">
+                  <path d="M 0 0 L 0 -36" stroke="rgba(62,57,51,0.55)" strokeWidth="1.5"/>
+                  <ellipse cx="0"  cy="-42" rx="20" ry="17" fill="rgba(159,118,87,0.46)"/>
+                  <ellipse cx="-7" cy="-38" rx="12" ry="11" fill="rgba(159,118,87,0.56)"/>
+                </g>
+                <g transform="translate(1620 2780)">
+                  <path d="M 0 0 L 0 -40" stroke="rgba(62,57,51,0.5)" strokeWidth="1.5"/>
+                  <ellipse cx="0" cy="-46" rx="20" ry="18" fill="rgba(159,118,87,0.48)"/>
+                </g>
+                <g transform="translate(1240 2860)">
+                  <path d="M 0 0 L 0 -34" stroke="rgba(62,57,51,0.5)" strokeWidth="1.4"/>
+                  <ellipse cx="0" cy="-40" rx="16" ry="14" fill="rgba(159,118,87,0.5)"/>
+                </g>
+              </g>
+              {/* Wildflowers */}
+              <g fill="rgba(159,118,87,0.6)" opacity="0.7">
+                <circle cx="240"  cy="2860" r="2.5"/><circle cx="280"  cy="2890" r="2"/>
+                <circle cx="340"  cy="2920" r="2.5"/><circle cx="540"  cy="2950" r="2"/>
+                <circle cx="800"  cy="2920" r="2.5"/><circle cx="980"  cy="2960" r="2"/>
+                <circle cx="1100" cy="2940" r="2.5"/><circle cx="1320" cy="2970" r="2"/>
+                <circle cx="1540" cy="2940" r="2.5"/><circle cx="1700" cy="2970" r="2"/>
+                <circle cx="160"  cy="2940" r="2"/>  <circle cx="420"  cy="2970" r="2.5"/>
+                <circle cx="700"  cy="3010" r="2"/>  <circle cx="1180" cy="3020" r="2.5"/>
+                <circle cx="1480" cy="3010" r="2"/>
+              </g>
+              {/* Birds */}
+              <g stroke="rgba(62,57,51,0.5)" strokeWidth="1.4" fill="none" opacity="0.7">
+                <path d="M 1100 2400 Q 1108 2394 1116 2400 Q 1124 2394 1132 2400"/>
+                <path d="M 1180 2360 Q 1186 2356 1192 2360 Q 1198 2356 1204 2360"/>
+                <path d="M 980 2440 Q 988 2434 996 2440 Q 1004 2434 1012 2440"/>
+              </g>
+              <rect width="1800" height="3200" filter="url(#paperGrain2)" opacity="0.20"/>
+            </svg>
+
+            {/* Road SVG */}
+            <svg className="pj-road-svg" width="800" height={SVG_H}
+              viewBox={`0 0 800 ${SVG_H}`} xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <defs>
+                <radialGradient id="carHalo2" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%"   stopColor="rgba(159,118,87,0.30)"/>
+                  <stop offset="100%" stopColor="rgba(159,118,87,0)"/>
+                </radialGradient>
+              </defs>
+              <path ref={pathRef} d={ROAD_TRAVEL_D} fill="none" stroke="none"/>
+              <path d={ROAD_OVERLAY_D} fill="none" stroke="#9f7657" strokeOpacity="0.10" strokeWidth="48" strokeLinecap="butt"/>
+              <path d={ROAD_OVERLAY_D} fill="none" stroke="#3e3933" strokeOpacity="0.16" strokeWidth="22" strokeLinecap="butt"/>
+              <path d={ROAD_OVERLAY_D} fill="none" stroke="#3e3933" strokeOpacity="0.92" strokeWidth="2"  strokeLinecap="butt"/>
+              <path d={ROAD_OVERLAY_D} fill="none" stroke="#9f7657" strokeOpacity="0.6"  strokeWidth="1.2" strokeDasharray="6 10" strokeLinecap="butt"/>
+              <g ref={dotsRef}/>
+              <ellipse ref={carGlowRef} cx="400" cy="0" rx="36" ry="44" fill="url(#carHalo2)" opacity="0"/>
+            </svg>
+
+            {/* Car — ink dot with clay halo */}
+            <div ref={carRef} className="pj-car">
+              <svg width="22" height="22" viewBox="-11 -11 22 22" overflow="visible" aria-hidden="true">
+                <circle cx="0" cy="0" r="9"   fill="#9f7657" fillOpacity="0.20"/>
+                <circle cx="0" cy="0" r="5.5" fill="#3e3933"/>
+                <circle cx="0" cy="0" r="2.2" fill="#f6efe3"/>
+              </svg>
+            </div>
+          </div>
+
+          {/* Milestone cards */}
           {MILESTONES.map((m, i) => (
             <div
               key={i}
               ref={el => { cardsRef.current[i] = el }}
-              className={`pj-mc pj-mc--${m.side}`}
+              className="pj-mc"
+              data-side={m.side}
               data-zone={m.zone}
             >
-              <div className="pj-mc-km">{m.km}</div>
-              <div className="pj-mc-title">{m.title}</div>
-              <p className="pj-mc-desc">{m.desc}</p>
+              <div className="pj-mc-head">
+                <span className="pj-mc-num">{m.km}</span>
+                <span className="pj-mc-zone">{MILESTONE_CONTENT[i].stop}</span>
+              </div>
+              <div className="pj-mc-title">{MILESTONE_CONTENT[i].title}</div>
+              <p className="pj-mc-desc">{MILESTONE_CONTENT[i].desc}</p>
+              <div className="pj-mc-foot">
+                <span className="dot" aria-hidden="true"/>
+                {MILESTONE_CONTENT[i].foot}
+              </div>
             </div>
           ))}
         </div>
       </div>
 
-      <div className="pj-bridge" aria-hidden="true"/>
+      {/* ── OUTRO ── */}
+      <section className="pj-outro">
+        <div className="pj-outro-inner">
+          <div className="pj-outro-k">End of chapter one</div>
+          <h3 className="pj-outro-h">
+            Six stops behind you. <em>Now,</em> the specialties that make each one possible.
+          </h3>
+          <a href="#specialties" className="pj-outro-cta">Continue · Specialties</a>
+        </div>
+      </section>
     </>
   )
 }
