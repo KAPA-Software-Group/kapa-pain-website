@@ -1,3 +1,4 @@
+import Image from "next/image"
 import Link from "next/link"
 import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
@@ -11,14 +12,29 @@ import {
 function ProcedureImagePlaceholder({ visual }: { visual: ProcedureVisual }) {
   return (
     <div className="service-image-placeholder compact">
-      <div className="service-image-grid" />
-      <div className="service-image-scan" />
-      <div className="service-image-marker service-image-marker-primary" />
-      <div className="service-image-marker service-image-marker-secondary" />
+      {visual.imageSrc ? (
+        <>
+          <Image
+            src={visual.imageSrc}
+            alt={visual.imageAlt ?? visual.title}
+            fill
+            sizes="(max-width: 900px) 100vw, 42vw"
+            className="service-image-photo"
+          />
+          <div className="service-image-photo-shade" />
+        </>
+      ) : (
+        <>
+          <div className="service-image-grid" />
+          <div className="service-image-scan" />
+          <div className="service-image-marker service-image-marker-primary" />
+          <div className="service-image-marker service-image-marker-secondary" />
+        </>
+      )}
       <div className="service-image-copy">
         <span>{visual.label}</span>
         <strong>{visual.title}</strong>
-        <p>{visual.copy}</p>
+        {visual.copy ? <p>{visual.copy}</p> : null}
       </div>
     </div>
   )

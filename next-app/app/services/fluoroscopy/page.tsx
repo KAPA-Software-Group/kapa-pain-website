@@ -27,11 +27,6 @@ const page: ServiceDetailPageData = {
       most commonly used for spine interventions and spinal injections.
     </>,
   ],
-  heroVisual: {
-    label: "Image placeholder",
-    title: "Fluoroscopy-guided injection",
-    copy: "Best suited for an image of fluoroscopy equipment or a treatment-room setup with live X-ray guidance.",
-  },
   quickFacts: [
     { label: "Imaging", value: "Real-time X-ray movie" },
     { label: "Common use", value: "Spine interventions and spinal injections" },
@@ -54,9 +49,11 @@ const page: ServiceDetailPageData = {
         "Rotator Cuff Issues",
       ],
       visual: {
-        label: "Image placeholder",
+        label: "Service image",
         title: "Spine and joint targeting",
-        copy: "A procedural or diagnostic imaging image would reinforce the accuracy of this service.",
+        copy: "Live X-ray guidance helps position treatment precisely.",
+        imageSrc: "/procedure-images/fluoroscopy.png",
+        imageAlt: "Fluoroscopy-guided spine and joint procedure image",
       },
     },
     {
@@ -72,11 +69,6 @@ const page: ServiceDetailPageData = {
         "respiratory",
         "reproductive",
       ],
-      visual: {
-        label: "Image placeholder",
-        title: "Real-time imaging view",
-        copy: "Use an image or diagram-like clinical still that makes the live imaging concept clear.",
-      },
       tone: "muted",
     },
   ],

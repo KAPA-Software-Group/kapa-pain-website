@@ -17,11 +17,6 @@ const page: ServiceDetailPageData = {
     'Injections need to be administered at an exact location in order to have a high success rate for treatment. The conventional palpation guided method is extremely inaccurate, and is therefore referred to as "blind". These injections are solely based on experience and knowledge. Unfortunately, even a very experienced physician will always be less accurate and their failure rate will remain high.',
     "This is the reason why fluoroscopy & ultrasound guided injections are the methods we recommend. These methods are necessary to ensure the injection is administered at the exact location. With a correct injection, physicians can make a more accurate diagnosis and better understand where the pain originates.",
   ],
-  heroVisual: {
-    label: "Image placeholder",
-    title: "Guided injection procedure",
-    copy: "Best suited for a real clinic image of a clinician using imaging guidance during an injection procedure.",
-  },
   quickFacts: [
     { label: "Guidance", value: "Ultrasound and fluoroscopy" },
     { label: "Purpose", value: "Accurate diagnosis and treatment" },
@@ -38,9 +33,11 @@ const page: ServiceDetailPageData = {
         "Ultrasound guided injections allow physicians to administer medication with utmost accuracy.",
       ],
       visual: {
-        label: "Image placeholder",
+        label: "Service image",
         title: "Ultrasound guided injection",
-        copy: "Use a close clinical image showing ultrasound equipment and injection preparation.",
+        copy: "Needle placement is guided by real-time imaging.",
+        imageSrc: "/procedure-images/guidedInjection.png",
+        imageAlt: "Ultrasound guided injection procedure",
       },
     },
     {
@@ -58,11 +55,6 @@ const page: ServiceDetailPageData = {
         "Muscle Pain",
         "Synovitis",
       ],
-      visual: {
-        label: "Image placeholder",
-        title: "Targeted joint and tendon care",
-        copy: "A calm treatment-room image would support the list of conditions without crowding the copy.",
-      },
       tone: "muted",
     },
   ],

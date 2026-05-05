@@ -6,7 +6,9 @@ export type ProcedureCard = {
 export type ProcedureVisual = {
   label: string
   title: string
-  copy: string
+  copy?: string
+  imageSrc?: string
+  imageAlt?: string
 }
 
 export type ProcedureInfoBox = {
@@ -83,9 +85,11 @@ export const patientProcedurePages: ProcedurePage[] = [
       {
         title: "What the assessment includes",
         visual: {
-          label: "Image placeholder",
+          label: "Procedure image",
           title: "Initial consultation",
-          copy: "Best suited for an image of a physician reviewing imaging with a patient or conducting a clinical assessment.",
+          copy: "A structured visit reviews symptoms, history, function, and prior care.",
+          imageSrc: "/procedure-images/initialConsultation.png",
+          imageAlt: "Initial chronic pain consultation and assessment",
         },
         bullets: [
           "Review of medical history and prior treatments",
@@ -174,9 +178,11 @@ export const patientProcedurePages: ProcedurePage[] = [
       {
         title: "Common treatment areas",
         visual: {
-          label: "Image placeholder",
+          label: "Procedure image",
           title: "Ultrasound-guided nerve approach",
-          copy: "Best suited for an image of an ultrasound probe positioned near the arm, wrist, or leg during a nerve hydrodissection procedure.",
+          copy: "Ultrasound guidance helps separate irritated nerves from surrounding tissue.",
+          imageSrc: "/procedure-images/NerveHydrodissection.png",
+          imageAlt: "Nerve hydrodissection procedure with ultrasound guidance",
         },
         cards: [
           {
@@ -282,9 +288,11 @@ export const patientProcedurePages: ProcedurePage[] = [
       {
         title: "Common procedures on this page",
         visual: {
-          label: "Image placeholder",
+          label: "Procedure image",
           title: "Fluoroscopy-guided nerve block",
-          copy: "Best suited for an image of fluoroscopy or ultrasound guidance being used during a spinal or peripheral nerve injection.",
+          copy: "Targeted blocks help diagnose and treat nerve-related pain.",
+          imageSrc: "/procedure-images/nerveBlock.png",
+          imageAlt: "Image-guided nerve block injection procedure",
         },
         cards: [
           {
@@ -421,9 +429,11 @@ export const patientProcedurePages: ProcedurePage[] = [
       {
         title: "What to expect after the procedure",
         visual: {
-          label: "Image placeholder",
-          title: "Post-procedure recovery",
-          copy: "Best suited for an image that conveys low-intensity recovery following a minimally invasive pain procedure.",
+          label: "Procedure image",
+          title: "Radiofrequency ablation",
+          copy: "Targeted heat can interrupt pain signals after diagnostic confirmation.",
+          imageSrc: "/procedure-images/radioFrequencyAblation.png",
+          imageAlt: "Radiofrequency ablation pain procedure",
         },
         bullets: [
           "Mild soreness, burning, or swelling",
@@ -502,9 +512,11 @@ export const patientProcedurePages: ProcedurePage[] = [
       {
         title: "Types of epidural injections",
         visual: {
-          label: "Image placeholder",
+          label: "Procedure image",
           title: "Epidural injection approaches",
-          copy: "Best suited for a spine anatomy diagram or fluoroscopy image showing the epidural space and needle placement.",
+          copy: "Fluoroscopy helps place medication around irritated spinal nerves.",
+          imageSrc: "/procedure-images/epiduralInjection.png",
+          imageAlt: "Epidural injection procedure with spinal image guidance",
         },
         cards: [
           {
@@ -661,9 +673,11 @@ export const patientProcedurePages: ProcedurePage[] = [
       {
         title: "Common joints and conditions treated",
         visual: {
-          label: "Image placeholder",
+          label: "Procedure image",
           title: "Joint injection site",
-          copy: "Best suited for an image of an ultrasound-guided injection into the knee or shoulder joint.",
+          copy: "Image guidance supports precise treatment for arthritic joints.",
+          imageSrc: "/procedure-images/arthritisJointInjection.png",
+          imageAlt: "Arthritis joint injection procedure",
         },
         bullets: [
           "Knee, shoulder, hip, and other small or large joints",
@@ -780,9 +794,11 @@ export const patientProcedurePages: ProcedurePage[] = [
       {
         title: "Expected benefits and treatment role",
         visual: {
-          label: "Image placeholder",
+          label: "Procedure image",
           title: "Stellate ganglion anatomy",
-          copy: "Best suited for an illustration or ultrasound image showing the neck anatomy and the stellate ganglion location relative to surrounding structures.",
+          copy: "A specialized block targets sympathetic nerve activity in the neck.",
+          imageSrc: "/procedure-images/StellateGanglion.png",
+          imageAlt: "Stellate ganglion block procedure image",
         },
         bullets: [
           "Reduction in PTSD symptoms",

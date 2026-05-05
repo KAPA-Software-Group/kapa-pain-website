@@ -15,11 +15,6 @@ const page: ServiceDetailPageData = {
   intro: [
     "Although medications have the power to heal, they can also cause harm. Therefore, medication management is a service that ensures you are given the right medication and right medication combinations to adequately control and reduce pain while minimizing any risks. This service can also be used in combination with other types of treatment such as physical therapy or interventional procedures.",
   ],
-  heroVisual: {
-    label: "Image placeholder",
-    title: "Medication consultation",
-    copy: "Best suited for a warm clinical consultation image with a physician reviewing medication history with a patient.",
-  },
   quickFacts: [
     { label: "Focus", value: "Right medication and right combinations" },
     { label: "Approach", value: "Initial and ongoing review" },
@@ -40,9 +35,11 @@ const page: ServiceDetailPageData = {
         "Greater engagement with recovery",
       ],
       visual: {
-        label: "Image placeholder",
+        label: "Service image",
         title: "Medication review plan",
-        copy: "A clean still-life of medication review materials or a care-plan discussion would fit here.",
+        copy: "Treatment plans focus on benefit, risk, and daily function.",
+        imageSrc: "/procedure-images/medicationManagement.png",
+        imageAlt: "Medication review plan for pain management",
       },
     },
     {
@@ -62,11 +59,6 @@ const page: ServiceDetailPageData = {
         "able to be taken by you as intended",
         "on your health plan, and if not, whether a suitable substitution is available",
       ],
-      visual: {
-        label: "Image placeholder",
-        title: "Detailed medication reconciliation",
-        copy: "Place an image of a clinician reviewing records or prescriptions with the patient.",
-      },
       tone: "muted",
     },
   ],

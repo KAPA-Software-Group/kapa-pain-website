@@ -1,4 +1,5 @@
 import type { CSSProperties, ReactNode } from "react"
+import Image from "next/image"
 import Link from "next/link"
 import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
@@ -6,7 +7,9 @@ import { SiteHeader } from "@/components/site-header"
 type ServiceVisual = {
   label: string
   title: string
-  copy: string
+  copy?: string
+  imageSrc?: string
+  imageAlt?: string
 }
 
 type ServiceFeatureSection = {
@@ -30,8 +33,9 @@ export type ServiceDetailPageData = {
   eyebrow?: string
   title: string
   heroLabel?: string
+  heroClassName?: string
   intro: ReactNode[]
-  heroVisual: ServiceVisual
+  heroVisual?: ServiceVisual
   quickFacts: {
     label: string
     value: string
@@ -129,7 +133,16 @@ export function ServiceDetailPage({ page }: { page: ServiceDetailPageData }) {
       </style>
 
       <main className="page-shell procedure-shell service-detail-shell">
-        <section className="inner-hero procedure-hero service-detail-hero">
+        <section
+          className={[
+            "inner-hero",
+            "procedure-hero",
+            "service-detail-hero",
+            page.heroClassName,
+          ]
+            .filter(Boolean)
+            .join(" ")}
+        >
           <div className="section-inner procedure-hero-content">
             <div className="service-hero-grid">
               <div className="service-hero-copy-block">
@@ -159,13 +172,11 @@ export function ServiceDetailPage({ page }: { page: ServiceDetailPageData }) {
                   </Link>
                 </div>
               </div>
-
-              <div
-                className="service-hero-panel"
-                aria-label="Image placeholder"
-              >
-                <ServiceImagePlaceholder visual={page.heroVisual} />
-              </div>
+              {page.heroVisual ? (
+                <div className="service-hero-panel" aria-label="Service image">
+                  <ServiceImagePlaceholder visual={page.heroVisual} />
+                </div>
+              ) : null}
             </div>
           </div>
         </section>
@@ -218,6 +229,7 @@ export function ServiceDetailPage({ page }: { page: ServiceDetailPageData }) {
               <div
                 className="service-content-grid"
                 data-media-side={index % 2 === 0 ? "right" : "left"}
+                data-has-media={section.visual ? "true" : "false"}
               >
                 <div className="service-content-copy">
                   <div className="section-label">{section.eyebrow}</div>
@@ -376,14 +388,29 @@ function ServiceImagePlaceholder({
           : "service-image-placeholder"
       }
     >
-      <div className="service-image-grid" />
-      <div className="service-image-scan" />
-      <div className="service-image-marker service-image-marker-primary" />
-      <div className="service-image-marker service-image-marker-secondary" />
+      {visual.imageSrc ? (
+        <>
+          <Image
+            src={visual.imageSrc}
+            alt={visual.imageAlt ?? visual.title}
+            fill
+            sizes={compact ? "(max-width: 900px) 100vw, 42vw" : "100vw"}
+            className="service-image-photo"
+          />
+          <div className="service-image-photo-shade" />
+        </>
+      ) : (
+        <>
+          <div className="service-image-grid" />
+          <div className="service-image-scan" />
+          <div className="service-image-marker service-image-marker-primary" />
+          <div className="service-image-marker service-image-marker-secondary" />
+        </>
+      )}
       <div className="service-image-copy">
         <span>{visual.label}</span>
         <strong>{visual.title}</strong>
-        <p>{visual.copy}</p>
+        {visual.copy ? <p>{visual.copy}</p> : null}
       </div>
     </div>
   )
