@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import Image from "next/image"
-import { useState } from "react"
+import { Fragment, useState } from "react"
 
 const NAV_LINKS = [
   { href: "/", label: "Home" },
@@ -78,10 +78,10 @@ export function SiteFooter() {
                 </address>
                 <dl className="sf-hours">
                   {HOURS.map((h) => (
-                    <>
-                      <dt key={`dt-${h.day}-${loc.city}`}>{h.day}</dt>
-                      <dd key={`dd-${h.day}-${loc.city}`}>{h.time}</dd>
-                    </>
+                    <Fragment key={`${loc.city}-${h.day}`}>
+                      <dt>{h.day}</dt>
+                      <dd>{h.time}</dd>
+                    </Fragment>
                   ))}
                 </dl>
               </div>
