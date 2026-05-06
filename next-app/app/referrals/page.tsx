@@ -504,6 +504,7 @@ const referralsPageStyles = `
     border: 1px solid rgba(62, 57, 51, 0.12);
     border-radius: 8px;
     background: rgba(255, 252, 247, 0.62);
+    padding: clamp(18px, 3vw, 40px);
     box-shadow: 0 14px 36px rgba(31, 29, 26, 0.05);
   }
 
