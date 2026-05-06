@@ -424,7 +424,7 @@ const referralsPageStyles = `
 
   .referral-form-layout {
     display: grid;
-    grid-template-columns: minmax(280px, 0.32fr) minmax(0, 0.68fr);
+    grid-template-columns: 1fr;
     gap: 0;
     border: 1px solid var(--hairline);
     border-radius: 8px;
@@ -439,11 +439,11 @@ const referralsPageStyles = `
   }
 
   .referral-form-context {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: minmax(0, 0.82fr) minmax(260px, 0.48fr);
     gap: 42px;
-    border-right: 1px solid var(--hairline);
+    align-items: end;
+    border-bottom: 1px solid var(--hairline);
     background: rgba(246, 239, 227, 0.58);
   }
 
@@ -469,7 +469,15 @@ const referralsPageStyles = `
   }
 
   .referrals-form-first-section .referral-form-layout {
-    grid-template-columns: minmax(260px, 0.28fr) minmax(0, 0.72fr);
+    grid-template-columns: 1fr;
+  }
+
+  .referrals-form-first-section .section-inner {
+    max-width: 1440px;
+  }
+
+  .referrals-form-first-section .referral-form-panel {
+    padding: clamp(18px, 3vw, 34px);
   }
 
   .referral-embed {
@@ -555,7 +563,7 @@ const referralsPageStyles = `
     }
 
     .referral-form-context {
-      border-right: 0;
+      grid-template-columns: 1fr;
       border-bottom: 1px solid var(--hairline);
     }
 
