@@ -3,6 +3,7 @@ import type { CSSProperties } from "react"
 import Link from "next/link"
 import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
+import { ServicesHeroBackground } from "@/components/ui/background-snippets"
 
 export const metadata: Metadata = {
   title: "Services | Precision Care Centre",
@@ -62,6 +63,7 @@ export default function ServicesPage() {
 
       <main className="page-shell procedure-shell">
         <section className="inner-hero procedure-hero">
+          <ServicesHeroBackground />
           <div className="section-inner procedure-hero-content">
             <div className="procedure-hero-centered">
               <div className="section-label">Our Services</div>

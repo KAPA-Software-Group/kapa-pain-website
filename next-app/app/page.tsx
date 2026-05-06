@@ -14,7 +14,7 @@ export default function Home() {
       {/* ═══ 03  SERVICES ══════════════════════════════════ */}
       <section className="section services" id="specialties">
         <div className="section-inner">
-          <div className="section-label reveal">02 — Specialties</div>
+          <div className="section-label reveal">Specialties</div>
           <div className="services-header">
             <h2 className="display-heading services-heading reveal reveal-delay-1">
               Every dimension of pain, addressed.
@@ -22,36 +22,30 @@ export default function Home() {
           </div>
           {[
             {
-              n: "01",
               name: "Image-Guided Procedures",
               desc: "Fluoroscopic and ultrasound-guided injections deliver treatment precisely to the source — with real-time imaging accuracy.",
             },
             {
-              n: "02",
               name: "Regenerative & Sports Therapy",
               desc: "PRP, prolotherapy, and sport-specific rehabilitation that activate the body's natural healing potential for lasting recovery.",
             },
             {
-              n: "03",
               name: "Medication Management",
               desc: "Pharmacological strategies that balance effective pain control with long-term safety, quality of life, and patient wellbeing.",
             },
             {
-              n: "04",
               name: "Migraine & Headache Care",
               desc: "Neurologist-led diagnosis and ongoing management of chronic migraines, cluster headaches, and tension-type disorders.",
             },
             {
-              n: "05",
               name: "Mental Health Integration",
               desc: "Psychological care woven into your treatment plan — because chronic pain and mental wellbeing are never separate.",
             },
           ].map((s, i) => (
             <div
-              key={s.n}
+              key={s.name}
               className={`service-row reveal reveal-delay-${i + 1}`}
             >
-              <span className="service-n">{s.n}</span>
               <span className="service-name">{s.name}</span>
               <p className="service-desc">{s.desc}</p>
             </div>
@@ -63,7 +57,7 @@ export default function Home() {
       {/* ═══ 06  CONDITIONS ════════════════════════════════ */}
       <section className="section conditions" id="conditions">
         <div className="section-inner">
-          <div className="section-label reveal">05 — Conditions Treated</div>
+          <div className="section-label reveal">Conditions Treated</div>
           <h2 className="display-heading conditions-heading reveal reveal-delay-1">
             If it hurts, we treat it.
           </h2>
@@ -97,7 +91,7 @@ export default function Home() {
       {/* ═══ 07  LOCATIONS ═════════════════════════════════ */}
       <section className="section locations" id="locations">
         <div className="section-inner">
-          <div className="section-label reveal">06 — Find Us</div>
+          <div className="section-label reveal">Find Us</div>
           <h2 className="display-heading locations-heading reveal reveal-delay-1">
             Two clinics. One standard of care.
           </h2>
@@ -178,20 +172,6 @@ export default function Home() {
             <Link href="/contact-us" className="btn-primary">
               Contact the Clinic
             </Link>
-          </div>
-        </div>
-        <div className="cta-footer reveal reveal-delay-4">
-          <div className="cta-footer-item">
-            <span className="cf-dot" />
-            <span className="cf-text">OHIP Accepted When Referred</span>
-          </div>
-          <div className="cta-footer-item">
-            <span className="cf-dot" />
-            <span className="cf-text">Brampton &amp; Hamilton</span>
-          </div>
-          <div className="cta-footer-item">
-            <span className="cf-dot" />
-            <span className="cf-text">Fax: 289-800-9399</span>
           </div>
         </div>
       </section>

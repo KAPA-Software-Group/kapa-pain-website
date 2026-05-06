@@ -4,8 +4,11 @@ import { useEffect, useRef } from "react"
 
 const SVG_H      = 1600
 const SCENE_W    = 1800
+const SCENE_H    = SVG_H
 const SVG_OFFSET = 500
 const CARD_GAP   = 80
+const SCENE_MIN_SCALE = 0.48
+const SCENE_MAX_SCALE = 2.4
 
 const ROAD_OVERLAY_D = "M 400 -600 C 400 -430 330 -330 370 -210 C 415 -95 400 -35 400 0 C 400 110 285 175 280 285 C 274 420 560 470 540 610 C 522 735 300 770 320 910 C 340 1055 555 1095 520 1230 C 490 1350 390 1435 400 1600 C 404 1680 402 1760 400 1840"
 const ROAD_TRAVEL_D = "M 400 0 C 400 110 285 175 280 285 C 274 420 560 470 540 610 C 522 735 300 770 320 910 C 340 1055 555 1095 520 1230 C 490 1350 390 1435 400 1600"
@@ -17,6 +20,12 @@ const MILESTONES: { km: string; t: number; side: "left"|"right"; zone: string; t
   { km:"KM 50", t:0.56, side:"left",  zone:"A path of your own", terrain:"settling",    light:"warm"     },
   { km:"KM 67", t:0.74, side:"right", zone:"Precision",          terrain:"open ground", light:"golden"   },
   { km:"KM 83", t:0.92, side:"left",  zone:"Lasting relief",     terrain:"meadow",      light:"radiant"  },
+]
+
+const CARE_DISCIPLINES = [
+  "Interventional Radiology",
+  "Chronic Pain Specialists",
+  "Orthopaedic Surgeons",
 ]
 
 const MILESTONE_CONTENT = [
@@ -86,7 +95,30 @@ export function RoadmapSection() {
     const _sticky = sticky as HTMLDivElement
 
     const pathLen  = _path.getTotalLength()
-    const getScale = () => Math.min(1, Math.max(0.45, window.innerWidth / SCENE_W))
+    const clampScale = (scale: number) =>
+      Math.min(SCENE_MAX_SCALE, Math.max(SCENE_MIN_SCALE, scale))
+    const getViewport = () => {
+      const visualViewport = window.visualViewport
+      const viewportW = Math.max(
+        _sticky.clientWidth,
+        visualViewport?.width ?? 0,
+        window.innerWidth,
+      )
+      const viewportH = Math.max(
+        _sticky.clientHeight,
+        visualViewport?.height ?? 0,
+        window.innerHeight,
+      )
+
+      return { viewportW, viewportH }
+    }
+    const getScale = () => {
+      const { viewportW, viewportH } = getViewport()
+      const widthScale = viewportW / SCENE_W
+      const heightScale = viewportH / SCENE_H
+
+      return clampScale(Math.max(widthScale, heightScale))
+    }
     const milestonePoints = MILESTONES.map(m => _path.getPointAtLength(m.t * pathLen))
 
     dotsRef.current?.replaceChildren()
@@ -129,9 +161,10 @@ export function RoadmapSection() {
       const p2     = _path.getPointAtLength(Math.min(pathLen, carLen + 4))
       const angle  = Math.atan2(p2.y - p1.y, p2.x - p1.x) * 180 / Math.PI - 90
 
-      const viewportAnchorY = lerp(0, window.innerHeight, p)
+      const { viewportW, viewportH } = getViewport()
+      const viewportAnchorY = lerp(0, viewportH, p)
       const translateY = viewportAnchorY - carPt.y * scale
-      const leftOffset = (window.innerWidth - SCENE_W) / 2
+      const leftOffset = (viewportW - SCENE_W) / 2
       _scene.style.left            = `${leftOffset}px`
       _scene.style.transform       = `translateY(${translateY}px) scale(${scale})`
       _scene.style.transformOrigin = "top center"
@@ -151,16 +184,16 @@ export function RoadmapSection() {
         if (!card) return
         const m      = MILESTONES[i]
         const pt     = milestonePoints[i]
-        const anchorX = window.innerWidth / 2 + (SVG_OFFSET + pt.x - SCENE_W / 2) * scale
+        const anchorX = viewportW / 2 + (SVG_OFFSET + pt.x - SCENE_W / 2) * scale
         const anchorY = translateY + pt.y * scale
         const cardW   = card.offsetWidth || 360
         const cardH   = card.offsetHeight || 180
         const gap     = Math.max(28, CARD_GAP * scale)
         const minX    = 16
-        const maxX    = window.innerWidth - cardW - minX
+        const maxX    = viewportW - cardW - minX
         const rawLeft = m.side === "right" ? anchorX + gap : anchorX - gap - cardW
         const left    = Math.max(minX, Math.min(maxX, rawLeft))
-        const tp      = Math.max(80, Math.min(window.innerHeight - cardH - 80, anchorY - cardH / 2))
+        const tp      = Math.max(80, Math.min(viewportH - cardH - 80, anchorY - cardH / 2))
         card.style.left = `${left}px`
         card.style.top  = `${tp}px`
         if (p >= m.t - 0.07 && p <= m.t + 0.09) card.classList.add("show")
@@ -196,10 +229,17 @@ export function RoadmapSection() {
     }
     window.addEventListener("scroll", onScroll, { passive: true })
     window.addEventListener("resize", update, { passive: true })
+    window.visualViewport?.addEventListener("resize", update, { passive: true })
+    window.visualViewport?.addEventListener("scroll", update, { passive: true })
+    const resizeObserver = new ResizeObserver(update)
+    resizeObserver.observe(_sticky)
     update()
     return () => {
       window.removeEventListener("scroll", onScroll)
       window.removeEventListener("resize", update)
+      window.visualViewport?.removeEventListener("resize", update)
+      window.visualViewport?.removeEventListener("scroll", update)
+      resizeObserver.disconnect()
     }
   }, [])
 
@@ -210,8 +250,22 @@ export function RoadmapSection() {
       {/* ── INTRO PORTAL ── */}
       <section className="pj-intro" id="journey">
         <div className="pj-intro-grid">
+          <div className="pj-refine-callout">
+            <div>
+              <span className="pj-refine-kicker">Our Standard</span>
+              <h2 className="pj-refine-title">Refining modern medicine.</h2>
+            </div>
+            <div className="pj-refine-disciplines" aria-label="Care disciplines">
+              {CARE_DISCIPLINES.map((discipline) => (
+                <span key={discipline} className="pj-refine-discipline">
+                  {discipline}
+                </span>
+              ))}
+            </div>
+          </div>
+
           <div className="pj-intro-meta">
-            <span className="pj-intro-meta-label">02 — Your Journey</span>
+            <span className="pj-intro-meta-label">01 — Your Journey</span>
             <span className="pj-intro-meta-mark">a road, not a protocol</span>
             <span className="pj-intro-meta-counter">CHAPTER 01 / 06</span>
           </div>

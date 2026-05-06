@@ -6,13 +6,6 @@ import HeroText from "@/components/ui/hero-shutter-text"
 import { useCallback, useEffect, useRef, useState } from "react"
 
 const HEADLINE = "Where precision meets care."
-const DISCIPLINES = [
-  "Interventional Radiology",
-  "Sports Medicine Physicians",
-  "Chronic Pain Specialists",
-  "Orthopaedic Surgeons",
-  "Neurologists",
-]
 
 export function HeroSection() {
   const videoRef = useRef<HTMLVideoElement>(null)
@@ -101,20 +94,6 @@ export function HeroSection() {
           </div>
         </div>
 
-        <div className="hero-disciplines">
-          <h2 className="hero-disciplines-heading">
-            Refining the Art
-            <br />
-            of Modern Medicine.
-          </h2>
-          <div className="hero-disciplines-list">
-            {DISCIPLINES.map((discipline) => (
-              <span key={discipline} className="hero-discipline">
-                {discipline}
-              </span>
-            ))}
-          </div>
-        </div>
       </section>
     </>
   )

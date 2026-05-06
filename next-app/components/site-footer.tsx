@@ -1,16 +1,137 @@
+"use client"
+
 import Link from "next/link"
+import Image from "next/image"
+import { useState } from "react"
+
+const NAV_LINKS = [
+  { href: "/", label: "Home" },
+  { href: "/doctors", label: "Our Doctors" },
+  { href: "/locations", label: "Locations" },
+  { href: "/contact-us", label: "Contact Us" },
+  { href: "/faq", label: "FAQ's" },
+  { href: "/referrals", label: "Referrals" },
+]
+
+const SERVICE_LINKS = [
+  { href: "/services/image-guided-procedures", label: "Image-Guided Procedures" },
+  { href: "/services/medication-management", label: "Medication Management" },
+  { href: "/services/fluoroscopy", label: "Fluoroscopy" },
+]
+
+const LOCATIONS = [
+  {
+    city: "Brampton",
+    address: ["18 Kensington Road, Unit 200 & 502", "Brampton, ON  L6T 4S5"],
+  },
+  {
+    city: "Hamilton",
+    address: ["25 Charlton Ave E, Unit 101", "Hamilton, ON  L8N 1Y2"],
+  },
+]
+
+const HOURS = [
+  { day: "Mon – Fri", time: "9:00 am – 5:00 pm" },
+  { day: "Saturday", time: "Select dates" },
+  { day: "Sunday", time: "Closed" },
+]
 
 export function SiteFooter() {
+  const [open, setOpen] = useState(false)
+
   return (
-    <footer className="footer">
-      <span className="footer-left">
-        &copy; Precision Pain Centre. All rights reserved.
-      </span>
-      <div className="footer-right">
-        <a href="tel:2897529388">289-752-9388</a>
-        <a href="mailto:info@precisioncare.ca">info@precisioncare.ca</a>
-        <Link href="/contact-us">Contact Us</Link>
+    <footer className={`sf${open ? " sf--open" : ""}`}>
+
+      {/* Expandable panel */}
+      <div className="sf-panel" aria-hidden={!open}>
+        <div className="sf-panel-inner">
+
+          <div className="sf-col">
+            <p className="sf-col-label">Navigate</p>
+            <ul className="sf-list">
+              {NAV_LINKS.map((l) => (
+                <li key={l.href}>
+                  <Link href={l.href} className="sf-link">{l.label}</Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="sf-col">
+            <p className="sf-col-label">Services</p>
+            <ul className="sf-list">
+              {SERVICE_LINKS.map((l) => (
+                <li key={l.href}>
+                  <Link href={l.href} className="sf-link">{l.label}</Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="sf-col">
+            <p className="sf-col-label">Locations</p>
+            {LOCATIONS.map((loc, i) => (
+              <div key={loc.city} className={`sf-loc${i > 0 ? " sf-loc-second" : ""}`}>
+                <p className="sf-loc-city">{loc.city}</p>
+                <address className="sf-loc-addr">
+                  {loc.address.map((line, j) => <span key={j}>{line}</span>)}
+                </address>
+                <dl className="sf-hours">
+                  {HOURS.map((h) => (
+                    <>
+                      <dt key={`dt-${h.day}-${loc.city}`}>{h.day}</dt>
+                      <dd key={`dd-${h.day}-${loc.city}`}>{h.time}</dd>
+                    </>
+                  ))}
+                </dl>
+              </div>
+            ))}
+          </div>
+
+          <div className="sf-col">
+            <p className="sf-col-label">Contact</p>
+            <a href="tel:2897529388" className="sf-contact-phone">289-752-9388</a>
+            <span className="sf-contact-fax">Fax: 289-800-9399</span>
+          </div>
+
+        </div>
       </div>
+
+      {/* Always-visible bar */}
+      <div className="sf-bar">
+        <Link href="/" className="sf-logo">
+          <Image
+            src="/media/logo/Logo.png"
+            alt="Precision Care Centre"
+            width={36}
+            height={24}
+            className="sf-logo-img"
+          />
+          <span className="sf-logo-name">Precision Care Centre</span>
+        </Link>
+
+        <div className="sf-bar-meta">
+          <a href="tel:2897529388" className="sf-bar-phone">289-752-9388</a>
+          <span className="sf-bar-sep" aria-hidden="true" />
+          <span className="sf-bar-locs">Brampton &nbsp;·&nbsp; Hamilton</span>
+        </div>
+
+        <div className="sf-bar-right">
+          <span className="sf-bar-copy">
+            &copy; {new Date().getFullYear()} Precision Care Centre
+          </span>
+          <button
+            type="button"
+            className="sf-toggle"
+            onClick={() => setOpen((o) => !o)}
+            aria-expanded={open}
+          >
+            <span className="sf-toggle-icon" aria-hidden="true" />
+            {open ? "Close" : "Clinic Info"}
+          </button>
+        </div>
+      </div>
+
     </footer>
   )
 }

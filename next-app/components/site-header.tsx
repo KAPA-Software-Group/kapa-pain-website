@@ -160,7 +160,15 @@ export function SiteHeader({ overlay = false }: SiteHeaderProps) {
                   </svg>
                 </Link>
 
-                <div className="nav-dropdown" role="menu">
+                <div
+                  className={[
+                    "nav-dropdown",
+                    item.dropdown === "procedures"
+                      ? "nav-dropdown-procedures"
+                      : "nav-dropdown-services",
+                  ].join(" ")}
+                  role="menu"
+                >
                   {item.dropdown === "procedures" ? (
                     PROCEDURE_GROUPS.map((group) => (
                       <div key={group.label} className="nav-dropdown-group">
