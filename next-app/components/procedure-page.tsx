@@ -1,5 +1,6 @@
 import Image from "next/image"
 import Link from "next/link"
+import { PatientProcedureReveal } from "@/components/patient-procedure-reveal"
 import { ProcedureQuickFactsCarousel } from "@/components/procedure-quick-facts-carousel"
 import { ProcedureSideNav } from "@/components/procedure-side-nav"
 import { SiteFooter } from "@/components/site-footer"
@@ -13,7 +14,11 @@ import {
 
 function ProcedureImagePlaceholder({ visual }: { visual: ProcedureVisual }) {
   return (
-    <div className="service-image-placeholder compact">
+    <div
+      className={`service-image-placeholder compact${
+        visual.imageSrc ? " has-procedure-image" : ""
+      }`}
+    >
       {visual.imageSrc ? (
         <>
           <Image
@@ -34,7 +39,6 @@ function ProcedureImagePlaceholder({ visual }: { visual: ProcedureVisual }) {
         </>
       )}
       <div className="service-image-copy">
-        <span>{visual.label}</span>
         <strong>{visual.title}</strong>
         {visual.copy ? <p>{visual.copy}</p> : null}
       </div>
@@ -51,6 +55,153 @@ const toAnchorId = (value: string) =>
 type ProcedurePageViewProps = {
   page: ProcedurePage
 }
+
+export function PatientProcedureCenteringStyles() {
+  return (
+    <style>{`
+      @media (min-width: 1280px) {
+        .patient-procedure-shell.procedure-shell .procedure-section .section-inner,
+        .patient-procedure-shell.procedure-shell .procedure-cta-section .section-inner {
+          padding-left: var(--page-gutter);
+          max-width: var(--section-max);
+        }
+
+        .patient-procedure-shell.procedure-shell .procedure-hub-group-section .section-inner {
+          max-width: 1400px;
+        }
+      }
+    `}</style>
+  )
+}
+
+const patientProcedureDetailRevealStyles = `
+  @media (min-width: 1280px) {
+    .patient-procedure-detail-reveal-root .procedure-side-nav {
+      transform-origin: left center;
+      overflow: visible;
+      transition:
+        transform 420ms cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 320ms ease,
+        width 360ms cubic-bezier(0.22, 1, 0.36, 1),
+        padding 360ms cubic-bezier(0.22, 1, 0.36, 1),
+        background 260ms ease,
+        border-color 260ms ease;
+    }
+
+    .patient-procedure-detail-reveal-root .procedure-side-nav.is-visible:not(.is-collapsed) {
+      transition:
+        transform 420ms cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 320ms ease,
+        width 360ms cubic-bezier(0.22, 1, 0.36, 1),
+        padding 360ms cubic-bezier(0.22, 1, 0.36, 1),
+        background 260ms ease,
+        border-color 260ms ease;
+    }
+
+    .patient-procedure-detail-reveal-root .procedure-side-nav.is-collapsed {
+      width: 0;
+      padding: 0;
+      border-left-color: transparent;
+      background: transparent;
+      backdrop-filter: none;
+      box-shadow: none;
+    }
+
+    .patient-procedure-detail-reveal-root .procedure-side-nav.is-collapsed::after {
+      opacity: 0;
+    }
+
+    .patient-procedure-detail-reveal-root .procedure-side-nav.is-collapsed .procedure-side-nav-body {
+      opacity: 0;
+      visibility: hidden;
+      transform: translate3d(-6px, 0, 0);
+      pointer-events: none;
+    }
+
+    .patient-procedure-detail-reveal-root .procedure-side-nav .procedure-side-nav-body {
+      width: clamp(190px, 15vw, 240px);
+      min-width: clamp(190px, 15vw, 240px);
+      transition:
+        opacity 300ms ease,
+        visibility 300ms ease,
+        transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .patient-procedure-detail-reveal-root .procedure-side-nav .procedure-side-nav-toggle {
+      right: -14px;
+      transition:
+        background 220ms ease,
+        border-color 220ms ease,
+        transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .patient-procedure-detail-reveal-root .procedure-side-nav.is-collapsed .procedure-side-nav-toggle {
+      right: -14px;
+      transform: translateY(-50%);
+    }
+
+    .patient-procedure-detail-reveal-root .procedure-side-nav .procedure-side-nav-toggle-arrow {
+      transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+  }
+
+  .patient-procedure-detail-reveal-root .procedure-section-visual .service-image-placeholder.compact.has-procedure-image {
+    overflow: visible;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+    isolation: isolate;
+  }
+
+  .patient-procedure-detail-reveal-root .procedure-section-visual .service-image-placeholder.compact.has-procedure-image::before {
+    content: "";
+    position: absolute;
+    inset: 12px -12px -12px 12px;
+    z-index: 0;
+    border: 1px solid rgba(159, 118, 87, 0.24);
+    background: rgba(159, 118, 87, 0.09);
+    box-shadow: 0 16px 34px rgba(31, 29, 26, 0.08);
+    pointer-events: none;
+  }
+
+  .patient-procedure-detail-reveal-root .procedure-section-visual .service-image-photo {
+    z-index: 1;
+  }
+
+  .patient-procedure-detail-reveal-root .procedure-section-visual .service-image-photo-shade {
+    z-index: 2;
+  }
+
+  .patient-procedure-detail-reveal-root .procedure-section-visual .service-image-copy {
+    z-index: 3;
+  }
+
+  .patient-procedure-detail-reveal-root.is-reveal-enabled [data-patient-procedure-detail-reveal] {
+    opacity: 0;
+    transform: translate3d(0, 32px, 0);
+    transition:
+      opacity 780ms var(--ease),
+      transform 780ms var(--ease),
+      border-color 280ms ease,
+      box-shadow 280ms ease;
+    will-change: opacity, transform;
+  }
+
+  .patient-procedure-detail-reveal-root.is-reveal-enabled [data-patient-procedure-detail-reveal].is-loaded {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+    will-change: auto;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .patient-procedure-detail-reveal-root.is-reveal-enabled [data-patient-procedure-detail-reveal],
+    .patient-procedure-detail-reveal-root.is-reveal-enabled [data-patient-procedure-detail-reveal].is-loaded {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+`
 
 export function ProcedurePageView({ page }: ProcedurePageViewProps) {
   const relatedPages = page.relatedSlugs
@@ -69,7 +220,17 @@ export function ProcedurePageView({ page }: ProcedurePageViewProps) {
     <>
       <SiteHeader overlay />
 
-      <main className="page-shell procedure-shell">
+      <PatientProcedureCenteringStyles />
+      <style>{patientProcedureDetailRevealStyles}</style>
+      <PatientProcedureReveal
+        rootSelector="[data-patient-procedure-detail-reveal-root]"
+        itemSelector="[data-patient-procedure-detail-reveal]"
+      />
+
+      <main
+        className="page-shell procedure-shell patient-procedure-shell patient-procedure-detail-reveal-root"
+        data-patient-procedure-detail-reveal-root
+      >
         <ProcedureSideNav items={sideNavItems} />
 
         <section className="inner-hero procedure-hero">
@@ -80,9 +241,9 @@ export function ProcedurePageView({ page }: ProcedurePageViewProps) {
                 {page.description}
               </p>
               <div className="procedure-hero-actions">
-                <a href="tel:2897529388" className="btn-primary">
-                  Call to Discuss Treatment
-                </a>
+                <Link href="/contact-us" className="btn-primary">
+                  Contact Us to Discuss Treatment
+                </Link>
                 <Link href="/referrals" className="btn-ghost">
                   Referral Information
                 </Link>
@@ -112,14 +273,20 @@ export function ProcedurePageView({ page }: ProcedurePageViewProps) {
 
         {page.quickFacts.length > 0 ? (
           <section className="procedure-facts-strip">
-            <div className="section-inner">
+            <div
+              className="section-inner"
+              data-patient-procedure-detail-reveal="quick-facts"
+            >
               <ProcedureQuickFactsCarousel facts={page.quickFacts} />
             </div>
           </section>
         ) : null}
 
         <section id="overview" className="procedure-section">
-          <div className="section-inner">
+          <div
+            className="section-inner"
+            data-patient-procedure-detail-reveal="overview"
+          >
             <div className="procedure-section-header">
               <div className="section-label">Overview</div>
               <h2 className="procedure-section-title">
@@ -145,7 +312,10 @@ export function ProcedurePageView({ page }: ProcedurePageViewProps) {
               section.tone ? `procedure-section-${section.tone}` : ""
             }`}
           >
-            <div className="section-inner">
+            <div
+              className="section-inner"
+              data-patient-procedure-detail-reveal="section"
+            >
               <div className="procedure-section-header">
                 <h2 className="procedure-section-title">{section.title}</h2>
               </div>
@@ -220,7 +390,10 @@ export function ProcedurePageView({ page }: ProcedurePageViewProps) {
         ))}
 
         <section className="procedure-cta-section">
-          <div className="section-inner procedure-cta-grid">
+          <div
+            className="section-inner procedure-cta-grid"
+            data-patient-procedure-detail-reveal="cta"
+          >
             <div>
               <div className="section-label">Next Step</div>
               <h2 className="procedure-cta-title">
@@ -251,7 +424,10 @@ export function ProcedurePageView({ page }: ProcedurePageViewProps) {
 
         {relatedPages.length > 0 ? (
           <section className="procedure-section procedure-related-section">
-            <div className="section-inner">
+            <div
+              className="section-inner"
+              data-patient-procedure-detail-reveal="related"
+            >
               <div className="procedure-section-header">
                 <div className="section-label">Related Pages</div>
                 <h2 className="procedure-section-title">

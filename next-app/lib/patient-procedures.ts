@@ -229,7 +229,6 @@ export const patientProcedurePages: ProcedurePage[] = [
       },
       {
         title: "When to contact the clinic",
-        tone: "alert",
         bullets: [
           "Increasing redness, swelling, or warmth",
           "Fever or chills",
@@ -363,7 +362,6 @@ export const patientProcedurePages: ProcedurePage[] = [
       },
       {
         title: "Risks and when to contact the clinic",
-        tone: "alert",
         bullets: [
           "Pain, bruising, or swelling",
           "Temporary numbness or weakness",
@@ -458,7 +456,6 @@ export const patientProcedurePages: ProcedurePage[] = [
       },
       {
         title: "Risks and possible limitations",
-        tone: "alert",
         bullets: [
           "Pain, bruising, or swelling",
           "Temporary numbness or weakness",
@@ -561,7 +558,6 @@ export const patientProcedurePages: ProcedurePage[] = [
       },
       {
         title: "Important preparation notes",
-        tone: "muted",
         infoBox: {
           title: "Before your appointment",
           body: "Blood thinner timing varies by injection type and site. Confirm with the clinic well in advance of your appointment date so you have time to adjust your medications safely under physician guidance.",
@@ -600,7 +596,6 @@ export const patientProcedurePages: ProcedurePage[] = [
       },
       {
         title: "Rare but serious problems that need urgent attention",
-        tone: "alert",
         bullets: [
           "Severe headache that gets worse when sitting or standing",
           "Significant or worsening weakness",
@@ -717,7 +712,6 @@ export const patientProcedurePages: ProcedurePage[] = [
       },
       {
         title: "Risks and when to contact the clinic",
-        tone: "alert",
         bullets: [
           "Pain, swelling, bruising, infection, bleeding, allergic reaction, or incomplete relief",
           "Temporary increase in blood sugar, especially in patients with diabetes",
@@ -809,7 +803,6 @@ export const patientProcedurePages: ProcedurePage[] = [
       },
       {
         title: "Evidence and off-label use",
-        tone: "muted",
         infoBox: {
           title: "Off-label context",
           body: "The use of stellate ganglion block for PTSD and related conditions is considered off-label. Patients should discuss the available evidence, realistic expectations, and the role this treatment plays within a broader care plan before proceeding.",
@@ -823,7 +816,6 @@ export const patientProcedurePages: ProcedurePage[] = [
       },
       {
         title: "Temporary effects and rare risks",
-        tone: "alert",
         bullets: [
           "Temporary Horner's syndrome with a droopy eyelid, constricted pupil, and red eye",
           "Hoarseness",
@@ -853,7 +845,6 @@ export const patientProcedurePages: ProcedurePage[] = [
       },
       {
         title: "When to seek immediate medical attention",
-        tone: "alert",
         bullets: [
           "Severe neck pain",
           "Difficulty breathing",
@@ -946,7 +937,6 @@ export const patientProcedurePages: ProcedurePage[] = [
       },
       {
         title: "Planning, recovery, and risk discussion",
-        tone: "muted",
         infoBox: {
           title: "Individualized planning",
           body: "Each of these procedures involves a unique recovery profile and set of risks. Your physician will review the specific technique, expected benefit, limitations, and safety considerations with you individually before any procedure is scheduled.",
