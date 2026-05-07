@@ -62,33 +62,11 @@ export function BridgeSection() {
 
       {/* Light zone — promise, stats, CTA */}
       <div className="bridge-light">
-        <p className="bridge-promise br">
-          <strong>Pain is complex.</strong>
-          {" "}We make the path clear.
-        </p>
-
         <p className="bridge-body br br-d1">
           Six stops. One road. Your story, told the way it actually
           unfolds — from the bumpy uncertainty of the first referral
           to the steady ground of lasting relief.
         </p>
-
-        <div className="bridge-stats br br-d2" aria-label="Key facts">
-          <div className="bridge-stat">
-            <span className="bridge-stat-val">Weeks,</span>
-            <span className="bridge-stat-label">not months</span>
-          </div>
-          <div className="bridge-stat-divider" aria-hidden="true" />
-          <div className="bridge-stat">
-            <span className="bridge-stat-val">OHIP</span>
-            <span className="bridge-stat-label">accepted</span>
-          </div>
-          <div className="bridge-stat-divider" aria-hidden="true" />
-          <div className="bridge-stat">
-            <span className="bridge-stat-val">Five</span>
-            <span className="bridge-stat-label">disciplines, under one roof</span>
-          </div>
-        </div>
 
         <a href="#road" className="bridge-scroll br br-d3">
           <span>Scroll to follow the road</span>

@@ -955,12 +955,159 @@ select {
   text-transform: uppercase;
   color: rgba(246, 239, 227, 0.78);
 }
+/* ══════════════════════════════════════════════════════════════
+   CLOUD VEIL — cinematic transition between intro and road
+   ══════════════════════════════════════════════════════════════ */
+.pj-cloud-veil {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  visibility: hidden;
+  contain: strict;
+}
+.pj-cloud-veil.covering,
+.pj-cloud-veil.clearing {
+  visibility: visible;
+}
+.pj-cloud-base {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 110% 70% at 50% 50%, #efe6cf 0%, #d8cfb6 55%, #b9b09a 100%);
+  opacity: 0;
+  transition: opacity 0.42s cubic-bezier(0.65, 0, 0.35, 1);
+}
+.pj-cloud-veil.covering .pj-cloud-base {
+  opacity: 1;
+}
+.pj-cloud-veil.clearing .pj-cloud-base {
+  opacity: 0;
+  transition: opacity 0.6s cubic-bezier(0.4, 0, 0.6, 1) 0.1s;
+}
+.pj-cloud-layer {
+  position: absolute;
+  inset: -25vh -15vw;
+  pointer-events: none;
+  filter: blur(36px);
+  mix-blend-mode: screen;
+  will-change: transform, opacity;
+  opacity: 0;
+}
+.pj-cloud-l1 {
+  background:
+    radial-gradient(42% 58% at 22% 38%, rgba(255, 253, 247, 0.95) 0%, rgba(255, 253, 247, 0) 72%),
+    radial-gradient(50% 64% at 75% 32%, rgba(248, 242, 228, 0.92) 0%, rgba(248, 242, 228, 0) 75%);
+  transform: translate3d(0, -38vh, 0) scale(1.18);
+  transition:
+    transform 0.55s cubic-bezier(0.34, 0.01, 0.2, 1),
+    opacity 0.4s cubic-bezier(0.4, 0, 0.6, 1);
+}
+.pj-cloud-l2 {
+  background:
+    radial-gradient(55% 70% at 70% 68%, rgba(238, 228, 208, 0.95) 0%, rgba(238, 228, 208, 0) 75%),
+    radial-gradient(40% 55% at 24% 78%, rgba(220, 210, 190, 0.85) 0%, rgba(220, 210, 190, 0) 75%);
+  transform: translate3d(0, 38vh, 0) scale(1.18);
+  transition:
+    transform 0.55s cubic-bezier(0.34, 0.01, 0.2, 1) 0.04s,
+    opacity 0.4s cubic-bezier(0.4, 0, 0.6, 1);
+}
+.pj-cloud-l3 {
+  background:
+    radial-gradient(60% 70% at 50% 50%, rgba(245, 238, 220, 0.85) 0%, rgba(245, 238, 220, 0) 80%);
+  transform: translate3d(0, 0, 0) scale(0.6);
+  transition:
+    transform 0.5s cubic-bezier(0.34, 0.01, 0.2, 1),
+    opacity 0.4s cubic-bezier(0.4, 0, 0.6, 1);
+}
+.pj-cloud-l4 {
+  background:
+    radial-gradient(35% 50% at 12% 55%, rgba(232, 222, 200, 0.8) 0%, rgba(232, 222, 200, 0) 75%),
+    radial-gradient(38% 50% at 88% 60%, rgba(245, 235, 215, 0.85) 0%, rgba(245, 235, 215, 0) 75%);
+  transform: translate3d(0, 0, 0) scale(1.4);
+  filter: blur(54px);
+  transition:
+    transform 0.6s cubic-bezier(0.34, 0.01, 0.2, 1) 0.06s,
+    opacity 0.45s cubic-bezier(0.4, 0, 0.6, 1);
+}
+.pj-cloud-veil.covering .pj-cloud-layer {
+  opacity: 1;
+}
+.pj-cloud-veil.covering .pj-cloud-l1,
+.pj-cloud-veil.covering .pj-cloud-l2 {
+  transform: translate3d(0, 0, 0) scale(1);
+}
+.pj-cloud-veil.covering .pj-cloud-l3 {
+  transform: translate3d(0, 0, 0) scale(1.25);
+}
+.pj-cloud-veil.covering .pj-cloud-l4 {
+  transform: translate3d(0, 0, 0) scale(1);
+}
+.pj-cloud-veil.clearing .pj-cloud-layer {
+  opacity: 0;
+  transition:
+    transform 0.85s cubic-bezier(0.3, 0, 0.5, 1),
+    opacity 0.6s cubic-bezier(0.4, 0, 0.6, 1);
+}
+.pj-cloud-veil.clearing .pj-cloud-l1 {
+  transform: translate3d(0, -48vh, 0) scale(1.35);
+}
+.pj-cloud-veil.clearing .pj-cloud-l2 {
+  transform: translate3d(0, 48vh, 0) scale(1.35);
+}
+.pj-cloud-veil.clearing .pj-cloud-l3 {
+  transform: translate3d(0, 0, 0) scale(2.2);
+}
+.pj-cloud-veil.clearing .pj-cloud-l4 {
+  transform: translate3d(0, 0, 0) scale(1.8);
+}
+.pj-cloud-logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: clamp(160px, 22vw, 320px);
+  height: auto;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.82);
+  filter: brightness(0) saturate(100%) drop-shadow(0 6px 30px rgba(20, 18, 14, 0.35));
+  transition:
+    opacity 0.5s cubic-bezier(0.4, 0, 0.6, 1) 0.1s,
+    transform 0.7s cubic-bezier(0.34, 0.01, 0.2, 1) 0.05s;
+  will-change: transform, opacity;
+}
+.pj-cloud-veil.covering .pj-cloud-logo {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+.pj-cloud-veil.clearing .pj-cloud-logo {
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(1.18);
+  transition:
+    opacity 0.4s cubic-bezier(0.4, 0, 0.6, 1),
+    transform 0.7s cubic-bezier(0.3, 0, 0.5, 1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .pj-cloud-base,
+  .pj-cloud-layer,
+  .pj-cloud-logo {
+    transition-duration: 0.001s !important;
+  }
+}
+
 .pj-intro {
   position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   padding: clamp(50px, 7vw, 84px) var(--page-gutter) clamp(54px, 7vw, 88px);
-  background: linear-gradient(180deg, #1f1d1a 0%, #302d29 58%, #26231f 100%);
-  overflow: hidden;
-  isolation: isolate;
+  background-color: #1f1d1a;
+  background-image: url("/media/Pain%20is%20complex/background_blend_exact_2400x1400.png");
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  overflow: visible;
   color: var(--vanilla);
 }
 .pj-intro-grid {
@@ -1109,36 +1256,35 @@ select {
   margin-top: 0;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
   gap: 24px;
   flex-wrap: wrap;
 }
 .pj-hint {
   display: inline-flex;
+  flex-direction: column;
   align-items: center;
-  gap: 12px;
-  padding: 14px 20px;
-  border: 1px solid transparent;
-  background: rgba(246, 239, 227, 0.92);
-  color: var(--mahogany);
+  gap: 10px;
+  padding: 8px 4px;
+  border: none;
+  background: transparent;
+  color: rgba(246, 239, 227, 0.72);
   font-family: var(--f-sans);
   font-size: 10px;
   font-weight: 500;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   cursor: pointer;
-  transition: all 0.3s var(--ease);
+  transition: color 0.3s var(--ease);
   text-decoration: none;
 }
 .pj-hint:hover {
-  border-color: rgba(246, 239, 227, 0.72);
-  background: transparent;
   color: var(--vanilla);
 }
 .pj-hint .arrow {
   display: inline-block;
-  width: 14px;
-  height: 1px;
+  width: 1px;
+  height: 18px;
   background: currentColor;
   position: relative;
   animation: arrowPulse 2.4s var(--ease) infinite;
@@ -1146,17 +1292,17 @@ select {
 .pj-hint .arrow::after {
   content: "";
   position: absolute;
-  right: -1px;
-  top: -3px;
+  bottom: -1px;
+  left: -3px;
   width: 7px;
   height: 7px;
   border-right: 1px solid currentColor;
   border-bottom: 1px solid currentColor;
-  transform: rotate(-45deg);
+  transform: rotate(45deg);
 }
 @keyframes arrowPulse {
-  0%, 100% { transform: translateX(0); opacity: 1; }
-  50% { transform: translateX(4px); opacity: 0.6; }
+  0%, 100% { transform: translateY(0); opacity: 1; }
+  50% { transform: translateY(4px); opacity: 0.6; }
 }
 .pj-portal-legend {
   font-family: var(--f-sans);
@@ -1184,7 +1330,7 @@ select {
   position: relative;
   z-index: 4;
   height: 260vh;
-  margin-top: -48px;
+  margin-top: 0;
   background: linear-gradient(
     180deg,
     #dcd5bf 0%,
