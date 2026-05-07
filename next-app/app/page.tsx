@@ -37,10 +37,6 @@ export default function Home() {
               name: "Migraine & Headache Care",
               desc: "Neurologist-led diagnosis and ongoing management of chronic migraines, cluster headaches, and tension-type disorders.",
             },
-            {
-              name: "Mental Health Integration",
-              desc: "Psychological care woven into your treatment plan — because chronic pain and mental wellbeing are never separate.",
-            },
           ].map((s, i) => (
             <div
               key={s.name}

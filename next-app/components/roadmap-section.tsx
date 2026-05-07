@@ -13,13 +13,13 @@ const SCENE_MAX_SCALE = 2.4
 const ROAD_OVERLAY_D = "M 400 -600 C 400 -430 330 -330 370 -210 C 415 -95 400 -35 400 0 C 400 110 285 175 280 285 C 274 420 560 470 540 610 C 522 735 300 770 320 910 C 340 1055 555 1095 520 1230 C 490 1350 390 1435 400 1600 C 404 1680 402 1760 400 1840"
 const ROAD_TRAVEL_D = "M 400 0 C 400 110 285 175 280 285 C 274 420 560 470 540 610 C 522 735 300 770 320 910 C 340 1055 555 1095 520 1230 C 490 1350 390 1435 400 1600"
 
-const MILESTONES: { km: string; t: number; side: "left"|"right"; zone: string }[] = [
-  { km:"KM 00", t:0.05, side:"right", zone:"The first mile" },
-  { km:"KM 18", t:0.22, side:"left",  zone:"Listening" },
-  { km:"KM 34", t:0.39, side:"right", zone:"Many minds" },
-  { km:"KM 50", t:0.56, side:"left",  zone:"A path of your own" },
-  { km:"KM 67", t:0.74, side:"right", zone:"Precision" },
-  { km:"KM 83", t:0.92, side:"left",  zone:"Lasting relief" },
+const MILESTONES: { t: number; side: "left"|"right"; zone: string }[] = [
+  { t:0.05, side:"right", zone:"The first mile" },
+  { t:0.22, side:"left",  zone:"Listening" },
+  { t:0.39, side:"right", zone:"Many minds" },
+  { t:0.56, side:"left",  zone:"A path of your own" },
+  { t:0.74, side:"right", zone:"Precision" },
+  { t:0.92, side:"left",  zone:"Lasting relief" },
 ]
 
 const CARE_DISCIPLINES = [
@@ -29,12 +29,12 @@ const CARE_DISCIPLINES = [
 ]
 
 const MILESTONE_CONTENT = [
-  { title:"GP referral",              desc:"Ask your family physician for a referral. Most treatments are covered by OHIP once referred — no out-of-pocket starting line.",       foot:"Day 1 · paperwork-free for you",       stop:"Stop 01 / 06" },
-  { title:"Initial consultation",     desc:"A specialist reviews your history, symptoms, and imaging — without rush or assumptions. The conversation that should have happened sooner.", foot:"Average visit · 45 minutes",           stop:"Stop 02 / 06" },
-  { title:"Multidisciplinary review", desc:"Your case is assessed across five specialties before any path is proposed. Five sets of eyes; one coherent plan.",                    foot:"Five disciplines · one room",          stop:"Stop 03 / 06" },
-  { title:"Personalised care plan",   desc:"A strategy built around your condition and response — a plan, not a protocol. Adjusted as we learn what your body answers to.",       foot:"Built for you, not from a template",   stop:"Stop 04 / 06" },
-  { title:"Treatment & procedures",   desc:"Image-guided injections, regenerative therapy, and integrated care — delivered at the source, with millimetric precision.",           foot:"Onsite fluoroscopy & ultrasound",       stop:"Stop 05 / 06" },
-  { title:"Monitoring & adjustment",  desc:"Regular follow-ups track your progress and adjust your plan based on real outcomes. Care that doesn't end at the procedure.",         foot:"Outcomes reviewed · quarterly",        stop:"Stop 06 / 06" },
+  { title:"GP referral",              desc:"Ask your family physician for a referral. Most treatments are covered by OHIP once referred — no out-of-pocket starting line.",       foot:"Day 1 · paperwork-free for you" },
+  { title:"Initial consultation",     desc:"A specialist reviews your history, symptoms, and imaging — without rush or assumptions. The conversation that should have happened sooner.", foot:"Average visit · 45 minutes" },
+  { title:"Multidisciplinary review", desc:"Your case is assessed across five specialties before any path is proposed. Five sets of eyes; one coherent plan.",                    foot:"Five disciplines · one room" },
+  { title:"Personalised care plan",   desc:"A strategy built around your condition and response — a plan, not a protocol. Adjusted as we learn what your body answers to.",       foot:"Built for you, not from a template" },
+  { title:"Treatment & procedures",   desc:"Image-guided injections, regenerative therapy, and integrated care — delivered at the source, with millimetric precision.",           foot:"Onsite fluoroscopy & ultrasound" },
+  { title:"Monitoring & adjustment",  desc:"Regular follow-ups track your progress and adjust your plan based on real outcomes. Care that doesn't end at the procedure.",         foot:"Outcomes reviewed · quarterly" },
 ]
 
 function lerp(a: number, b: number, t: number) {
@@ -340,8 +340,7 @@ export function RoadmapSection() {
               data-zone={m.zone}
             >
               <div className="pj-mc-head">
-                <span className="pj-mc-num">{m.km}</span>
-                <span className="pj-mc-zone">{MILESTONE_CONTENT[i].stop}</span>
+                <span className="pj-mc-num">Step {i + 1}</span>
               </div>
               <div className="pj-mc-title">{MILESTONE_CONTENT[i].title}</div>
               <p className="pj-mc-desc">{MILESTONE_CONTENT[i].desc}</p>
