@@ -2194,7 +2194,8 @@ a.loc-page-contact-line:hover {
 /* ─── CTA ───────────────────────────────────────────────────── */
 .cta-section {
   background: var(--page-dark);
-  justify-content: center;
+  min-height: auto;
+  justify-content: flex-start;
   align-items: flex-start;
   text-align: left;
   overflow: hidden;
