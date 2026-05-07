@@ -226,11 +226,7 @@ export function RoadmapSection() {
             </div>
           </div>
 
-          <div className="pj-intro-meta">
-            <span className="pj-intro-meta-label">01 — Your Journey</span>
-            <span className="pj-intro-meta-mark">a road, not a protocol</span>
-            <span className="pj-intro-meta-counter">CHAPTER 01 / 06</span>
-          </div>
+          <div className="pj-intro-rule" aria-hidden="true" />
 
           <div className="pj-portal">
             <div className="pj-portal-text">

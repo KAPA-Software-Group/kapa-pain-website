@@ -986,6 +986,10 @@ select {
   text-transform: uppercase;
   font-variant-numeric: tabular-nums;
 }
+.pj-intro-rule {
+  height: 1px;
+  background: rgba(246, 239, 227, 0.18);
+}
 .pj-portal {
   position: relative;
   display: grid;
