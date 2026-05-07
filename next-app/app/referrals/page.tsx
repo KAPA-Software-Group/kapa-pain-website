@@ -31,94 +31,6 @@ const referralSteps = [
   },
 ] as const
 
-const locationChoices = ["Brampton", "Hamilton", "Guelph", "Toronto"] as const
-
-const intakeDetails = [
-  {
-    title: "Initial referral details",
-    items: [
-      "Date of referral",
-      "Location choice",
-      "FHO / FHT / FHN membership status",
-      "Please note all our physicians have FHO exemption",
-    ],
-  },
-  {
-    title: "Referring physician information",
-    items: [
-      "Physician name",
-      "Billing number",
-      "Office phone",
-      "Office fax",
-      "Clinic address",
-    ],
-  },
-  {
-    title: "Patient information",
-    items: [
-      "Full name",
-      "Date of birth",
-      "Health Card # (VC)",
-      "Home address",
-      "Primary phone",
-      "Email address",
-    ],
-  },
-  {
-    title: "Clinical details and documents",
-    items: [
-      "Clinical comments / observations",
-      "Additional clinical history",
-      "Specific diagnostic questions",
-      "Relevant imaging and documents",
-    ],
-  },
-] as const
-
-const referralGroups = [
-  {
-    title: "Pain Consultation",
-    options: [
-      "Lower back pain / sciatica",
-      "Neck pain with upper extremity pain",
-      "Fibromyalgia",
-      "Headache / migraine",
-      "Shoulder, knee, or hip joint pain",
-      "Opioid management",
-      "Other",
-    ],
-  },
-  {
-    title: "Orthopaedic Consultation",
-    options: [
-      "Upper extremity",
-      "Lower extremity",
-      "Back pain",
-      "Neck pain",
-      "Joint replacement",
-      "Other",
-    ],
-  },
-  {
-    title: "Image Guided Injections",
-    options: [
-      "Cortisone injections",
-      "HA injections",
-      "PRP",
-      "Radiofrequency ablation: joints",
-      "Radiofrequency ablation: cervical, thoracic, or lumbar",
-      "Epidural steroid injections: cervical, thoracic, or lumbar",
-      "Facet joint injections: cervical, thoracic, or lumbar",
-      "Piriformis injection / decompression",
-      "Intercostal nerves",
-      "Other",
-    ],
-  },
-] as const
-
-const procedureDetailNote =
-  "For joint, side, area, level, or 'Other' details, please include the specifics in the clinical comments area of the secure Hushmail form."
-
 const referralsPageStyles = `
   .referrals-page-scope .section-inner {
     max-width: 1240px;
@@ -153,8 +65,7 @@ const referralsPageStyles = `
   .referrals-intro-copy,
   .referrals-contact-copy,
   .referral-form-copy,
-  .referral-security-note,
-  .referrals-detail-note {
+  .referral-security-note {
     margin: 0;
     font-family: var(--f-sans);
     font-size: 14px;
@@ -172,8 +83,7 @@ const referralsPageStyles = `
   }
 
   .referrals-card-label,
-  .referral-card-label,
-  .referrals-chip-label {
+  .referral-card-label {
     font-family: var(--f-sans);
     font-size: 11px;
     font-weight: 600;
@@ -262,9 +172,7 @@ const referralsPageStyles = `
     color: var(--clay-dark);
   }
 
-  .referrals-process-title,
-  .referrals-detail-title,
-  .referrals-group-title {
+  .referrals-process-title {
     margin: 0;
     font-family: var(--f-serif);
     font-size: 2rem;
@@ -274,9 +182,7 @@ const referralsPageStyles = `
     color: var(--mahogany);
   }
 
-  .referrals-process-copy,
-  .referrals-detail-list,
-  .referrals-group-list {
+  .referrals-process-copy {
     margin: 0;
     font-family: var(--f-sans);
     font-size: 13px;
@@ -284,136 +190,6 @@ const referralsPageStyles = `
     line-height: 1.8;
     color: var(--mahogany);
     opacity: 0.68;
-  }
-
-  .referrals-prep-section {
-    background: rgba(229, 222, 211, 0.3);
-    border-top: 1px solid var(--hairline);
-  }
-
-  .referrals-prep-header {
-    display: grid;
-    grid-template-columns: minmax(0, 0.86fr) minmax(0, 1.14fr);
-    gap: clamp(32px, 6vw, 74px);
-    align-items: end;
-    margin-bottom: clamp(38px, 6vw, 62px);
-  }
-
-  .referrals-location-card {
-    display: grid;
-    gap: 20px;
-    padding: 24px;
-    border: 1px solid var(--hairline);
-    border-radius: 8px;
-    background: rgba(246, 239, 227, 0.66);
-  }
-
-  .referrals-location-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-
-  .referrals-location-list li,
-  .referrals-group-chip {
-    display: inline-flex;
-    align-items: center;
-    min-height: 36px;
-    border: 1px solid rgba(159, 118, 87, 0.26);
-    border-radius: 999px;
-    padding: 8px 14px;
-    font-family: var(--f-sans);
-    font-size: 12px;
-    font-weight: 400;
-    color: var(--mahogany);
-    background: rgba(246, 239, 227, 0.7);
-  }
-
-  .referrals-detail-grid {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 0;
-    border: 1px solid var(--hairline);
-    border-radius: 8px;
-    overflow: hidden;
-    background: rgba(246, 239, 227, 0.72);
-  }
-
-  .referrals-detail-card {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    min-height: 320px;
-    padding: clamp(24px, 3vw, 34px);
-    border-right: 1px solid var(--hairline);
-  }
-
-  .referrals-detail-card:last-child {
-    border-right: 0;
-  }
-
-  .referrals-detail-list,
-  .referrals-group-list {
-    display: grid;
-    gap: 10px;
-    padding: 0;
-    list-style: none;
-  }
-
-  .referrals-detail-list li,
-  .referrals-group-list li {
-    position: relative;
-    padding-left: 18px;
-  }
-
-  .referrals-detail-list li::before,
-  .referrals-group-list li::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0.78em;
-    width: 6px;
-    height: 1px;
-    background: var(--clay);
-  }
-
-  .referrals-groups-section {
-    background: var(--vanilla);
-    border-top: 1px solid var(--hairline);
-  }
-
-  .referrals-group-grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 18px;
-    margin-top: clamp(34px, 5vw, 56px);
-  }
-
-  .referrals-group-card {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    min-height: 100%;
-    padding: clamp(24px, 3vw, 34px);
-    border: 1px solid var(--hairline);
-    border-radius: 8px;
-    background: rgba(246, 239, 227, 0.68);
-    box-shadow: 0 18px 44px rgba(31, 29, 26, 0.045);
-  }
-
-  .referrals-group-chip {
-    align-self: flex-start;
-    border-radius: 8px;
-  }
-
-  .referrals-detail-note {
-    max-width: 760px;
-    margin-top: 28px;
-    padding-left: 22px;
-    border-left: 3px solid rgba(159, 118, 87, 0.38);
   }
 
   .referral-form-section {
@@ -515,25 +291,9 @@ const referralsPageStyles = `
   }
 
   @media (max-width: 1180px) {
-    .referrals-detail-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .referrals-detail-card:nth-child(2) {
-      border-right: 0;
-    }
-
-    .referrals-detail-card:nth-child(3),
-    .referrals-detail-card:nth-child(4) {
-      border-top: 1px solid var(--hairline);
-    }
-  }
-
   @media (max-width: 1024px) {
     .referrals-intro-grid,
-    .referrals-prep-header,
-    .referral-form-layout,
-    .referrals-group-grid {
+    .referral-form-layout {
       grid-template-columns: 1fr;
     }
 
@@ -559,34 +319,16 @@ const referralsPageStyles = `
 
   @media (max-width: 768px) {
     .referrals-intro-panel,
-    .referrals-location-card,
     .referral-form-context,
     .referral-form-panel {
       padding: 24px;
-    }
-
-    .referrals-detail-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .referrals-detail-card,
-    .referrals-detail-card:nth-child(2) {
-      min-height: auto;
-      border-right: 0;
-      border-top: 1px solid var(--hairline);
-    }
-
-    .referrals-detail-card:first-child {
-      border-top: 0;
     }
 
     .referral-form-heading {
       font-size: 2rem;
     }
 
-    .referrals-process-title,
-    .referrals-detail-title,
-    .referrals-group-title {
+    .referrals-process-title {
       font-size: 1.75rem;
     }
 
@@ -622,6 +364,59 @@ export default function ReferralsPage() {
                 </Link>
               </div>
             </div>
+          </div>
+        </section>
+
+        <section className="procedure-section referrals-overview-section">
+          <div className="section-inner">
+            <div className="referrals-intro-grid">
+              <div>
+                <div className="section-label">Patient Referral</div>
+                <h2 className="procedure-section-title">
+                  Secure referral intake for pain care, orthopaedic
+                  consultation, and image-guided procedures.
+                </h2>
+              </div>
+
+              <aside className="referrals-intro-panel">
+                <p className="referrals-intro-copy">
+                  Please complete the secure Hushmail form below and attach all
+                  relevant imaging at the bottom of the form.
+                </p>
+
+                <div className="referrals-contact-card">
+                  <span className="referrals-card-label">Contact Info</span>
+                  <dl className="referrals-contact-list">
+                    {contactDetails.map((detail) => (
+                      <div className="referrals-contact-row" key={detail.label}>
+                        <dt>{detail.label}</dt>
+                        <dd>
+                          {detail.href ? (
+                            <a href={detail.href}>{detail.value}</a>
+                          ) : (
+                            detail.value
+                          )}
+                        </dd>
+                      </div>
+                    ))}
+                  </dl>
+                </div>
+              </aside>
+            </div>
+
+            <ol className="referrals-process-list" aria-label="Referral steps">
+              {referralSteps.map((step, index) => (
+                <li className="referrals-process-step" key={step.title}>
+                  <span className="referrals-process-number">
+                    {index + 1}
+                  </span>
+                  <div>
+                    <h3 className="referrals-process-title">{step.title}</h3>
+                    <p className="referrals-process-copy">{step.copy}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
           </div>
         </section>
 
@@ -663,129 +458,6 @@ export default function ReferralsPage() {
                 <HushmailReferralForm />
               </div>
             </div>
-          </div>
-        </section>
-
-        <section className="procedure-section referrals-overview-section">
-          <div className="section-inner">
-            <div className="referrals-intro-grid">
-              <div>
-                <div className="section-label">Patient Referral</div>
-                <h2 className="procedure-section-title">
-                  Secure referral intake for pain care, orthopaedic
-                  consultation, and image-guided procedures.
-                </h2>
-              </div>
-
-              <aside className="referrals-intro-panel">
-                <p className="referrals-intro-copy">
-                  Please complete the secure Hushmail form below and attach all
-                  relevant imaging at the bottom of the form. The website
-                  displays the secure form only; referral data is not processed
-                  or stored by this frontend.
-                </p>
-
-                <div className="referrals-contact-card">
-                  <span className="referrals-card-label">Contact Info</span>
-                  <dl className="referrals-contact-list">
-                    {contactDetails.map((detail) => (
-                      <div className="referrals-contact-row" key={detail.label}>
-                        <dt>{detail.label}</dt>
-                        <dd>
-                          {detail.href ? (
-                            <a href={detail.href}>{detail.value}</a>
-                          ) : (
-                            detail.value
-                          )}
-                        </dd>
-                      </div>
-                    ))}
-                  </dl>
-                </div>
-              </aside>
-            </div>
-
-            <ol className="referrals-process-list" aria-label="Referral steps">
-              {referralSteps.map((step, index) => (
-                <li className="referrals-process-step" key={step.title}>
-                  <span className="referrals-process-number">
-                    {index + 1}
-                  </span>
-                  <div>
-                    <h3 className="referrals-process-title">{step.title}</h3>
-                    <p className="referrals-process-copy">{step.copy}</p>
-                  </div>
-                </li>
-              ))}
-            </ol>
-          </div>
-        </section>
-
-        <section className="procedure-section referrals-prep-section">
-          <div className="section-inner">
-            <div className="referrals-prep-header">
-              <div>
-                <div className="section-label">Before You Begin</div>
-                <h2 className="procedure-section-title">
-                  Information requested in the secure referral form.
-                </h2>
-              </div>
-
-              <aside className="referrals-location-card">
-                <span className="referrals-chip-label">
-                  Available Location Choices
-                </span>
-                <ul className="referrals-location-list">
-                  {locationChoices.map((location) => (
-                    <li key={location}>{location}</li>
-                  ))}
-                </ul>
-              </aside>
-            </div>
-
-            <div
-              className="referrals-detail-grid"
-              aria-label="Referral information checklist"
-            >
-              {intakeDetails.map((section) => (
-                <article className="referrals-detail-card" key={section.title}>
-                  <h3 className="referrals-detail-title">{section.title}</h3>
-                  <ul className="referrals-detail-list">
-                    {section.items.map((item) => (
-                      <li key={item}>{item}</li>
-                    ))}
-                  </ul>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="procedure-section referrals-groups-section">
-          <div className="section-inner">
-            <div className="section-label">Reason For Referral</div>
-            <h2 className="procedure-section-title">
-              Select the most relevant consultation or procedure category in
-              the secure form.
-            </h2>
-
-            <div className="referrals-group-grid">
-              {referralGroups.map((group) => (
-                <article className="referrals-group-card" key={group.title}>
-                  <span className="referrals-group-chip">
-                    Primary Indication
-                  </span>
-                  <h3 className="referrals-group-title">{group.title}</h3>
-                  <ul className="referrals-group-list">
-                    {group.options.map((option) => (
-                      <li key={option}>{option}</li>
-                    ))}
-                  </ul>
-                </article>
-              ))}
-            </div>
-
-            <p className="referrals-detail-note">{procedureDetailNote}</p>
           </div>
         </section>
 
