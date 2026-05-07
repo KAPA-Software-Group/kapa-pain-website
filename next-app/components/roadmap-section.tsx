@@ -37,30 +37,8 @@ const MILESTONE_CONTENT = [
   { title:"Monitoring & adjustment",  desc:"Regular follow-ups track your progress and adjust your plan based on real outcomes. Care that doesn't end at the procedure.",         foot:"Outcomes reviewed · quarterly",        stop:"Stop 06 / 06" },
 ]
 
-const TONE_STOPS: [number, [number, number, number]][] = [
-  [0.00, [216, 210, 196]],
-  [0.20, [223, 216, 200]],
-  [0.45, [230, 220, 204]],
-  [0.65, [236, 221, 199]],
-  [0.85, [240, 220, 190]],
-  [1.00, [243, 216, 176]],
-]
-
 function lerp(a: number, b: number, t: number) {
   return a + (b - a) * Math.max(0, Math.min(1, t))
-}
-
-function toneAt(p: number): string {
-  for (let i = 0; i < TONE_STOPS.length - 1; i++) {
-    const [p0, c0] = TONE_STOPS[i]
-    const [p1, c1] = TONE_STOPS[i + 1]
-    if (p <= p1) {
-      const t = (p - p0) / (p1 - p0)
-      return `rgb(${Math.round(lerp(c0[0],c1[0],t))},${Math.round(lerp(c0[1],c1[1],t))},${Math.round(lerp(c0[2],c1[2],t))})`
-    }
-  }
-  const c = TONE_STOPS[TONE_STOPS.length - 1][1]
-  return `rgb(${c[0]},${c[1]},${c[2]})`
 }
 
 export function RoadmapSection() {
