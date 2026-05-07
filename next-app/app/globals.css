@@ -4541,7 +4541,9 @@ a.loc-page-contact-line:hover {
 .sf-toggle {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
+  width: 148px;
   padding: 8px 16px;
   border: 1px solid rgba(246,239,227,0.22);
   background: rgba(246,239,227,0.05);

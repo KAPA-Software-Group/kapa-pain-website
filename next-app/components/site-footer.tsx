@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import Image from "next/image"
-import { Fragment, useState } from "react"
+import { Fragment, useEffect, useRef, useState } from "react"
 
 const NAV_LINKS = [
   { href: "/", label: "Home" },
@@ -38,12 +38,45 @@ const HOURS = [
 
 export function SiteFooter() {
   const [open, setOpen] = useState(false)
+  const footerRef = useRef<HTMLElement>(null)
+
+  useEffect(() => {
+    if (!open) return
+
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches
+
+    if (prefersReducedMotion) {
+      footerRef.current?.scrollIntoView({ block: "end" })
+      return
+    }
+
+    let animationFrame = 0
+    const startedAt = performance.now()
+    const duration = 520
+
+    const keepFooterBottomInView = (now: number) => {
+      window.scrollTo({
+        top: document.documentElement.scrollHeight,
+        behavior: "instant",
+      })
+
+      if (now - startedAt < duration) {
+        animationFrame = requestAnimationFrame(keepFooterBottomInView)
+      }
+    }
+
+    animationFrame = requestAnimationFrame(keepFooterBottomInView)
+
+    return () => cancelAnimationFrame(animationFrame)
+  }, [open])
 
   return (
-    <footer className={`sf${open ? " sf--open" : ""}`}>
+    <footer ref={footerRef} className={`sf${open ? " sf--open" : ""}`}>
 
       {/* Expandable panel */}
-      <div className="sf-panel" aria-hidden={!open}>
+      <div className="sf-panel" id="clinic-info" aria-hidden={!open}>
         <div className="sf-panel-inner">
 
           <div className="sf-col">
@@ -125,6 +158,7 @@ export function SiteFooter() {
             className="sf-toggle"
             onClick={() => setOpen((o) => !o)}
             aria-expanded={open}
+            aria-controls="clinic-info"
           >
             <span className="sf-toggle-icon" aria-hidden="true" />
             {open ? "Close" : "Clinic Info"}
