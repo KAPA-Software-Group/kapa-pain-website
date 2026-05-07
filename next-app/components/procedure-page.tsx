@@ -1,5 +1,7 @@
 import Image from "next/image"
 import Link from "next/link"
+import { ProcedureQuickFactsCarousel } from "@/components/procedure-quick-facts-carousel"
+import { ProcedureSideNav } from "@/components/procedure-side-nav"
 import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
 import {
@@ -55,11 +57,21 @@ export function ProcedurePageView({ page }: ProcedurePageViewProps) {
     .map((slug) => patientProcedurePages.find((entry) => entry.slug === slug))
     .filter((entry): entry is ProcedurePage => Boolean(entry))
 
+  const sideNavItems = [
+    { id: "overview", title: "Overview" },
+    ...page.sections.map((section) => ({
+      id: toAnchorId(section.title),
+      title: section.title,
+    })),
+  ]
+
   return (
     <>
       <SiteHeader overlay />
 
       <main className="page-shell procedure-shell">
+        <ProcedureSideNav items={sideNavItems} />
+
         <section className="inner-hero procedure-hero">
           <div className="section-inner procedure-hero-content">
             <div className="procedure-hero-centered">
@@ -101,18 +113,7 @@ export function ProcedurePageView({ page }: ProcedurePageViewProps) {
         {page.quickFacts.length > 0 ? (
           <section className="procedure-facts-strip">
             <div className="section-inner">
-              <div className="procedure-quick-facts">
-                {page.quickFacts.map((fact) => (
-                  <div key={fact.label} className="procedure-quick-fact">
-                    <span className="procedure-quick-fact-label">
-                      {fact.label}
-                    </span>
-                    <strong className="procedure-quick-fact-value">
-                      {fact.value}
-                    </strong>
-                  </div>
-                ))}
-              </div>
+              <ProcedureQuickFactsCarousel facts={page.quickFacts} />
             </div>
           </section>
         ) : null}
