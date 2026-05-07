@@ -11,6 +11,7 @@ export const metadata: Metadata = {
 }
 
 const page: ServiceDetailPageData = {
+  heroClassName: "medication-management-service-hero",
   title: "Medication Management",
   intro: [
     "Although medications have the power to heal, they can also cause harm. Therefore, medication management is a service that ensures you are given the right medication and right medication combinations to adequately control and reduce pain while minimizing any risks. This service can also be used in combination with other types of treatment such as physical therapy or interventional procedures.",
@@ -113,5 +114,32 @@ const page: ServiceDetailPageData = {
 }
 
 export default function MedicationManagementPage() {
-  return <ServiceDetailPage page={page} />
+  return (
+    <>
+      <style>
+        {`
+          .medication-management-service-hero .service-hero-grid {
+            grid-template-columns: minmax(0, 920px);
+            justify-content: center;
+            text-align: center;
+          }
+
+          .medication-management-service-hero .service-hero-copy-block {
+            display: grid;
+            justify-items: center;
+          }
+
+          .medication-management-service-hero .service-hero-intro {
+            max-width: 820px;
+            margin-inline: auto;
+          }
+
+          .medication-management-service-hero .procedure-hero-actions {
+            justify-content: center;
+          }
+        `}
+      </style>
+      <ServiceDetailPage page={page} />
+    </>
+  )
 }

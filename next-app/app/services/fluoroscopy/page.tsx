@@ -12,6 +12,7 @@ export const metadata: Metadata = {
 }
 
 const page: ServiceDetailPageData = {
+  heroClassName: "fluoroscopy-service-hero",
   title: "Fluoroscopy",
   intro: [
     <>
@@ -113,5 +114,32 @@ const page: ServiceDetailPageData = {
 }
 
 export default function FluoroscopyPage() {
-  return <ServiceDetailPage page={page} />
+  return (
+    <>
+      <style>
+        {`
+          .fluoroscopy-service-hero .service-hero-grid {
+            grid-template-columns: minmax(0, 920px);
+            justify-content: center;
+            text-align: center;
+          }
+
+          .fluoroscopy-service-hero .service-hero-copy-block {
+            display: grid;
+            justify-items: center;
+          }
+
+          .fluoroscopy-service-hero .service-hero-intro {
+            max-width: 820px;
+            margin-inline: auto;
+          }
+
+          .fluoroscopy-service-hero .procedure-hero-actions {
+            justify-content: center;
+          }
+        `}
+      </style>
+      <ServiceDetailPage page={page} />
+    </>
+  )
 }
