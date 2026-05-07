@@ -43,8 +43,15 @@ export const locations: Location[] = [
   {
     slug: "guelph",
     name: "Guelph",
-    status: "coming-soon",
-    addressLines: ["Coming soon"],
+    status: "open",
+    addressLines: [
+      "21 Surrey Street West",
+      "Suite 202",
+      "Guelph, ON  N1H 3R3",
+    ],
+    coordinates: "43.5448° N, 80.2482° W",
+    googleMapsUrl:
+      "https://www.google.com/maps/search/21+Surrey+Street+West,+Guelph,+ON+N1H+3R3",
   },
 ]
 

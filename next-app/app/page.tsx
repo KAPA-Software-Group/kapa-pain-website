@@ -93,10 +93,10 @@ export default function Home() {
         <div className="section-inner">
           <div className="section-label reveal">Find Us</div>
           <h2 className="display-heading locations-heading reveal reveal-delay-1">
-            Two clinics. One standard of care.
+            Three clinics. One standard of care.
           </h2>
           <div className="loc-grid">
-            <div className="loc-card reveal reveal-delay-2">
+            <Link href="/locations/brampton" className="loc-card reveal reveal-delay-2">
               <span className="loc-tag">Main Clinic</span>
               <div className="loc-city">Brampton</div>
               <address className="loc-address">
@@ -106,9 +106,7 @@ export default function Home() {
                 <br />
                 Brampton, ON &nbsp; L6T 4S5
               </address>
-              <a href="tel:2897529388" className="loc-phone">
-                289-752-9388
-              </a>
+              <span className="loc-phone">289-752-9388</span>
               <div className="loc-divider" />
               <div className="hours-row">
                 <span className="h-day">Mon – Fri</span>
@@ -122,8 +120,9 @@ export default function Home() {
                 <span className="h-day">Sunday</span>
                 <span className="h-time">Closed</span>
               </div>
-            </div>
-            <div className="loc-card reveal reveal-delay-3">
+              <span className="loc-cta">View location →</span>
+            </Link>
+            <Link href="/locations/hamilton" className="loc-card reveal reveal-delay-3">
               <span className="loc-tag">Second Location</span>
               <div className="loc-city">Hamilton</div>
               <address className="loc-address">
@@ -132,9 +131,7 @@ export default function Home() {
                 25 Charlton Ave E<br />
                 Hamilton, ON &nbsp; L8N 1Y2
               </address>
-              <a href="tel:2897529388" className="loc-phone">
-                289-752-9388
-              </a>
+              <span className="loc-phone">289-752-9388</span>
               <div className="loc-divider" />
               <div className="hours-row">
                 <span className="h-day">Mon – Fri</span>
@@ -148,7 +145,33 @@ export default function Home() {
                 <span className="h-day">Sunday</span>
                 <span className="h-time">Closed</span>
               </div>
-            </div>
+              <span className="loc-cta">View location →</span>
+            </Link>
+            <Link href="/locations/guelph" className="loc-card reveal reveal-delay-4">
+              <span className="loc-tag">Third Location</span>
+              <div className="loc-city">Guelph</div>
+              <address className="loc-address">
+                Suite 202
+                <br />
+                21 Surrey St W<br />
+                Guelph, ON &nbsp; N1H 3R3
+              </address>
+              <span className="loc-phone">519-265-9622</span>
+              <div className="loc-divider" />
+              <div className="hours-row">
+                <span className="h-day">Mon – Fri</span>
+                <span className="h-time">9:00 am – 5:00 pm</span>
+              </div>
+              <div className="hours-row">
+                <span className="h-day">Saturday</span>
+                <span className="h-time">By Appointment</span>
+              </div>
+              <div className="hours-row">
+                <span className="h-day">Sunday</span>
+                <span className="h-time">Closed</span>
+              </div>
+              <span className="loc-cta">View location →</span>
+            </Link>
           </div>
         </div>
       </section>
