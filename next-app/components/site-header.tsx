@@ -36,6 +36,7 @@ const PROCEDURE_GROUPS = [
 
 const SERVICES_ITEMS = [
   { href: "/services/image-guided-procedures", label: "Image Guided Procedures" },
+  { href: "/services/regenerative-sports-therapy", label: "Regenerative & Sports Therapy" },
   { href: "/services/medication-management", label: "Medication Management" },
   { href: "/services/fluoroscopy", label: "Fluoroscopy" },
 ]

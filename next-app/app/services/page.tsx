@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import type { CSSProperties } from "react"
+import Image from "next/image"
 import Link from "next/link"
 import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
@@ -25,6 +26,8 @@ const SERVICES = [
       "Precise pain-source targeting",
     ],
     visual: "Guided injection image",
+    imageSrc: "/procedure-images/guidedInjection.png",
+    imageAlt: "Image-guided injection procedure",
   },
   {
     href: "/services/medication-management",
@@ -39,6 +42,24 @@ const SERVICES = [
       "Risk-aware pain control",
     ],
     visual: "Medication review image",
+    imageSrc: "/procedure-images/medicationManagement.png",
+    imageAlt: "Medication management consultation",
+  },
+  {
+    href: "/services/regenerative-sports-therapy",
+    eyebrow: "Sports Recovery",
+    title: "Regenerative & Sports Therapy",
+    summary:
+      "Regenerative and sports therapy supports recovery from musculoskeletal injuries and disorders affecting ligaments, cartilage, tendons, muscle, bone, joints, and chronic degenerative pain.",
+    highlights: [
+      "PRP and regenerative therapies",
+      "Sports medicine recovery",
+      "Tendon, ligament, and cartilage concerns",
+      "Return-to-function planning",
+    ],
+    visual: "Regenerative therapy image",
+    imageSrc: "/procedure-images/regenerativeSports.png",
+    imageAlt: "Regenerative sports therapy treatment",
   },
   {
     href: "/services/fluoroscopy",
@@ -53,6 +74,8 @@ const SERVICES = [
       "Improved diagnostic clarity",
     ],
     visual: "Fluoroscopy image",
+    imageSrc: "/procedure-images/fluoroscopy.png",
+    imageAlt: "Fluoroscopy-guided procedure",
   },
 ]
 
@@ -113,8 +136,16 @@ export default function ServicesPage() {
                   <h3 className="procedure-card-title">{service.title}</h3>
                   <div
                     className="service-overview-visual"
-                    aria-label="Image placeholder"
+                    data-has-image="true"
+                    aria-label={service.imageAlt}
                   >
+                    <Image
+                      src={service.imageSrc}
+                      alt={service.imageAlt}
+                      fill
+                      sizes="(max-width: 900px) 100vw, 25vw"
+                      className="service-overview-image"
+                    />
                     <span>{service.visual}</span>
                   </div>
                   <p className="procedure-card-copy">{service.summary}</p>
