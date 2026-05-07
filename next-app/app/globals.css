@@ -1293,51 +1293,6 @@ select {
   opacity: 0;
   transform: translateY(8px);
 }
-.pj-climate {
-  position: absolute;
-  z-index: 25;
-  bottom: clamp(28px, 5vh, 52px);
-  right: clamp(20px, 4vw, 56px);
-  display: grid;
-  gap: 8px;
-  text-align: right;
-  font-family: var(--f-mono);
-  font-size: 10px;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--stone);
-}
-.pj-climate-row {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  gap: 10px;
-}
-.pj-climate-row .lbl {
-  color: var(--mahogany);
-  opacity: 0.5;
-}
-.pj-climate-row .val {
-  color: var(--clay-dark);
-}
-.pj-climate-bar {
-  width: 140px;
-  height: 2px;
-  background: var(--hairline);
-  position: relative;
-  overflow: hidden;
-}
-.pj-climate-bar::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: var(--pj-progress, 0%);
-  background: linear-gradient(90deg, #928b80, #9f7657);
-  transition: width 0.12s linear;
-}
-
 /* Scene + road */
 .pj-road-scene {
   position: absolute;

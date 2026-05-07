@@ -13,13 +13,13 @@ const SCENE_MAX_SCALE = 2.4
 const ROAD_OVERLAY_D = "M 400 -600 C 400 -430 330 -330 370 -210 C 415 -95 400 -35 400 0 C 400 110 285 175 280 285 C 274 420 560 470 540 610 C 522 735 300 770 320 910 C 340 1055 555 1095 520 1230 C 490 1350 390 1435 400 1600 C 404 1680 402 1760 400 1840"
 const ROAD_TRAVEL_D = "M 400 0 C 400 110 285 175 280 285 C 274 420 560 470 540 610 C 522 735 300 770 320 910 C 340 1055 555 1095 520 1230 C 490 1350 390 1435 400 1600"
 
-const MILESTONES: { km: string; t: number; side: "left"|"right"; zone: string; terrain: string; light: string }[] = [
-  { km:"KM 00", t:0.05, side:"right", zone:"The first mile",     terrain:"rough",       light:"overcast" },
-  { km:"KM 18", t:0.22, side:"left",  zone:"Listening",          terrain:"rocky",       light:"diffuse"  },
-  { km:"KM 34", t:0.39, side:"right", zone:"Many minds",         terrain:"clearing",    light:"breaking" },
-  { km:"KM 50", t:0.56, side:"left",  zone:"A path of your own", terrain:"settling",    light:"warm"     },
-  { km:"KM 67", t:0.74, side:"right", zone:"Precision",          terrain:"open ground", light:"golden"   },
-  { km:"KM 83", t:0.92, side:"left",  zone:"Lasting relief",     terrain:"meadow",      light:"radiant"  },
+const MILESTONES: { km: string; t: number; side: "left"|"right"; zone: string }[] = [
+  { km:"KM 00", t:0.05, side:"right", zone:"The first mile" },
+  { km:"KM 18", t:0.22, side:"left",  zone:"Listening" },
+  { km:"KM 34", t:0.39, side:"right", zone:"Many minds" },
+  { km:"KM 50", t:0.56, side:"left",  zone:"A path of your own" },
+  { km:"KM 67", t:0.74, side:"right", zone:"Precision" },
+  { km:"KM 83", t:0.92, side:"left",  zone:"Lasting relief" },
 ]
 
 const CARE_DISCIPLINES = [
@@ -75,9 +75,6 @@ export function RoadmapSection() {
   const stickyRef      = useRef<HTMLDivElement>(null)
   const progReadRef    = useRef<HTMLSpanElement>(null)
   const progBarRef     = useRef<HTMLSpanElement>(null)
-  const climateBarRef  = useRef<HTMLDivElement>(null)
-  const terrainReadRef = useRef<HTMLSpanElement>(null)
-  const lightReadRef   = useRef<HTMLSpanElement>(null)
 
   useEffect(() => {
     const path   = pathRef.current
@@ -203,22 +200,6 @@ export function RoadmapSection() {
 
       if (progReadRef.current) progReadRef.current.textContent = String(Math.round(p * 100)).padStart(3, "0") + "%"
       if (progBarRef.current) progBarRef.current.style.setProperty("--pj-progress", `${p * 100}%`)
-      if (climateBarRef.current) climateBarRef.current.style.setProperty("--pj-progress", `${p * 100}%`)
-
-      let activeIdx = -1
-      for (let i = 0; i < MILESTONES.length; i++) {
-        if (p >= MILESTONES[i].t - 0.04) activeIdx = i
-      }
-
-      if (activeIdx === -1) {
-        if (terrainReadRef.current) terrainReadRef.current.textContent = "rough"
-        if (lightReadRef.current) lightReadRef.current.textContent = "overcast"
-      } else {
-        const m = MILESTONES[activeIdx]
-        if (terrainReadRef.current) terrainReadRef.current.textContent = m.terrain
-        if (lightReadRef.current) lightReadRef.current.textContent = m.light
-      }
-
       stopRefs.current.forEach((li, i) => {
         if (!li) return
         if (p >= MILESTONES[i].t - 0.02) li.classList.add("is-passed")
@@ -324,18 +305,6 @@ export function RoadmapSection() {
       {/* ── STICKY ROAD SCROLL ── */}
       <div ref={scrollRef} className="pj-road-scroll" id="road">
         <div ref={stickyRef} className="pj-road-sticky">
-
-          <div className="pj-climate" aria-hidden="true">
-            <div className="pj-climate-row">
-              <span className="lbl">Terrain</span>
-              <span className="val" ref={terrainReadRef}>rough</span>
-            </div>
-            <div className="pj-climate-row">
-              <span className="lbl">Light</span>
-              <span className="val" ref={lightReadRef}>overcast</span>
-            </div>
-            <div className="pj-climate-bar" ref={climateBarRef}/>
-          </div>
 
           <ol className="pj-stop-list" aria-label="Journey stops">
             {MILESTONE_CONTENT.map((c, i) => (
