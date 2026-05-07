@@ -35,12 +35,6 @@ export const locations: Location[] = [
       "https://www.google.com/maps/search/25+Charlton+Avenue+East,+Hamilton,+ON+L8N+1Y2",
   },
   {
-    slug: "toronto",
-    name: "Toronto",
-    status: "coming-soon",
-    addressLines: ["Coming soon"],
-  },
-  {
     slug: "guelph",
     name: "Guelph",
     status: "open",
@@ -52,6 +46,12 @@ export const locations: Location[] = [
     coordinates: "43.5448° N, 80.2482° W",
     googleMapsUrl:
       "https://www.google.com/maps/search/21+Surrey+Street+West,+Guelph,+ON+N1H+3R3",
+  },
+  {
+    slug: "toronto",
+    name: "Toronto",
+    status: "coming-soon",
+    addressLines: ["Coming soon"],
   },
 ]
 

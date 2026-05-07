@@ -7,7 +7,7 @@ import { SiteHeader } from "@/components/site-header"
 export const metadata: Metadata = {
   title: "Locations | Precision Pain Centre",
   description:
-    "Browse Precision Care Centre locations in Toronto, Brampton, Hamilton, and Guelph, with contact information and booking access.",
+    "Browse Precision Care Centre locations in Brampton, Hamilton, Guelph, and Toronto, with contact information and booking access.",
 }
 
 const contactEmail = "info@precisioncare.ca"
@@ -42,13 +42,6 @@ const locationCards = [
       "https://www.google.com/maps?q=25%20Charlton%20Avenue%20East%2C%20Hamilton%2C%20ON%20L8N%201Y2&output=embed",
   },
   {
-    name: "Toronto",
-    addressLines: ["Coming Soon..."],
-    coordinates: undefined,
-    googleMapsUrl: undefined,
-    mapEmbedUrl: undefined,
-  },
-  {
     name: "Guelph",
     addressLines: [
       "21 Surrey Street West, Suite 202",
@@ -60,6 +53,13 @@ const locationCards = [
       "https://www.google.com/maps/search/21+Surrey+Street+West,+Guelph,+ON+N1H+3R3",
     mapEmbedUrl:
       "https://www.google.com/maps?q=21%20Surrey%20Street%20West%2C%20Guelph%2C%20ON%20N1H%203R3&output=embed",
+  },
+  {
+    name: "Toronto",
+    addressLines: ["Coming Soon..."],
+    coordinates: undefined,
+    googleMapsUrl: undefined,
+    mapEmbedUrl: undefined,
   },
 ] as const
 
@@ -425,8 +425,8 @@ export default function LocationsPage() {
               <div className="section-label">Clinic Access</div>
               <h1 className="inner-hero-title">Locations</h1>
               <p className="inner-hero-copy procedure-hero-copy">
-                Browse Precision Care Centre locations in Toronto, Brampton,
-                Hamilton, and Guelph, with contact details and direct clinic
+                Browse Precision Care Centre locations in Brampton, Hamilton,
+                Guelph, and Toronto, with contact details and direct clinic
                 access.
               </p>
               <div className="procedure-hero-actions">
