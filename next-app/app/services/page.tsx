@@ -105,7 +105,7 @@ export default function ServicesPage() {
           </div>
         </section>
 
-        <section className="procedure-section procedure-hub-group-section">
+        <section className="procedure-section procedure-hub-group-section services-list-section">
           <div className="section-inner">
             <div className="procedure-section-header">
               <div className="section-label">What We Offer</div>
@@ -119,21 +119,15 @@ export default function ServicesPage() {
             </div>
 
             <div
-              className="procedure-card-grid procedure-hub-card-grid"
+              className="services-list-grid"
               data-card-count={SERVICES.length}
             >
               {SERVICES.map((service, i) => (
                 <article
                   key={service.href}
-                  className="procedure-card procedure-hub-card"
+                  className="services-list-card"
                   style={{ "--stagger": i } as CSSProperties}
                 >
-                  <div className="procedure-card-topline">
-                    <span className="procedure-card-eyebrow">
-                      {service.eyebrow}
-                    </span>
-                  </div>
-                  <h3 className="procedure-card-title">{service.title}</h3>
                   <div
                     className="service-overview-visual"
                     data-has-image="true"
@@ -148,22 +142,30 @@ export default function ServicesPage() {
                     />
                     <span>{service.visual}</span>
                   </div>
-                  <p className="procedure-card-copy">{service.summary}</p>
-                  <ul className="procedure-card-list">
-                    {service.highlights.map((h) => (
-                      <li key={h}>{h}</li>
-                    ))}
-                  </ul>
-                  <Link href={service.href} className="procedure-card-link">
-                    <span>Learn More</span>
-                  </Link>
+                  <div className="services-list-card-content">
+                    <div className="procedure-card-topline">
+                      <span className="procedure-card-eyebrow">
+                        {service.eyebrow}
+                      </span>
+                    </div>
+                    <h3 className="procedure-card-title">{service.title}</h3>
+                    <p className="procedure-card-copy">{service.summary}</p>
+                    <ul className="procedure-card-list">
+                      {service.highlights.map((h) => (
+                        <li key={h}>{h}</li>
+                      ))}
+                    </ul>
+                    <Link href={service.href} className="procedure-card-link">
+                      <span>Learn More</span>
+                    </Link>
+                  </div>
                 </article>
               ))}
             </div>
           </div>
         </section>
 
-        <section className="procedure-cta-section">
+        <section className="procedure-cta-section services-cta-section">
           <div className="section-inner procedure-cta-grid">
             <div>
               <div className="section-label">Book Or Ask Questions</div>

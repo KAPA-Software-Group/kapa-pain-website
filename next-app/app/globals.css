@@ -2787,6 +2787,16 @@ a.loc-page-contact-line:hover {
 .procedure-hub-group-section .section-inner {
   max-width: 1400px;
 }
+.procedure-shell .services-list-section .section-inner {
+  padding-left: var(--page-gutter);
+  padding-right: var(--page-gutter);
+  max-width: var(--section-max);
+}
+.procedure-shell .services-cta-section .section-inner {
+  padding-left: var(--page-gutter);
+  padding-right: var(--page-gutter);
+  max-width: var(--section-max);
+}
 .procedure-section-muted {
   background: rgba(220, 207, 186, 0.2);
 }
@@ -3300,6 +3310,14 @@ a.loc-page-contact-line:hover {
 .procedure-hub-card-grid[data-card-count="4"] {
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
 }
+.services-list-grid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  width: min(100%, 980px);
+  margin: 0 auto;
+}
 .procedure-card {
   display: flex;
   flex-direction: column;
@@ -3389,6 +3407,92 @@ a.loc-page-contact-line:hover {
 .procedure-hub-card:hover::before {
   opacity: 1;
   transform: translateX(26%);
+}
+.services-list-card {
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: minmax(260px, 0.42fr) minmax(0, 1fr);
+  gap: clamp(24px, 4vw, 44px);
+  align-items: stretch;
+  width: 100%;
+  min-height: 300px;
+  padding: clamp(18px, 2.2vw, 28px);
+  border: 1px solid var(--hairline);
+  background:
+    linear-gradient(
+      180deg,
+      rgba(246, 239, 227, 0.86),
+      rgba(246, 239, 227, 0.52)
+    ),
+    rgba(246, 239, 227, 0.64);
+  box-shadow: 0 20px 48px rgba(31, 29, 26, 0.04);
+  transform: translateY(0);
+  transition:
+    transform 0.42s var(--ease),
+    border-color 0.42s ease,
+    box-shadow 0.42s ease,
+    background 0.42s ease;
+  animation: procedureFloatIn 0.72s var(--ease) both;
+  animation-delay: calc(var(--stagger) * 80ms);
+}
+.services-list-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    rgba(159, 118, 87, 0.08) 48%,
+    transparent 82%
+  );
+  opacity: 0;
+  transform: translateX(-36%);
+  transition:
+    opacity 0.42s ease,
+    transform 0.72s var(--ease);
+  pointer-events: none;
+}
+.services-list-card:hover {
+  border-color: rgba(159, 118, 87, 0.42);
+  background:
+    linear-gradient(
+      180deg,
+      rgba(246, 239, 227, 0.96),
+      rgba(246, 239, 227, 0.64)
+    ),
+    rgba(246, 239, 227, 0.84);
+  box-shadow: 0 30px 70px rgba(31, 29, 26, 0.08);
+  transform: translateY(-6px);
+}
+.services-list-card:hover::before {
+  opacity: 1;
+  transform: translateX(26%);
+}
+.services-list-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  min-width: 0;
+}
+.services-list-card .procedure-card-topline {
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 8px;
+}
+.services-list-card .procedure-card-eyebrow {
+  text-align: left;
+}
+.services-list-card .procedure-card-title {
+  font-size: clamp(30px, 3vw, 42px);
+  line-height: 1.08;
+}
+.services-list-card .procedure-card-list {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px 18px;
+}
+.services-list-card .procedure-card-link {
+  margin-top: auto;
 }
 .procedure-card-topline {
   display: flex;
@@ -3861,6 +3965,12 @@ a.loc-page-contact-line:hover {
 }
 
 /* ── Service detail pages ─────────────────────────────────── */
+.service-detail-shell .procedure-section .section-inner,
+.service-detail-shell .procedure-cta-section .section-inner {
+  padding-left: var(--page-gutter);
+  padding-right: var(--page-gutter);
+  max-width: var(--section-max);
+}
 .service-detail-hero .section-inner {
   max-width: 1340px;
 }
@@ -4179,6 +4289,10 @@ a.loc-page-contact-line:hover {
     28px 28px,
     auto;
 }
+.services-list-card .service-overview-visual {
+  min-height: 100%;
+  margin: 0;
+}
 .service-overview-visual::before {
   content: "";
   position: absolute;
@@ -4431,10 +4545,10 @@ a.loc-page-contact-line:hover {
   padding: 8px 16px;
   border: 1px solid rgba(246,239,227,0.22);
   background: rgba(246,239,227,0.05);
-  font-family: var(--f-mono);
-  font-size: 10px;
+  font-family: var(--f-sans);
+  font-size: 11px;
   font-weight: 500;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: rgba(246,239,227,0.65);
   cursor: pointer;
@@ -4601,6 +4715,15 @@ a.loc-page-contact-line:hover {
   .procedure-hub-card-grid[data-card-count="3"],
   .procedure-hub-card-grid[data-card-count="4"] {
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+  }
+  .services-list-grid {
+    width: min(100%, 760px);
+  }
+  .services-list-card {
+    grid-template-columns: 1fr;
+  }
+  .services-list-card .service-overview-visual {
+    min-height: 240px;
   }
   .doctors-profile[data-quote-side="left"] .doctors-profile-copy,
   .doctors-profile[data-quote-side="left"] .doctors-quote-card {
@@ -4925,6 +5048,9 @@ a.loc-page-contact-line:hover {
   }
   .procedure-hub-card-grid[data-card-count="3"],
   .procedure-hub-card-grid[data-card-count="4"] {
+    grid-template-columns: 1fr;
+  }
+  .services-list-card .procedure-card-list {
     grid-template-columns: 1fr;
   }
   .procedure-card-topline {
