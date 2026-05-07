@@ -316,19 +316,17 @@ export default function FaqPage() {
           </div>
         </section>
 
-        <section className="bg-[rgba(220,207,186,0.2)]">
-          <div className="section-inner">
-            <div className="mx-auto grid max-w-[980px] gap-8 border border-[color:var(--hairline)] bg-[rgba(246,239,227,0.5)] p-8 sm:p-10 lg:grid-cols-[1fr_auto] lg:items-center">
-              <div>
-                <div className="section-label text-[color:var(--mahogany)]">
-                  Still Have Questions?
-                </div>
-                <h2 className="mt-5 font-serif text-[clamp(32px,5vw,56px)] font-light italic leading-[1.04] text-[color:var(--ink)]">
-                  Contact the clinic for referral or appointment details.
-                </h2>
-              </div>
+        <section className="procedure-cta-section">
+          <div className="section-inner procedure-cta-grid">
+            <div>
+              <div className="section-label">Still Have Questions?</div>
+              <h2 className="procedure-cta-title">
+                Contact the clinic for referral or appointment details.
+              </h2>
+            </div>
 
-              <div className="flex flex-col gap-4 sm:flex-row lg:flex-col">
+            <div className="procedure-cta-panel">
+              <div className="procedure-cta-actions">
                 <Link href="/contact-us" className="btn-primary">
                   Contact the Clinic
                 </Link>

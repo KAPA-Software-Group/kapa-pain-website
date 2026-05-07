@@ -18,6 +18,10 @@ const contactPageStyles = `
     max-width: 1320px;
   }
 
+  .contact-page-scope .page-placeholder {
+    padding-bottom: 0;
+  }
+
   .contact-layout {
     display: grid;
     grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
@@ -25,7 +29,7 @@ const contactPageStyles = `
     border: 1px solid var(--hairline);
     background: rgba(246, 239, 227, 0.46);
     box-shadow: 0 28px 80px rgba(31, 29, 26, 0.08);
-    margin-bottom: clamp(60px, 8vw, 120px);
+    margin-bottom: 0;
   }
 
   .contact-info-panel {

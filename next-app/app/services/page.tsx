@@ -183,9 +183,6 @@ export default function ServicesPage() {
                 <Link href="/contact-us" className="btn-primary">
                   Contact the Clinic
                 </Link>
-                <Link href="/contact-us" className="btn-ghost">
-                  Contact the Clinic
-                </Link>
               </div>
               <p className="procedure-cta-note">
                 A referral may be required. Contact the clinic for details on

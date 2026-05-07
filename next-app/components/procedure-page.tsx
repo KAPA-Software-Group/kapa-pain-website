@@ -60,8 +60,7 @@ export function PatientProcedureCenteringStyles() {
   return (
     <style>{`
       @media (min-width: 1280px) {
-        .patient-procedure-shell.procedure-shell .procedure-section .section-inner,
-        .patient-procedure-shell.procedure-shell .procedure-cta-section .section-inner {
+        .patient-procedure-shell.procedure-shell .procedure-section .section-inner {
           padding-left: var(--page-gutter);
           max-width: var(--section-max);
         }

@@ -352,10 +352,7 @@ export function ServiceDetailPage({ page }: { page: ServiceDetailPageData }) {
 
             <div className="procedure-cta-panel">
               <div className="procedure-cta-actions">
-                <a href="tel:2897529388" className="btn-primary">
-                  Call the Clinic
-                </a>
-                <Link href="/contact-us" className="btn-ghost">
+                <Link href="/contact-us" className="btn-primary">
                   Contact the Clinic
                 </Link>
               </div>

@@ -154,7 +154,6 @@ const referralsPageStyles = `
   .referrals-contact-copy,
   .referral-form-copy,
   .referral-security-note,
-  .referral-help-copy,
   .referrals-detail-note {
     margin: 0;
     font-family: var(--f-sans);
@@ -515,31 +514,6 @@ const referralsPageStyles = `
     background: transparent;
   }
 
-  .referral-help-section {
-    background: var(--vanilla);
-  }
-
-  .referral-help-panel {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 28px;
-    padding: clamp(28px, 4vw, 42px);
-    border: 1px solid var(--hairline);
-    border-radius: 8px;
-    background: rgba(246, 239, 227, 0.72);
-  }
-
-  .referral-help-title {
-    margin: 0 0 10px;
-    font-family: var(--f-serif);
-    font-size: 2.125rem;
-    font-style: italic;
-    font-weight: 300;
-    line-height: 1.12;
-    color: var(--mahogany);
-  }
-
   @media (max-width: 1180px) {
     .referrals-detail-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -587,8 +561,7 @@ const referralsPageStyles = `
     .referrals-intro-panel,
     .referrals-location-card,
     .referral-form-context,
-    .referral-form-panel,
-    .referral-help-panel {
+    .referral-form-panel {
       padding: 24px;
     }
 
@@ -613,8 +586,7 @@ const referralsPageStyles = `
 
     .referrals-process-title,
     .referrals-detail-title,
-    .referrals-group-title,
-    .referral-help-title {
+    .referrals-group-title {
       font-size: 1.75rem;
     }
 
@@ -623,10 +595,6 @@ const referralsPageStyles = `
       min-height: 900px;
     }
 
-    .referral-help-panel {
-      align-items: stretch;
-      flex-direction: column;
-    }
   }
 `
 
@@ -821,22 +789,26 @@ export default function ReferralsPage() {
           </div>
         </section>
 
-        <section className="procedure-section referral-help-section">
-          <div className="section-inner">
-            <div className="referral-help-panel">
-              <div>
-                <h2 className="referral-help-title">
-                  Difficulty submitting the form?
-                </h2>
-                <p className="referral-help-copy">
-                  If the secure form does not load or you need assistance with a
-                  referral, please contact the clinic directly during regular
-                  hours.
-                </p>
+        <section className="procedure-cta-section">
+          <div className="section-inner procedure-cta-grid">
+            <div>
+              <div className="section-label">Referral Support</div>
+              <h2 className="procedure-cta-title">
+                Difficulty submitting the form?
+              </h2>
+              <p className="procedure-cta-copy">
+                If the secure form does not load or you need assistance with a
+                referral, please contact the clinic directly during regular
+                hours.
+              </p>
+            </div>
+
+            <div className="procedure-cta-panel">
+              <div className="procedure-cta-actions">
+                <Link href="/contact-us" className="btn-primary">
+                  Contact the Clinic
+                </Link>
               </div>
-              <Link href="/contact-us" className="btn-primary">
-                Contact the Clinic
-              </Link>
             </div>
           </div>
         </section>

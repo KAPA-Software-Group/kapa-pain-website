@@ -2225,7 +2225,9 @@ a.loc-page-contact-line:hover {
   max-width: var(--section-max);
   margin: 0 auto;
   width: 100%;
-  min-height: 100svh;
+  min-height: auto;
+  padding-top: clamp(72px, 9vh, 108px);
+  padding-bottom: 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -2648,8 +2650,7 @@ a.loc-page-contact-line:hover {
   .procedure-nav-strip {
     display: none;
   }
-  .procedure-shell .procedure-section .section-inner,
-  .procedure-shell .procedure-cta-section .section-inner {
+  .procedure-shell .procedure-section .section-inner {
     padding-left: max(var(--page-gutter), clamp(240px, 22vw, 330px));
     max-width: calc(var(--section-max) + clamp(240px, 22vw, 330px));
   }
@@ -3634,19 +3635,22 @@ a.loc-page-contact-line:hover {
   background: rgba(109, 60, 46, 0.58);
 }
 .procedure-cta-section {
-  background:
-    linear-gradient(135deg, rgba(159, 118, 87, 0.22), transparent 46%),
-    var(--page-dark);
+  background: var(--page-dark);
+  justify-content: center;
+  align-items: flex-start;
+  text-align: left;
+  overflow: hidden;
 }
 .procedure-cta-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1.05fr) minmax(min(100%, 320px), 0.95fr);
-  gap: 36px;
-  align-items: end;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 34px;
 }
 .procedure-cta-section .section-inner {
-  padding-top: 84px;
-  padding-bottom: 84px;
+  padding-top: clamp(72px, 9vh, 108px);
+  padding-bottom: 20px;
+  min-height: auto;
 }
 .procedure-cta-section .section-label {
   color: rgba(246, 239, 227, 0.72);
@@ -3656,13 +3660,13 @@ a.loc-page-contact-line:hover {
 }
 .procedure-cta-title {
   font-family: var(--f-serif);
-  font-size: clamp(38px, 4.8vw, 62px);
+  font-size: clamp(48px, 7vw, 96px);
   font-style: italic;
-  font-weight: 300;
-  line-height: 1.08;
+  font-weight: 200;
+  line-height: 1.02;
   letter-spacing: -0.02em;
   color: var(--vanilla);
-  max-width: 740px;
+  max-width: 860px;
 }
 .procedure-cta-copy {
   margin-top: 22px;
@@ -3674,16 +3678,13 @@ a.loc-page-contact-line:hover {
   color: rgba(246, 239, 227, 0.72);
 }
 .procedure-cta-panel {
-  padding: 28px;
-  border: 1px solid var(--hairline-light);
-  background: rgba(31, 29, 26, 0.28);
-  backdrop-filter: blur(8px);
+  max-width: 620px;
 }
 .procedure-cta-actions {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   align-items: flex-start;
-  gap: 18px;
+  gap: 18px 24px;
 }
 .procedure-cta-section .btn-primary {
   background: var(--vanilla);
@@ -4480,12 +4481,20 @@ a.loc-page-contact-line:hover {
 
 /* expandable panel */
 .sf-panel {
-  display: grid;
-  grid-template-rows: 0fr;
-  transition: grid-template-rows 0.44s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  max-height: 0;
   overflow: hidden;
+  visibility: hidden;
+  transition:
+    max-height 0.44s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    visibility 0s linear 0.44s;
 }
-.sf--open .sf-panel { grid-template-rows: 1fr; }
+.sf--open .sf-panel {
+  max-height: 1200px;
+  visibility: visible;
+  transition:
+    max-height 0.44s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    visibility 0s;
+}
 .sf-panel-inner {
   overflow: hidden;
   display: grid;
