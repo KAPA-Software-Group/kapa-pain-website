@@ -365,6 +365,24 @@ const contactPageStyles = `
       justify-content: center;
     }
   }
+
+  @media (max-width: 480px) {
+    .contact-info-panel,
+    .contact-form-panel {
+      padding: 24px 20px;
+    }
+
+    .contact-info-eyebrow,
+    .contact-field-label,
+    .contact-field-optional {
+      overflow-wrap: anywhere;
+    }
+
+    .contact-info-value,
+    .contact-form-note {
+      overflow-wrap: anywhere;
+    }
+  }
 `
 
 export default function ContactUsPage() {

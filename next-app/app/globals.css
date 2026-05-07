@@ -55,6 +55,7 @@ html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
+  max-width: 100%;
 }
 
 body {
@@ -71,12 +72,25 @@ body {
   -webkit-font-smoothing: antialiased;
   overflow-x: clip;
   min-width: 0;
+  max-width: 100%;
 }
 
 img,
 video,
-svg {
+svg,
+iframe {
   max-width: 100%;
+}
+
+main,
+section,
+article,
+aside,
+header,
+footer,
+nav,
+div {
+  min-width: 0;
 }
 
 button,
@@ -84,6 +98,12 @@ input,
 textarea,
 select {
   font: inherit;
+}
+
+input,
+textarea,
+select {
+  max-width: 100%;
 }
 
 /* ─── SITE DESIGN TOKENS (CSS vars used by component classes) ── */
@@ -1417,6 +1437,11 @@ select {
   line-height: 1.25;
 }
 @media (max-width: 1180px) {
+  .pj-road-scroll,
+  .pj-road-sticky {
+    overflow: hidden;
+  }
+
   .pj-stop-list {
     display: none !important;
   }
@@ -4592,6 +4617,7 @@ a.loc-page-contact-line:hover {
     display: inline-flex;
   }
   .mobile-nav {
+    display: block;
     position: absolute;
     top: 100%;
     left: 0;
@@ -4601,7 +4627,8 @@ a.loc-page-contact-line:hover {
     border-bottom: 1px solid var(--hairline-light);
     padding: 0 var(--page-gutter);
     max-height: 0;
-    overflow: hidden;
+    overflow: hidden auto;
+    overscroll-behavior: contain;
     opacity: 0;
     transition:
       max-height 0.35s ease,
@@ -4610,10 +4637,10 @@ a.loc-page-contact-line:hover {
       padding-bottom 0.35s ease;
   }
   .mobile-nav.is-open {
-    max-height: 520px;
+    max-height: calc(100dvh - 76px);
     opacity: 1;
     padding-top: 24px;
-    padding-bottom: 28px;
+    padding-bottom: calc(28px + env(safe-area-inset-bottom));
   }
   .mobile-nav-links {
     display: flex;
@@ -4832,6 +4859,15 @@ a.loc-page-contact-line:hover {
   }
 }
 @media (max-width: 768px) {
+  .section {
+    min-height: auto;
+  }
+
+  .pj-road-scroll,
+  .pj-road-sticky {
+    overflow: hidden;
+  }
+
   .nav {
     padding-top: 20px;
     padding-bottom: 20px;
@@ -4848,6 +4884,7 @@ a.loc-page-contact-line:hover {
     display: inline-flex;
   }
   .mobile-nav {
+    display: block;
     position: absolute;
     top: 100%;
     left: 0;
@@ -4857,7 +4894,8 @@ a.loc-page-contact-line:hover {
     border-bottom: 1px solid var(--hairline-light);
     padding: 0 var(--page-gutter);
     max-height: 0;
-    overflow: hidden;
+    overflow: hidden auto;
+    overscroll-behavior: contain;
     opacity: 0;
     transition:
       max-height 0.35s ease,
@@ -4866,10 +4904,10 @@ a.loc-page-contact-line:hover {
       padding-bottom 0.35s ease;
   }
   .mobile-nav.is-open {
-    max-height: 520px;
+    max-height: calc(100dvh - 72px);
     opacity: 1;
     padding-top: 24px;
-    padding-bottom: 28px;
+    padding-bottom: calc(28px + env(safe-area-inset-bottom));
   }
   .mobile-nav-links {
     display: flex;
@@ -5018,10 +5056,18 @@ a.loc-page-contact-line:hover {
   }
   .procedure-jump-nav {
     gap: 10px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: 2px;
+  }
+  .procedure-jump-nav::-webkit-scrollbar {
+    display: none;
   }
   .procedure-jump-link {
     font-size: 9px;
     padding: 10px 12px;
+    flex: 0 0 auto;
   }
   .procedure-section .section-inner,
   .procedure-cta-section .section-inner {
@@ -5184,12 +5230,27 @@ a.loc-page-contact-line:hover {
   :root {
     --page-gutter: 16px;
   }
+  .nav {
+    padding-left: max(16px, env(safe-area-inset-left));
+    padding-right: max(16px, env(safe-area-inset-right));
+  }
+  .nav-logo-img {
+    height: 34px;
+  }
   .nav-logo-name {
     font-size: 10px;
     letter-spacing: 0.08em;
   }
   .nav-menu-toggle {
     font-size: 10px;
+    min-height: 44px;
+    padding-inline: 8px;
+  }
+  .mobile-nav-link {
+    font-size: clamp(22px, 7vw, 28px);
+  }
+  .mobile-nav-sublinks {
+    padding-left: 14px;
   }
   .hero {
     min-height: max(100svh, 640px);
@@ -5213,6 +5274,17 @@ a.loc-page-contact-line:hover {
     align-items: flex-start;
     flex-direction: column;
     gap: 4px;
+  }
+  .sf-bar {
+    gap: 12px;
+  }
+  .sf-logo-name {
+    display: none;
+  }
+  .sf-toggle {
+    width: auto;
+    min-height: 44px;
+    padding: 10px 12px;
   }
   .pj-mc {
     padding: 1rem 1.1rem 1.1rem;

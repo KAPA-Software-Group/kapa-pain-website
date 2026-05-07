@@ -276,6 +276,21 @@ const locationsPageStyles = `
     }
   }
 
+  @media (max-width: 480px) {
+    .locations-page-copy {
+      padding: 20px;
+    }
+
+    .locations-page-card {
+      gap: 24px;
+    }
+
+    .locations-page-actions {
+      align-items: stretch;
+      flex-direction: column;
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .locations-page-card,
     .locations-page-map iframe,

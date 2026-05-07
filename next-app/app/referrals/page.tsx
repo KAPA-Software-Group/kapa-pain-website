@@ -275,7 +275,8 @@ const referralsPageStyles = `
   .referral-embed-frame {
     min-height: 1040px;
     width: 100%;
-    overflow: hidden;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
     border: 1px solid rgba(62, 57, 51, 0.12);
     border-radius: 8px;
     background: rgba(255, 252, 247, 0.62);
@@ -290,7 +291,6 @@ const referralsPageStyles = `
     background: transparent;
   }
 
-  @media (max-width: 1180px) {
   @media (max-width: 1024px) {
     .referrals-intro-grid,
     .referral-form-layout {
@@ -337,6 +337,33 @@ const referralsPageStyles = `
       min-height: 900px;
     }
 
+  }
+
+  @media (max-width: 480px) {
+    .referrals-intro-panel,
+    .referral-form-context,
+    .referral-form-panel {
+      padding: 20px;
+    }
+
+    .referrals-contact-row {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .referrals-process-step {
+      padding: 24px 20px;
+    }
+
+    .referral-embed-frame {
+      min-height: 780px;
+      padding: 12px;
+    }
+
+    .referral-embed-frame iframe {
+      min-height: 780px;
+    }
   }
 `
 
