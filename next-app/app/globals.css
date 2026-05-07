@@ -891,7 +891,6 @@ select {
   align-items: center;
   gap: clamp(18px, 4vw, 46px);
   padding: clamp(14px, 2vw, 22px) 0;
-  border-bottom: 1px solid rgba(246, 239, 227, 0.2);
   background: transparent;
 }
 .pj-refine-kicker {
