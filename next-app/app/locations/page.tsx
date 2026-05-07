@@ -50,10 +50,16 @@ const locationCards = [
   },
   {
     name: "Guelph",
-    addressLines: ["Coming Soon..."],
-    coordinates: undefined,
-    googleMapsUrl: undefined,
-    mapEmbedUrl: undefined,
+    addressLines: [
+      "21 Surrey Street West, Suite 202",
+      "Guelph, ON",
+      "N1H 3R3",
+    ],
+    coordinates: "43.5448° N, 80.2482° W",
+    googleMapsUrl:
+      "https://www.google.com/maps/search/21+Surrey+Street+West,+Guelph,+ON+N1H+3R3",
+    mapEmbedUrl:
+      "https://www.google.com/maps?q=21%20Surrey%20Street%20West%2C%20Guelph%2C%20ON%20N1H%203R3&output=embed",
   },
 ] as const
 
@@ -150,14 +156,8 @@ const locationsPageStyles = `
     height: 100%;
     margin: 0;
     overflow: hidden;
-    border: 1px solid rgba(62, 57, 51, 0.14);
-    background:
-      linear-gradient(
-        145deg,
-        rgba(246, 239, 227, 0.9),
-        rgba(216, 203, 187, 0.52)
-      ),
-      var(--vanilla);
+    border: 1px solid rgba(62, 57, 51, 0.12);
+    background: #eee8dd;
   }
 
   .locations-page-map::after {
@@ -165,32 +165,19 @@ const locationsPageStyles = `
     position: absolute;
     inset: 0;
     pointer-events: none;
-    background:
-      linear-gradient(
-        135deg,
-        rgba(246, 239, 227, 0.3),
-        rgba(159, 118, 87, 0.22) 46%,
-        rgba(62, 57, 51, 0.16)
-      ),
-      radial-gradient(
-        circle at 18% 16%,
-        rgba(216, 203, 187, 0.2),
-        transparent 36%
-      );
-    mix-blend-mode: multiply;
-    opacity: 0.72;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.4),
+      inset 0 18px 36px -18px rgba(31, 29, 26, 0.18);
   }
 
   .locations-page-map iframe {
     width: 100%;
     height: 100%;
     border: 0;
-    filter: sepia(0.58) saturate(0.72) hue-rotate(338deg) contrast(0.9)
-      brightness(1.04);
-    opacity: 0.88;
+    filter: grayscale(0.18) contrast(0.96);
+    opacity: 1;
     transform: scale(1);
     transition:
-      opacity 420ms ease,
+      filter 420ms ease,
       transform 720ms var(--ease);
   }
 
@@ -232,7 +219,7 @@ const locationsPageStyles = `
     }
 
     .locations-page-card:hover .locations-page-map iframe {
-      opacity: 0.96;
+      filter: grayscale(0) contrast(1);
       transform: scale(1.015);
     }
   }

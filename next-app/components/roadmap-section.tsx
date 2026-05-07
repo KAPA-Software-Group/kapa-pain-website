@@ -71,8 +71,8 @@ export function RoadmapSection() {
   const carGlowRef     = useRef<SVGEllipseElement>(null)
   const dotsRef        = useRef<SVGGElement>(null)
   const cardsRef       = useRef<(HTMLDivElement | null)[]>([])
+  const stopRefs       = useRef<(HTMLLIElement | null)[]>([])
   const stickyRef      = useRef<HTMLDivElement>(null)
-  const sunRef         = useRef<SVGGElement>(null)
   const progReadRef    = useRef<HTMLSpanElement>(null)
   const progBarRef     = useRef<HTMLSpanElement>(null)
   const climateBarRef  = useRef<HTMLDivElement>(null)
@@ -201,9 +201,6 @@ export function RoadmapSection() {
       })
 
 
-      const sun = sunRef.current
-      if (sun) sun.setAttribute("opacity", String(Math.min(1, Math.max(0, (p - 0.50) / 0.45)) * 0.95))
-
       if (progReadRef.current) progReadRef.current.textContent = String(Math.round(p * 100)).padStart(3, "0") + "%"
       if (progBarRef.current) progBarRef.current.style.setProperty("--pj-progress", `${p * 100}%`)
       if (climateBarRef.current) climateBarRef.current.style.setProperty("--pj-progress", `${p * 100}%`)
@@ -221,6 +218,12 @@ export function RoadmapSection() {
         if (terrainReadRef.current) terrainReadRef.current.textContent = m.terrain
         if (lightReadRef.current) lightReadRef.current.textContent = m.light
       }
+
+      stopRefs.current.forEach((li, i) => {
+        if (!li) return
+        if (p >= MILESTONES[i].t - 0.02) li.classList.add("is-passed")
+        else li.classList.remove("is-passed")
+      })
     }
 
     let pending = false
@@ -334,157 +337,26 @@ export function RoadmapSection() {
             <div className="pj-climate-bar" ref={climateBarRef}/>
           </div>
 
+          <ol className="pj-stop-list" aria-label="Journey stops">
+            {MILESTONE_CONTENT.map((c, i) => (
+              <li
+                key={i}
+                ref={el => { stopRefs.current[i] = el }}
+                className="pj-stop-item"
+              >
+                <span className="pj-stop-num">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <span className="pj-stop-title">{c.title}</span>
+              </li>
+            ))}
+          </ol>
+
           <div ref={sceneRef} className="pj-road-scene">
             {/* Atmospheric backdrop */}
             {/* Fill divs extend above/below the 3200px SVG to cover translateY gaps */}
             <div className="pj-scene-fill pj-scene-fill-top" aria-hidden="true" />
             <div className="pj-scene-fill pj-scene-fill-bot" aria-hidden="true" />
-
-            <svg className="pj-bg-svg" viewBox="0 0 1800 3200" preserveAspectRatio="none"
-              xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="1800" height={SVG_H}>
-              <defs>
-                <linearGradient id="paperGrad" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%"   stopColor="#d8d2c4"/>
-                  <stop offset="18%"  stopColor="#dfd8c8"/>
-                  <stop offset="40%"  stopColor="#e6dccc"/>
-                  <stop offset="62%"  stopColor="#ecddc7"/>
-                  <stop offset="82%"  stopColor="#f0dcbe"/>
-                  <stop offset="100%" stopColor="#f3d8b0"/>
-                </linearGradient>
-                <radialGradient id="coolHalo" cx="50%" cy="50%" r="50%">
-                  <stop offset="0%"   stopColor="rgba(76,72,66,0.32)"/>
-                  <stop offset="100%" stopColor="rgba(76,72,66,0)"/>
-                </radialGradient>
-                <radialGradient id="sunHalo2" cx="50%" cy="50%" r="50%">
-                  <stop offset="0%"   stopColor="rgba(220,180,120,0.45)"/>
-                  <stop offset="50%"  stopColor="rgba(180,140,90,0.18)"/>
-                  <stop offset="100%" stopColor="rgba(150,110,70,0)"/>
-                </radialGradient>
-                <filter id="paperGrain2">
-                  <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves={2} seed={5}/>
-                  <feColorMatrix values="0 0 0 0 0.3 0 0 0 0 0.27 0 0 0 0 0.22 0 0 0 0.06 0"/>
-                  <feComposite in2="SourceGraphic" operator="in"/>
-                </filter>
-                <pattern id="cracks2" width="60" height="60" patternUnits="userSpaceOnUse">
-                  <path d="M 0 12 L 16 18 L 22 6 M 30 28 L 44 22 L 52 38 M 12 50 L 28 42 L 36 56"
-                    stroke="rgba(62,57,51,0.18)" strokeWidth="0.6" fill="none"/>
-                </pattern>
-              </defs>
-
-              <rect width="1800" height="3200" fill="url(#paperGrad)"/>
-
-              {/* EARLY ZONE: cold, rough, jagged */}
-              <ellipse cx="900" cy="200" rx="1300" ry="700" fill="url(#coolHalo)" opacity="0.7"/>
-              <ellipse cx="600" cy="500" rx="800"  ry="500" fill="url(#coolHalo)" opacity="0.5"/>
-              <g opacity="0.85">
-                <path d="M 0 480 L 80 380 L 130 460 L 200 320 L 260 420 L 320 280 L 400 410 L 470 290 L 540 400 L 620 260 L 700 410 L 780 290 L 860 420 L 940 270 L 1020 400 L 1100 300 L 1180 420 L 1260 280 L 1340 410 L 1420 320 L 1500 430 L 1580 290 L 1660 420 L 1740 340 L 1800 400 L 1800 600 L 0 600 Z"
-                  fill="#3e3933" fillOpacity="0.34"/>
-                <path d="M 0 580 L 100 500 L 180 560 L 260 460 L 340 540 L 420 440 L 510 540 L 590 470 L 680 540 L 770 450 L 860 540 L 950 470 L 1040 540 L 1130 460 L 1220 540 L 1310 470 L 1400 540 L 1490 460 L 1580 540 L 1680 480 L 1800 540 L 1800 700 L 0 700 Z"
-                  fill="#3e3933" fillOpacity="0.22"/>
-              </g>
-              <rect x="0" y="600" width="1800" height="500" fill="url(#cracks2)" opacity="0.5"/>
-              <g fill="none" opacity="0.65">
-                <path d="M 220 760 L 220 700 M 220 720 L 200 695 M 220 730 L 240 700 M 220 745 L 205 720"
-                  stroke="rgba(62,57,51,0.5)" strokeWidth="1.2"/>
-                <path d="M 980 880 L 980 810 M 980 830 L 958 800 M 980 840 L 1002 808 M 980 855 L 962 832"
-                  stroke="rgba(62,57,51,0.5)" strokeWidth="1.2"/>
-                <path d="M 1340 980 L 1340 920 M 1340 940 L 1318 912 M 1340 950 L 1360 920"
-                  stroke="rgba(62,57,51,0.5)" strokeWidth="1.2"/>
-                <path d="M 320 1100 L 320 1030 M 320 1050 L 298 1020 M 320 1060 L 342 1028"
-                  stroke="rgba(62,57,51,0.5)" strokeWidth="1.2"/>
-              </g>
-              <g fill="rgba(62,57,51,0.4)">
-                <ellipse cx="180"  cy="1080" rx="14" ry="6"/>
-                <ellipse cx="280"  cy="1180" rx="10" ry="5"/>
-                <ellipse cx="1080" cy="1240" rx="16" ry="7"/>
-                <ellipse cx="1480" cy="1120" rx="12" ry="6"/>
-                <ellipse cx="540"  cy="900"  rx="9"  ry="4"/>
-                <ellipse cx="1280" cy="940"  rx="11" ry="5"/>
-              </g>
-
-              {/* MIDDLE ZONE: transition */}
-              <g opacity="0.6">
-                <path d="M 0 1700 Q 240 1620 480 1670 T 960 1680 T 1440 1670 T 1800 1672 L 1800 1820 L 0 1820 Z"
-                  fill="#9f7657" fillOpacity="0.10"/>
-                <path d="M 0 1780 Q 220 1720 460 1758 T 920 1760 T 1380 1758 T 1800 1750 L 1800 1820 L 0 1820 Z"
-                  fill="#9f7657" fillOpacity="0.08"/>
-              </g>
-              <g opacity="0.5">
-                <path d="M 200 1680 L 200 1620 M 200 1640 Q 188 1632 192 1620 M 200 1640 Q 212 1632 208 1620 M 200 1656 Q 188 1648 192 1636 M 200 1656 Q 212 1648 208 1636"
-                  stroke="rgba(62,57,51,0.4)" strokeWidth="1" fill="none"/>
-                <path d="M 1500 1720 L 1500 1660 M 1500 1680 Q 1488 1672 1492 1660 M 1500 1680 Q 1512 1672 1508 1660 M 1500 1696 Q 1488 1688 1492 1676"
-                  stroke="rgba(62,57,51,0.4)" strokeWidth="1" fill="none"/>
-              </g>
-
-              {/* LATE ZONE: warm, lush, sun */}
-              <g ref={sunRef} opacity={0}>
-                <ellipse cx="1280" cy="2620" rx="520" ry="380" fill="url(#sunHalo2)"/>
-                <ellipse cx="1280" cy="2620" rx="120" ry="120" fill="rgba(230,190,130,0.25)"/>
-                <g stroke="rgba(220,180,120,0.18)" strokeWidth="14" strokeLinecap="round">
-                  <line x1="1280" y1="2480" x2="1280" y2="2380"/>
-                  <line x1="1380" y1="2520" x2="1460" y2="2460"/>
-                  <line x1="1180" y1="2520" x2="1100" y2="2460"/>
-                  <line x1="1420" y1="2620" x2="1520" y2="2620"/>
-                  <line x1="1140" y1="2620" x2="1040" y2="2620"/>
-                </g>
-              </g>
-              <g opacity="0.85">
-                <path d="M 0 2540 Q 300 2400 620 2480 T 1180 2470 T 1620 2510 T 1800 2490 L 1800 2700 L 0 2700 Z" fill="#9f7657" fillOpacity="0.13"/>
-                <path d="M 0 2680 Q 280 2580 580 2630 T 1140 2620 T 1580 2650 T 1800 2640 L 1800 2820 L 0 2820 Z" fill="#9f7657" fillOpacity="0.16"/>
-                <path d="M 0 2820 Q 320 2740 640 2780 T 1240 2770 T 1640 2790 T 1800 2780 L 1800 2940 L 0 2940 Z" fill="#9f7657" fillOpacity="0.20"/>
-                <path d="M 0 2980 Q 360 2900 720 2940 T 1320 2930 T 1800 2920 L 1800 3100 L 0 3100 Z" fill="#9f7657" fillOpacity="0.24"/>
-              </g>
-              {/* Lush trees */}
-              <g>
-                <g transform="translate(220 2620)">
-                  <path d="M 0 0 L 0 -38" stroke="rgba(62,57,51,0.55)" strokeWidth="1.6"/>
-                  <ellipse cx="0"  cy="-46" rx="22" ry="18" fill="rgba(159,118,87,0.45)"/>
-                  <ellipse cx="-8" cy="-42" rx="14" ry="12" fill="rgba(159,118,87,0.55)"/>
-                  <ellipse cx="9"  cy="-50" rx="14" ry="12" fill="rgba(159,118,87,0.40)"/>
-                </g>
-                <g transform="translate(380 2700)">
-                  <path d="M 0 0 L 0 -32" stroke="rgba(62,57,51,0.5)" strokeWidth="1.4"/>
-                  <ellipse cx="0" cy="-38" rx="18" ry="15" fill="rgba(159,118,87,0.5)"/>
-                </g>
-                <g transform="translate(620 2780)">
-                  <path d="M 0 0 L 0 -42" stroke="rgba(62,57,51,0.55)" strokeWidth="1.6"/>
-                  <ellipse cx="0"   cy="-50" rx="24" ry="20" fill="rgba(159,118,87,0.48)"/>
-                  <ellipse cx="-10" cy="-46" rx="14" ry="13" fill="rgba(159,118,87,0.58)"/>
-                  <ellipse cx="11"  cy="-54" rx="14" ry="13" fill="rgba(159,118,87,0.42)"/>
-                </g>
-                <g transform="translate(1480 2660)">
-                  <path d="M 0 0 L 0 -36" stroke="rgba(62,57,51,0.55)" strokeWidth="1.5"/>
-                  <ellipse cx="0"  cy="-42" rx="20" ry="17" fill="rgba(159,118,87,0.46)"/>
-                  <ellipse cx="-7" cy="-38" rx="12" ry="11" fill="rgba(159,118,87,0.56)"/>
-                </g>
-                <g transform="translate(1620 2780)">
-                  <path d="M 0 0 L 0 -40" stroke="rgba(62,57,51,0.5)" strokeWidth="1.5"/>
-                  <ellipse cx="0" cy="-46" rx="20" ry="18" fill="rgba(159,118,87,0.48)"/>
-                </g>
-                <g transform="translate(1240 2860)">
-                  <path d="M 0 0 L 0 -34" stroke="rgba(62,57,51,0.5)" strokeWidth="1.4"/>
-                  <ellipse cx="0" cy="-40" rx="16" ry="14" fill="rgba(159,118,87,0.5)"/>
-                </g>
-              </g>
-              {/* Wildflowers */}
-              <g fill="rgba(159,118,87,0.6)" opacity="0.7">
-                <circle cx="240"  cy="2860" r="2.5"/><circle cx="280"  cy="2890" r="2"/>
-                <circle cx="340"  cy="2920" r="2.5"/><circle cx="540"  cy="2950" r="2"/>
-                <circle cx="800"  cy="2920" r="2.5"/><circle cx="980"  cy="2960" r="2"/>
-                <circle cx="1100" cy="2940" r="2.5"/><circle cx="1320" cy="2970" r="2"/>
-                <circle cx="1540" cy="2940" r="2.5"/><circle cx="1700" cy="2970" r="2"/>
-                <circle cx="160"  cy="2940" r="2"/>  <circle cx="420"  cy="2970" r="2.5"/>
-                <circle cx="700"  cy="3010" r="2"/>  <circle cx="1180" cy="3020" r="2.5"/>
-                <circle cx="1480" cy="3010" r="2"/>
-              </g>
-              {/* Birds */}
-              <g stroke="rgba(62,57,51,0.5)" strokeWidth="1.4" fill="none" opacity="0.7">
-                <path d="M 1100 2400 Q 1108 2394 1116 2400 Q 1124 2394 1132 2400"/>
-                <path d="M 1180 2360 Q 1186 2356 1192 2360 Q 1198 2356 1204 2360"/>
-                <path d="M 980 2440 Q 988 2434 996 2440 Q 1004 2434 1012 2440"/>
-              </g>
-              <rect width="1800" height="3200" filter="url(#paperGrain2)" opacity="0.20"/>
-            </svg>
 
             {/* Road SVG */}
             <svg className="pj-road-svg" width="800" height={SVG_H}
@@ -504,12 +376,13 @@ export function RoadmapSection() {
               <ellipse ref={carGlowRef} cx="400" cy="0" rx="36" ry="44" fill="url(#carHalo2)" opacity="0"/>
             </svg>
 
-            {/* Car — ink dot with clay halo */}
+            {/* Car — ink dot with cream ring + clay halo */}
             <div ref={carRef} className="pj-car">
-              <svg width="22" height="22" viewBox="-11 -11 22 22" overflow="visible" aria-hidden="true">
-                <circle cx="0" cy="0" r="9"   fill="#9f7657" fillOpacity="0.20"/>
-                <circle cx="0" cy="0" r="5.5" fill="#3e3933"/>
-                <circle cx="0" cy="0" r="2.2" fill="#f6efe3"/>
+              <svg width="40" height="40" viewBox="-20 -20 40 40" overflow="visible" aria-hidden="true">
+                <circle cx="0" cy="0" r="18" fill="#9f7657" fillOpacity="0.18"/>
+                <circle cx="0" cy="0" r="11" fill="#f6efe3"/>
+                <circle cx="0" cy="0" r="8"  fill="#1f1d1a"/>
+                <circle cx="0" cy="0" r="3"  fill="#f6efe3"/>
               </svg>
             </div>
           </div>

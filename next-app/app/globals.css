@@ -1191,7 +1191,11 @@ select {
   top: 0;
   height: 100svh;
   overflow: visible;
-  background: transparent;
+  background-color: #f3d8b0;
+  background-image: url("/media/Background%20Road%20Map/backgrond%20v5.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
 }
 
 /* Stage readouts */
@@ -1369,8 +1373,114 @@ select {
   width: 1800px;
   height: auto;
   pointer-events: none;
-  z-index: 0;
+  z-index: 1;
 }
+.pj-stop-list {
+  position: absolute;
+  top: 50%;
+  left: clamp(32px, 5vw, 88px);
+  transform: translateY(-50%);
+  z-index: 5;
+  list-style: none !important;
+  margin: 0;
+  padding: 0 0 0 28px;
+  width: 320px;
+  pointer-events: none;
+  font-family: var(--f-sans);
+  background: linear-gradient(
+    to bottom,
+    rgba(62, 57, 51, 0) 0%,
+    rgba(62, 57, 51, 0.22) 8%,
+    rgba(62, 57, 51, 0.22) 92%,
+    rgba(62, 57, 51, 0) 100%
+  );
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  background-size: 1px 100%;
+}
+.pj-stop-item {
+  display: flex !important;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  position: relative;
+  padding: 22px 0;
+  opacity: 0.3;
+  transform: translateX(-6px);
+  transition:
+    opacity 540ms cubic-bezier(0.22, 0.7, 0.2, 1),
+    transform 540ms cubic-bezier(0.22, 0.7, 0.2, 1),
+    color 320ms ease;
+  list-style: none;
+}
+.pj-stop-item::before {
+  content: "";
+  position: absolute;
+  left: -34px;
+  top: 30px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #f6efe3;
+  border: 1.5px solid rgba(62, 57, 51, 0.5);
+  box-shadow: 0 0 0 6px rgba(246, 239, 227, 0.6);
+  transition:
+    background 360ms ease,
+    border-color 360ms ease,
+    box-shadow 360ms ease,
+    transform 360ms cubic-bezier(0.22, 0.7, 0.2, 1);
+}
+.pj-stop-item.is-passed {
+  opacity: 1;
+  transform: translateX(0);
+}
+.pj-stop-item.is-passed::before {
+  background: #1f1d1a;
+  border-color: #1f1d1a;
+  box-shadow: 0 0 0 6px rgba(159, 118, 87, 0.18);
+  transform: scale(1.05);
+}
+.pj-stop-num {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  color: var(--clay-dark);
+  font-variant-numeric: tabular-nums;
+  text-transform: uppercase;
+}
+.pj-stop-num::after {
+  content: "";
+  width: 18px;
+  height: 1px;
+  background: rgba(62, 57, 51, 0.35);
+  display: inline-block;
+  transition: width 420ms ease, background 320ms ease;
+}
+.pj-stop-item.is-passed .pj-stop-num {
+  color: #1f1d1a;
+}
+.pj-stop-item.is-passed .pj-stop-num::after {
+  width: 26px;
+  background: #1f1d1a;
+}
+.pj-stop-title {
+  display: block;
+  font-family: var(--f-serif, var(--f-sans));
+  font-size: 19px;
+  font-weight: 400;
+  letter-spacing: -0.005em;
+  color: #1f1d1a;
+  line-height: 1.25;
+}
+@media (max-width: 1180px) {
+  .pj-stop-list {
+    display: none !important;
+  }
+}
+
 .pj-road-svg {
   position: absolute;
   left: 500px;
@@ -1865,7 +1975,7 @@ select {
 }
 .loc-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   border: 1px solid var(--hairline);
   background: rgba(246, 239, 227, 0.46);
   box-shadow: 0 28px 80px rgba(31, 29, 26, 0.08);
@@ -1873,9 +1983,53 @@ select {
 .loc-card {
   padding: clamp(34px, 5vw, 56px) clamp(28px, 4vw, 52px);
   border-right: 1px solid var(--hairline);
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  position: relative;
+  cursor: pointer;
+  transition: background-color 220ms ease, transform 220ms ease;
+}
+a.loc-card:hover {
+  background-color: rgba(246, 239, 227, 0.78);
+}
+a.loc-card:hover .loc-cta {
+  opacity: 1;
+  transform: translateX(4px);
+}
+a.loc-card:focus-visible {
+  outline: 2px solid var(--clay-dark);
+  outline-offset: -2px;
+}
+.loc-cta {
+  display: inline-block;
+  margin-top: 24px;
+  font-family: var(--f-sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--clay-dark);
+  opacity: 0.6;
+  transition: opacity 220ms ease, transform 220ms ease;
 }
 .loc-card:last-child {
   border-right: none;
+}
+@media (max-width: 1024px) and (min-width: 769px) {
+  .loc-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .loc-card {
+    border-right: 1px solid var(--hairline);
+    border-bottom: 1px solid var(--hairline);
+  }
+  .loc-card:nth-child(2n) {
+    border-right: none;
+  }
+  .loc-card:nth-last-child(-n+1) {
+    border-bottom: none;
+  }
 }
 .loc-tag {
   font-family: var(--f-sans);
