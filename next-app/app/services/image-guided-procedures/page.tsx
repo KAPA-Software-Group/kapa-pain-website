@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 }
 
 const page: ServiceDetailPageData = {
-  eyebrow: "The importance of",
+  heroClassName: "guided-injections-service-hero",
   title: "Guided Injections",
   intro: [
     'Injections need to be administered at an exact location in order to have a high success rate for treatment. The conventional palpation guided method is extremely inaccurate, and is therefore referred to as "blind". These injections are solely based on experience and knowledge. Unfortunately, even a very experienced physician will always be less accurate and their failure rate will remain high.',
@@ -114,5 +114,32 @@ const page: ServiceDetailPageData = {
 }
 
 export default function ImageGuidedProceduresPage() {
-  return <ServiceDetailPage page={page} />
+  return (
+    <>
+      <style>
+        {`
+          .guided-injections-service-hero .service-hero-grid {
+            grid-template-columns: minmax(0, 920px);
+            justify-content: center;
+            text-align: center;
+          }
+
+          .guided-injections-service-hero .service-hero-copy-block {
+            display: grid;
+            justify-items: center;
+          }
+
+          .guided-injections-service-hero .service-hero-intro {
+            max-width: 820px;
+            margin-inline: auto;
+          }
+
+          .guided-injections-service-hero .procedure-hero-actions {
+            justify-content: center;
+          }
+        `}
+      </style>
+      <ServiceDetailPage page={page} />
+    </>
+  )
 }

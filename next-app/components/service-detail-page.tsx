@@ -146,9 +146,9 @@ export function ServiceDetailPage({ page }: { page: ServiceDetailPageData }) {
           <div className="section-inner procedure-hero-content">
             <div className="service-hero-grid">
               <div className="service-hero-copy-block">
-                <div className="section-label">
-                  {page.heroLabel ?? "Services"}
-                </div>
+                {page.heroLabel ? (
+                  <div className="section-label">{page.heroLabel}</div>
+                ) : null}
                 {page.eyebrow ? (
                   <p className="service-hero-eyebrow">{page.eyebrow}</p>
                 ) : null}

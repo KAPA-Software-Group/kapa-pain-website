@@ -5,9 +5,8 @@ export const ServicesHeroBackground = () => {
     <div
       className="absolute inset-0 h-full w-full pointer-events-none"
       style={{
-        backgroundImage:
-          "linear-gradient(to right, rgba(246,239,227,0.055) 1px, transparent 1px), linear-gradient(to bottom, rgba(246,239,227,0.04) 1px, transparent 1px)",
-        backgroundSize: "6rem 4rem",
+        background:
+          "linear-gradient(135deg, rgba(31,29,26,0.98), rgba(67,58,50,0.96))",
       }}
       aria-hidden="true"
     >

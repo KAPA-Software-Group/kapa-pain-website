@@ -4249,8 +4249,28 @@ a.loc-page-contact-line:hover {
   background: rgba(246, 239, 227, 0.06);
   animation: serviceMarkerPulse 4.6s ease-in-out infinite;
 }
+.service-overview-visual[data-has-image="true"]::before {
+  display: none;
+}
+.service-overview-visual[data-has-image="true"]::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    180deg,
+    rgba(31, 29, 26, 0.04),
+    rgba(31, 29, 26, 0.72)
+  );
+}
+.service-overview-image {
+  position: absolute;
+  inset: 0;
+  object-fit: cover;
+}
 .service-overview-visual span {
   position: absolute;
+  z-index: 2;
   left: 18px;
   right: 18px;
   bottom: 16px;
