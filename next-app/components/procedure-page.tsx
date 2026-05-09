@@ -288,9 +288,6 @@ export function ProcedurePageView({ page }: ProcedurePageViewProps) {
           >
             <div className="procedure-section-header">
               <div className="section-label">Overview</div>
-              <h2 className="procedure-section-title">
-                Clear information before the visit.
-              </h2>
             </div>
 
             <div className="procedure-detail-intro">
@@ -316,6 +313,9 @@ export function ProcedurePageView({ page }: ProcedurePageViewProps) {
               data-patient-procedure-detail-reveal="section"
             >
               <div className="procedure-section-header">
+                {section.eyebrow ? (
+                  <div className="section-label">{section.eyebrow}</div>
+                ) : null}
                 <h2 className="procedure-section-title">{section.title}</h2>
               </div>
 

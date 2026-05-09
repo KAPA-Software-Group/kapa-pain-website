@@ -11,7 +11,7 @@ const PROCEDURE_GROUPS = [
     items: [
       {
         href: "/patient-procedures/chronic-pain-assessment-medical-management",
-        label: "Chronic Pain Assessment & Medical Management",
+        label: "Chronic Pain Assessment",
       },
     ],
   },

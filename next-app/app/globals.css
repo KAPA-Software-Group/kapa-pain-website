@@ -170,6 +170,9 @@ select {
 .reveal-delay-5 {
   transition-delay: 0.6s;
 }
+.reveal-delay-6 {
+  transition-delay: 0.72s;
+}
 
 /* ─── NAV ───────────────────────────────────────────────────── */
 .nav {
@@ -2967,6 +2970,93 @@ a.loc-page-contact-line:hover {
 }
 .procedure-section-alert {
   background: rgba(109, 60, 46, 0.05);
+}
+.procedure-section-feature {
+  position: relative;
+  isolation: isolate;
+  background:
+    radial-gradient(circle at 0% 0%, rgba(159, 118, 87, 0.14), transparent 42%),
+    radial-gradient(circle at 100% 100%, rgba(109, 60, 46, 0.08), transparent 48%),
+    linear-gradient(135deg, rgba(246, 239, 227, 0.78), rgba(220, 207, 186, 0.32));
+  overflow: hidden;
+}
+.procedure-section-feature::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 4px;
+  background: linear-gradient(
+    to bottom,
+    var(--clay-dark) 0%,
+    rgba(118, 83, 61, 0.55) 55%,
+    rgba(118, 83, 61, 0.12) 100%
+  );
+  z-index: 1;
+}
+.procedure-section-feature::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(
+      ellipse 60% 40% at 90% 10%,
+      rgba(159, 118, 87, 0.12),
+      transparent 70%
+    );
+  z-index: 0;
+  pointer-events: none;
+}
+.procedure-section-feature .section-inner {
+  position: relative;
+  z-index: 2;
+}
+.procedure-section-feature .procedure-section-header .section-label {
+  color: var(--clay-dark);
+  font-weight: 700;
+}
+.procedure-section-feature .procedure-section-title {
+  font-size: clamp(36px, 4.6vw, 60px);
+  background: linear-gradient(135deg, var(--mahogany) 0%, var(--clay-dark) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: var(--mahogany);
+}
+.procedure-section-feature .procedure-paragraph {
+  font-size: clamp(16px, 1.3vw, 18px);
+  color: rgba(62, 57, 51, 0.92);
+  font-weight: 400;
+  line-height: 1.85;
+  max-width: 780px;
+}
+.procedure-section-feature .procedure-info-box {
+  margin-top: 32px;
+  padding: 24px 28px;
+  border: 1px solid rgba(118, 83, 61, 0.32);
+  border-left: 4px solid var(--clay-dark);
+  background: rgba(255, 252, 245, 0.85);
+  box-shadow: 0 18px 40px rgba(31, 29, 26, 0.08);
+  backdrop-filter: blur(2px);
+}
+.procedure-section-feature .procedure-info-box-title {
+  color: var(--clay-dark);
+  font-weight: 700;
+  letter-spacing: 0.16em;
+}
+.procedure-section-feature .procedure-info-box-body {
+  color: var(--mahogany);
+  font-size: 15px;
+  font-weight: 400;
+}
+@media (prefers-reduced-motion: reduce) {
+  .procedure-section-feature {
+    background: rgba(246, 239, 227, 0.7);
+  }
+  .procedure-section-feature::after {
+    display: none;
+  }
 }
 .procedure-section-header {
   max-width: 760px;

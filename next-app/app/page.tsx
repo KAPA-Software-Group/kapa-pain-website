@@ -37,6 +37,14 @@ export default function Home() {
               name: "Migraine & Headache Care",
               desc: "Neurologist-led diagnosis and ongoing management of chronic migraines, cluster headaches, and tension-type disorders.",
             },
+            {
+              name: "Trigger Point Injections & Nerve Blocks",
+              desc: "Targeted treatments that relax painful muscle knots and interrupt pain signals from irritated nerves — providing meaningful relief, improved mobility, and direction for the next step in care.",
+            },
+            {
+              name: "Lidocaine & Ketamine Infusions",
+              desc: "Controlled IV treatments that calm overactive pain signals in the nervous system — considered for complex, persistent, or nerve-related pain when other treatments have not provided enough relief.",
+            },
           ].map((s, i) => (
             <div
               key={s.name}

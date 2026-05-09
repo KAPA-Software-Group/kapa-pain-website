@@ -18,11 +18,12 @@ export type ProcedureInfoBox = {
 
 export type ProcedureSection = {
   title: string
+  eyebrow?: string
   intro?: string[]
   paragraphs?: string[]
   bullets?: string[]
   cards?: ProcedureCard[]
-  tone?: "default" | "muted" | "alert"
+  tone?: "default" | "muted" | "alert" | "feature"
   visual?: ProcedureVisual
   infoBox?: ProcedureInfoBox
 }
@@ -48,18 +49,18 @@ export type ProcedurePage = {
 export const patientProcedurePages: ProcedurePage[] = [
   {
     slug: "chronic-pain-assessment-medical-management",
-    title: "Chronic Pain Assessment & Medical Management",
-    shortTitle: "Assessment & Medical Management",
+    title: "Chronic Pain Assessment",
+    shortTitle: "Chronic Pain Assessment",
     eyebrow: "Start Here",
     description:
-      "Comprehensive assessment and medical management help identify the source of pain and guide a personalized, evidence-based treatment plan.",
+      "A multidisciplinary assessment that identifies the source of pain and guides a personalized, evidence-based treatment plan.",
     metaDescription:
-      "Learn how Precision Care Centre approaches chronic pain assessment, medical management, imaging review, and coordinated multidisciplinary care.",
+      "Learn how Precision Care Centre approaches chronic pain assessment, imaging review, and coordinated multidisciplinary care.",
     cardSummary:
-      "A structured starting point for patients who need diagnosis, medication review, and a coordinated plan before choosing a procedure.",
+      "A structured starting point for patients who need a diagnosis and coordinated plan before choosing a procedure.",
     cardHighlights: [
       "History, examination, and imaging review",
-      "Non-opioid and targeted medication planning",
+      "Functional review of how pain affects daily life",
       "Integrated follow-up with procedures and rehabilitation",
     ],
     quickFacts: [
@@ -69,17 +70,15 @@ export const patientProcedurePages: ProcedurePage[] = [
       },
       {
         label: "May Include",
-        value:
-          "History, exam, imaging review, function review, medication plan",
+        value: "History, exam, imaging review, and function review",
       },
       {
         label: "Focus",
-        value: "Safe, effective, sustainable pain control",
+        value: "Identifying the likely pain source",
       },
     ],
     intro: [
-      "Precision Care Centre uses a multidisciplinary approach to chronic pain assessment and management. The goal is to identify the likely pain source as accurately as possible and build a plan that fits the patient's condition, function, and prior treatment history.",
-      "Care may include medication planning, image-guided procedures, rehabilitation guidance, lifestyle modification, and follow-up as symptoms change.",
+      "A multidisciplinary assessment that identifies the likely pain source and builds a personalized plan combining image-guided procedures, rehabilitation, and follow-up as symptoms change.",
     ],
     sections: [
       {
@@ -99,16 +98,27 @@ export const patientProcedurePages: ProcedurePage[] = [
         ],
       },
       {
-        title: "How medical management is approached",
+        title: "In-house imaging review",
+        eyebrow: "What sets us apart",
+        tone: "feature",
         paragraphs: [
-          "Medical management at Precision Care Centre is tailored to the type and pattern of pain. The goal is to reduce reliance on opioids wherever possible while applying evidence-based pharmacologic strategies that target the underlying pain mechanism.",
+          "At Precision, our in-house interventional radiologists review your previous imaging alongside your symptoms, clinical history, and presentation to help determine the most appropriate procedure for your condition.",
+        ],
+        infoBox: {
+          title: "Bring your imaging",
+          body: "You may be asked to bring a physical copy of your prior imaging for review at your appointment.",
+        },
+      },
+      {
+        title: "Specialist involvement",
+        paragraphs: [
+          "Depending on your clinical presentation at our clinic, we determine whether your care would benefit from input from other specialists.",
         ],
         bullets: [
-          "Non-opioid medications such as anti-inflammatories and neuropathic agents",
-          "Targeted pharmacologic therapy based on the type of pain",
-          "Infusion-based treatments for complex or refractory pain",
-          "Coordination with primary care and other specialists",
-          "A focus on minimizing reliance on opioids whenever possible",
+          "Spine surgeons",
+          "Orthopedic surgeons",
+          "Interventional radiologists",
+          "Chronic pain physicians or anesthesiologists",
         ],
       },
       {
@@ -171,8 +181,7 @@ export const patientProcedurePages: ProcedurePage[] = [
       },
     ],
     intro: [
-      "Nerve hydrodissection is a simple, minimally invasive procedure used to treat nerve pain. A small needle is used to place fluid around the nerve under ultrasound guidance.",
-      "The fluid is intended to gently separate the nerve from surrounding tissue, reduce pressure, release scar tissue, and decrease pain and irritation.",
+      "A minimally invasive ultrasound-guided procedure that places fluid around an irritated nerve to ease pressure, release scar tissue, and reduce pain.",
     ],
     sections: [
       {
@@ -280,8 +289,7 @@ export const patientProcedurePages: ProcedurePage[] = [
       },
     ],
     intro: [
-      "Precision Care Centre performs a wide range of image-guided nerve blocks to diagnose and treat pain. These procedures are minimally invasive and are performed with ultrasound or fluoroscopy/X-ray to improve precision and safety.",
-      "Some injections are used primarily to confirm the exact pain source. Others are used to reduce inflammation, interrupt pain signals, or guide decisions about treatments such as radiofrequency ablation.",
+      "Image-guided nerve blocks used to pinpoint the source of pain, reduce inflammation, or guide decisions about further treatment such as radiofrequency ablation.",
     ],
     sections: [
       {
@@ -408,8 +416,7 @@ export const patientProcedurePages: ProcedurePage[] = [
       },
     ],
     intro: [
-      "Radiofrequency ablation is used to provide longer-term pain relief by applying targeted heat to the nerves that carry pain signals. The treatment is intended to temporarily disrupt those signals rather than permanently remove the nerve.",
-      "At Precision Care Centre, radiofrequency ablation fits into a structured pathway. It is often considered after diagnostic injections have helped confirm the pain source.",
+      "Targeted heat is used to temporarily disrupt pain-transmitting nerves, typically after diagnostic blocks have confirmed the source of pain.",
     ],
     sections: [
       {
@@ -502,8 +509,7 @@ export const patientProcedurePages: ProcedurePage[] = [
       },
     ],
     intro: [
-      "Epidural injections are used to treat pain caused by irritated or inflamed spinal nerves. Medication is placed into the epidural space around the spine using fluoroscopy/X-ray to help with accuracy and safety.",
-      "Depending on the pain pattern and anatomy, the injection may be given from the middle of the back or neck, targeted to one nerve root, or placed through the sacral area near the tailbone for broader lower-spine coverage.",
+      "Fluoroscopy-guided injections that place medication around irritated spinal nerves to reduce inflammation and ease arm or leg pain.",
     ],
     sections: [
       {
@@ -641,8 +647,7 @@ export const patientProcedurePages: ProcedurePage[] = [
       },
     ],
     intro: [
-      "Arthritis injections are used to relieve joint pain and inflammation by placing medication directly into the affected joint. Image guidance is used for accuracy and safety.",
-      "Depending on the treatment plan, injections may be used to reduce inflammation, improve lubrication, or support healing over time.",
+      "Image-guided joint injections that calm inflammation, improve lubrication, or support healing in arthritic and degenerative joints.",
     ],
     sections: [
       {
@@ -768,8 +773,7 @@ export const patientProcedurePages: ProcedurePage[] = [
       },
     ],
     intro: [
-      "A stellate ganglion block involves injecting local anesthetic into the stellate ganglion, a cluster of nerves in the neck. The goal is to temporarily block sympathetic nerve activity.",
-      "The procedure is typically performed on the right side first. A later left-sided injection may be considered if needed. Ultrasound guidance is used for precision, and procedural sedation may be involved.",
+      "An ultrasound-guided injection of local anesthetic near a nerve cluster in the neck, used to temporarily reduce sympathetic nerve activity.",
     ],
     sections: [
       {
@@ -889,8 +893,7 @@ export const patientProcedurePages: ProcedurePage[] = [
       },
     ],
     intro: [
-      "Precision Care Centre offers advanced, minimally invasive procedures for selected patients with complex or chronic pain conditions when standard therapies are not enough.",
-      "These treatments are performed with image guidance, including ultrasound or fluoroscopy/X-ray, to support precision, safety, and targeted care. Because the procedures on this page are more specialized, candidacy and recovery planning are individualized.",
+      "Advanced image-guided procedures considered for complex or chronic pain conditions when standard therapies have not provided enough relief.",
     ],
     sections: [
       {
@@ -950,7 +953,7 @@ export const patientProcedurePages: ProcedurePage[] = [
       {
         title: "Alternatives and next steps",
         bullets: [
-          "Assessment and medical management",
+          "Assessment and treatment planning",
           "Other image-guided injections or nerve procedures",
           "Rehabilitation, physiotherapy, and activity modification",
           "Surgery in selected cases depending on the diagnosis",
