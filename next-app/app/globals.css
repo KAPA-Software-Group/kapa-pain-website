@@ -972,6 +972,7 @@ select {
 .pj-cloud-veil.covering,
 .pj-cloud-veil.clearing {
   visibility: visible;
+  pointer-events: auto;
 }
 .pj-cloud-base {
   position: absolute;

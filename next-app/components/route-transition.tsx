@@ -1,16 +1,19 @@
 "use client"
 
-import { usePathname } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 import { useEffect, useRef } from "react"
 
-const COVER_MS = 460
+const COVER_BEFORE_NAV_MS = 620
+const HOLD_AFTER_ROUTE_MS = 140
 const CLEAR_MS = 720
 
 export function RouteTransition() {
   const pathname = usePathname()
+  const router = useRouter()
   const veilRef = useRef<HTMLDivElement>(null)
   const firstRender = useRef(true)
   const lastPath = useRef(pathname)
+  const navigateTimerRef = useRef<number | null>(null)
   const clearTimerRef = useRef<number | null>(null)
   const cleanupTimerRef = useRef<number | null>(null)
 
@@ -26,11 +29,14 @@ export function RouteTransition() {
     const veil = veilRef.current
     if (!veil) return
 
+    if (navigateTimerRef.current) window.clearTimeout(navigateTimerRef.current)
     if (clearTimerRef.current) window.clearTimeout(clearTimerRef.current)
     if (cleanupTimerRef.current) window.clearTimeout(cleanupTimerRef.current)
 
-    // Make sure we're in covering state (in case the click handler missed)
-    if (!veil.classList.contains("covering")) {
+    const alreadyCovering = veil.classList.contains("covering")
+
+    // Make sure we're in covering state in case navigation happened outside a link click.
+    if (!alreadyCovering) {
       veil.classList.remove("clearing")
       void veil.offsetWidth
       veil.classList.add("covering")
@@ -44,18 +50,18 @@ export function RouteTransition() {
       cleanupTimerRef.current = window.setTimeout(() => {
         veil.classList.remove("clearing")
       }, CLEAR_MS)
-    }, COVER_MS)
+    }, alreadyCovering ? HOLD_AFTER_ROUTE_MS : COVER_BEFORE_NAV_MS)
 
     return () => {
+      if (navigateTimerRef.current) window.clearTimeout(navigateTimerRef.current)
       if (clearTimerRef.current) window.clearTimeout(clearTimerRef.current)
       if (cleanupTimerRef.current) window.clearTimeout(cleanupTimerRef.current)
     }
   }, [pathname])
 
-  // On any internal-link click, start the cover animation in parallel with
-  // navigation. We do NOT preventDefault — Next.js Link navigates normally,
-  // dropdowns/onClick handlers still fire, and the pathname effect above
-  // takes over once the new route mounts.
+  // On any internal-link click, show the cover first, then navigate once the
+  // logo is visible. React/Next click handlers still run and see the event as
+  // prevented, so menus can close while Next waits for our delayed push.
   useEffect(() => {
     const onClick = (e: MouseEvent) => {
       if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return
@@ -75,13 +81,26 @@ export function RouteTransition() {
 
       const veil = veilRef.current
       if (!veil) return
+      e.preventDefault()
+
+      if (navigateTimerRef.current) window.clearTimeout(navigateTimerRef.current)
+      if (clearTimerRef.current) window.clearTimeout(clearTimerRef.current)
+      if (cleanupTimerRef.current) window.clearTimeout(cleanupTimerRef.current)
+
       veil.classList.remove("clearing")
       void veil.offsetWidth
       veil.classList.add("covering")
+
+      navigateTimerRef.current = window.setTimeout(() => {
+        router.push(`${url.pathname}${url.search}${url.hash}`)
+      }, COVER_BEFORE_NAV_MS)
     }
-    document.addEventListener("click", onClick)
-    return () => document.removeEventListener("click", onClick)
-  }, [])
+    document.addEventListener("click", onClick, true)
+    return () => {
+      document.removeEventListener("click", onClick, true)
+      if (navigateTimerRef.current) window.clearTimeout(navigateTimerRef.current)
+    }
+  }, [router])
 
   return (
     <div ref={veilRef} className="pj-cloud-veil pj-cloud-route" aria-hidden="true">

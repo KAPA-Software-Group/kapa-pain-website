@@ -15,6 +15,12 @@ interface HeroTextProps {
   onAnimationComplete?: () => void
 }
 
+const CHARACTER_STAGGER_SECONDS = 0.052
+const TEXT_REVEAL_DURATION_SECONDS = 1.04
+const SHUTTER_DURATION_SECONDS = 0.91
+const TEXT_REVEAL_DELAY_SECONDS = 0.39
+const FINAL_SETTLE_DELAY_SECONDS = 0.195
+
 export default function HeroText({
   text = "IMMERSE",
   className = "",
@@ -30,7 +36,12 @@ export default function HeroText({
   const words = text.trim().split(/\s+/).filter(Boolean)
 
   useEffect(() => {
-    const durationMs = (characters.length * 0.04 + 1.25) * 1000
+    const durationMs =
+      (characters.length * CHARACTER_STAGGER_SECONDS +
+        TEXT_REVEAL_DELAY_SECONDS +
+        TEXT_REVEAL_DURATION_SECONDS +
+        FINAL_SETTLE_DELAY_SECONDS) *
+      1000
     const timer = window.setTimeout(() => {
       setAnimationDone(true)
       onAnimationComplete?.()
@@ -62,7 +73,10 @@ export default function HeroText({
         <motion.span
           initial={{ opacity: 0, filter: "blur(10px)" }}
           animate={{ opacity: 1, filter: "blur(0px)" }}
-          transition={{ delay: i * 0.04 + 0.3, duration: 0.8 }}
+          transition={{
+            delay: i * CHARACTER_STAGGER_SECONDS + TEXT_REVEAL_DELAY_SECONDS,
+            duration: TEXT_REVEAL_DURATION_SECONDS,
+          }}
           className={cn("text-zinc-900 dark:text-white", characterClassName)}
         >
           {char}
@@ -73,8 +87,8 @@ export default function HeroText({
         initial={{ x: "-100%", opacity: 0 }}
         animate={{ x: "100%", opacity: [0, 1, 0] }}
         transition={{
-          duration: 0.7,
-          delay: i * 0.04,
+          duration: SHUTTER_DURATION_SECONDS,
+          delay: i * CHARACTER_STAGGER_SECONDS,
           ease: "easeInOut",
         }}
         className={cn(
@@ -92,8 +106,8 @@ export default function HeroText({
         initial={{ x: "100%", opacity: 0 }}
         animate={{ x: "-100%", opacity: [0, 1, 0] }}
         transition={{
-          duration: 0.7,
-          delay: i * 0.04 + 0.1,
+          duration: SHUTTER_DURATION_SECONDS,
+          delay: i * CHARACTER_STAGGER_SECONDS + 0.1,
           ease: "easeInOut",
         }}
         className={cn(
@@ -111,8 +125,8 @@ export default function HeroText({
         initial={{ x: "-100%", opacity: 0 }}
         animate={{ x: "100%", opacity: [0, 1, 0] }}
         transition={{
-          duration: 0.7,
-          delay: i * 0.04 + 0.2,
+          duration: SHUTTER_DURATION_SECONDS,
+          delay: i * CHARACTER_STAGGER_SECONDS + 0.2,
           ease: "easeInOut",
         }}
         className={cn(
