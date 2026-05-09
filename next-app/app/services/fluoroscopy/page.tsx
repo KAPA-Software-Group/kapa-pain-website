@@ -50,7 +50,6 @@ const page: ServiceDetailPageData = {
         "Rotator Cuff Issues",
       ],
       visual: {
-        label: "Service image",
         title: "Spine and joint targeting",
         copy: "Live X-ray guidance helps position treatment precisely.",
         imageSrc: "/procedure-images/fluoroscopy.png",

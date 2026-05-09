@@ -23,14 +23,17 @@ export default function Home() {
           {[
             {
               name: "Image-Guided Procedures",
+              href: "/services/image-guided-procedures",
               desc: "Fluoroscopic and ultrasound-guided injections deliver treatment precisely to the source — with real-time imaging accuracy.",
             },
             {
               name: "Regenerative & Sports Therapy",
+              href: "/services/regenerative-sports-therapy",
               desc: "PRP, prolotherapy, and sport-specific rehabilitation that activate the body's natural healing potential for lasting recovery.",
             },
             {
               name: "Medication Management",
+              href: "/services#medication-management",
               desc: "Pharmacological strategies that balance effective pain control with long-term safety, quality of life, and patient wellbeing.",
             },
             {
@@ -45,15 +48,26 @@ export default function Home() {
               name: "Lidocaine & Ketamine Infusions",
               desc: "Controlled IV treatments that calm overactive pain signals in the nervous system — considered for complex, persistent, or nerve-related pain when other treatments have not provided enough relief.",
             },
-          ].map((s, i) => (
-            <div
-              key={s.name}
-              className={`service-row reveal reveal-delay-${i + 1}`}
-            >
-              <span className="service-name">{s.name}</span>
-              <p className="service-desc">{s.desc}</p>
-            </div>
-          ))}
+          ].map((s, i) =>
+            s.href ? (
+              <Link
+                key={s.name}
+                href={s.href}
+                className={`service-row reveal reveal-delay-${i + 1}`}
+              >
+                <span className="service-name">{s.name}</span>
+                <p className="service-desc">{s.desc}</p>
+              </Link>
+            ) : (
+              <div
+                key={s.name}
+                className={`service-row reveal reveal-delay-${i + 1}`}
+              >
+                <span className="service-name">{s.name}</span>
+                <p className="service-desc">{s.desc}</p>
+              </div>
+            )
+          )}
         </div>
       </section>
 

@@ -32,7 +32,6 @@ const page: ServiceDetailPageData = {
         "Ultrasound guided injections allow physicians to administer medication with utmost accuracy.",
       ],
       visual: {
-        label: "Service image",
         title: "Ultrasound guided injection",
         copy: "Needle placement is guided by real-time imaging.",
         imageSrc: "/procedure-images/guidedInjection.png",

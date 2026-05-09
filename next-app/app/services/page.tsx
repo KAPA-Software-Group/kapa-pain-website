@@ -125,6 +125,7 @@ export default function ServicesPage() {
               {SERVICES.map((service, i) => (
                 <article
                   key={service.href}
+                  id={service.href.split("/").pop()}
                   className="services-list-card"
                   style={{ "--stagger": i } as CSSProperties}
                 >

@@ -36,7 +36,6 @@ const page: ServiceDetailPageData = {
         "Chronic degenerative joint disease",
       ],
       visual: {
-        label: "Service image",
         title: "Regenerative therapy",
         copy: "Treatment plans focus on damaged tissue, pain recovery, and function.",
         imageSrc: "/procedure-images/regenerativeSports.png",

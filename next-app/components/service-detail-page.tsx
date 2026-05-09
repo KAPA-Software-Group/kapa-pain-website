@@ -5,7 +5,7 @@ import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
 
 type ServiceVisual = {
-  label: string
+  label?: string
   title: string
   copy?: string
   imageSrc?: string
@@ -173,7 +173,10 @@ export function ServiceDetailPage({ page }: { page: ServiceDetailPageData }) {
                 </div>
               </div>
               {page.heroVisual ? (
-                <div className="service-hero-panel" aria-label="Service image">
+                <div
+                  className="service-hero-panel"
+                  aria-label={page.heroVisual.imageAlt ?? page.heroVisual.title}
+                >
                   <ServiceImagePlaceholder visual={page.heroVisual} />
                 </div>
               ) : null}
@@ -405,7 +408,7 @@ function ServiceImagePlaceholder({
         </>
       )}
       <div className="service-image-copy">
-        <span>{visual.label}</span>
+        {visual.label ? <span>{visual.label}</span> : null}
         <strong>{visual.title}</strong>
         {visual.copy ? <p>{visual.copy}</p> : null}
       </div>
