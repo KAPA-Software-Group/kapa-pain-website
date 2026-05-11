@@ -9,7 +9,7 @@ import { ServicesHeroBackground } from "@/components/ui/background-snippets"
 export const metadata: Metadata = {
   title: "Services | Precision Care Centre",
   description:
-    "Precision Care Centre offers image-guided procedures, medication management, and fluoroscopy-assisted treatments for chronic pain.",
+    "Precision Care Centre offers image-guided procedures, landmark injections, medication management, and fluoroscopy-assisted treatments for chronic pain.",
 }
 
 const SERVICES = [
@@ -28,6 +28,22 @@ const SERVICES = [
     visual: "Guided injection image",
     imageSrc: "/procedure-images/guidedInjection.png",
     imageAlt: "Image-guided injection procedure",
+  },
+  {
+    href: "/services/landmark-injections",
+    eyebrow: "Anatomy-Based Care",
+    title: "Landmark Injections",
+    summary:
+      "Landmark injections use anatomical landmarks and careful physical assessment to target accessible painful joints, muscles, tendons, and soft tissue concerns.",
+    highlights: [
+      "Anatomy-based targeting",
+      "Joint and soft tissue care",
+      "Physical assessment guided",
+      "Targeted pain relief",
+    ],
+    visual: "Landmark injection image",
+    imageSrc: "/procedure-images/guidedInjection.png",
+    imageAlt: "Landmark injection treatment",
   },
   {
     href: "/services/medication-management",
