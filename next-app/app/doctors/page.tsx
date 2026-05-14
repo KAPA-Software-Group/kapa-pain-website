@@ -5,58 +5,43 @@ import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
 
 export const metadata: Metadata = {
-  title: "Doctors | Precision Pain Centre",
+  title: "Clinical Practices | Precision Pain Centre",
   description:
-    "Meet the Precision Care Centre team, including interventional radiologists, an anesthesiologist, and a nurse practitioner pain consultant.",
+    "Learn about Precision Care Centre's interventional radiology, anesthesiology, and nurse practitioner pain consulting practices.",
 }
 
 const doctors = [
   {
-    name: "Dr. Aziz Qazi",
-    credentials: "BSc, MD, FRCPC",
-    role: "Interventional Radiologist",
+    id: "interventional-radiology",
+    practice: "Interventional Radiology",
     biography: [
-      "Dr. Qazi is a diagnostic and Interventional Radiologist. He completed medical school at the University of Calgary in 2013 followed by a 5-year residency in diagnostic imaging at the University of Toronto. He subsequently completed a fellowship in Vascular and Interventional Radiology at the University Health Network in 2019.",
-      "Dr. Qazi has received numerous awards throughout his training and is focused on providing high quality pain intervention for his patients.",
+      "This interventional radiology practice is supported by training that includes medical education at the University of Calgary and McMaster University, diagnostic imaging residency at the University of Toronto and the University of Manitoba, and fellowship training in Vascular and Interventional Radiology at the University Health Network.",
+      "Interventional radiology uses image guidance to perform precise, minimally invasive procedures. In pain care, this can help target the source of symptoms while supporting faster recovery, spine intervention, and a more focused treatment plan.",
     ],
     philosophy:
       "Quality in a service or product is not what you put into it. It is what the customer gets out of it.",
     quoteSide: "right",
   },
   {
-    name: "Dr. Ahmed Farooq",
-    credentials: "BSc, MD, FRCPC",
-    role: "Interventional Radiologist",
+    id: "anesthesiology-pain-medicine",
+    practice: "Anesthesiology and Chronic Pain",
     biography: [
-      "Dr. Farooq is a diagnostic and Interventional Radiologist. He completed medical school at McMaster University in 2003 followed by a 5-year residency in diagnostic imaging at the University of Manitoba. He subsequently completed a fellowship in Vascular and Interventional Radiology at the University Health Network in 2009.",
-      "Dr. Farooq is a highly experienced physician with expertise in spine intervention.",
+      "This anesthesiology and chronic pain practice includes academic work through McMaster University and clinical experience at Hamilton Health Sciences.",
+      "Anesthesiology in chronic pain care focuses on understanding pain pathways, medication strategies, and image-guided procedures. Using advanced medical imaging can help deliver precise, minimally invasive treatments designed to reduce pain and improve quality of life.",
     ],
-    philosophy:
-      "Patients don't care how much you know until they know how much you care.",
+    philosophy: "Improving patient experience is not an extra. It is the work.",
     quoteSide: "left",
   },
   {
-    name: "Dr. Madi Ali",
-    credentials: "BSc, MD, FRCPC",
-    role: "Anesthesiologist",
+    id: "nurse-practitioner-pain-consulting",
+    practice: "Nurse Practitioner Pain Consulting",
     biography: [
-      "Dr. Madi Ali is a highly skilled Anesthesiologist and Chronic Pain Specialist at Hamilton Health Sciences, dedicated to helping patients find relief from chronic pain. He specializes in image-guided procedures, using advanced medical imaging to deliver precise, minimally invasive treatments designed to reduce pain and improve quality of life.",
-      "Dr. Ali is committed to compassionate, patient-centered care, working closely with each individual to create personalized treatment plans. He is also a Clinical Associate Professor at McMaster University, where he contributes to the education of future healthcare professionals in pain management and anesthesia care.",
-    ],
-    philosophy: "Improving patient experience is not an extra. It is the work.",
-    quoteSide: "right",
-  },
-  {
-    name: "Sharon House",
-    credentials: "",
-    role: "Nurse Practitioner - Pain Consultant",
-    biography: [
-      "Sharon House is a Nurse Practitioner specializing in adult and acute care. She completed her undergraduate studies at McMaster University in 2018 followed by her post-graduate Master's education at the University of Toronto in 2023. She has vast experience in orthopaedics, sports medicine, spine and pain services.",
-      "She enjoys meeting with patients and families to discuss both interventional and non-interventional treatment options for acute and chronic pain conditions. She has special interest in research surrounding fibromyalgia spectrum disorders and patient education.",
+      "This nurse practitioner pain consulting practice is shaped by undergraduate education at McMaster University and post-graduate Master's education at the University of Toronto.",
+      "Nurse practitioner pain consulting supports assessment, education, and care planning across acute and chronic pain conditions. The practice includes experience in orthopaedics, sports medicine, spine care, pain services, fibromyalgia spectrum disorders, and patient education.",
     ],
     philosophy:
       "It's not how much you do, but how much love you put into the doing.",
-    quoteSide: "left",
+    quoteSide: "right",
   },
 ] as const
 
@@ -95,13 +80,21 @@ const doctorsPageStyles = `
   }
 
   .doctors-page-scope .doctors-profile {
+    grid-template-columns: minmax(0, 720px) minmax(320px, 380px);
+    justify-content: space-between;
     align-items: stretch;
     padding: clamp(78px, 9vw, 128px) 0;
     border-top-color: rgba(159, 118, 87, 0.22);
   }
 
   .doctors-page-scope .doctors-profile-copy {
+    width: 100%;
+    max-width: 720px;
     min-width: 0;
+  }
+
+  .doctors-page-scope .doctors-profile[data-quote-side="left"] {
+    grid-template-columns: minmax(320px, 380px) minmax(0, 720px);
   }
 
   .doctors-page-scope .doctors-profile:first-child {
@@ -140,13 +133,15 @@ const doctorsPageStyles = `
   .doctors-page-scope .doctors-quote-card {
     position: relative;
     top: auto;
-    align-self: stretch;
-    height: auto;
-    min-height: clamp(230px, 26vw, 340px);
-    padding: clamp(24px, 3vw, 34px);
+    width: 100%;
+    max-width: 380px;
+    align-self: start;
+    height: clamp(260px, 24vw, 320px);
+    min-height: 0;
+    padding: clamp(24px, 2.5vw, 32px);
     align-items: flex-start;
-    justify-content: flex-start;
-    gap: clamp(22px, 3vw, 34px);
+    justify-content: space-between;
+    gap: 24px;
     transition:
       opacity 650ms var(--ease),
       border-color 280ms ease,
@@ -165,8 +160,8 @@ const doctorsPageStyles = `
 
   .doctors-page-scope .doctors-quote {
     width: 100%;
-    max-width: min(100%, 26ch);
-    font-size: clamp(30px, 3vw, 46px);
+    max-width: min(100%, 28ch);
+    font-size: clamp(26px, 2.5vw, 38px);
     line-height: 1.12;
     overflow-wrap: break-word;
   }
@@ -203,12 +198,18 @@ const doctorsPageStyles = `
 
   @media (max-width: 1024px) {
     .doctors-page-scope .doctors-profile {
+      grid-template-columns: minmax(0, 1fr);
       align-items: start;
       padding: 64px 0;
     }
 
+    .doctors-page-scope .doctors-profile-copy,
     .doctors-page-scope .doctors-quote-card {
-      min-height: clamp(210px, 32vw, 280px);
+      max-width: none;
+    }
+
+    .doctors-page-scope .doctors-quote-card {
+      height: clamp(230px, 28vw, 280px);
     }
 
     .doctors-page-scope .doctors-quote {
@@ -242,8 +243,10 @@ const doctorsPageStyles = `
     }
 
     .doctors-page-scope .doctors-quote-card {
+      height: auto;
       min-height: auto;
       gap: 28px;
+      justify-content: flex-start;
     }
 
     .doctors-page-scope .doctors-quote {
@@ -331,11 +334,9 @@ function renderBiography(paragraph: string) {
 
 function DoctorProfile({
   biography,
-  credentials,
-  name,
   philosophy,
+  practice,
   quoteSide,
-  role,
 }: DoctorProfileProps) {
   return (
     <article
@@ -347,13 +348,10 @@ function DoctorProfile({
         <div className="doctors-profile-heading">
           <div>
             <h2 className="procedure-section-title doctors-profile-name">
-              {name}
+              {practice}
             </h2>
-            {credentials ? (
-              <p className="doctors-profile-credentials">{credentials}</p>
-            ) : null}
           </div>
-          <p className="doctors-profile-role">{role}</p>
+          <p className="doctors-profile-role">Clinical Practice</p>
         </div>
 
         <div className="doctors-profile-bio">
@@ -397,11 +395,12 @@ export default function DoctorsPage() {
           <div className="section-inner procedure-hero-content">
             <div className="procedure-hero-centered">
               <div className="section-label">Medical Team</div>
-              <h1 className="inner-hero-title">Meet Our Team</h1>
+              <h1 className="inner-hero-title">Clinical Practices</h1>
               <p className="inner-hero-copy procedure-hero-copy">
-                Meet the clinicians behind Precision Care Centre&apos;s
-                multidisciplinary pain care, including interventional
-                radiology, anesthesiology, and nurse practitioner expertise.
+                Learn about the clinical practices behind Precision Care
+                Centre&apos;s multidisciplinary pain care, including
+                interventional radiology, anesthesiology, and nurse practitioner
+                expertise.
               </p>
               <div className="procedure-hero-actions">
                 <Link href="/contact-us" className="btn-primary">
@@ -440,7 +439,7 @@ export default function DoctorsPage() {
           <div className="section-inner">
             <div className="doctors-profile-list">
               {doctors.map((doctor) => (
-                <DoctorProfile key={doctor.name} {...doctor} />
+                <DoctorProfile key={doctor.id} {...doctor} />
               ))}
             </div>
           </div>
