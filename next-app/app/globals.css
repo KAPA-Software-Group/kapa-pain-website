@@ -13,6 +13,15 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* Drawer reveal: content after the scroll-hero scrub slides up over the
+   static last frame as the user scrolls past the scrub. */
+.sh-reveal-wrap {
+  position: relative;
+  z-index: 10;
+  margin-top: -100vh;
+  background: transparent;
+}
+
 @theme inline {
   --font-sans: "DM Sans", system-ui, sans-serif;
   --font-serif: "Spectral", Georgia, serif;
@@ -52,7 +61,6 @@
 
 html {
   overflow-y: scroll;
-  scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
   max-width: 100%;
@@ -1335,6 +1343,10 @@ select {
   z-index: 4;
   height: 260vh;
   margin-top: 0;
+  padding-top: clamp(120px, 18vh, 200px);
+  border-top-left-radius: 50% 18vh;
+  border-top-right-radius: 50% 18vh;
+  box-shadow: 0 -36px 90px rgba(0, 0, 0, 0.35);
   background: linear-gradient(
     180deg,
     #dcd5bf 0%,
@@ -1347,11 +1359,6 @@ select {
   top: 0;
   height: 100svh;
   overflow: visible;
-  background-color: #f3d8b0;
-  background-image: url("/media/Background%20Road%20Map/backgrond%20v5.png");
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
 }
 
 /* Stage readouts */

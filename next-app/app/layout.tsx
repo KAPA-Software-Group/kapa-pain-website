@@ -5,7 +5,7 @@ import { RouteTransition } from "@/components/route-transition"
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
+  weight: ["300", "400", "500", "600", "700", "800"],
   variable: "--font-sans",
   display: "swap",
 })

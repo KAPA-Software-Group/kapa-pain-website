@@ -22,12 +22,6 @@ const MILESTONES: { t: number; side: "left"|"right"; zone: string }[] = [
   { t:0.92, side:"left",  zone:"Lasting relief" },
 ]
 
-const CARE_DISCIPLINES = [
-  "Interventional Radiology",
-  "Chronic Pain Specialists",
-  "Orthopaedic Surgeons",
-]
-
 const MILESTONE_CONTENT = [
   { title:"GP referral",              desc:"Ask your family physician for a referral. Most treatments are covered by OHIP once referred — no out-of-pocket starting line.",       foot:"Day 1 · paperwork-free for you" },
   { title:"Initial consultation",     desc:"A specialist reviews your history, symptoms, and imaging — without rush or assumptions. The conversation that should have happened sooner.", foot:"Average visit · 45 minutes" },
@@ -62,7 +56,6 @@ export function RoadmapSection() {
     const sticky = stickyRef.current
     if (!path || !car || !scene || !scroll || !sticky) return
 
-    // narrow to non-nullable for closures
     const _path   = path   as SVGPathElement
     const _car    = car    as HTMLDivElement
     const _scene  = scene  as HTMLDivElement
@@ -84,14 +77,12 @@ export function RoadmapSection() {
         visualViewport?.height ?? 0,
         window.innerHeight,
       )
-
       return { viewportW, viewportH }
     }
     const getScale = () => {
       const { viewportW, viewportH } = getViewport()
       const widthScale = viewportW / SCENE_W
       const heightScale = viewportH / SCENE_H
-
       return clampScale(Math.max(widthScale, heightScale))
     }
     const milestonePoints = MILESTONES.map(m => _path.getPointAtLength(m.t * pathLen))
@@ -175,7 +166,6 @@ export function RoadmapSection() {
         else card.classList.remove("show")
       })
 
-
       if (progReadRef.current) progReadRef.current.textContent = String(Math.round(p * 100)).padStart(3, "0") + "%"
       if (progBarRef.current) progBarRef.current.style.setProperty("--pj-progress", `${p * 100}%`)
       stopRefs.current.forEach((li, i) => {
@@ -205,338 +195,8 @@ export function RoadmapSection() {
     }
   }, [])
 
-  const veilRef = useRef<HTMLDivElement>(null)
-  const introGateReleasedRef = useRef(false)
-  const releaseIntroGateRef = useRef<(() => void) | null>(null)
-
-  useEffect(() => {
-    const intro = document.querySelector(".pj-intro") as HTMLElement | null
-    const road = scrollRef.current
-    const veil = veilRef.current
-    if (!intro || !road || !veil) return
-
-    const COVER_MS = 460
-    const HOLD_MS = 90
-    const CLEAR_MS = 720
-    const END_SLOP = 2
-    const GESTURE_QUIET_MS = 46
-    let isAnimating = false
-    let cooldown = 0
-    let gateHeld = false
-    let lastGateInputAt = 0
-    let lastScrollY = window.scrollY
-    let touchStartedAfterHold = false
-
-    const scrollWithoutSmooth = (targetTop: number) => {
-      const prev = document.documentElement.style.scrollBehavior
-      document.documentElement.style.scrollBehavior = "auto"
-      window.scrollTo({ top: targetTop, left: 0 })
-      document.documentElement.style.scrollBehavior = prev
-    }
-
-    const runTransition = (targetTop: number) => {
-      if (isAnimating || Date.now() - cooldown < 200) return
-      gateHeld = false
-      isAnimating = true
-      introGateReleasedRef.current = true
-      veil.classList.remove("clearing")
-      // force reflow so re-adding 'covering' restarts transitions
-      void veil.offsetWidth
-      veil.classList.add("covering")
-      window.setTimeout(() => {
-        road.style.visibility = ""
-        scrollWithoutSmooth(targetTop)
-        window.setTimeout(() => {
-          veil.classList.remove("covering")
-          veil.classList.add("clearing")
-          window.setTimeout(() => {
-            veil.classList.remove("clearing")
-            isAnimating = false
-            cooldown = Date.now()
-          }, CLEAR_MS)
-        }, HOLD_MS)
-      }, COVER_MS)
-    }
-
-    const getIntroEndTop = () =>
-      intro.offsetTop + intro.offsetHeight - window.innerHeight
-
-    const snapToIntroEnd = () => {
-      scrollWithoutSmooth(getIntroEndTop())
-    }
-
-    const holdAtIntroEnd = () => {
-      const wasHeld = gateHeld
-      gateHeld = true
-      introGateReleasedRef.current = false
-      touchStartedAfterHold = false
-      snapToIntroEnd()
-      if (!wasHeld) {
-        road.style.visibility = "hidden"
-      }
-      lastGateInputAt = performance.now()
-      lastScrollY = getIntroEndTop()
-    }
-
-    const releaseIntroHold = () => {
-      gateHeld = false
-      road.style.visibility = ""
-    }
-    releaseIntroGateRef.current = releaseIntroHold
-
-    const normalizeWheelDeltaY = (e: WheelEvent) => {
-      if (e.deltaMode === WheelEvent.DOM_DELTA_LINE) return e.deltaY * 16
-      if (e.deltaMode === WheelEvent.DOM_DELTA_PAGE) return e.deltaY * window.innerHeight
-      return e.deltaY
-    }
-
-    const shouldCatchIntroEnd = (deltaY: number) => {
-      const introEndTop = getIntroEndTop()
-      return window.scrollY < introEndTop - END_SLOP &&
-        window.scrollY + deltaY >= introEndTop - END_SLOP
-    }
-
-    const atIntroEndGate = () => {
-      const introEndTop = getIntroEndTop()
-      const roadTop = intro.offsetTop + intro.offsetHeight
-      const y = window.scrollY
-
-      return y >= introEndTop - END_SLOP && y < roadTop - END_SLOP
-    }
-
-    const onWheel = (e: WheelEvent) => {
-      if (isAnimating) { e.preventDefault(); return }
-      const deltaY = normalizeWheelDeltaY(e)
-
-      if (gateHeld) {
-        e.preventDefault()
-        const now = performance.now()
-        const isFreshScroll = now - lastGateInputAt >= GESTURE_QUIET_MS
-        lastGateInputAt = now
-        if (deltaY < 0) {
-          const targetTop = Math.max(0, getIntroEndTop() + deltaY)
-          releaseIntroHold()
-          introGateReleasedRef.current = false
-          scrollWithoutSmooth(targetTop)
-          lastScrollY = window.scrollY
-          return
-        }
-        snapToIntroEnd()
-        if (deltaY > 0 && isFreshScroll) {
-          runTransition(intro.offsetTop + intro.offsetHeight)
-        }
-        return
-      }
-
-      if (deltaY > 0 && shouldCatchIntroEnd(deltaY)) {
-        e.preventDefault()
-        holdAtIntroEnd()
-        return
-      }
-
-      // At the end of Pain is Complex, hold the image until a second scroll starts the transition.
-      if (deltaY > 0 && atIntroEndGate()) {
-        e.preventDefault()
-        holdAtIntroEnd()
-        return
-      }
-    }
-
-    const DOWN_KEYS = new Set(["PageDown", "ArrowDown", "Space", " ", "End"])
-    const UP_KEYS = new Set(["PageUp", "ArrowUp", "Home"])
-    const onKey = (e: KeyboardEvent) => {
-      if (isAnimating) { e.preventDefault(); return }
-      if (gateHeld) {
-        if (UP_KEYS.has(e.key)) {
-          e.preventDefault()
-          releaseIntroHold()
-          introGateReleasedRef.current = false
-          scrollWithoutSmooth(Math.max(0, getIntroEndTop() - window.innerHeight * 0.75))
-        } else if (DOWN_KEYS.has(e.key)) {
-          e.preventDefault()
-          snapToIntroEnd()
-          if (!e.repeat) runTransition(intro.offsetTop + intro.offsetHeight)
-        }
-        return
-      }
-      if (DOWN_KEYS.has(e.key) && shouldCatchIntroEnd(window.innerHeight)) {
-        e.preventDefault()
-        holdAtIntroEnd()
-      } else if (DOWN_KEYS.has(e.key) && atIntroEndGate()) {
-        e.preventDefault()
-        holdAtIntroEnd()
-      }
-    }
-
-    let touchStartY = 0
-    const onTouchStart = (e: TouchEvent) => {
-      touchStartY = e.touches[0]?.clientY ?? 0
-      if (gateHeld) touchStartedAfterHold = true
-    }
-    const onTouchMove = (e: TouchEvent) => {
-      if (isAnimating) { e.preventDefault(); return }
-      const dy = touchStartY - (e.touches[0]?.clientY ?? 0)
-      if (Math.abs(dy) < 14) return
-      if (gateHeld) {
-        e.preventDefault()
-        if (dy < 0) {
-          releaseIntroHold()
-          introGateReleasedRef.current = false
-          scrollWithoutSmooth(Math.max(0, getIntroEndTop() + dy))
-          touchStartY = e.touches[0]?.clientY ?? touchStartY
-          lastScrollY = window.scrollY
-          return
-        }
-        snapToIntroEnd()
-        if (touchStartedAfterHold) {
-          runTransition(intro.offsetTop + intro.offsetHeight)
-        }
-        touchStartY = e.touches[0]?.clientY ?? touchStartY
-        return
-      }
-      if (dy > 0 && shouldCatchIntroEnd(dy)) {
-        e.preventDefault()
-        holdAtIntroEnd()
-      } else if (dy > 0 && atIntroEndGate()) {
-        e.preventDefault()
-        holdAtIntroEnd()
-        touchStartY = e.touches[0]?.clientY ?? touchStartY
-      }
-    }
-
-    const keepIntroEndCovered = () => {
-      if (isAnimating) return
-      const introEndTop = getIntroEndTop()
-      const y = window.scrollY
-      const scrollingDown = y > lastScrollY
-
-      if (y <= introEndTop - END_SLOP) {
-        releaseIntroHold()
-        introGateReleasedRef.current = false
-      } else if (!introGateReleasedRef.current && scrollingDown && y > introEndTop + END_SLOP) {
-        holdAtIntroEnd()
-        return
-      }
-
-      lastScrollY = window.scrollY
-    }
-
-    let pendingScrollCheck = false
-    const onScroll = () => {
-      if (pendingScrollCheck) return
-      pendingScrollCheck = true
-      requestAnimationFrame(() => {
-        pendingScrollCheck = false
-        keepIntroEndCovered()
-      })
-    }
-
-    window.addEventListener("wheel", onWheel, { passive: false, capture: true })
-    window.addEventListener("touchstart", onTouchStart, { passive: true })
-    window.addEventListener("touchmove", onTouchMove, { passive: false, capture: true })
-    window.addEventListener("keydown", onKey)
-    window.addEventListener("scroll", onScroll, { passive: true })
-    return () => {
-      road.style.visibility = ""
-      releaseIntroGateRef.current = null
-      window.removeEventListener("wheel", onWheel, true)
-      window.removeEventListener("touchstart", onTouchStart)
-      window.removeEventListener("touchmove", onTouchMove, true)
-      window.removeEventListener("keydown", onKey)
-      window.removeEventListener("scroll", onScroll)
-    }
-  }, [])
-
-  const scrollToRoad = () => {
-    const intro = document.querySelector(".pj-intro") as HTMLElement | null
-    const road = scrollRef.current
-    const veil = veilRef.current
-    if (!intro || !road || !veil) return
-    releaseIntroGateRef.current?.()
-    introGateReleasedRef.current = true
-    veil.classList.remove("clearing")
-    void veil.offsetWidth
-    veil.classList.add("covering")
-    window.setTimeout(() => {
-      const prev = document.documentElement.style.scrollBehavior
-      document.documentElement.style.scrollBehavior = "auto"
-      window.scrollTo({ top: intro.offsetTop + intro.offsetHeight, left: 0 })
-      document.documentElement.style.scrollBehavior = prev
-      window.setTimeout(() => {
-        veil.classList.remove("covering")
-        veil.classList.add("clearing")
-        window.setTimeout(() => veil.classList.remove("clearing"), 720)
-      }, 90)
-    }, 460)
-  }
-
   return (
     <>
-      {/* ── CLOUD VEIL — transition between intro and road ── */}
-      <div ref={veilRef} className="pj-cloud-veil" aria-hidden="true">
-        <div className="pj-cloud-base" />
-        <div className="pj-cloud-layer pj-cloud-l1" />
-        <div className="pj-cloud-layer pj-cloud-l2" />
-        <div className="pj-cloud-layer pj-cloud-l3" />
-        <div className="pj-cloud-layer pj-cloud-l4" />
-        <img
-          src="/media/logo/Logo.png"
-          alt=""
-          className="pj-cloud-logo"
-          aria-hidden="true"
-        />
-      </div>
-
-      {/* ── INTRO PORTAL ── */}
-      <section className="pj-intro" id="journey">
-        <div className="pj-intro-grid">
-          <div className="pj-refine-callout">
-            <div>
-              <span className="pj-refine-kicker">Our Standard</span>
-              <h2 className="pj-refine-title">Refining modern medicine.</h2>
-            </div>
-            <div className="pj-refine-disciplines" aria-label="Care disciplines">
-              {CARE_DISCIPLINES.map((discipline) => (
-                <span key={discipline} className="pj-refine-discipline">
-                  {discipline}
-                </span>
-              ))}
-            </div>
-          </div>
-
-          <div className="pj-intro-rule" aria-hidden="true" />
-
-          <div className="pj-portal">
-            <div className="pj-portal-text">
-              <h2 className="pj-portal-h">
-                <span className="word">Pain is</span>
-                <span className="word complex">complex</span>
-              </h2>
-              <p className="pj-portal-bridge">We make the path clear.</p>
-              <p className="pj-portal-body">
-                Six stops. One road. Your story, told the way it actually unfolds —
-                from the bumpy uncertainty of the first referral to the steady ground
-                of lasting relief.
-              </p>
-            </div>
-
-            <aside className="pj-portal-aside" aria-hidden="true">
-              <p className="pj-portal-stamp">
-                06<br/>
-                <span style={{ fontSize: "0.4em", opacity: 0.65 }}>stops</span>
-              </p>
-            </aside>
-          </div>
-
-          <div className="pj-portal-foot">
-            <button className="pj-hint" onClick={scrollToRoad}>
-              Scroll to follow the road
-              <span className="arrow" aria-hidden="true"/>
-            </button>
-          </div>
-        </div>
-      </section>
-
       {/* ── STICKY ROAD SCROLL ── */}
       <div ref={scrollRef} className="pj-road-scroll" id="road">
         <div ref={stickyRef} className="pj-road-sticky">
@@ -557,12 +217,9 @@ export function RoadmapSection() {
           </ol>
 
           <div ref={sceneRef} className="pj-road-scene">
-            {/* Atmospheric backdrop */}
-            {/* Fill divs extend above/below the 3200px SVG to cover translateY gaps */}
             <div className="pj-scene-fill pj-scene-fill-top" aria-hidden="true" />
             <div className="pj-scene-fill pj-scene-fill-bot" aria-hidden="true" />
 
-            {/* Road SVG */}
             <svg className="pj-road-svg" width="800" height={SVG_H}
               viewBox={`0 0 800 ${SVG_H}`} xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
               <defs>
@@ -580,7 +237,6 @@ export function RoadmapSection() {
               <ellipse ref={carGlowRef} cx="400" cy="0" rx="36" ry="44" fill="url(#carHalo2)" opacity="0"/>
             </svg>
 
-            {/* Car — ink dot with cream ring + clay halo */}
             <div ref={carRef} className="pj-car">
               <svg width="40" height="40" viewBox="-20 -20 40 40" overflow="visible" aria-hidden="true">
                 <circle cx="0" cy="0" r="18" fill="#9f7657" fillOpacity="0.18"/>
@@ -591,7 +247,6 @@ export function RoadmapSection() {
             </div>
           </div>
 
-          {/* Milestone cards */}
           {MILESTONES.map((m, i) => (
             <div
               key={i}

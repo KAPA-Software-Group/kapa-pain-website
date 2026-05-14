@@ -67,10 +67,19 @@ export function SiteHeader({ overlay = false }: SiteHeaderProps) {
 
   useEffect(() => {
     if (!overlay) return
-    const onScroll = () => setScrolled(window.scrollY > 60)
+    const getScrubBottom = () => {
+      const el = document.querySelector(".sh-root") as HTMLElement | null
+      if (!el) return 60
+      return el.offsetTop + el.offsetHeight - window.innerHeight
+    }
+    const onScroll = () => setScrolled(window.scrollY > getScrubBottom())
     onScroll()
     window.addEventListener("scroll", onScroll, { passive: true })
-    return () => window.removeEventListener("scroll", onScroll)
+    window.addEventListener("resize", onScroll, { passive: true })
+    return () => {
+      window.removeEventListener("scroll", onScroll)
+      window.removeEventListener("resize", onScroll)
+    }
   }, [overlay])
 
   useEffect(() => {

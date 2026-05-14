@@ -1,12 +1,18 @@
 import Link from "next/link"
-import { HeroSection } from "@/components/hero-section"
 import { RoadmapSection } from "@/components/roadmap-section"
+import { ScrollHero } from "@/components/scroll-hero"
 import { SiteFooter } from "@/components/site-footer"
+import { SiteHeader } from "@/components/site-header"
+import { RevealObserver } from "@/components/reveal-observer"
 
 export default function Home() {
   return (
     <>
-      <HeroSection />
+      <RevealObserver />
+      <SiteHeader overlay />
+      <ScrollHero />
+
+      <div className="sh-reveal-wrap">
 
       {/* ═══ 02  PHILOSOPHY + ROADMAP ═════════════════════ */}
       <RoadmapSection />
@@ -220,6 +226,7 @@ export default function Home() {
       </section>
 
       <SiteFooter />
+      </div>
     </>
   )
 }
