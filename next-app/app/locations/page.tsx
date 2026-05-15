@@ -431,7 +431,7 @@ export default function LocationsPage() {
       <SiteHeader overlay />
 
       <main
-        className="page-shell locations-reveal-root"
+        className="page-shell locations-reveal-root hero-drawer-reveal"
         data-locations-reveal-root
       >
         <section className="inner-hero procedure-hero">

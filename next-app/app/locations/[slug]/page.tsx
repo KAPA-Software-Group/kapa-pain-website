@@ -39,7 +39,7 @@ export default async function LocationDetailPage({ params }: Props) {
     <>
       <SiteHeader overlay />
 
-      <main className="page-shell">
+      <main className="page-shell hero-drawer-reveal">
         {/* ── Dark hero ── */}
         <section className="inner-hero">
           <div className="section-inner inner-hero-content">

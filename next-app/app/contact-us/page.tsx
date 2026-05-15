@@ -390,7 +390,7 @@ export default function ContactUsPage() {
     <>
       <SiteHeader overlay />
 
-      <main className="page-shell contact-page-scope">
+      <main className="page-shell contact-page-scope hero-drawer-reveal">
         <style>{contactPageStyles}</style>
 
         <section className="inner-hero procedure-hero">

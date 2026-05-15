@@ -241,11 +241,16 @@ export function SiteHeader({ overlay = false }: SiteHeaderProps) {
         <button
           type="button"
           className="nav-menu-toggle"
+          aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
           aria-expanded={menuOpen}
           aria-controls="site-mobile-nav"
           onClick={() => setMenuOpen((open) => !open)}
         >
-          {menuOpen ? "Close" : "Menu"}
+          <span className="nav-menu-toggle-icon" aria-hidden="true">
+            <span />
+            <span />
+            <span />
+          </span>
         </button>
       </div>
 

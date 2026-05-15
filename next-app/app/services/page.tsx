@@ -100,7 +100,7 @@ export default function ServicesPage() {
     <>
       <SiteHeader overlay />
 
-      <main className="page-shell procedure-shell">
+      <main className="page-shell procedure-shell hero-drawer-reveal">
         <section className="inner-hero procedure-hero">
           <ServicesHeroBackground />
           <div className="section-inner procedure-hero-content">

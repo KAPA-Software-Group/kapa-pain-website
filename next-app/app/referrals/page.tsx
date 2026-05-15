@@ -372,7 +372,7 @@ export default function ReferralsPage() {
     <>
       <SiteHeader overlay />
 
-      <main className="page-shell referrals-page-scope">
+      <main className="page-shell referrals-page-scope hero-drawer-reveal">
         <style>{referralsPageStyles}</style>
 
         <section className="inner-hero procedure-hero">

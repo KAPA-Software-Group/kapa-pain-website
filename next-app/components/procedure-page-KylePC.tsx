@@ -227,7 +227,7 @@ export function ProcedurePageView({ page }: ProcedurePageViewProps) {
       />
 
       <main
-        className="page-shell procedure-shell patient-procedure-shell patient-procedure-detail-reveal-root"
+        className="page-shell procedure-shell patient-procedure-shell patient-procedure-detail-reveal-root hero-drawer-reveal"
         data-patient-procedure-detail-reveal-root
       >
         <ProcedureSideNav items={sideNavItems} />

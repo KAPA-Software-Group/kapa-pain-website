@@ -17,7 +17,7 @@ export function PlaceholderPage({
     <>
       <SiteHeader overlay />
 
-      <main className="page-shell">
+      <main className="page-shell hero-drawer-reveal">
         <section className="inner-hero">
           <div className="section-inner inner-hero-content">
             <div className="section-label">{eyebrow}</div>

@@ -29,13 +29,22 @@ export function ProcedureSideNav({ items }: ProcedureSideNavProps) {
       Array.from(document.querySelectorAll<HTMLElement>(sel)),
     )
     const heroEl = document.querySelector<HTMLElement>(".procedure-hero")
+    const contentSections = Array.from(
+      document.querySelectorAll<HTMLElement>(
+        ".procedure-hero ~ section:not(.procedure-nav-strip)",
+      ),
+    )
 
     const update = () => {
       const probeY = window.innerHeight / 2
+      const firstVisibleContentEl = contentSections.find(
+        (el) => el.getClientRects().length > 0,
+      )
 
-      if (heroEl) {
-        const heroBottom = heroEl.getBoundingClientRect().bottom
-        setIsVisible(heroBottom <= 80)
+      if (firstVisibleContentEl) {
+        setIsVisible(firstVisibleContentEl.getBoundingClientRect().top <= 80)
+      } else if (heroEl) {
+        setIsVisible(heroEl.getBoundingClientRect().bottom <= 80)
       } else {
         setIsVisible(window.scrollY > 200)
       }

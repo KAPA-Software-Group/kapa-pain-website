@@ -236,7 +236,7 @@ export default function FaqPage() {
         `}
       </style>
 
-      <main className="page-shell">
+      <main className="page-shell hero-drawer-reveal">
         <section className="inner-hero procedure-hero">
           <div className="section-inner procedure-hero-content">
             <div className="procedure-hero-centered">

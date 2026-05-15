@@ -181,7 +181,7 @@ export default function PatientProceduresPage() {
       />
 
       <main
-        className="page-shell procedure-shell patient-procedure-shell patient-procedures-reveal-root"
+        className="page-shell procedure-shell patient-procedure-shell patient-procedures-reveal-root hero-drawer-reveal"
         data-patient-procedures-reveal-root
       >
         <section className="inner-hero procedure-hero">

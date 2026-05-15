@@ -388,7 +388,7 @@ export default function DoctorsPage() {
       <SiteHeader overlay />
 
       <main
-        className="page-shell doctors-shell doctors-reveal-root"
+        className="page-shell doctors-shell doctors-reveal-root hero-drawer-reveal"
         data-doctors-reveal-root
       >
         <section className="inner-hero procedure-hero doctors-hero">

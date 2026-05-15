@@ -132,7 +132,7 @@ export function ServiceDetailPage({ page }: { page: ServiceDetailPageData }) {
         `}
       </style>
 
-      <main className="page-shell procedure-shell service-detail-shell">
+      <main className="page-shell procedure-shell service-detail-shell hero-drawer-reveal">
         <section
           className={[
             "inner-hero",
