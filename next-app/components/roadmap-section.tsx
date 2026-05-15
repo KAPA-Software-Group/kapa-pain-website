@@ -6,19 +6,27 @@ const FRAME_COUNT = 149
 const FRAME_PATH = (i: number) =>
   `/media/road-scrub-frames/f${String(i).padStart(3, "0")}.webp`
 
-// Six evenly-spaced milestone stops across the scrub: 1/7, 2/7, ..., 6/7
+// Six milestone stops, evenly tiled across the scrub. Each card owns a
+// segment of progress: [i/6 .. (i+1)/6] with a small cross-fade overlap.
 const MILESTONES = [
-  { t: 1 / 7, title: "GP referral",              desc: "Ask your family physician for a referral. Most treatments are covered by OHIP once referred — no out-of-pocket starting line.",       foot: "Day 1 · paperwork-free for you" },
-  { t: 2 / 7, title: "Initial consultation",     desc: "A specialist reviews your history, symptoms, and imaging — without rush or assumptions. The conversation that should have happened sooner.", foot: "Average visit · 45 minutes" },
-  { t: 3 / 7, title: "Multidisciplinary review", desc: "Your case is assessed across five specialties before any path is proposed. Five sets of eyes; one coherent plan.",                       foot: "Five disciplines · one room" },
-  { t: 4 / 7, title: "Personalised care plan",   desc: "A strategy built around your condition and response — a plan, not a protocol. Adjusted as we learn what your body answers to.",         foot: "Built for you, not from a template" },
-  { t: 5 / 7, title: "Treatment & procedures",   desc: "Image-guided injections, regenerative therapy, and integrated care — delivered at the source, with millimetric precision.",             foot: "Onsite fluoroscopy & ultrasound" },
-  { t: 6 / 7, title: "Monitoring & adjustment",  desc: "Regular follow-ups track your progress and adjust your plan based on real outcomes. Care that doesn't end at the procedure.",           foot: "Outcomes reviewed · quarterly" },
-]
+  { title: "GP referral",              titleLines: ["GP", "referral"],                  desc: "Ask your family physician for a referral. Most treatments are covered by OHIP once referred — no out-of-pocket starting line." },
+  { title: "Initial consultation",     titleLines: ["Initial", "consultation"],         desc: "A specialist reviews your history, symptoms, and imaging — without rush or assumptions. The conversation that should have happened sooner." },
+  { title: "Multidisciplinary review", titleLines: ["Multidisciplinary", "review"],     desc: "Your case is assessed across five specialties before any path is proposed. Five sets of eyes; one coherent plan." },
+  { title: "Personalised care plan",   titleLines: ["Personalised", "care plan"],       desc: "A strategy built around your condition and response — a plan, not a protocol. Adjusted as we learn what your body answers to." },
+  { title: "Treatment & procedures",   titleLines: ["Treatment &", "procedures"],       desc: "Image-guided injections, regenerative therapy, and integrated care — delivered at the source, with millimetric precision." },
+  { title: "Monitoring & adjustment",  titleLines: ["Monitoring &", "adjustment"],      desc: "Regular follow-ups track your progress and adjust your plan based on real outcomes. Care that doesn't end at the procedure." },
+].map((m, i, arr) => {
+  // segment center; used for sidebar "is-passed" cue
+  const t = (i + 0.5) / arr.length
+  return { ...m, t }
+})
 
-// Show window around each milestone t
-const SHOW_BEFORE = 0.04
-const SHOW_AFTER = 0.10
+const CARD_FADE = 0.04 // fade-in/out width on each side of a card's segment
+
+function smoothstep(a: number, b: number, x: number) {
+  const t = Math.max(0, Math.min(1, (x - a) / (b - a)))
+  return t * t * (3 - 2 * t)
+}
 
 export function RoadmapSection() {
   const containerRef = useRef<HTMLDivElement | null>(null)
@@ -29,9 +37,10 @@ export function RoadmapSection() {
   const drawnIndexRef = useRef(-1)
   const rafRef = useRef<number | null>(null)
   const cardsRef = useRef<(HTMLDivElement | null)[]>([])
-  const stopRefs = useRef<(HTMLLIElement | null)[]>([])
+  const progressRefs = useRef<(HTMLDivElement | null)[]>([])
 
   useEffect(() => {
+    const containerEl = containerRef.current
     const imgs: HTMLImageElement[] = []
     for (let i = 1; i <= FRAME_COUNT; i++) {
       const img = new Image()
@@ -75,28 +84,52 @@ export function RoadmapSection() {
       if (!container) return 0
       const rect = container.getBoundingClientRect()
       const viewport = window.innerHeight
-      const scrollable = rect.height - viewport
-      if (scrollable <= 0) return 0
-      return Math.max(0, Math.min(1, -rect.top / scrollable))
+      const drawerDistance = viewport * 1.65
+      const entering = rect.top > 0 && rect.top < drawerDistance && rect.bottom > viewport
+      const drawerProgress = entering
+        ? Math.max(0, Math.min(1, 1 - rect.top / drawerDistance))
+        : 1
+      const drawer = entering ? 1 - smoothstep(0, 1, drawerProgress) : 0
+      container.classList.toggle("is-prepinned", entering)
+      container.style.setProperty("--pj-road-drawer", `${drawer * 100}%`)
+      // Include the full-screen handoff in the scrub range. The road is
+      // fixed while entering, then sticky until its bottom reaches the
+      // viewport bottom, so progress spans that whole visible lock.
+      const scrubLength = rect.height
+      if (scrubLength <= 0) return 0
+      return Math.max(0, Math.min(1, (viewport - rect.top) / scrubLength))
     }
 
     const applyMilestones = (p: number) => {
+      const n = MILESTONES.length
       MILESTONES.forEach((m, i) => {
+        const start = i / n
+        const end = (i + 1) / n
+        // Crossfade at segment boundaries: each card is fully visible across
+        // its segment, fading in over [start-fade, start] and out over
+        // [end-fade, end] so neighbours cross smoothly with no dark gap.
+        const fadeIn = smoothstep(start - CARD_FADE, start, p)
+        const fadeOut = 1 - smoothstep(end - CARD_FADE, end, p)
+        const alpha = Math.max(0, Math.min(1, fadeIn * fadeOut))
         const card = cardsRef.current[i]
-        const stop = stopRefs.current[i]
         if (card) {
-          if (p >= m.t - SHOW_BEFORE && p <= m.t + SHOW_AFTER) card.classList.add("show")
-          else card.classList.remove("show")
+          card.style.opacity = String(alpha)
+          card.style.transform = `translateY(${(1 - alpha) * 32}px)`
+          card.style.pointerEvents = alpha > 0.5 ? "auto" : "none"
         }
-        if (stop) {
-          if (p >= m.t - 0.01) stop.classList.add("is-passed")
-          else stop.classList.remove("is-passed")
+        const progressItem = progressRefs.current[i]
+        if (progressItem) {
+          const stepFill = Math.max(0, Math.min(1, (p - start) / (end - start)))
+          progressItem.style.setProperty("--pj-step-fill", `${stepFill * 100}%`)
+          progressItem.classList.toggle("is-passed", p >= end)
+          progressItem.classList.toggle("is-active", p >= start && p < end)
         }
       })
     }
 
     const tick = () => {
-      const lerp = 0.28
+      // Smooth, cinematic scrub: lower damping avoids frame jumps on wheel/touchpad input.
+      const lerp = 0.18
       currentRef.current += (targetRef.current - currentRef.current) * lerp
       const idx = Math.max(
         0,
@@ -129,6 +162,8 @@ export function RoadmapSection() {
     window.addEventListener("resize", onResize)
     return () => {
       if (rafRef.current !== null) window.cancelAnimationFrame(rafRef.current)
+      containerEl?.classList.remove("is-prepinned")
+      containerEl?.style.removeProperty("--pj-road-drawer")
       window.removeEventListener("scroll", onScroll)
       window.removeEventListener("resize", onResize)
     }
@@ -145,21 +180,21 @@ export function RoadmapSection() {
             className="pj-road-canvas"
           />
 
-          {/* Sidebar — journey stops */}
-          <ol className="pj-stop-list" aria-label="Journey stops">
+          {/* Step progress */}
+          <div className="pj-step-progress" aria-label="Journey progress">
             {MILESTONES.map((m, i) => (
-              <li
+              <div
                 key={i}
-                ref={(el) => { stopRefs.current[i] = el }}
-                className="pj-stop-item"
+                ref={(el) => { progressRefs.current[i] = el }}
+                className="pj-step-progress-item"
               >
-                <span className="pj-stop-num">Step {String(i + 1).padStart(2, "0")}</span>
-                <span className="pj-stop-title">{m.title}</span>
-              </li>
+                <span className="pj-step-progress-track" />
+                <span className="pj-step-progress-label">Step {String(i + 1).padStart(2, "0")}</span>
+              </div>
             ))}
-          </ol>
+          </div>
 
-          {/* Right-side milestone cards */}
+          {/* Full-screen milestone overlays */}
           {MILESTONES.map((m, i) => (
             <div
               key={i}
@@ -170,12 +205,12 @@ export function RoadmapSection() {
               <div className="pj-mc-head">
                 <span className="pj-mc-num">Step {String(i + 1).padStart(2, "0")}</span>
               </div>
-              <div className="pj-mc-title">{m.title}</div>
-              <p className="pj-mc-desc">{m.desc}</p>
-              <div className="pj-mc-foot">
-                <span className="dot" aria-hidden="true" />
-                {m.foot}
+              <div className="pj-mc-title">
+                {m.titleLines.map((line) => (
+                  <span key={line}>{line}</span>
+                ))}
               </div>
+              <p className="pj-mc-desc">{m.desc}</p>
             </div>
           ))}
         </div>

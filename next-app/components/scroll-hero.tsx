@@ -112,7 +112,7 @@ export function ScrollHero({ className = "" }: ScrollHeroProps) {
     }
 
     const tick = () => {
-      const lerp = 0.28
+      const lerp = 0.16
       currentRef.current += (targetRef.current - currentRef.current) * lerp
       const idx = Math.max(
         0,
