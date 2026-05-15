@@ -4,24 +4,51 @@ import { useEffect, useRef } from "react"
 
 const FRAME_COUNT = 149
 const FRAME_PATH = (i: number) =>
-  `/media/road-scrub-frames/f${String(i).padStart(3, "0")}.webp`
+  `/media/road-scrub-frames-optimized/f${String(i).padStart(3, "0")}.webp`
+const MAX_CANVAS_WIDTH = 1440
+const SCRUB_LERP = 0.115
+const SCRUB_SETTLE_EPSILON = 0.00025
 
 // Six milestone stops, evenly tiled across the scrub. Each card owns a
 // segment of progress: [i/6 .. (i+1)/6] with a small cross-fade overlap.
 const MILESTONES = [
-  { title: "GP referral",              titleLines: ["GP", "referral"],                  desc: "Ask your family physician for a referral. Most treatments are covered by OHIP once referred — no out-of-pocket starting line." },
-  { title: "Initial consultation",     titleLines: ["Initial", "consultation"],         desc: "A specialist reviews your history, symptoms, and imaging — without rush or assumptions. The conversation that should have happened sooner." },
-  { title: "Multidisciplinary review", titleLines: ["Multidisciplinary", "review"],     desc: "Your case is assessed across five specialties before any path is proposed. Five sets of eyes; one coherent plan." },
-  { title: "Personalised care plan",   titleLines: ["Personalised", "care plan"],       desc: "A strategy built around your condition and response — a plan, not a protocol. Adjusted as we learn what your body answers to." },
-  { title: "Treatment & procedures",   titleLines: ["Treatment &", "procedures"],       desc: "Image-guided injections, regenerative therapy, and integrated care — delivered at the source, with millimetric precision." },
-  { title: "Monitoring & adjustment",  titleLines: ["Monitoring &", "adjustment"],      desc: "Regular follow-ups track your progress and adjust your plan based on real outcomes. Care that doesn't end at the procedure." },
+  {
+    title: "GP referral",
+    titleLines: ["GP", "referral"],
+    desc: "Ask your family physician for a referral. Most treatments are covered by OHIP once referred — no out-of-pocket starting line.",
+  },
+  {
+    title: "Initial consultation",
+    titleLines: ["Initial", "consultation"],
+    desc: "A specialist reviews your history, symptoms, and imaging — without rush or assumptions. The conversation that should have happened sooner.",
+  },
+  {
+    title: "Multidisciplinary review",
+    titleLines: ["Multidisciplinary", "review"],
+    desc: "Your case is assessed across five specialties before any path is proposed. Five sets of eyes; one coherent plan.",
+  },
+  {
+    title: "Personalised care plan",
+    titleLines: ["Personalised", "care plan"],
+    desc: "A strategy built around your condition and response — a plan, not a protocol. Adjusted as we learn what your body answers to.",
+  },
+  {
+    title: "Treatment & procedures",
+    titleLines: ["Treatment &", "procedures"],
+    desc: "Image-guided injections, regenerative therapy, and integrated care — delivered at the source, with millimetric precision.",
+  },
+  {
+    title: "Monitoring & adjustment",
+    titleLines: ["Monitoring &", "adjustment"],
+    desc: "Regular follow-ups track your progress and adjust your plan based on real outcomes. Care that doesn't end at the procedure.",
+  },
 ].map((m, i, arr) => {
   // segment center; used for sidebar "is-passed" cue
   const t = (i + 0.5) / arr.length
   return { ...m, t }
 })
 
-const CARD_FADE = 0.04 // fade-in/out width on each side of a card's segment
+const CARD_FADE = 0.065 // fade-in/out width on each side of a card's segment
 
 function smoothstep(a: number, b: number, x: number) {
   const t = Math.max(0, Math.min(1, (x - a) / (b - a)))
@@ -34,49 +61,123 @@ export function RoadmapSection() {
   const framesRef = useRef<HTMLImageElement[]>([])
   const targetRef = useRef(0)
   const currentRef = useRef(0)
-  const drawnIndexRef = useRef(-1)
+  const drawnFrameRef = useRef(-1)
   const rafRef = useRef<number | null>(null)
+  const ctxRef = useRef<CanvasRenderingContext2D | null>(null)
+  const canvasSizeRef = useRef({ width: 0, height: 0 })
   const cardsRef = useRef<(HTMLDivElement | null)[]>([])
   const progressRefs = useRef<(HTMLDivElement | null)[]>([])
 
   useEffect(() => {
     const containerEl = containerRef.current
-    const imgs: HTMLImageElement[] = []
-    for (let i = 1; i <= FRAME_COUNT; i++) {
-      const img = new Image()
-      img.decoding = "async"
-      img.src = FRAME_PATH(i)
-      if (i === 1) {
-        img.onload = () => drawFrame(0)
-      }
-      imgs.push(img)
-    }
-    framesRef.current = imgs
+    let disposed = false
 
-    const drawFrame = (idx: number) => {
+    const findNearestLoadedFrame = (index: number) => {
+      const frames = framesRef.current
+      const maxDistance = frames.length - 1
+
+      for (let distance = 0; distance <= maxDistance; distance++) {
+        const before = index - distance
+        const after = index + distance
+        const beforeImg = frames[before]
+        const afterImg = frames[after]
+
+        if (beforeImg?.complete && beforeImg.naturalWidth > 0) return before
+        if (afterImg?.complete && afterImg.naturalWidth > 0) return after
+      }
+
+      return -1
+    }
+
+    const resizeCanvas = () => {
       const canvas = canvasRef.current
-      const img = framesRef.current[idx]
-      if (!canvas || !img || !img.complete || img.naturalWidth === 0) return
-      if (drawnIndexRef.current === idx) return
-      const ctx = canvas.getContext("2d", { alpha: false })
-      if (!ctx) return
-      const dpr = Math.min(window.devicePixelRatio || 1, 2)
+      if (!canvas) return
+
       const cw = canvas.clientWidth
       const ch = canvas.clientHeight
-      const targetW = Math.round(cw * dpr)
-      const targetH = Math.round(ch * dpr)
+      if (cw <= 0 || ch <= 0) return
+
+      const pixelRatio = Math.min(window.devicePixelRatio || 1, 1.25)
+      const targetW = Math.round(Math.min(cw * pixelRatio, MAX_CANVAS_WIDTH))
+      const targetH = Math.round(targetW * (ch / cw))
+
       if (canvas.width !== targetW) canvas.width = targetW
       if (canvas.height !== targetH) canvas.height = targetH
+
+      canvasSizeRef.current = { width: targetW, height: targetH }
+      drawnFrameRef.current = -1
+    }
+
+    const drawImageCover = (
+      ctx: CanvasRenderingContext2D,
+      img: HTMLImageElement,
+      width: number,
+      height: number
+    ) => {
       const ir = img.naturalWidth / img.naturalHeight
-      const cr = targetW / targetH
-      let dw = targetW
-      let dh = targetH
-      if (ir > cr) dw = targetH * ir
-      else dh = targetW / ir
-      const dx = (targetW - dw) / 2
-      const dy = (targetH - dh) / 2
+      const cr = width / height
+      let dw = width
+      let dh = height
+
+      if (ir > cr) dw = height * ir
+      else dh = width / ir
+
+      const dx = (width - dw) / 2
+      const dy = (height - dh) / 2
       ctx.drawImage(img, dx, dy, dw, dh)
-      drawnIndexRef.current = idx
+    }
+
+    const drawScrubFrame = (progress: number) => {
+      const canvas = canvasRef.current
+      if (!canvas) return
+
+      const exactFrame = Math.max(
+        0,
+        Math.min(FRAME_COUNT - 1, progress * (FRAME_COUNT - 1))
+      )
+      if (Math.abs(drawnFrameRef.current - exactFrame) < 0.003) return
+
+      const baseIndex = Math.floor(exactFrame)
+      const nextIndex = Math.min(FRAME_COUNT - 1, baseIndex + 1)
+      let baseImg = framesRef.current[baseIndex]
+      let nextImg: HTMLImageElement | undefined = framesRef.current[nextIndex]
+      let canBlend = true
+
+      if (!baseImg?.complete || baseImg.naturalWidth === 0) {
+        const fallbackIndex = findNearestLoadedFrame(baseIndex)
+        if (fallbackIndex < 0) return
+        baseImg = framesRef.current[fallbackIndex]
+        nextImg = undefined
+        canBlend = false
+      }
+
+      const ctx = ctxRef.current ?? canvas.getContext("2d", { alpha: false })
+      if (!ctx) return
+      ctxRef.current = ctx
+      if (!canvasSizeRef.current.width || !canvasSizeRef.current.height) {
+        resizeCanvas()
+      }
+      const { width: targetW, height: targetH } = canvasSizeRef.current
+      if (!targetW || !targetH) return
+      ctx.imageSmoothingEnabled = true
+      ctx.imageSmoothingQuality = "low"
+
+      ctx.globalAlpha = 1
+      drawImageCover(ctx, baseImg, targetW, targetH)
+
+      const blend = exactFrame - baseIndex
+      if (
+        canBlend &&
+        blend > 0.001 &&
+        nextImg?.complete &&
+        nextImg.naturalWidth > 0
+      ) {
+        ctx.globalAlpha = blend
+        drawImageCover(ctx, nextImg, targetW, targetH)
+        ctx.globalAlpha = 1
+      }
+
+      drawnFrameRef.current = exactFrame
     }
 
     const computeProgress = () => {
@@ -85,19 +186,19 @@ export function RoadmapSection() {
       const rect = container.getBoundingClientRect()
       const viewport = window.innerHeight
       const drawerDistance = viewport * 1.65
-      const entering = rect.top > 0 && rect.top < drawerDistance && rect.bottom > viewport
+      const entering =
+        rect.top > 0 && rect.top < drawerDistance && rect.bottom > viewport
       const drawerProgress = entering
         ? Math.max(0, Math.min(1, 1 - rect.top / drawerDistance))
         : 1
       const drawer = entering ? 1 - smoothstep(0, 1, drawerProgress) : 0
       container.classList.toggle("is-prepinned", entering)
       container.style.setProperty("--pj-road-drawer", `${drawer * 100}%`)
-      // Include the full-screen handoff in the scrub range. The road is
-      // fixed while entering, then sticky until its bottom reaches the
-      // viewport bottom, so progress spans that whole visible lock.
-      const scrubLength = rect.height
+      // Keep the entry handoff on step one. The scrub starts once the road
+      // reaches the top of the viewport, then finishes as the sticky releases.
+      const scrubLength = rect.height - viewport
       if (scrubLength <= 0) return 0
-      return Math.max(0, Math.min(1, (viewport - rect.top) / scrubLength))
+      return Math.max(0, Math.min(1, -rect.top / scrubLength))
     }
 
     const applyMilestones = (p: number) => {
@@ -120,7 +221,7 @@ export function RoadmapSection() {
         const progressItem = progressRefs.current[i]
         if (progressItem) {
           const stepFill = Math.max(0, Math.min(1, (p - start) / (end - start)))
-          progressItem.style.setProperty("--pj-step-fill", `${stepFill * 100}%`)
+          progressItem.style.setProperty("--pj-step-fill", String(stepFill))
           progressItem.classList.toggle("is-passed", p >= end)
           progressItem.classList.toggle("is-active", p >= start && p < end)
         }
@@ -128,19 +229,17 @@ export function RoadmapSection() {
     }
 
     const tick = () => {
-      // Smooth, cinematic scrub: lower damping avoids frame jumps on wheel/touchpad input.
-      const lerp = 0.18
-      currentRef.current += (targetRef.current - currentRef.current) * lerp
-      const idx = Math.max(
-        0,
-        Math.min(FRAME_COUNT - 1, Math.round(currentRef.current * (FRAME_COUNT - 1)))
-      )
-      drawFrame(idx)
+      currentRef.current +=
+        (targetRef.current - currentRef.current) * SCRUB_LERP
+      drawScrubFrame(currentRef.current)
       applyMilestones(currentRef.current)
-      if (Math.abs(targetRef.current - currentRef.current) > 0.0005) {
+      if (
+        Math.abs(targetRef.current - currentRef.current) > SCRUB_SETTLE_EPSILON
+      ) {
         rafRef.current = window.requestAnimationFrame(tick)
       } else {
         currentRef.current = targetRef.current
+        drawScrubFrame(currentRef.current)
         applyMilestones(currentRef.current)
         rafRef.current = null
       }
@@ -148,20 +247,43 @@ export function RoadmapSection() {
 
     const wake = () => {
       targetRef.current = computeProgress()
-      if (rafRef.current === null) rafRef.current = window.requestAnimationFrame(tick)
+      if (rafRef.current === null)
+        rafRef.current = window.requestAnimationFrame(tick)
     }
 
     const onScroll = () => wake()
     const onResize = () => {
-      drawnIndexRef.current = -1
+      resizeCanvas()
       wake()
     }
 
+    const imgs = Array.from({ length: FRAME_COUNT }, () => new Image())
+    framesRef.current = imgs
+    imgs.forEach((img, index) => {
+      img.decoding = "async"
+      img.fetchPriority = index < 12 ? "high" : "low"
+      img.onload = () => {
+        if (disposed) return
+        const targetIndex = Math.round(targetRef.current * (FRAME_COUNT - 1))
+        if (index === 0 || Math.abs(index - targetIndex) <= 2) {
+          drawnFrameRef.current = -1
+          wake()
+        }
+      }
+      img.src = FRAME_PATH(index + 1)
+    })
+
+    resizeCanvas()
     wake()
     window.addEventListener("scroll", onScroll, { passive: true })
     window.addEventListener("resize", onResize)
     return () => {
+      disposed = true
       if (rafRef.current !== null) window.cancelAnimationFrame(rafRef.current)
+      imgs.forEach((img) => {
+        img.onload = null
+      })
+      ctxRef.current = null
       containerEl?.classList.remove("is-prepinned")
       containerEl?.style.removeProperty("--pj-road-drawer")
       window.removeEventListener("scroll", onScroll)
@@ -185,11 +307,15 @@ export function RoadmapSection() {
             {MILESTONES.map((m, i) => (
               <div
                 key={i}
-                ref={(el) => { progressRefs.current[i] = el }}
+                ref={(el) => {
+                  progressRefs.current[i] = el
+                }}
                 className="pj-step-progress-item"
               >
                 <span className="pj-step-progress-track" />
-                <span className="pj-step-progress-label">Step {String(i + 1).padStart(2, "0")}</span>
+                <span className="pj-step-progress-label">
+                  Step {String(i + 1).padStart(2, "0")}
+                </span>
               </div>
             ))}
           </div>
@@ -198,12 +324,16 @@ export function RoadmapSection() {
           {MILESTONES.map((m, i) => (
             <div
               key={i}
-              ref={(el) => { cardsRef.current[i] = el }}
+              ref={(el) => {
+                cardsRef.current[i] = el
+              }}
               className="pj-mc"
               data-zone={m.title}
             >
               <div className="pj-mc-head">
-                <span className="pj-mc-num">Step {String(i + 1).padStart(2, "0")}</span>
+                <span className="pj-mc-num">
+                  Step {String(i + 1).padStart(2, "0")}
+                </span>
               </div>
               <div className="pj-mc-title">
                 {m.titleLines.map((line) => (
@@ -221,9 +351,12 @@ export function RoadmapSection() {
         <div className="pj-outro-inner">
           <div className="pj-outro-k">End of chapter one</div>
           <h3 className="pj-outro-h">
-            Six stops behind you. <em>Now,</em> the specialties that make each one possible.
+            Six stops behind you. <em>Now,</em> the specialties that make each
+            one possible.
           </h3>
-          <a href="#specialties" className="pj-outro-cta">Continue · Specialties</a>
+          <a href="#specialties" className="pj-outro-cta">
+            Continue · Specialties
+          </a>
         </div>
       </section>
     </>
