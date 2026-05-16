@@ -195,7 +195,7 @@ export function ScrollHero({ className = "" }: ScrollHeroProps) {
                   <span className="sh-arrow" aria-hidden>→</span>
                 </Link>
                 <a href="#specialties" className="sh-btn-ghost">
-                  Our Specialties
+                  Our Treatments
                 </a>
               </div>
             </aside>
@@ -372,13 +372,13 @@ export function ScrollHero({ className = "" }: ScrollHeroProps) {
         }
         .sh-sub {
           font-family: var(--font-sans, "DM Sans", system-ui, sans-serif);
-          font-size: 14px;
+          font-size: 19px;
           font-weight: 400;
-          line-height: 1.7;
-          color: rgba(246, 239, 227, 0.85);
+          line-height: 1.6;
+          color: rgba(246, 239, 227, 0.9);
           margin: 0;
           text-shadow: 0 2px 12px rgba(0, 0, 0, 0.55);
-          max-width: 36ch;
+          max-width: 38ch;
         }
         .sh-actions {
           display: flex;
@@ -389,13 +389,13 @@ export function ScrollHero({ className = "" }: ScrollHeroProps) {
         }
         .sh-btn-primary {
           font-family: var(--font-sans, "DM Sans", system-ui, sans-serif);
-          font-size: 11px;
+          font-size: 15px;
           font-weight: 600;
           letter-spacing: 0.2em;
           text-transform: uppercase;
           color: var(--sh-ink);
           background: var(--sh-cream);
-          padding: 17px 26px 17px 30px;
+          padding: 22px 34px 22px 38px;
           text-decoration: none;
           display: inline-flex;
           align-items: center;
@@ -420,7 +420,7 @@ export function ScrollHero({ className = "" }: ScrollHeroProps) {
         }
         .sh-btn-ghost {
           font-family: var(--font-sans, "DM Sans", system-ui, sans-serif);
-          font-size: 11px;
+          font-size: 14px;
           font-weight: 500;
           letter-spacing: 0.2em;
           text-transform: uppercase;

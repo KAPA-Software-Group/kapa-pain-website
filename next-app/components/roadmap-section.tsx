@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useRef } from "react"
+import Link from "next/link"
 
 const FRAME_COUNT = 149
 const FRAME_PATH = (i: number) =>
@@ -15,7 +16,8 @@ const MILESTONES = [
   {
     title: "GP referral",
     titleLines: ["GP", "referral"],
-    desc: "Ask your family physician for a referral. Most treatments are covered by OHIP once referred — no out-of-pocket starting line.",
+    desc: "Ask your family physician for a referral. Our chronic pain specialists are FHO-exempt. If you don't have a referral — no problem.",
+    cta: { href: "/contact-us", label: "Contact us" },
   },
   {
     title: "Initial consultation",
@@ -23,19 +25,19 @@ const MILESTONES = [
     desc: "A specialist reviews your history, symptoms, and imaging — without rush or assumptions. The conversation that should have happened sooner.",
   },
   {
-    title: "Multidisciplinary review",
-    titleLines: ["Multidisciplinary", "review"],
-    desc: "Your case is assessed across five specialties before any path is proposed. Five sets of eyes; one coherent plan.",
-  },
-  {
     title: "Personalised care plan",
     titleLines: ["Personalised", "care plan"],
     desc: "A strategy built around your condition and response — a plan, not a protocol. Adjusted as we learn what your body answers to.",
   },
   {
-    title: "Treatment & procedures",
-    titleLines: ["Treatment &", "procedures"],
+    title: "Image-guided intervention",
+    titleLines: ["Image-guided", "intervention"],
     desc: "Image-guided injections, regenerative therapy, and integrated care — delivered at the source, with millimetric precision.",
+  },
+  {
+    title: "Multidisciplinary review",
+    titleLines: ["Multidisciplinary", "review"],
+    desc: "Your case is assessed across five specialties before any path is proposed. Five sets of eyes; one coherent plan.",
   },
   {
     title: "Monitoring & adjustment",
@@ -340,7 +342,15 @@ export function RoadmapSection() {
                   <span key={line}>{line}</span>
                 ))}
               </div>
-              <p className="pj-mc-desc">{m.desc}</p>
+              <div className="pj-mc-body">
+                <p className="pj-mc-desc">{m.desc}</p>
+                {"cta" in m && m.cta ? (
+                  <Link href={m.cta.href} className="pj-mc-cta">
+                    {m.cta.label}
+                    <span className="pj-mc-cta-arrow" aria-hidden>→</span>
+                  </Link>
+                ) : null}
+              </div>
             </div>
           ))}
         </div>
@@ -349,13 +359,12 @@ export function RoadmapSection() {
       {/* ── OUTRO ── */}
       <section className="pj-outro">
         <div className="pj-outro-inner">
-          <div className="pj-outro-k">End of chapter one</div>
           <h3 className="pj-outro-h">
-            Six stops behind you. <em>Now,</em> the specialties that make each
+            Six stops behind you. <em>Now,</em> the treatments that make each
             one possible.
           </h3>
           <a href="#specialties" className="pj-outro-cta">
-            Continue · Specialties
+            Continue · Treatments
           </a>
         </div>
       </section>
