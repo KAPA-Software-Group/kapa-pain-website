@@ -68,6 +68,7 @@ export function RoadmapSection() {
   useEffect(() => {
     const containerEl = containerRef.current
     let disposed = false
+    const wakeTimers: number[] = []
 
     const findNearestLoadedFrame = (index: number) => {
       const frames = framesRef.current
@@ -206,8 +207,9 @@ export function RoadmapSection() {
         // Crossfade at segment boundaries: each card is fully visible across
         // its segment, fading in over [start-fade, start] and out over
         // [end-fade, end] so neighbours cross smoothly with no dark gap.
-        const fadeIn = smoothstep(start - CARD_FADE, start, p)
-        const fadeOut = 1 - smoothstep(end - CARD_FADE, end, p)
+        const fadeIn = i === 0 ? 1 : smoothstep(start - CARD_FADE, start, p)
+        const fadeOut =
+          i === n - 1 ? 1 : 1 - smoothstep(end - CARD_FADE, end, p)
         const alpha = Math.max(0, Math.min(1, fadeIn * fadeOut))
         const card = cardsRef.current[i]
         if (card) {
@@ -220,7 +222,10 @@ export function RoadmapSection() {
           const stepFill = Math.max(0, Math.min(1, (p - start) / (end - start)))
           progressItem.style.setProperty("--pj-step-fill", String(stepFill))
           progressItem.classList.toggle("is-passed", p >= end)
-          progressItem.classList.toggle("is-active", p >= start && p < end)
+          progressItem.classList.toggle(
+            "is-active",
+            p >= start && (p < end || i === n - 1)
+          )
         }
       })
     }
@@ -244,14 +249,40 @@ export function RoadmapSection() {
 
     const wake = () => {
       targetRef.current = computeProgress()
-      if (rafRef.current === null)
-        rafRef.current = window.requestAnimationFrame(tick)
+      const hasAppliedMilestones = cardsRef.current.some(
+        (card) => card?.style.opacity
+      )
+      if (!hasAppliedMilestones) {
+        currentRef.current = targetRef.current
+        drawnFrameRef.current = -1
+        drawScrubFrame(currentRef.current)
+        applyMilestones(currentRef.current)
+      }
+      if (rafRef.current !== null) window.cancelAnimationFrame(rafRef.current)
+      rafRef.current = window.requestAnimationFrame(tick)
+    }
+
+    const queueWake = () => {
+      wake()
+      window.requestAnimationFrame(() => {
+        if (!disposed) wake()
+      })
+      ;[80, 250, 600].forEach((delay) => {
+        wakeTimers.push(
+          window.setTimeout(() => {
+            if (!disposed) wake()
+          }, delay)
+        )
+      })
     }
 
     const onScroll = () => wake()
     const onResize = () => {
       resizeCanvas()
       wake()
+    }
+    const onVisibilityChange = () => {
+      if (document.visibilityState === "visible") queueWake()
     }
 
     const imgs = Array.from({ length: FRAME_COUNT }, () => new Image())
@@ -271,11 +302,15 @@ export function RoadmapSection() {
     })
 
     resizeCanvas()
-    wake()
+    queueWake()
     window.addEventListener("scroll", onScroll, { passive: true })
+    document.addEventListener("scroll", onScroll, { passive: true })
     window.addEventListener("resize", onResize)
+    window.addEventListener("pageshow", queueWake)
+    document.addEventListener("visibilitychange", onVisibilityChange)
     return () => {
       disposed = true
+      wakeTimers.forEach((timer) => window.clearTimeout(timer))
       if (rafRef.current !== null) window.cancelAnimationFrame(rafRef.current)
       imgs.forEach((img) => {
         img.onload = null
@@ -284,7 +319,10 @@ export function RoadmapSection() {
       containerEl?.classList.remove("is-prepinned")
       containerEl?.style.removeProperty("--pj-road-drawer")
       window.removeEventListener("scroll", onScroll)
+      document.removeEventListener("scroll", onScroll)
       window.removeEventListener("resize", onResize)
+      window.removeEventListener("pageshow", queueWake)
+      document.removeEventListener("visibilitychange", onVisibilityChange)
     }
   }, [])
 

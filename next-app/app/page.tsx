@@ -20,7 +20,7 @@ export default function Home() {
         <section className="section specialties" id="our-specialists">
           <div className="section-inner">
             <div className="spec-slide-head">
-              <div className="section-label reveal">The Difference</div>
+              <div className="section-label reveal">Specialties</div>
               <h2 className="display-heading spec-heading reveal reveal-delay-1">
                 Led by an <em>interventional radiologist</em>.
               </h2>
@@ -49,19 +49,23 @@ export default function Home() {
                 {[
                   {
                     title: "Images guide the procedure.",
+                    href: "/doctors#interventional-radiology",
                     desc: "The target is confirmed on screen, helping the treatment reach the irritated joint, nerve, tendon, or soft tissue.",
                   },
                   {
                     title: "Your case is read in context.",
+                    href: "/doctors#anesthesiology-pain-medicine",
                     desc: "Previous imaging, symptoms, exam findings, and medical history are reviewed together before a plan is recommended.",
                   },
                   {
                     title: "One plan connects the team.",
+                    href: "/doctors#nurse-practitioner-pain-consulting",
                     desc: "Interventional radiology works alongside chronic pain and musculoskeletal care, so the next step is clear.",
                   },
                 ].map((item, index) => (
-                  <article
+                  <Link
                     key={item.title}
+                    href={item.href}
                     className={`spec-proof-row reveal reveal-delay-${index + 3}`}
                   >
                     <span className="spec-proof-index">
@@ -69,7 +73,7 @@ export default function Home() {
                     </span>
                     <h3 className="spec-proof-title">{item.title}</h3>
                     <p className="spec-proof-desc">{item.desc}</p>
-                  </article>
+                  </Link>
                 ))}
               </div>
             </div>
@@ -79,7 +83,7 @@ export default function Home() {
         {/* ═══ 03  SERVICES ══════════════════════════════════ */}
         <section className="section services" id="specialties">
           <div className="section-inner">
-            <div className="section-label reveal">Treatments</div>
+            <div className="section-label reveal">Treatments / Services</div>
             <div className="services-header">
               <h2 className="display-heading services-heading reveal reveal-delay-1">
                 Every dimension of pain, addressed.

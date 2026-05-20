@@ -45,7 +45,7 @@ const SERVICES_ITEMS = [
 const NAV_ITEMS = [
   { href: "/patient-procedures", label: "Patient Procedures", dropdown: "procedures" as const },
   { href: "/services", label: "Services", dropdown: "services" as const },
-  { href: "/doctors", label: "Doctors" },
+  { href: "/doctors", label: "Specialties" },
   { href: "/locations", label: "Locations" },
   { href: "/contact-us", label: "Contact Us" },
   { href: "/faq", label: "FAQ" },

@@ -80,7 +80,7 @@ const doctorsPageStyles = `
   }
 
   .doctors-page-scope .doctors-profile {
-    grid-template-columns: minmax(0, 720px) minmax(320px, 380px);
+    grid-template-columns: minmax(0, 700px) minmax(340px, 420px);
     justify-content: space-between;
     align-items: stretch;
     padding: clamp(78px, 9vw, 128px) 0;
@@ -94,7 +94,7 @@ const doctorsPageStyles = `
   }
 
   .doctors-page-scope .doctors-profile[data-quote-side="left"] {
-    grid-template-columns: minmax(320px, 380px) minmax(0, 720px);
+    grid-template-columns: minmax(340px, 420px) minmax(0, 700px);
   }
 
   .doctors-page-scope .doctors-profile:first-child {
@@ -134,14 +134,14 @@ const doctorsPageStyles = `
     position: relative;
     top: auto;
     width: 100%;
-    max-width: 380px;
+    max-width: 420px;
     align-self: start;
-    height: clamp(260px, 24vw, 320px);
+    height: clamp(300px, 25vw, 360px);
     min-height: 0;
     padding: clamp(24px, 2.5vw, 32px);
     align-items: flex-start;
-    justify-content: space-between;
-    gap: 24px;
+    justify-content: flex-start;
+    gap: clamp(32px, 4vw, 54px);
     transition:
       opacity 650ms var(--ease),
       border-color 280ms ease,
@@ -160,10 +160,28 @@ const doctorsPageStyles = `
 
   .doctors-page-scope .doctors-quote {
     width: 100%;
-    max-width: min(100%, 28ch);
-    font-size: clamp(26px, 2.5vw, 38px);
-    line-height: 1.12;
+    max-width: min(100%, 30ch);
+    font-size: clamp(24px, 2.1vw, 32px);
+    line-height: 1.16;
     overflow-wrap: break-word;
+  }
+
+  .doctors-page-scope #interventional-radiology .doctors-quote {
+    font-size: clamp(22px, 1.9vw, 30px);
+    line-height: 1.18;
+  }
+
+  .doctors-page-scope .doctors-profile[data-quote-side="left"] .doctors-quote-card {
+    align-self: center;
+    height: clamp(260px, 22vw, 310px);
+    padding: clamp(26px, 2.7vw, 36px);
+    gap: clamp(34px, 4vw, 52px);
+  }
+
+  .doctors-page-scope .doctors-profile[data-quote-side="left"] .doctors-quote {
+    max-width: min(100%, 24ch);
+    font-size: clamp(25px, 2.2vw, 34px);
+    line-height: 1.15;
   }
 
   @media (hover: hover) and (pointer: fine) {
@@ -334,12 +352,14 @@ function renderBiography(paragraph: string) {
 
 function DoctorProfile({
   biography,
+  id,
   philosophy,
   practice,
   quoteSide,
 }: DoctorProfileProps) {
   return (
     <article
+      id={id}
       className="doctors-profile"
       data-doctors-reveal="profile"
       data-quote-side={quoteSide}

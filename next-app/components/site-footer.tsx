@@ -6,7 +6,7 @@ import { Fragment, useEffect, useRef, useState } from "react"
 
 const NAV_LINKS = [
   { href: "/", label: "Home" },
-  { href: "/doctors", label: "Our Doctors" },
+  { href: "/doctors", label: "Specialties" },
   { href: "/locations", label: "Locations" },
   { href: "/contact-us", label: "Contact Us" },
   { href: "/faq", label: "FAQ's" },
