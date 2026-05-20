@@ -187,7 +187,6 @@ export default function PatientProceduresPage() {
         <section className="inner-hero procedure-hero">
           <div className="section-inner procedure-hero-content">
             <div className="procedure-hero-centered">
-              <div className="section-label">Patient Procedures</div>
               <h1 className="inner-hero-title">Patient Procedures</h1>
               <p className="inner-hero-copy procedure-hero-copy">
                 Patient-friendly information about chronic pain assessment,

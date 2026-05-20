@@ -10,14 +10,14 @@ const MAX_CANVAS_WIDTH = 1440
 const SCRUB_LERP = 0.115
 const SCRUB_SETTLE_EPSILON = 0.00025
 
-// Six milestone stops, evenly tiled across the scrub. Each card owns a
-// segment of progress: [i/6 .. (i+1)/6] with a small cross-fade overlap.
+// Five milestone stops, evenly tiled across the scrub. Each card owns a
+// segment of progress with a small cross-fade overlap.
 const MILESTONES = [
   {
     title: "GP referral",
     titleLines: ["GP", "referral"],
-    desc: "Ask your family physician for a referral. Our chronic pain specialists are FHO-exempt. If you don't have a referral — no problem.",
-    cta: { href: "/contact-us", label: "Contact us" },
+    desc: "Ask your family physician for a referral.",
+    cta: { href: "/referrals", label: "Referral form" },
   },
   {
     title: "Initial consultation",
@@ -25,14 +25,9 @@ const MILESTONES = [
     desc: "A specialist reviews your history, symptoms, and imaging — without rush or assumptions. The conversation that should have happened sooner.",
   },
   {
-    title: "Personalised care plan",
-    titleLines: ["Personalised", "care plan"],
-    desc: "A strategy built around your condition and response — a plan, not a protocol. Adjusted as we learn what your body answers to.",
-  },
-  {
     title: "Image-guided intervention",
     titleLines: ["Image-guided", "intervention"],
-    desc: "Image-guided injections, regenerative therapy, and integrated care — delivered at the source, with millimetric precision.",
+    desc: "Image-guided intervention, regenerative therapy, and integrated care — delivered at the source, with millimetric precision.",
   },
   {
     title: "Multidisciplinary review",
@@ -360,7 +355,7 @@ export function RoadmapSection() {
       <section className="pj-outro">
         <div className="pj-outro-inner">
           <h3 className="pj-outro-h">
-            Six stops behind you. <em>Now,</em> the treatments that make each
+            Five stops behind you. <em>Now,</em> the treatments that make each
             one possible.
           </h3>
           <a href="#specialties" className="pj-outro-cta">

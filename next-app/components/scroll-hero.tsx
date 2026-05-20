@@ -224,7 +224,7 @@ export function ScrollHero({ className = "" }: ScrollHeroProps) {
               ))}
             </div>
             <p className="sh-body">
-              Six stops. One road. Your story, told the way it actually unfolds —
+              Five stops. One road. Your story, told the way it actually unfolds —
               from the bumpy uncertainty of the first referral to the steady
               ground of lasting relief.
             </p>

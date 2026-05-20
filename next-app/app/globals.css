@@ -1541,7 +1541,7 @@ select {
   width: min(620px, calc(100vw - 48px));
   transform: translateX(-50%);
   display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: clamp(8px, 1.2vw, 16px);
   pointer-events: none;
 }
@@ -1907,7 +1907,7 @@ select {
 }
 .pj-mc-desc {
   font-family: var(--font-sans, "DM Sans", system-ui, sans-serif);
-  font-size: clamp(17px, 1.45vw, 22px);
+  font-size: clamp(19px, 1.65vw, 25px);
   font-weight: 400;
   color: rgba(246, 239, 227, 0.84);
   line-height: 1.72;
@@ -2086,7 +2086,7 @@ select {
     font-size: clamp(31px, 9vw, 54px);
   }
   .pj-mc-desc {
-    font-size: 16px;
+    font-size: 18px;
   }
   .pj-step-progress-label {
     display: none;

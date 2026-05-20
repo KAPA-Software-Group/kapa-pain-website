@@ -63,7 +63,7 @@ export function BridgeSection() {
       {/* Light zone — promise, stats, CTA */}
       <div className="bridge-light">
         <p className="bridge-body br br-d1">
-          Six stops. One road. Your story, told the way it actually
+          Five stops. One road. Your story, told the way it actually
           unfolds — from the bumpy uncertainty of the first referral
           to the steady ground of lasting relief.
         </p>
