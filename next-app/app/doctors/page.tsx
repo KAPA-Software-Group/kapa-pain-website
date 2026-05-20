@@ -414,7 +414,6 @@ export default function DoctorsPage() {
         <section className="inner-hero procedure-hero doctors-hero">
           <div className="section-inner procedure-hero-content">
             <div className="procedure-hero-centered">
-              <div className="section-label">Medical Team</div>
               <h1 className="inner-hero-title">Clinical Practices</h1>
               <p className="inner-hero-copy procedure-hero-copy">
                 Learn about the clinical practices behind Precision Care

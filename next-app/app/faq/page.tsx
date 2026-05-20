@@ -240,7 +240,6 @@ export default function FaqPage() {
         <section className="inner-hero procedure-hero">
           <div className="section-inner procedure-hero-content">
             <div className="procedure-hero-centered">
-              <div className="section-label">Patient Questions</div>
               <h1 className="inner-hero-title">
                 Frequently Asked Questions
               </h1>

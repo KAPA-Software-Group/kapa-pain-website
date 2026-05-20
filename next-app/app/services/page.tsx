@@ -39,10 +39,10 @@ const SERVICES = [
     eyebrow: "Anatomy-Based Care",
     title: "Landmark Injections",
     summary:
-      "Landmark injections use anatomical landmarks and careful physical assessment to target accessible painful joints, muscles, tendons, and soft tissue concerns.",
+      "Landmark injections use anatomical landmarks and careful physical assessment to target accessible painful muscles, tendons, and soft tissue concerns.",
     highlights: [
       "Anatomy-based targeting",
-      "Joint and soft tissue care",
+      "Muscle and soft tissue care",
       "Physical assessment guided",
       "Targeted pain relief",
     ],
@@ -114,7 +114,6 @@ export default function ServicesPage() {
           <ServicesHeroBackground />
           <div className="section-inner procedure-hero-content">
             <div className="procedure-hero-centered">
-              <div className="section-label">Our Services</div>
               <h1 className="inner-hero-title">Services</h1>
               <p className="inner-hero-copy procedure-hero-copy">
                 Precision Care Centre provides targeted, evidence-informed

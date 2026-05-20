@@ -396,7 +396,6 @@ export default function ContactUsPage() {
         <section className="inner-hero procedure-hero">
           <div className="section-inner procedure-hero-content">
             <div className="procedure-hero-centered">
-              <div className="section-label">Get In Touch</div>
               <h1 className="inner-hero-title">Contact Us</h1>
               <p className="inner-hero-copy procedure-hero-copy">
                 Questions about a referral, a procedure, or scheduling? Reach

@@ -437,7 +437,6 @@ export default function LocationsPage() {
         <section className="inner-hero procedure-hero">
           <div className="section-inner procedure-hero-content">
             <div className="procedure-hero-centered">
-              <div className="section-label">Clinic Access</div>
               <h1 className="inner-hero-title">Locations</h1>
               <p className="inner-hero-copy procedure-hero-copy">
                 Browse Precision Care Centre locations in Brampton, Hamilton,

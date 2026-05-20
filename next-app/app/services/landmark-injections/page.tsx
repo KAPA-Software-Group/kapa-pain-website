@@ -7,7 +7,7 @@ import {
 export const metadata: Metadata = {
   title: "Landmark Injections | Precision Care Centre",
   description:
-    "Learn how Precision Care Centre uses landmark injections to target painful joints, muscles, tendons, and soft tissue concerns.",
+    "Learn how Precision Care Centre uses landmark injections to target painful muscles, tendons, and soft tissue concerns.",
 }
 
 const page: ServiceDetailPageData = {
@@ -19,7 +19,7 @@ const page: ServiceDetailPageData = {
   ],
   quickFacts: [
     { label: "Guidance", value: "Anatomical landmarks and assessment" },
-    { label: "Use", value: "Joints, muscles, tendons, and soft tissue" },
+    { label: "Use", value: "Muscles, tendons, and soft tissue" },
     { label: "Goal", value: "Targeted pain relief and improved function" },
   ],
   sections: [
@@ -32,7 +32,9 @@ const page: ServiceDetailPageData = {
       ],
       bulletLabel: "Common targets can include",
       bullets: [
-        "Painful joints",
+        "Myofascial pain syndrome",
+        "Fibromyalgia",
+        "Headaches",
         "Inflamed tendons",
         "Muscle trigger points",
         "Bursitis-related pain",

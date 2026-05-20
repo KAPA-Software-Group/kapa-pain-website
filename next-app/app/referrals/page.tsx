@@ -378,7 +378,6 @@ export default function ReferralsPage() {
         <section className="inner-hero procedure-hero">
           <div className="section-inner procedure-hero-content">
             <div className="procedure-hero-centered">
-              <div className="section-label">Provider Access</div>
               <h1 className="inner-hero-title">Refer a Patient</h1>
               <p className="inner-hero-copy procedure-hero-copy">
                 Physicians and healthcare providers can securely submit patient
