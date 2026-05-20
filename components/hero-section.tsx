@@ -19,7 +19,7 @@ export function HeroSection() {
     return () => window.removeEventListener("scroll", onScroll)
   }, [])
 
-  // Intersection observer — reveal elements on scroll
+  // Intersection observer - reveal elements on scroll
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -64,7 +64,7 @@ export function HeroSection() {
         {/* Content sits above shader */}
         <div className="hero-inner" style={{ position: "relative", zIndex: 1 }}>
           <p className="hero-label">
-            Precision Pain Centre — Brampton &amp; Hamilton
+            Precision Pain Centre - Brampton &amp; Hamilton
           </p>
           <h1 className="hero-headline">
             Where precision

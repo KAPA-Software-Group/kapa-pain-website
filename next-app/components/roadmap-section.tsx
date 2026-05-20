@@ -22,12 +22,12 @@ const MILESTONES = [
   {
     title: "Initial consultation",
     titleLines: ["Initial", "consultation"],
-    desc: "A specialist reviews your history, symptoms, and imaging — without rush or assumptions. The conversation that should have happened sooner.",
+    desc: "A specialist reviews your history, symptoms, and imaging - without rush or assumptions. The conversation that should have happened sooner.",
   },
   {
     title: "Image-guided intervention",
     titleLines: ["Image-guided", "intervention"],
-    desc: "Image-guided intervention, regenerative therapy, and integrated care — delivered at the source, with millimetric precision.",
+    desc: "Image-guided intervention, regenerative therapy, and integrated care - delivered at the source, with millimetric precision.",
   },
   {
     title: "Multidisciplinary review",

@@ -561,7 +561,7 @@ export default function ContactUsPage() {
                       className="contact-field-label"
                     >
                       Message
-                      <span className="contact-field-optional">— Optional</span>
+                      <span className="contact-field-optional"> - Optional</span>
                     </label>
                     <textarea
                       id="contact-message"

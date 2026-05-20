@@ -327,7 +327,7 @@ export const patientProcedurePages: ProcedurePage[] = [
       {
         title: "How diagnostic injections are interpreted",
         paragraphs: [
-          "A key purpose of some nerve blocks is diagnostic. By precisely targeting a nerve or joint and observing the pain response, the physician can gain important information about the likely source of the patient's symptoms — information that shapes the next treatment decision.",
+          "A key purpose of some nerve blocks is diagnostic. By precisely targeting a nerve or joint and observing the pain response, the physician can gain important information about the likely source of the patient's symptoms - information that shapes the next treatment decision.",
         ],
         bullets: [
           "Short-term pain relief after the injection can help confirm the diagnosis",
@@ -340,7 +340,7 @@ export const patientProcedurePages: ProcedurePage[] = [
         title: "Activity instructions after diagnostic injections",
         infoBox: {
           title: "Why the pain journal matters",
-          body: "The pain journal you receive is a clinical tool, not just a formality. Recording how your pain responds — and bringing that record to your follow-up appointment — directly shapes what treatment is recommended next. It is one of the most useful things you can do after this type of injection.",
+          body: "The pain journal you receive is a clinical tool, not just a formality. Recording how your pain responds - and bringing that record to your follow-up appointment - directly shapes what treatment is recommended next. It is one of the most useful things you can do after this type of injection.",
         },
         bullets: [
           "Stay active on the day of the procedure",
@@ -422,7 +422,7 @@ export const patientProcedurePages: ProcedurePage[] = [
       {
         title: "When radiofrequency ablation is commonly used",
         paragraphs: [
-          "Radiofrequency ablation is most appropriate when a diagnostic injection has already confirmed that a specific nerve is contributing to the patient's pain. It represents a logical next step in the treatment pathway — moving from a short-term diagnostic block toward a longer-lasting therapeutic result.",
+          "Radiofrequency ablation is most appropriate when a diagnostic injection has already confirmed that a specific nerve is contributing to the patient's pain. It represents a logical next step in the treatment pathway - moving from a short-term diagnostic block toward a longer-lasting therapeutic result.",
         ],
         bullets: [
           "Facet joint pain",
@@ -779,7 +779,7 @@ export const patientProcedurePages: ProcedurePage[] = [
       {
         title: "Symptoms and conditions it may help",
         paragraphs: [
-          "The stellate ganglion block is most often considered for patients with symptoms driven by sympathetic nervous system overactivation. By temporarily reducing that activity, some patients experience significant relief in hyperarousal, anxiety, and PTSD-related symptoms — often quickly enough to improve engagement with other therapies.",
+          "The stellate ganglion block is most often considered for patients with symptoms driven by sympathetic nervous system overactivation. By temporarily reducing that activity, some patients experience significant relief in hyperarousal, anxiety, and PTSD-related symptoms - often quickly enough to improve engagement with other therapies.",
         ],
         bullets: [
           "Post-traumatic stress disorder (PTSD)",
@@ -929,7 +929,7 @@ export const patientProcedurePages: ProcedurePage[] = [
           copy: "Best suited for an image of a modern interventional radiology or pain procedure room with imaging equipment visible.",
         },
         paragraphs: [
-          "Advanced procedures are not a first step. They are considered when standard therapies — including medications, rehabilitative care, and conventional image-guided injections — have not provided sufficient relief, or when a more targeted minimally invasive option is clinically appropriate.",
+          "Advanced procedures are not a first step. They are considered when standard therapies - including medications, rehabilitative care, and conventional image-guided injections - have not provided sufficient relief, or when a more targeted minimally invasive option is clinically appropriate.",
         ],
         bullets: [
           "When the pain condition is complex or chronic",

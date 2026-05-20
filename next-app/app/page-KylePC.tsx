@@ -23,7 +23,7 @@ export default function Home() {
           {[
             {
               name: "Image-Guided Procedures",
-              desc: "Fluoroscopic and ultrasound-guided injections deliver treatment precisely to the source — with real-time imaging accuracy.",
+              desc: "Fluoroscopic and ultrasound-guided injections deliver treatment precisely to the source - with real-time imaging accuracy.",
             },
             {
               name: "Regenerative & Sports Therapy",
@@ -39,11 +39,11 @@ export default function Home() {
             },
             {
               name: "Trigger Point Injections & Nerve Blocks",
-              desc: "Targeted treatments that relax painful muscle knots and interrupt pain signals from irritated nerves — providing meaningful relief, improved mobility, and direction for the next step in care.",
+              desc: "Targeted treatments that relax painful muscle knots and interrupt pain signals from irritated nerves - providing meaningful relief, improved mobility, and direction for the next step in care.",
             },
             {
               name: "Lidocaine & Ketamine Infusions",
-              desc: "Controlled IV treatments that calm overactive pain signals in the nervous system — considered for complex, persistent, or nerve-related pain when other treatments have not provided enough relief.",
+              desc: "Controlled IV treatments that calm overactive pain signals in the nervous system - considered for complex, persistent, or nerve-related pain when other treatments have not provided enough relief.",
             },
           ].map((s, i) => (
             <div

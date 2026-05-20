@@ -37,7 +37,7 @@ export function BridgeSection() {
         <span className="bridge-axis-word bridge-axis-to">relief</span>
       </div>
 
-      {/* Dark zone — disciplines */}
+      {/* Dark zone - disciplines */}
       <div className="bridge-dark">
         <p className="bridge-tagline br">Refining modern medicine.</p>
         <ul className="bridge-disciplines" aria-label="Specialties">
@@ -52,7 +52,7 @@ export function BridgeSection() {
         </ul>
       </div>
 
-      {/* Pivot — the big concept */}
+      {/* Pivot - the big concept */}
       <div className="bridge-pivot">
         <h2 className="bridge-pivot-h br">
           <em>a road,</em>
@@ -60,11 +60,11 @@ export function BridgeSection() {
         </h2>
       </div>
 
-      {/* Light zone — promise, stats, CTA */}
+      {/* Light zone - promise, stats, CTA */}
       <div className="bridge-light">
         <p className="bridge-body br br-d1">
           Five stops. One road. Your story, told the way it actually
-          unfolds — from the bumpy uncertainty of the first referral
+          unfolds - from the bumpy uncertainty of the first referral
           to the steady ground of lasting relief.
         </p>
 

@@ -20,10 +20,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const loc = getLocationBySlug(slug)
   if (!loc) return {}
   return {
-    title: `${loc.name} — Precision Pain Centre`,
+    title: `${loc.name} - Precision Pain Centre`,
     description:
       loc.status === "open"
-        ? `Precision Pain Centre ${loc.name} — ${loc.addressLines.join(", ")}.`
+        ? `Precision Pain Centre ${loc.name} - ${loc.addressLines.join(", ")}.`
         : `Precision Pain Centre is opening a ${loc.name} clinic soon.`,
   }
 }
@@ -58,7 +58,7 @@ export default async function LocationDetailPage({ params }: Props) {
           <LocationsBackground />
           <div className="loc-page-list loc-page-list-detail">
             <div className="loc-page-row">
-              {/* Left — address + map */}
+              {/* Left - address + map */}
               <div>
                 <p className="loc-page-contact-label">Address</p>
                 <address className="loc-page-address loc-page-address-lg">
@@ -89,7 +89,7 @@ export default async function LocationDetailPage({ params }: Props) {
                 )}
               </div>
 
-              {/* Right — contact + CTAs */}
+              {/* Right - contact + CTAs */}
               <div className="loc-page-right">
                 <p className="loc-page-contact-label">Contact</p>
                 <a href="tel:2897529388" className="loc-page-contact-line">

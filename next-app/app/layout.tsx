@@ -26,7 +26,7 @@ const jetbrainsMono = JetBrains_Mono({
 })
 
 export const metadata: Metadata = {
-  title: "Precision Pain Centre — Multidisciplinary Specialist Clinic",
+  title: "Precision Pain Centre - Multidisciplinary Specialist Clinic",
   description:
     "Evidence-based pain management delivered by a team of specialists across Brampton and Hamilton. Covered by OHIP when referred by your family physician.",
   keywords: [

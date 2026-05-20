@@ -170,7 +170,7 @@ export function ScrollHero({ className = "" }: ScrollHeroProps) {
         />
 
 
-        {/* ─────────────── PHASE A — Where precision meets care ─────────────── */}
+        {/* ─────────────── PHASE A - Where precision meets care ─────────────── */}
         <div
           ref={overlayARef}
           className={`sh-overlay sh-phase-a ${introIn ? "sh-in" : ""}`}
@@ -202,7 +202,7 @@ export function ScrollHero({ className = "" }: ScrollHeroProps) {
           </div>
         </div>
 
-        {/* ─────────────── PHASE B — Pain is complex ─────────────── */}
+        {/* ─────────────── PHASE B - Pain is complex ─────────────── */}
         <div
           ref={overlayBRef}
           className="sh-overlay sh-phase-b"
@@ -224,7 +224,7 @@ export function ScrollHero({ className = "" }: ScrollHeroProps) {
               ))}
             </div>
             <p className="sh-body">
-              Five stops. One road. Your story, told the way it actually unfolds —
+              Five stops. One road. Your story, told the way it actually unfolds - 
               from the bumpy uncertainty of the first referral to the steady
               ground of lasting relief.
             </p>
@@ -249,6 +249,20 @@ export function ScrollHero({ className = "" }: ScrollHeroProps) {
           color: var(--sh-cream);
           will-change: opacity, transform;
           transition: opacity 90ms linear;
+        }
+        .sh-headline,
+        .sh-headline span,
+        .sh-sub,
+        .sh-b-eyebrow,
+        .sh-portal-h,
+        .sh-portal-h span,
+        .sh-bridge,
+        .sh-disciplines,
+        .sh-discipline,
+        .sh-body {
+          background: transparent !important;
+          -webkit-backdrop-filter: none;
+          backdrop-filter: none;
         }
 
         /* ── Shared top row ── */
@@ -356,7 +370,7 @@ export function ScrollHero({ className = "" }: ScrollHeroProps) {
           transform: translateY(0);
           opacity: 1;
         }
-        /* accent line variant removed — uniform uppercase */
+        /* accent line variant removed - uniform uppercase */
 
         /* Meta column */
         .sh-meta {

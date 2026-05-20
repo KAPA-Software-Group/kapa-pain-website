@@ -19,7 +19,7 @@ export default function Home() {
               </h2>
               <p className="phil-body reveal reveal-delay-2">
                 We built Precision Pain Centre around a single conviction: every
-                patient deserves specialist-led, evidence-based care — without
+                patient deserves specialist-led, evidence-based care - without
                 financial barriers, without excessive wait times, and without
                 compromise. Our multidisciplinary team works together to
                 understand your pain from every angle and treat it with the
@@ -34,7 +34,7 @@ export default function Home() {
       {/* ═══ 03  SERVICES ══════════════════════════════════ */}
       <section className="section services" id="specialties">
         <div className="section-inner">
-          <div className="section-label reveal">02 — Specialties</div>
+          <div className="section-label reveal">02 - Specialties</div>
           <div className="services-header">
             <h2 className="display-heading services-heading reveal reveal-delay-1">
               Every dimension of pain, addressed.
@@ -44,7 +44,7 @@ export default function Home() {
             {
               n: "01",
               name: "Image-Guided Procedures",
-              desc: "Fluoroscopic and ultrasound-guided injections deliver treatment precisely to the source — with real-time imaging accuracy.",
+              desc: "Fluoroscopic and ultrasound-guided injections deliver treatment precisely to the source - with real-time imaging accuracy.",
             },
             {
               n: "02",
@@ -64,7 +64,7 @@ export default function Home() {
             {
               n: "05",
               name: "Mental Health Integration",
-              desc: "Psychological care woven into your treatment plan — because chronic pain and mental wellbeing are never separate.",
+              desc: "Psychological care woven into your treatment plan - because chronic pain and mental wellbeing are never separate.",
             },
           ].map((s, i) => (
             <div
@@ -82,7 +82,7 @@ export default function Home() {
       {/* ═══ 04  DIFFERENTIATORS ═══════════════════════════ */}
       <section className="section differ">
         <div className="section-inner">
-          <div className="section-label reveal">03 — Why Precision Care</div>
+          <div className="section-label reveal">03 - Why Precision Care</div>
           <h2 className="differ-heading reveal reveal-delay-1">
             Specialist access. Evidence-based care. No compromises.
           </h2>
@@ -96,12 +96,12 @@ export default function Home() {
               {
                 n: "02",
                 title: "Short Wait Times",
-                text: "Our streamlined intake process is designed to get you seen by the right specialist quickly — because timely care changes outcomes.",
+                text: "Our streamlined intake process is designed to get you seen by the right specialist quickly - because timely care changes outcomes.",
               },
               {
                 n: "03",
                 title: "All Under One Roof",
-                text: "Five distinct specialties, two locations. Your care is coordinated — not fragmented across multiple providers and referrals.",
+                text: "Five distinct specialties, two locations. Your care is coordinated - not fragmented across multiple providers and referrals.",
               },
               {
                 n: "04",
@@ -125,7 +125,7 @@ export default function Home() {
       {/* ═══ 05  PATIENT JOURNEY ═══════════════════════════ */}
       <section className="section journey">
         <div className="section-inner">
-          <div className="section-label reveal">04 — Getting Started</div>
+          <div className="section-label reveal">04 - Getting Started</div>
           <h2 className="display-heading journey-heading reveal reveal-delay-1">
             From first contact to lasting relief.
           </h2>
@@ -139,12 +139,12 @@ export default function Home() {
               {
                 n: "02",
                 title: "Initial Assessment",
-                desc: "A thorough consultation with your specialist to understand your history, symptoms, and goals — with no rush, no assumptions.",
+                desc: "A thorough consultation with your specialist to understand your history, symptoms, and goals - with no rush, no assumptions.",
               },
               {
                 n: "03",
                 title: "Personalised Plan",
-                desc: "Your care plan is built around your specific condition, lifestyle, and response — drawing on all five specialist disciplines where needed.",
+                desc: "Your care plan is built around your specific condition, lifestyle, and response - drawing on all five specialist disciplines where needed.",
               },
               {
                 n: "04",
@@ -168,7 +168,7 @@ export default function Home() {
       {/* ═══ 06  CONDITIONS ════════════════════════════════ */}
       <section className="section conditions" id="conditions">
         <div className="section-inner">
-          <div className="section-label reveal">05 — Conditions Treated</div>
+          <div className="section-label reveal">05 - Conditions Treated</div>
           <h2 className="display-heading conditions-heading reveal reveal-delay-1">
             If it hurts, we treat it.
           </h2>
@@ -188,7 +188,7 @@ export default function Home() {
       {/* ═══ 07  LOCATIONS ═════════════════════════════════ */}
       <section className="section locations" id="locations">
         <div className="section-inner">
-          <div className="section-label reveal">06 — Find Us</div>
+          <div className="section-label reveal">06 - Find Us</div>
           <h2 className="display-heading locations-heading reveal reveal-delay-1">
             Two clinics. One standard of care.
           </h2>
