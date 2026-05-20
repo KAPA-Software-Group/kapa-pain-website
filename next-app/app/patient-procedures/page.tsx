@@ -143,19 +143,17 @@ const patientProceduresPageStyles = `
   }
 
   .patient-procedures-reveal-root.is-reveal-enabled [data-patient-procedures-reveal] {
-    opacity: 0;
-    transform: translate3d(0, 32px, 0);
+    opacity: 1;
+    transform: none;
     transition:
-      opacity 780ms var(--ease),
-      transform 780ms var(--ease),
       border-color 280ms ease,
       box-shadow 280ms ease;
-    will-change: opacity, transform;
+    will-change: auto;
   }
 
   .patient-procedures-reveal-root.is-reveal-enabled [data-patient-procedures-reveal].is-loaded {
     opacity: 1;
-    transform: translate3d(0, 0, 0);
+    transform: none;
     will-change: auto;
   }
 

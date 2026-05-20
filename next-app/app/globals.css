@@ -3244,8 +3244,6 @@ a.loc-page-contact-line:hover {
 .procedure-facts {
   display: grid;
   gap: 16px;
-  animation: procedureFloatIn 0.9s var(--ease) both;
-  animation-delay: 0.14s;
 }
 .procedure-fact {
   position: relative;
@@ -4196,8 +4194,6 @@ a.loc-page-contact-line:hover {
     border-color 0.42s ease,
     box-shadow 0.42s ease,
     background 0.42s ease;
-  animation: procedureFloatIn 0.72s var(--ease) both;
-  animation-delay: calc(var(--stagger) * 80ms);
 }
 .procedure-hub-card-grid[data-card-count="1"] .procedure-hub-card {
   min-height: 320px;
@@ -4283,8 +4279,6 @@ a.loc-page-contact-line:hover {
     border-color 0.42s ease,
     box-shadow 0.42s ease,
     background 0.42s ease;
-  animation: procedureFloatIn 0.72s var(--ease) both;
-  animation-delay: calc(var(--stagger) * 80ms);
 }
 .services-list-card::before {
   content: "";
@@ -4862,8 +4856,6 @@ a.loc-page-contact-line:hover {
 }
 .service-hero-panel {
   min-width: 0;
-  animation: procedureFloatIn 0.9s var(--ease) both;
-  animation-delay: 0.18s;
 }
 .service-image-placeholder {
   position: relative;
@@ -4995,7 +4987,6 @@ a.loc-page-contact-line:hover {
   min-height: 140px;
   padding: clamp(22px, 3vw, 30px);
   border-right: 1px solid var(--hairline);
-  animation: procedureFloatIn 0.7s var(--ease) both;
 }
 .service-fact-tile:last-child {
   border-right: 0;
@@ -5109,7 +5100,6 @@ a.loc-page-contact-line:hover {
   display: grid;
   gap: 14px;
   padding: 0 24px 26px;
-  animation: procedureFloatIn 0.42s var(--ease) both;
 }
 .service-faq-answer p,
 .service-faq-answer li {
