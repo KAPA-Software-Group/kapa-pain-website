@@ -295,9 +295,9 @@ export default function Home() {
             </div>
           </div>
         </section>
-
-        <SiteFooter />
       </div>
+
+      <SiteFooter />
     </>
   )
 }

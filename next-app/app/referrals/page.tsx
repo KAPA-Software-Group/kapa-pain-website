@@ -19,7 +19,7 @@ const contactDetails = [
 const referralSteps = [
   {
     title: "Complete the secure referral form",
-    copy: "Submit the referral through the Hushmail form on this page. The form is hosted by Hushmail and submits directly through their secure form system.",
+    copy: "Submit the referral through the Hushmail form on this page. The form is hosted by Hushmail and submits directly through their secure form system. FOH EXEMPT",
   },
   {
     title: "Attach relevant imaging",
@@ -384,6 +384,7 @@ export default function ReferralsPage() {
                 referrals to Precision Care Centre through our Hushmail referral
                 portal. The secure form is embedded directly on this page.
               </p>
+              <p className="inner-hero-copy procedure-hero-copy">FOH EXEMPT</p>
               <div className="procedure-hero-actions">
                 <Link href="/contact-us" className="btn-ghost">
                   Contact the Clinic

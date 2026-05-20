@@ -16,7 +16,7 @@ const MILESTONES = [
   {
     title: "GP referral",
     titleLines: ["GP", "referral"],
-    desc: "Ask your family physician for a referral.",
+    desc: "Ask your family physician for a referral. FOH EXEMPT",
     cta: { href: "/referrals", label: "Referral form" },
   },
   {
