@@ -497,12 +497,12 @@ select {
   border-top-left-radius: inherit;
   border-top-right-radius: inherit;
 }
-.hero-drawer-reveal > .inner-hero ~ :not(.procedure-cta-section) {
+.hero-drawer-reveal > .inner-hero + :not(.procedure-cta-section) {
   position: relative;
   z-index: 2;
   background-color: var(--vanilla);
 }
-.hero-drawer-reveal > .inner-hero ~ .procedure-cta-section {
+.hero-drawer-reveal > .inner-hero + .procedure-cta-section {
   position: relative;
   z-index: 2;
   background: var(--page-dark);

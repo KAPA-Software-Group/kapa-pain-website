@@ -15,7 +15,7 @@ export function ProcedureSideNav({ items }: ProcedureSideNavProps) {
   const [activeId, setActiveId] = useState<string>(items[0]?.id ?? "")
   const [onDark, setOnDark] = useState(false)
   const [isVisible, setIsVisible] = useState(false)
-  const [isCollapsed, setIsCollapsed] = useState(false)
+  const [isCollapsed, setIsCollapsed] = useState(true)
 
   useEffect(() => {
     if (items.length === 0) return

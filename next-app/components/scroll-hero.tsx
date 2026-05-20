@@ -252,17 +252,28 @@ export function ScrollHero({ className = "" }: ScrollHeroProps) {
         }
         .sh-headline,
         .sh-headline span,
+        .sh-meta,
         .sh-sub,
+        .sh-b-center,
         .sh-b-eyebrow,
         .sh-portal-h,
         .sh-portal-h span,
         .sh-bridge,
+        .sh-b-bottom,
         .sh-disciplines,
         .sh-discipline,
         .sh-body {
           background: transparent !important;
+          box-shadow: none !important;
           -webkit-backdrop-filter: none;
           backdrop-filter: none;
+        }
+        .sh-sub,
+        .sh-b-eyebrow,
+        .sh-bridge,
+        .sh-disciplines,
+        .sh-body {
+          text-shadow: none !important;
         }
 
         /* ── Shared top row ── */
