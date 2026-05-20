@@ -5906,20 +5906,123 @@ a.loc-page-contact-line:hover {
   .sh-reveal-wrap > section {
     position: sticky;
     top: 0;
-    min-height: auto;
-    overflow: visible;
+    min-height: 100svh;
+    overflow: clip;
+  }
+
+  .sh-reveal-wrap > section.specialties,
+  .sh-reveal-wrap > section.services,
+  .sh-reveal-wrap > section.locations {
+    min-height: 100svh;
+  }
+
+  /* Conditions and locations are content sections — keep them scrollable,
+     not sticky, so there's no dead-scroll zone on mobile. */
+  .sh-reveal-wrap > section.conditions,
+  .sh-reveal-wrap > section.locations {
+    position: relative;
+    top: auto;
   }
 
   .section {
     min-height: auto;
   }
 
+  .section-inner {
+    padding-top: clamp(42px, 7svh, 58px);
+    padding-bottom: clamp(42px, 7svh, 58px);
+  }
+
   .pj-road-scroll {
+    height: 430svh;
     overflow: visible;
   }
 
   .pj-road-sticky {
+    height: 100svh;
+    min-height: 100svh;
     overflow: hidden;
+  }
+
+  .pj-road-scroll.is-prepinned .pj-road-sticky {
+    border-top-left-radius: 24px;
+    border-top-right-radius: 24px;
+  }
+
+  .pj-step-progress {
+    top: max(76px, calc(env(safe-area-inset-top) + 64px));
+    width: min(320px, calc(100vw - 32px));
+    gap: 6px;
+  }
+
+  .pj-step-progress-item {
+    gap: 0;
+  }
+
+  .pj-step-progress-label {
+    display: none;
+  }
+
+  .pj-mc {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto 1fr;
+    align-content: end;
+    align-items: end;
+    min-height: 100%;
+    padding: max(104px, calc(env(safe-area-inset-top) + 92px)) 18px
+      max(26px, env(safe-area-inset-bottom));
+    row-gap: 14px;
+  }
+
+  .pj-mc-head,
+  .pj-mc-title,
+  .pj-mc-body {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  .pj-mc-head {
+    margin: 0;
+  }
+
+  .pj-mc-num {
+    font-size: clamp(34px, 12vw, 52px);
+    line-height: 0.9;
+  }
+
+  .pj-mc-title {
+    min-height: 0;
+    max-width: min(100%, 12ch);
+    font-size: clamp(27px, 8.2vw, 38px);
+    line-height: 0.98;
+    overflow-wrap: anywhere;
+  }
+
+  .pj-mc-title span {
+    white-space: normal;
+  }
+
+  .pj-mc-body {
+    gap: 14px;
+    margin-top: 0;
+  }
+
+  .pj-mc-desc {
+    max-width: 32ch;
+    font-size: clamp(13px, 3.7vw, 15px);
+    line-height: 1.52;
+  }
+
+  .pj-mc-cta {
+    min-height: 42px;
+    padding: 12px 18px;
+    font-size: 10px;
+    letter-spacing: 0.13em;
+  }
+
+  .pj-outro {
+    padding-top: 72px;
+    padding-bottom: 80px;
   }
 
   .nav {
@@ -6236,6 +6339,27 @@ a.loc-page-contact-line:hover {
     line-height: 1.65;
     overflow-wrap: anywhere;
   }
+  .conditions .section-inner,
+  .locations .section-inner {
+    padding-top: clamp(34px, 5svh, 46px);
+    padding-bottom: clamp(34px, 5svh, 46px);
+  }
+  .conditions-heading,
+  .locations-heading {
+    margin-bottom: 28px;
+    font-size: clamp(30px, 8vw, 42px);
+    line-height: 1.02;
+  }
+  .cond-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .cond-item {
+    min-height: 0;
+    padding: 10px 9px;
+    font-size: 11px;
+    line-height: 1.24;
+    letter-spacing: 0;
+  }
   .differ-grid {
     grid-template-columns: 1fr;
   }
@@ -6262,13 +6386,44 @@ a.loc-page-contact-line:hover {
   }
   .loc-grid {
     grid-template-columns: 1fr;
+    box-shadow: 0 18px 46px rgba(31, 29, 26, 0.06);
   }
   .loc-card {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 6px 14px;
+    align-items: start;
+    padding: 14px 16px;
     border-right: none;
     border-bottom: 1px solid var(--hairline);
   }
   .loc-card:last-child {
     border-bottom: none;
+  }
+  .loc-tag,
+  .loc-divider,
+  .hours-row,
+  .loc-cta {
+    display: none;
+  }
+  .loc-city {
+    margin: 0;
+    font-size: clamp(25px, 7.5vw, 34px);
+    line-height: 1;
+  }
+  .loc-address {
+    grid-column: 1;
+    margin: 0;
+    font-size: 12px;
+    line-height: 1.45;
+  }
+  .loc-phone {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    align-self: center;
+    margin: 0;
+    font-size: 12px;
+    white-space: nowrap;
   }
   .loc-page-row {
     grid-template-columns: 1fr;
@@ -6335,7 +6490,7 @@ a.loc-page-contact-line:hover {
     margin-bottom: 34px;
   }
   .loc-card {
-    padding-inline: 22px;
+    padding-inline: 14px;
   }
   .hours-row {
     align-items: flex-start;
@@ -6354,7 +6509,8 @@ a.loc-page-contact-line:hover {
     padding: 10px 12px;
   }
   .pj-mc {
-    padding: 76px 18px 24px;
+    padding: max(104px, calc(env(safe-area-inset-top) + 92px)) 18px
+      max(26px, env(safe-area-inset-bottom));
   }
 }
 @media (prefers-reduced-motion: reduce) {
