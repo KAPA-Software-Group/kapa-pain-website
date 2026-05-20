@@ -5898,6 +5898,18 @@ a.loc-page-contact-line:hover {
   }
 }
 @media (max-width: 768px) {
+  .sh-reveal-wrap {
+    margin-top: -100vh;
+    background: transparent;
+  }
+
+  .sh-reveal-wrap > section {
+    position: sticky;
+    top: 0;
+    min-height: auto;
+    overflow: visible;
+  }
+
   .section {
     min-height: auto;
   }
@@ -6205,11 +6217,24 @@ a.loc-page-contact-line:hover {
     align-items: flex-start;
   }
   .service-row {
-    grid-template-columns: 40px 1fr;
-    gap: 0 18px;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding: 20px 0;
+  }
+  .service-name {
+    font-size: clamp(22px, 7vw, 27px);
+    line-height: 1.12;
+    overflow-wrap: anywhere;
+  }
+  .service-row:hover .service-name {
+    transform: none;
   }
   .service-desc {
-    display: none;
+    display: block;
+    max-width: 100%;
+    font-size: 13px;
+    line-height: 1.65;
+    overflow-wrap: anywhere;
   }
   .differ-grid {
     grid-template-columns: 1fr;
