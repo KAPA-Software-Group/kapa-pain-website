@@ -22,7 +22,8 @@ export default function Home() {
             <div className="spec-slide-head">
               <div className="section-label reveal">Specialties</div>
               <h2 className="display-heading spec-heading reveal reveal-delay-1">
-                Led by an <em>interventional radiologist</em>.
+                Leveraging the expertise of{" "}
+                <em>Interventional Radiologists</em>
               </h2>
               <p className="spec-deck reveal reveal-delay-2">
                 Every image-guided procedure is planned and performed by a
@@ -32,35 +33,25 @@ export default function Home() {
             </div>
 
             <div
-              className="spec-slide-body"
-              aria-label="Why image-guided care is different"
+              className="spec-slide-body spec-specialty-body"
+              aria-label="Specialties at Precision Care Centre"
             >
-              <div className="spec-focus reveal reveal-delay-2">
-                <span className="spec-focus-label">
-                  Specialist-led precision
-                </span>
-                <p>
-                  Fluoroscopy and ultrasound let the physician see anatomy in
-                  real time before treatment is delivered.
-                </p>
-              </div>
-
               <div className="spec-proof-list">
                 {[
                   {
-                    title: "Images guide the procedure.",
+                    title: "Interventional Radiology",
                     href: "/doctors#interventional-radiology",
-                    desc: "The target is confirmed on screen, helping the treatment reach the irritated joint, nerve, tendon, or soft tissue.",
+                    desc: "Image-guided procedures use fluoroscopy and ultrasound to target painful joints, nerves, tendons, and soft tissues with precision.",
                   },
                   {
-                    title: "Your case is read in context.",
+                    title: "Anesthesiology and Chronic Pain",
                     href: "/doctors#anesthesiology-pain-medicine",
-                    desc: "Previous imaging, symptoms, exam findings, and medical history are reviewed together before a plan is recommended.",
+                    desc: "Chronic pain expertise helps connect symptoms, medication strategy, and procedural options into a clear treatment plan.",
                   },
                   {
-                    title: "One plan connects the team.",
+                    title: "Nurse Practitioner Pain Consulting",
                     href: "/doctors#nurse-practitioner-pain-consulting",
-                    desc: "Interventional radiology works alongside chronic pain and musculoskeletal care, so the next step is clear.",
+                    desc: "Focused pain consultations support assessment, education, follow-up, and coordination throughout each patient's care pathway.",
                   },
                 ].map((item, index) => (
                   <Link
@@ -68,9 +59,6 @@ export default function Home() {
                     href={item.href}
                     className={`spec-proof-row reveal reveal-delay-${index + 3}`}
                   >
-                    <span className="spec-proof-index">
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
                     <h3 className="spec-proof-title">{item.title}</h3>
                     <p className="spec-proof-desc">{item.desc}</p>
                   </Link>
