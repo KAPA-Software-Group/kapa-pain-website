@@ -284,6 +284,12 @@ const locationsPageStyles = `
     .locations-page-card {
       min-height: auto;
     }
+
+    .locations-page-meta .loc-phone {
+      grid-column: auto;
+      grid-row: auto;
+      font-size: 13px;
+    }
   }
 
   @media (max-width: 480px) {
