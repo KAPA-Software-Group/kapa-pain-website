@@ -6210,7 +6210,7 @@ a.loc-page-contact-line:hover {
     border-bottom: 0;
   }
   .procedure-nav-strip {
-    position: static;
+    display: none;
   }
   .procedure-jump-nav {
     gap: 10px;
@@ -6444,6 +6444,9 @@ a.loc-page-contact-line:hover {
   .cta-actions {
     align-items: flex-start;
     flex-direction: column;
+  }
+  .cta-inner {
+    padding-top: clamp(80px, 14svh, 120px);
   }
   .cta-footer {
     display: none;
