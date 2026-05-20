@@ -2168,7 +2168,7 @@ select {
 }
 .spec-slide-body {
   display: grid;
-  grid-template-columns: minmax(260px, 0.45fr) minmax(0, 1fr);
+  grid-template-columns: minmax(300px, 0.38fr) minmax(0, 1fr);
   border-top: 1px solid var(--hairline);
   border-bottom: 1px solid var(--hairline);
   background: rgba(246, 239, 227, 0.3);
@@ -2176,12 +2176,12 @@ select {
 .spec-focus {
   position: relative;
   display: flex;
-  min-height: 390px;
+  min-height: 0;
   flex-direction: column;
-  justify-content: space-between;
-  gap: 48px;
+  justify-content: flex-start;
+  gap: clamp(44px, 5vw, 72px);
   overflow: hidden;
-  padding: clamp(34px, 5vw, 58px);
+  padding: clamp(34px, 4vw, 54px);
   background:
     linear-gradient(135deg, rgba(159, 118, 87, 0.22), transparent 42%),
     var(--charcoal);
@@ -2217,15 +2217,15 @@ select {
   text-transform: uppercase;
 }
 .spec-focus p {
-  max-width: 15ch;
+  max-width: 22ch;
   margin: 0;
   color: rgba(246, 239, 227, 0.9);
   font-family: var(--f-serif);
-  font-size: clamp(32px, 3.7vw, 54px);
+  font-size: clamp(24px, 2.4vw, 36px);
   font-style: italic;
   font-weight: 300;
   letter-spacing: -0.015em;
-  line-height: 1.08;
+  line-height: 1.18;
 }
 .spec-proof-list {
   display: grid;
@@ -2233,10 +2233,10 @@ select {
 }
 .spec-proof-row {
   display: grid;
-  grid-template-columns: 64px minmax(170px, 0.65fr) minmax(240px, 1fr);
-  gap: clamp(18px, 3vw, 42px);
+  grid-template-columns: 40px minmax(180px, 0.65fr) minmax(220px, 1fr);
+  gap: clamp(16px, 2vw, 28px);
   align-items: start;
-  padding: clamp(28px, 3.2vw, 42px) clamp(24px, 3.6vw, 52px);
+  padding: clamp(24px, 2.5vw, 36px) clamp(20px, 2.5vw, 36px);
   border-top: 1px solid var(--hairline);
   color: inherit;
   text-decoration: none;
@@ -2264,7 +2264,7 @@ select {
   margin: -0.12em 0 0;
   color: var(--mahogany);
   font-family: var(--f-serif);
-  font-size: clamp(26px, 2.55vw, 36px);
+  font-size: clamp(24px, 2.1vw, 32px);
   font-weight: 300;
   letter-spacing: -0.01em;
   line-height: 1.12;
@@ -2274,12 +2274,12 @@ select {
   margin: 0;
   color: rgba(62, 57, 51, 0.66);
   font-family: var(--f-sans);
-  font-size: clamp(15px, 1.08vw, 17px);
+  font-size: clamp(15px, 1vw, 16px);
   font-weight: 300;
   line-height: 1.78;
 }
 
-@media (max-width: 960px) {
+@media (max-width: 1100px) {
   .spec-slide-head,
   .spec-slide-body {
     grid-template-columns: 1fr;
@@ -2292,10 +2292,10 @@ select {
     margin-bottom: 0;
   }
   .spec-focus {
-    min-height: 300px;
+    min-height: 0;
   }
   .spec-focus p {
-    max-width: 18ch;
+    max-width: 26ch;
   }
   .spec-proof-row {
     grid-template-columns: 52px minmax(0, 1fr);
@@ -2314,11 +2314,11 @@ select {
     font-size: clamp(38px, 13vw, 58px);
   }
   .spec-focus {
-    min-height: 260px;
     padding: 30px 24px;
+    gap: 36px;
   }
   .spec-focus p {
-    font-size: clamp(28px, 9vw, 40px);
+    font-size: clamp(25px, 8vw, 34px);
   }
   .spec-proof-row,
   .spec-proof-row:hover {
@@ -4102,6 +4102,34 @@ a.loc-page-contact-line:hover {
   gap: 24px;
   width: min(100%, 980px);
   margin: 0 auto;
+}
+.services-assessment-planning {
+  margin-top: clamp(72px, 8vw, 112px);
+  padding-top: clamp(48px, 5vw, 72px);
+  border-top: 1px solid var(--hairline);
+  grid-template-columns: minmax(260px, 0.28fr) minmax(0, 1fr);
+  gap: clamp(40px, 5vw, 72px);
+  align-items: start;
+}
+.services-assessment-planning .procedure-group-aside {
+  position: static;
+  max-width: 360px;
+}
+.services-assessment-planning .procedure-section-title {
+  font-size: clamp(38px, 4.4vw, 64px);
+  line-height: 1.06;
+  max-width: 8.5ch;
+}
+.services-assessment-planning .procedure-section-copy {
+  max-width: 28ch;
+  margin-top: 24px;
+}
+.services-assessment-planning .procedure-hub-card-grid {
+  grid-template-columns: minmax(0, 1fr);
+}
+.services-assessment-planning .procedure-hub-card-grid[data-card-count="1"] .procedure-hub-card {
+  min-height: 320px;
+  justify-content: flex-start;
 }
 .procedure-card {
   display: flex;

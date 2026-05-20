@@ -5,6 +5,11 @@ import Link from "next/link"
 import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
 import { ServicesHeroBackground } from "@/components/ui/background-snippets"
+import {
+  getPatientProcedureHref,
+  patientProcedureHubGroups,
+  patientProcedurePages,
+} from "@/lib/patient-procedures"
 
 export const metadata: Metadata = {
   title: "Services | Precision Care Centre",
@@ -95,6 +100,10 @@ const SERVICES = [
   },
 ]
 
+const assessmentPlanningGroup = patientProcedureHubGroups.find(
+  (group) => group.title === "Assessment & Planning"
+)
+
 export default function ServicesPage() {
   return (
     <>
@@ -179,6 +188,64 @@ export default function ServicesPage() {
                 </article>
               ))}
             </div>
+
+            {assessmentPlanningGroup ? (
+              <div
+                className="procedure-group-layout services-assessment-planning"
+                data-card-count={assessmentPlanningGroup.slugs.length}
+              >
+                <div className="procedure-group-aside">
+                  <h2 className="procedure-section-title">
+                    {assessmentPlanningGroup.title}
+                  </h2>
+                  <p className="procedure-section-copy">
+                    {assessmentPlanningGroup.description}
+                  </p>
+                </div>
+
+                <div
+                  className="procedure-card-grid procedure-hub-card-grid"
+                  data-card-count={assessmentPlanningGroup.slugs.length}
+                >
+                  {assessmentPlanningGroup.slugs.map((slug, cardIndex) => {
+                    const page = patientProcedurePages.find(
+                      (entry) => entry.slug === slug
+                    )
+
+                    if (!page) {
+                      return null
+                    }
+
+                    return (
+                      <Link
+                        key={page.slug}
+                        href={getPatientProcedureHref(page.slug)}
+                        className="procedure-card procedure-hub-card procedure-hub-card-link"
+                        style={{ "--stagger": cardIndex } as CSSProperties}
+                      >
+                        <div className="procedure-card-topline">
+                          <span className="procedure-card-eyebrow">
+                            {page.eyebrow}
+                          </span>
+                        </div>
+                        <h3 className="procedure-card-title">{page.title}</h3>
+                        <p className="procedure-card-copy">
+                          {page.cardSummary}
+                        </p>
+                        <ul className="procedure-card-list">
+                          {page.cardHighlights.map((highlight) => (
+                            <li key={highlight}>{highlight}</li>
+                          ))}
+                        </ul>
+                        <span className="procedure-hub-card-cta">
+                          <span>View Procedure Details</span>
+                        </span>
+                      </Link>
+                    )
+                  })}
+                </div>
+              </div>
+            ) : null}
           </div>
         </section>
 

@@ -221,72 +221,78 @@ export default function PatientProceduresPage() {
           </div>
         </section>
 
-        {patientProcedureHubGroups.map((group) => (
-          <section
-            key={group.title}
-            id={group.title
-              .toLowerCase()
-              .replaceAll(" ", "-")
-              .replaceAll("&", "and")}
-            className="procedure-section procedure-hub-group-section"
-          >
-            <div className="section-inner">
-              <div
-                className="procedure-group-layout"
-                data-card-count={group.slugs.length}
-                data-patient-procedures-reveal="group"
-              >
-                <div className="procedure-group-aside">
-                  <div className="section-label">Procedure Group</div>
-                  <h2 className="procedure-section-title">{group.title}</h2>
-                  <p className="procedure-section-copy">{group.description}</p>
-                </div>
-
+        {patientProcedureHubGroups
+          .filter((group) => group.title !== "Assessment & Planning")
+          .map((group) => (
+            <section
+              key={group.title}
+              id={group.title
+                .toLowerCase()
+                .replaceAll(" ", "-")
+                .replaceAll("&", "and")}
+              className="procedure-section procedure-hub-group-section"
+            >
+              <div className="section-inner">
                 <div
-                  className="procedure-card-grid procedure-hub-card-grid"
+                  className="procedure-group-layout"
                   data-card-count={group.slugs.length}
+                  data-patient-procedures-reveal="group"
                 >
-                  {group.slugs.map((slug, cardIndex) => {
-                    const page = patientProcedurePages.find(
-                      (entry) => entry.slug === slug
-                    )
+                  <div className="procedure-group-aside">
+                    <div className="section-label">Procedure Group</div>
+                    <h2 className="procedure-section-title">{group.title}</h2>
+                    <p className="procedure-section-copy">
+                      {group.description}
+                    </p>
+                  </div>
 
-                    if (!page) {
-                      return null
-                    }
+                  <div
+                    className="procedure-card-grid procedure-hub-card-grid"
+                    data-card-count={group.slugs.length}
+                  >
+                    {group.slugs.map((slug, cardIndex) => {
+                      const page = patientProcedurePages.find(
+                        (entry) => entry.slug === slug
+                      )
 
-                    return (
-                      <Link
-                        key={page.slug}
-                        href={getPatientProcedureHref(page.slug)}
-                        className="procedure-card procedure-hub-card procedure-hub-card-link"
-                        style={{ "--stagger": cardIndex } as CSSProperties}
-                      >
-                        <div className="procedure-card-topline">
-                          <span className="procedure-card-eyebrow">
-                            {page.eyebrow}
+                      if (!page) {
+                        return null
+                      }
+
+                      return (
+                        <Link
+                          key={page.slug}
+                          href={getPatientProcedureHref(page.slug)}
+                          className="procedure-card procedure-hub-card procedure-hub-card-link"
+                          style={{ "--stagger": cardIndex } as CSSProperties}
+                        >
+                          <div className="procedure-card-topline">
+                            <span className="procedure-card-eyebrow">
+                              {page.eyebrow}
+                            </span>
+                          </div>
+                          <h3 className="procedure-card-title">
+                            {page.title}
+                          </h3>
+                          <p className="procedure-card-copy">
+                            {page.cardSummary}
+                          </p>
+                          <ul className="procedure-card-list">
+                            {page.cardHighlights.map((highlight) => (
+                              <li key={highlight}>{highlight}</li>
+                            ))}
+                          </ul>
+                          <span className="procedure-hub-card-cta">
+                            <span>View Procedure Details</span>
                           </span>
-                        </div>
-                        <h3 className="procedure-card-title">{page.title}</h3>
-                        <p className="procedure-card-copy">
-                          {page.cardSummary}
-                        </p>
-                        <ul className="procedure-card-list">
-                          {page.cardHighlights.map((highlight) => (
-                            <li key={highlight}>{highlight}</li>
-                          ))}
-                        </ul>
-                        <span className="procedure-hub-card-cta">
-                          <span>View Procedure Details</span>
-                        </span>
-                      </Link>
-                    )
-                  })}
+                        </Link>
+                      )
+                    })}
+                  </div>
                 </div>
               </div>
-            </div>
-          </section>
-        ))}
+            </section>
+          ))}
 
         <section className="procedure-section procedure-section-muted">
           <div
