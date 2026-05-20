@@ -226,18 +226,28 @@ const locationsPageStyles = `
 
   .locations-reveal-root.is-reveal-enabled .locations-page-scope [data-locations-reveal],
   .locations-reveal-root.is-reveal-enabled .procedure-cta-section [data-locations-reveal] {
+    opacity: 1;
+    transform: none;
+    transition:
+      border-color 280ms ease,
+      box-shadow 280ms ease;
+    will-change: auto;
+  }
+
+  .locations-reveal-root.is-reveal-enabled .locations-page-scope [data-locations-reveal] > *,
+  .locations-reveal-root.is-reveal-enabled .procedure-cta-section [data-locations-reveal] > * {
     opacity: 0;
     transform: translate3d(0, 18px, 0);
     transition:
       opacity 700ms var(--ease),
-      transform 700ms var(--ease),
-      border-color 280ms ease,
-      box-shadow 280ms ease;
+      transform 700ms var(--ease);
     will-change: opacity, transform;
   }
 
   .locations-reveal-root.is-reveal-enabled .locations-page-scope [data-locations-reveal].is-loaded,
-  .locations-reveal-root.is-reveal-enabled .procedure-cta-section [data-locations-reveal].is-loaded {
+  .locations-reveal-root.is-reveal-enabled .locations-page-scope [data-locations-reveal].is-loaded > *,
+  .locations-reveal-root.is-reveal-enabled .procedure-cta-section [data-locations-reveal].is-loaded,
+  .locations-reveal-root.is-reveal-enabled .procedure-cta-section [data-locations-reveal].is-loaded > * {
     opacity: 1;
     transform: translate3d(0, 0, 0);
     will-change: auto;
@@ -295,9 +305,13 @@ const locationsPageStyles = `
     .locations-page-card,
     .locations-page-map iframe,
     .locations-reveal-root.is-reveal-enabled .locations-page-scope [data-locations-reveal],
+    .locations-reveal-root.is-reveal-enabled .locations-page-scope [data-locations-reveal] > *,
     .locations-reveal-root.is-reveal-enabled .locations-page-scope [data-locations-reveal].is-loaded,
+    .locations-reveal-root.is-reveal-enabled .locations-page-scope [data-locations-reveal].is-loaded > *,
     .locations-reveal-root.is-reveal-enabled .procedure-cta-section [data-locations-reveal],
-    .locations-reveal-root.is-reveal-enabled .procedure-cta-section [data-locations-reveal].is-loaded {
+    .locations-reveal-root.is-reveal-enabled .procedure-cta-section [data-locations-reveal] > *,
+    .locations-reveal-root.is-reveal-enabled .procedure-cta-section [data-locations-reveal].is-loaded,
+    .locations-reveal-root.is-reveal-enabled .procedure-cta-section [data-locations-reveal].is-loaded > * {
       opacity: 1;
       transform: none;
       transition: none;

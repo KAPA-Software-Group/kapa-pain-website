@@ -166,9 +166,15 @@ export default function FaqPage() {
           }
 
           .faq-motion-row {
+            opacity: 1;
+            transform: none;
+            interpolate-size: allow-keywords;
+            will-change: auto;
+          }
+
+          .faq-motion-row > summary {
             animation: faq-rise 620ms ease-out both;
             animation-delay: var(--faq-delay, 70ms);
-            interpolate-size: allow-keywords;
             will-change: opacity, transform;
           }
 
@@ -218,7 +224,8 @@ export default function FaqPage() {
           }
 
           @media (prefers-reduced-motion: reduce) {
-            .faq-motion-row {
+            .faq-motion-row,
+            .faq-motion-row > summary {
               animation: none !important;
               opacity: 1 !important;
               transform: none !important;

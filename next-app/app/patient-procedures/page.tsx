@@ -151,15 +151,27 @@ const patientProceduresPageStyles = `
     will-change: auto;
   }
 
-  .patient-procedures-reveal-root.is-reveal-enabled [data-patient-procedures-reveal].is-loaded {
+  .patient-procedures-reveal-root.is-reveal-enabled [data-patient-procedures-reveal] > * {
+    opacity: 0;
+    transform: translate3d(0, 18px, 0);
+    transition:
+      opacity 700ms var(--ease),
+      transform 700ms var(--ease);
+    will-change: opacity, transform;
+  }
+
+  .patient-procedures-reveal-root.is-reveal-enabled [data-patient-procedures-reveal].is-loaded,
+  .patient-procedures-reveal-root.is-reveal-enabled [data-patient-procedures-reveal].is-loaded > * {
     opacity: 1;
-    transform: none;
+    transform: translate3d(0, 0, 0);
     will-change: auto;
   }
 
   @media (prefers-reduced-motion: reduce) {
     .patient-procedures-reveal-root.is-reveal-enabled [data-patient-procedures-reveal],
-    .patient-procedures-reveal-root.is-reveal-enabled [data-patient-procedures-reveal].is-loaded {
+    .patient-procedures-reveal-root.is-reveal-enabled [data-patient-procedures-reveal] > *,
+    .patient-procedures-reveal-root.is-reveal-enabled [data-patient-procedures-reveal].is-loaded,
+    .patient-procedures-reveal-root.is-reveal-enabled [data-patient-procedures-reveal].is-loaded > * {
       opacity: 1;
       transform: none;
       transition: none;

@@ -7,6 +7,22 @@
 - Network:       http://127.0.0.1:3000
 
 ✓ Starting...
-✓ Ready in 1553ms
-○ Compiling / ...
- GET / 200 in 8.3s (compile: 8.2s, render: 165ms)
+✓ Ready in 918ms
+ GET / 200 in 3.3s (compile: 3.1s, render: 188ms)
+✓ Finished writing to filesystem cache in 11.6s
+ GET / 200 in 58ms (compile: 4ms, render: 54ms)
+ GET / 200 in 117ms (compile: 4ms, render: 113ms)
+ GET /patient-procedures 200 in 360ms (compile: 314ms, render: 46ms)
+ GET /patient-procedures/chronic-pain-assessment-medical-management 200 in 722ms (compile: 677ms, generate-params: 432ms, render: 45ms)
+ GET / 200 in 22ms (compile: 3ms, render: 19ms)
+ GET / 200 in 95ms (compile: 2ms, render: 92ms)
+ GET / 200 in 49ms (compile: 2ms, render: 47ms)
+ GET / 200 in 70ms (compile: 3ms, render: 67ms)
+ GET /locations/guelph 200 in 779ms (compile: 702ms, generate-params: 427ms, render: 76ms)
+✓ Compiled in 1933ms
+ GET / 200 in 52ms (compile: 3ms, render: 49ms)
+ GET /patient-procedures/chronic-pain-assessment-medical-management 200 in 39ms (compile: 11ms, generate-params: 5ms, render: 28ms)
+ GET /services 200 in 225ms (compile: 194ms, render: 31ms)
+ GET /patient-procedures 200 in 52ms (compile: 17ms, render: 35ms)
+✓ Compiled in 1721ms
+ GET / 200 in 51ms (compile: 5ms, render: 46ms)

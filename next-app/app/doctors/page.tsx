@@ -193,22 +193,30 @@ const doctorsPageStyles = `
   }
 
   .doctors-reveal-root.is-reveal-enabled .doctors-page-scope [data-doctors-reveal] {
+    opacity: 1;
+    transform: none;
+    transition:
+      border-color 280ms ease,
+      box-shadow 280ms ease;
+    will-change: auto;
+  }
+
+  .doctors-reveal-root.is-reveal-enabled .doctors-page-scope [data-doctors-reveal] > :not([data-doctors-reveal]) {
     opacity: 0;
     transform: translate3d(0, 18px, 0);
     transition:
       opacity 700ms var(--ease),
-      transform 700ms var(--ease),
-      border-color 280ms ease,
-      box-shadow 280ms ease;
+      transform 700ms var(--ease);
     will-change: opacity, transform;
   }
 
-  .doctors-reveal-root.is-reveal-enabled .doctors-page-scope .doctors-quote-card[data-doctors-reveal] {
+  .doctors-reveal-root.is-reveal-enabled .doctors-page-scope .doctors-quote-card[data-doctors-reveal] > * {
     transform: translate3d(0, 10px, 0);
-    transition-duration: 650ms, 650ms, 280ms, 280ms;
+    transition-duration: 650ms, 650ms;
   }
 
-  .doctors-reveal-root.is-reveal-enabled .doctors-page-scope [data-doctors-reveal].is-loaded {
+  .doctors-reveal-root.is-reveal-enabled .doctors-page-scope [data-doctors-reveal].is-loaded,
+  .doctors-reveal-root.is-reveal-enabled .doctors-page-scope [data-doctors-reveal].is-loaded > :not([data-doctors-reveal]) {
     opacity: 1;
     transform: translate3d(0, 0, 0);
     will-change: auto;
@@ -276,7 +284,9 @@ const doctorsPageStyles = `
 
   @media (prefers-reduced-motion: reduce) {
     .doctors-reveal-root.is-reveal-enabled .doctors-page-scope [data-doctors-reveal],
-    .doctors-reveal-root.is-reveal-enabled .doctors-page-scope [data-doctors-reveal].is-loaded {
+    .doctors-reveal-root.is-reveal-enabled .doctors-page-scope [data-doctors-reveal] > :not([data-doctors-reveal]),
+    .doctors-reveal-root.is-reveal-enabled .doctors-page-scope [data-doctors-reveal].is-loaded,
+    .doctors-reveal-root.is-reveal-enabled .doctors-page-scope [data-doctors-reveal].is-loaded > :not([data-doctors-reveal]) {
       opacity: 1;
       transform: none;
       transition: none;

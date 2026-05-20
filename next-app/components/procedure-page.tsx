@@ -184,15 +184,27 @@ const patientProcedureDetailRevealStyles = `
     will-change: auto;
   }
 
-  .patient-procedure-detail-reveal-root.is-reveal-enabled [data-patient-procedure-detail-reveal].is-loaded {
+  .patient-procedure-detail-reveal-root.is-reveal-enabled [data-patient-procedure-detail-reveal] > * {
+    opacity: 0;
+    transform: translate3d(0, 18px, 0);
+    transition:
+      opacity 700ms var(--ease),
+      transform 700ms var(--ease);
+    will-change: opacity, transform;
+  }
+
+  .patient-procedure-detail-reveal-root.is-reveal-enabled [data-patient-procedure-detail-reveal].is-loaded,
+  .patient-procedure-detail-reveal-root.is-reveal-enabled [data-patient-procedure-detail-reveal].is-loaded > * {
     opacity: 1;
-    transform: none;
+    transform: translate3d(0, 0, 0);
     will-change: auto;
   }
 
   @media (prefers-reduced-motion: reduce) {
     .patient-procedure-detail-reveal-root.is-reveal-enabled [data-patient-procedure-detail-reveal],
-    .patient-procedure-detail-reveal-root.is-reveal-enabled [data-patient-procedure-detail-reveal].is-loaded {
+    .patient-procedure-detail-reveal-root.is-reveal-enabled [data-patient-procedure-detail-reveal] > *,
+    .patient-procedure-detail-reveal-root.is-reveal-enabled [data-patient-procedure-detail-reveal].is-loaded,
+    .patient-procedure-detail-reveal-root.is-reveal-enabled [data-patient-procedure-detail-reveal].is-loaded > * {
       opacity: 1;
       transform: none;
       transition: none;
