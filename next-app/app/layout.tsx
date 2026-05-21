@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next"
 import { DM_Sans, Spectral, JetBrains_Mono } from "next/font/google"
 import "./globals.css"
 import { RouteTransition } from "@/components/route-transition"
+import { ScrollHint } from "@/components/scroll-hint"
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
@@ -59,6 +60,7 @@ export default function RootLayout({
       <body className="antialiased">
         <RouteTransition />
         {children}
+        <ScrollHint />
       </body>
     </html>
   )
