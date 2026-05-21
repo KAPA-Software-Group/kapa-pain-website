@@ -15,14 +15,14 @@ const doctors = [
     id: "interventional-radiology",
     practice: "Interventional Radiology",
     biography: [
-      "Interventional radiology uses image guidance to perform precise, minimally invasive procedures. In pain care, this can help target the source of symptoms while supporting faster recovery, spine intervention, and a more focused treatment plan.",
+      "Interventional radiologists use real-time imaging to guide small, precise procedures, treating the source of your pain without major surgery.",
     ],
   },
   {
     id: "anesthesiology-pain-medicine",
-    practice: "Anesthesiology and Chronic Pain",
+    practice: "Anesthesiologists and Chronic Pain Specialists",
     biography: [
-      "Anesthesiology in chronic pain care focuses on understanding pain pathways, medication strategies, and image-guided procedures. Using advanced medical imaging can help deliver precise, minimally invasive treatments designed to reduce pain and improve quality of life.",
+      "Anesthesiologists and chronic pain specialists combine expertise in pain pathways, medication management, and image-guided procedures. With advanced medical imaging, they provide precise, minimally invasive care for long-term and complex pain conditions.",
     ],
   },
 ] as const
