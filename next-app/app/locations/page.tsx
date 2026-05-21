@@ -54,13 +54,6 @@ const locationCards = [
     mapEmbedUrl:
       "https://www.google.com/maps?q=21%20Surrey%20Street%20West%2C%20Guelph%2C%20ON%20N1H%203R3&output=embed",
   },
-  {
-    name: "Toronto",
-    addressLines: ["Coming Soon..."],
-    coordinates: undefined,
-    googleMapsUrl: undefined,
-    mapEmbedUrl: undefined,
-  },
 ] as const
 
 const locationsPageStyles = `
