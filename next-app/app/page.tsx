@@ -49,7 +49,7 @@ export default function Home() {
                     desc: "Chronic pain expertise helps connect symptoms, medication strategy, and procedural options into a clear treatment plan.",
                   },
                   {
-                    title: "Nurse Practitioner Pain Consulting",
+                    title: "Chronic Pain Specialists",
                     href: "/doctors#nurse-practitioner-pain-consulting",
                     desc: "Focused pain consultations support assessment, education, follow-up, and coordination throughout each patient's care pathway.",
                   },
