@@ -7,7 +7,7 @@ import { SiteHeader } from "@/components/site-header"
 export const metadata: Metadata = {
   title: "Clinical Practices | Precision Pain Centre",
   description:
-    "Learn about Precision Care Centre's interventional radiology, anesthesiology, and nurse practitioner pain consulting practices.",
+    "Learn about Precision Care Centre's interventional radiology and anesthesiology pain care practices.",
 }
 
 const doctors = [
@@ -15,33 +15,15 @@ const doctors = [
     id: "interventional-radiology",
     practice: "Interventional Radiology",
     biography: [
-      "This interventional radiology practice is supported by training that includes medical education at the University of Calgary and McMaster University, diagnostic imaging residency at the University of Toronto and the University of Manitoba, and fellowship training in Vascular and Interventional Radiology at the University Health Network.",
       "Interventional radiology uses image guidance to perform precise, minimally invasive procedures. In pain care, this can help target the source of symptoms while supporting faster recovery, spine intervention, and a more focused treatment plan.",
     ],
-    philosophy:
-      "Quality in a service or product is not what you put into it. It is what the customer gets out of it.",
-    quoteSide: "right",
   },
   {
     id: "anesthesiology-pain-medicine",
     practice: "Anesthesiology and Chronic Pain",
     biography: [
-      "This anesthesiology and chronic pain practice includes academic work through McMaster University and clinical experience at Hamilton Health Sciences.",
       "Anesthesiology in chronic pain care focuses on understanding pain pathways, medication strategies, and image-guided procedures. Using advanced medical imaging can help deliver precise, minimally invasive treatments designed to reduce pain and improve quality of life.",
     ],
-    philosophy: "Improving patient experience is not an extra. It is the work.",
-    quoteSide: "left",
-  },
-  {
-    id: "nurse-practitioner-pain-consulting",
-    practice: "Nurse Practitioner Pain Consulting",
-    biography: [
-      "This nurse practitioner pain consulting practice is shaped by undergraduate education at McMaster University and post-graduate Master's education at the University of Toronto.",
-      "Nurse practitioner pain consulting supports assessment, education, and care planning across acute and chronic pain conditions. The practice includes experience in orthopaedics, sports medicine, spine care, pain services, fibromyalgia spectrum disorders, and patient education.",
-    ],
-    philosophy:
-      "It's not how much you do, but how much love you put into the doing.",
-    quoteSide: "right",
   },
 ] as const
 
@@ -80,8 +62,7 @@ const doctorsPageStyles = `
   }
 
   .doctors-page-scope .doctors-profile {
-    grid-template-columns: minmax(0, 700px) minmax(340px, 420px);
-    justify-content: space-between;
+    grid-template-columns: minmax(0, 1fr);
     align-items: stretch;
     padding: clamp(78px, 9vw, 128px) 0;
     border-top-color: rgba(159, 118, 87, 0.22);
@@ -89,12 +70,8 @@ const doctorsPageStyles = `
 
   .doctors-page-scope .doctors-profile-copy {
     width: 100%;
-    max-width: 720px;
+    max-width: 900px;
     min-width: 0;
-  }
-
-  .doctors-page-scope .doctors-profile[data-quote-side="left"] {
-    grid-template-columns: minmax(340px, 420px) minmax(0, 700px);
   }
 
   .doctors-page-scope .doctors-profile:first-child {
@@ -363,16 +340,13 @@ function renderBiography(paragraph: string) {
 function DoctorProfile({
   biography,
   id,
-  philosophy,
   practice,
-  quoteSide,
 }: DoctorProfileProps) {
   return (
     <article
       id={id}
       className="doctors-profile"
       data-doctors-reveal="profile"
-      data-quote-side={quoteSide}
     >
       <div className="doctors-profile-copy">
         <div className="doctors-profile-heading">
@@ -390,18 +364,6 @@ function DoctorProfile({
           ))}
         </div>
       </div>
-
-      <aside
-        className="procedure-card doctors-quote-card"
-        data-doctors-reveal="philosophy"
-      >
-        <div className="procedure-card-topline">
-          <span className="procedure-card-eyebrow">Clinical Philosophy</span>
-        </div>
-        <blockquote className="doctors-quote">
-          &ldquo;{philosophy}&rdquo;
-        </blockquote>
-      </aside>
     </article>
   )
 }
@@ -428,8 +390,7 @@ export default function DoctorsPage() {
               <p className="inner-hero-copy procedure-hero-copy">
                 Learn about the clinical practices behind Precision Care
                 Centre&apos;s multidisciplinary pain care, including
-                interventional radiology, anesthesiology, and nurse practitioner
-                expertise.
+                interventional radiology and anesthesiology expertise.
               </p>
               <div className="procedure-hero-actions">
                 <Link href="/contact-us" className="btn-primary">
