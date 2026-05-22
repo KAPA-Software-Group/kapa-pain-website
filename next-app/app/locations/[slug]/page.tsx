@@ -5,7 +5,7 @@ import { notFound } from "next/navigation"
 import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
 import { LocationsBackground } from "@/components/ui/locations-background"
-import { getLocationBySlug, locations } from "@/lib/locations"
+import { getLocationBySlug, locations, SHARED_FAX } from "@/lib/locations"
 
 type Props = {
   params: Promise<{ slug: string }>
@@ -92,15 +92,25 @@ export default async function LocationDetailPage({ params }: Props) {
               {/* Right - contact + CTAs */}
               <div className="loc-page-right">
                 <p className="loc-page-contact-label">Contact</p>
-                <a href="tel:2897529388" className="loc-page-contact-line">
-                  289-752-9388
-                </a>
-                <a
-                  href="mailto:info@precisioncare.ca"
-                  className="loc-page-contact-line"
-                >
-                  info@precisioncare.ca
-                </a>
+                {loc.phone && (
+                  <a
+                    href={`tel:${loc.phone.replace(/[^0-9]/g, "")}`}
+                    className="loc-page-contact-line"
+                  >
+                    {loc.phone}
+                  </a>
+                )}
+                {loc.email && (
+                  <a
+                    href={`mailto:${loc.email}`}
+                    className="loc-page-contact-line"
+                  >
+                    {loc.email}
+                  </a>
+                )}
+                <span className="loc-page-contact-line">
+                  Fax: {SHARED_FAX}
+                </span>
 
                 <div className="loc-page-actions" style={{ marginTop: 40 }}>
                   <Link href="/contact-us" className="btn-primary">

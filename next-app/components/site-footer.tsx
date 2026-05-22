@@ -23,13 +23,25 @@ const SERVICE_LINKS = [
 const LOCATIONS = [
   {
     city: "Brampton",
-    address: ["18 Kensington Road, Unit 200 & 502", "Brampton, ON  L6T 4S5"],
+    address: ["18 Kensington Road, Unit 200", "Brampton, ON  L6T 4S5"],
+    phone: "289-752-9388",
+    email: "brampton@precisioncare.ca",
   },
   {
     city: "Hamilton",
-    address: ["25 Charlton Ave E, Unit 101", "Hamilton, ON  L8N 1Y2"],
+    address: ["25 Charlton Avenue East, Unit 101", "Hamilton, ON  L8N 1Y2"],
+    phone: "289-674-822",
+    email: "hamilton@precisioncare.ca",
+  },
+  {
+    city: "Guelph",
+    address: ["21 Surrey Street West, Suite 202", "Guelph, ON  N1H 3R3"],
+    phone: "519-265-9622",
+    email: "guelph@precisioncare.ca",
   },
 ]
+
+const SHARED_FAX = "289-800-9399"
 
 const HOURS = [
   { day: "Mon – Fri", time: "9:00 am – 5:00 pm" },
@@ -124,8 +136,27 @@ export function SiteFooter() {
 
           <div className="sf-col">
             <p className="sf-col-label">Contact</p>
-            <a href="tel:2897529388" className="sf-contact-phone">289-752-9388</a>
-            <span className="sf-contact-fax">Fax: 289-800-9399</span>
+            {LOCATIONS.map((loc, i) => (
+              <div
+                key={`${loc.city}-contact`}
+                className={`sf-loc${i > 0 ? " sf-loc-second" : ""}`}
+              >
+                <p className="sf-loc-city">{loc.city}</p>
+                <a
+                  href={`tel:${loc.phone.replace(/[^0-9]/g, "")}`}
+                  className="sf-contact-phone"
+                >
+                  {loc.phone}
+                </a>
+                <a
+                  href={`mailto:${loc.email}`}
+                  className="sf-contact-phone"
+                >
+                  {loc.email}
+                </a>
+              </div>
+            ))}
+            <span className="sf-contact-fax">Fax (all clinics): {SHARED_FAX}</span>
           </div>
 
         </div>
@@ -147,7 +178,7 @@ export function SiteFooter() {
         <div className="sf-bar-meta">
           <a href="tel:2897529388" className="sf-bar-phone">289-752-9388</a>
           <span className="sf-bar-sep" aria-hidden="true" />
-          <span className="sf-bar-locs">Brampton &nbsp;·&nbsp; Hamilton</span>
+          <span className="sf-bar-locs">Brampton &nbsp;·&nbsp; Hamilton &nbsp;·&nbsp; Guelph</span>
         </div>
 
         <div className="sf-bar-right">

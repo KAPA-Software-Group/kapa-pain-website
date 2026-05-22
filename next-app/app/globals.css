@@ -2726,11 +2726,29 @@ a.loc-card:focus-visible {
   color: var(--mahogany);
   text-decoration: none;
   display: block;
-  margin-bottom: 36px;
+  margin-bottom: 6px;
   transition: color 0.3s;
 }
 .loc-phone:hover {
   color: var(--clay-dark);
+}
+.loc-email {
+  font-family: var(--f-sans);
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--mahogany);
+  display: block;
+  margin-bottom: 4px;
+  word-break: break-word;
+}
+.loc-fax {
+  font-family: var(--f-sans);
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--mahogany);
+  opacity: 0.75;
+  display: block;
+  margin-bottom: 28px;
 }
 .loc-divider {
   height: 1px;
@@ -6403,7 +6421,9 @@ a.loc-page-contact-line:hover {
   .loc-tag,
   .loc-divider,
   .hours-row,
-  .loc-cta {
+  .loc-cta,
+  .loc-email,
+  .loc-fax {
     display: none;
   }
   .loc-city {

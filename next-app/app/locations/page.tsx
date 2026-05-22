@@ -10,15 +10,13 @@ export const metadata: Metadata = {
     "Browse Precision Care Centre locations in Brampton, Hamilton, Guelph, and Toronto, with contact information and booking access.",
 }
 
-const contactEmail = "info@precisioncare.ca"
-const contactPhone = "289-752-9388"
-const contactPhoneHref = "tel:2897529388"
+const SHARED_FAX = "289-800-9399"
 
 const locationCards = [
   {
     name: "Brampton",
     addressLines: [
-      "18 Kensington Road, Unit 200 and Unit 502",
+      "18 Kensington Road, Unit 200",
       "Brampton, ON",
       "L6T 4S5",
     ],
@@ -27,6 +25,8 @@ const locationCards = [
       "https://www.google.com/maps/search/18+Kensington+Road,+Brampton,+ON+L6T+4S5",
     mapEmbedUrl:
       "https://www.google.com/maps?q=18%20Kensington%20Road%2C%20Brampton%2C%20ON%20L6T%204S5&output=embed",
+    phone: "289-752-9388",
+    email: "brampton@precisioncare.ca",
   },
   {
     name: "Hamilton",
@@ -40,6 +40,8 @@ const locationCards = [
       "https://www.google.com/maps/search/25+Charlton+Avenue+East,+Hamilton,+ON+L8N+1Y2",
     mapEmbedUrl:
       "https://www.google.com/maps?q=25%20Charlton%20Avenue%20East%2C%20Hamilton%2C%20ON%20L8N%201Y2&output=embed",
+    phone: "289-674-822",
+    email: "hamilton@precisioncare.ca",
   },
   {
     name: "Guelph",
@@ -53,6 +55,8 @@ const locationCards = [
       "https://www.google.com/maps/search/21+Surrey+Street+West,+Guelph,+ON+N1H+3R3",
     mapEmbedUrl:
       "https://www.google.com/maps?q=21%20Surrey%20Street%20West%2C%20Guelph%2C%20ON%20N1H%203R3&output=embed",
+    phone: "519-265-9622",
+    email: "guelph@precisioncare.ca",
   },
 ] as const
 
@@ -363,8 +367,11 @@ function LocationCard({
   googleMapsUrl,
   mapEmbedUrl,
   name,
+  phone,
+  email,
 }: LocationCardProps) {
   const isComingSoon = !mapEmbedUrl
+  const phoneHref = phone ? `tel:${phone.replace(/[^0-9]/g, "")}` : undefined
 
   return (
     <article
@@ -390,12 +397,17 @@ function LocationCard({
             <div className="loc-divider" />
 
             <div className="locations-page-meta">
-              <a href={`mailto:${contactEmail}`} className="loc-phone">
-                {contactEmail}
-              </a>
-              <a href={contactPhoneHref} className="loc-phone">
-                {contactPhone}
-              </a>
+              {email ? (
+                <a href={`mailto:${email}`} className="loc-phone">
+                  {email}
+                </a>
+              ) : null}
+              {phone && phoneHref ? (
+                <a href={phoneHref} className="loc-phone">
+                  {phone}
+                </a>
+              ) : null}
+              <span>Fax: {SHARED_FAX}</span>
               {coordinates ? <span>{coordinates}</span> : null}
             </div>
 

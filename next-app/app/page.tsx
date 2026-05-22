@@ -178,13 +178,15 @@ export default function Home() {
                 <span className="loc-tag">Main Clinic</span>
                 <div className="loc-city">Brampton</div>
                 <address className="loc-address">
-                  Unit 200 &amp; 502
+                  Unit 200
                   <br />
                   18 Kensington Road
                   <br />
                   Brampton, ON &nbsp; L6T 4S5
                 </address>
                 <span className="loc-phone">289-752-9388</span>
+                <span className="loc-email">brampton@precisioncare.ca</span>
+                <span className="loc-fax">Fax: 289-800-9399</span>
                 <div className="loc-divider" />
                 <div className="hours-row">
                   <span className="h-day">Mon – Fri</span>
@@ -209,10 +211,13 @@ export default function Home() {
                 <address className="loc-address">
                   Unit 101
                   <br />
-                  25 Charlton Ave E<br />
+                  25 Charlton Avenue East
+                  <br />
                   Hamilton, ON &nbsp; L8N 1Y2
                 </address>
-                <span className="loc-phone">289-752-9388</span>
+                <span className="loc-phone">289-674-822</span>
+                <span className="loc-email">hamilton@precisioncare.ca</span>
+                <span className="loc-fax">Fax: 289-800-9399</span>
                 <div className="loc-divider" />
                 <div className="hours-row">
                   <span className="h-day">Mon – Fri</span>
@@ -237,10 +242,13 @@ export default function Home() {
                 <address className="loc-address">
                   Suite 202
                   <br />
-                  21 Surrey St W<br />
+                  21 Surrey Street West
+                  <br />
                   Guelph, ON &nbsp; N1H 3R3
                 </address>
                 <span className="loc-phone">519-265-9622</span>
+                <span className="loc-email">guelph@precisioncare.ca</span>
+                <span className="loc-fax">Fax: 289-800-9399</span>
                 <div className="loc-divider" />
                 <div className="hours-row">
                   <span className="h-day">Mon – Fri</span>
