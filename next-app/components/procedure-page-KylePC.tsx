@@ -416,9 +416,6 @@ export function ProcedurePageView({ page }: ProcedurePageViewProps) {
 
             <div className="procedure-cta-panel">
               <div className="procedure-cta-actions">
-                <a href="tel:2897529388" className="btn-primary">
-                  Call to Discuss This Procedure
-                </a>
                 <Link href="/referrals" className="btn-ghost">
                   Review Referral Information
                 </Link>

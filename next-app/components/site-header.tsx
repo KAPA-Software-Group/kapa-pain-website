@@ -216,10 +216,6 @@ export function SiteHeader({ overlay = false }: SiteHeaderProps) {
           )}
         </ul>
 
-        <a href="tel:2897529388" className="nav-cta">
-          289-752-9388
-        </a>
-
         <button
           type="button"
           className="nav-menu-toggle"
@@ -241,80 +237,21 @@ export function SiteHeader({ overlay = false }: SiteHeaderProps) {
         className={["mobile-nav", menuOpen ? "is-open" : ""].filter(Boolean).join(" ")}
       >
         <div className="mobile-nav-links">
-          {NAV_ITEMS.map((item) =>
-            item.dropdown ? (
-              <div key={item.href} className="mobile-nav-procedure">
-                <Link
-                  href={item.href}
-                  className={[
-                    "mobile-nav-link",
-                    isActivePath(item.href) ? "is-active" : "",
-                  ]
-                    .filter(Boolean)
-                    .join(" ")}
-                  onClick={() => setMenuOpen(false)}
-                >
-                  {item.label}
-                </Link>
-                <div className="mobile-nav-sublinks">
-                  {item.dropdown === "procedures" ? (
-                    PROCEDURE_GROUPS.map((group) => (
-                      <div key={group.label} className="mobile-nav-subgroup">
-                        <span className="mobile-nav-subgroup-label">{group.label}</span>
-                        {group.items.map((sub) => (
-                          <Link
-                            key={sub.href}
-                            href={sub.href}
-                            className={[
-                              "mobile-nav-sublink",
-                              pathname === sub.href ? "is-active" : "",
-                            ]
-                              .filter(Boolean)
-                              .join(" ")}
-                            onClick={() => setMenuOpen(false)}
-                          >
-                            {sub.label}
-                          </Link>
-                        ))}
-                      </div>
-                    ))
-                  ) : (
-                    <div className="mobile-nav-subgroup">
-                      {SERVICES_ITEMS.map((sub) => (
-                        <Link
-                          key={sub.href}
-                          href={sub.href}
-                          className={[
-                            "mobile-nav-sublink",
-                            pathname === sub.href ? "is-active" : "",
-                          ]
-                            .filter(Boolean)
-                            .join(" ")}
-                          onClick={() => setMenuOpen(false)}
-                        >
-                          {sub.label}
-                        </Link>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              </div>
-            ) : (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={[
-                  "mobile-nav-link",
-                  isActivePath(item.href) ? "is-active" : "",
-                ]
-                  .filter(Boolean)
-                  .join(" ")}
-                onClick={() => setMenuOpen(false)}
-              >
-                {item.label}
-              </Link>
-            )
-          )}
+          {NAV_ITEMS.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className={[
+                "mobile-nav-link",
+                isActivePath(item.href) ? "is-active" : "",
+              ]
+                .filter(Boolean)
+                .join(" ")}
+              onClick={() => setMenuOpen(false)}
+            >
+              {item.label}
+            </Link>
+          ))}
         </div>
         <Link href="/contact-us" className="mobile-nav-cta">
           Contact the Clinic

@@ -135,7 +135,7 @@ export default function Home() {
                 25 Charlton Ave E<br />
                 Hamilton, ON &nbsp; L8N 1Y2
               </address>
-              <span className="loc-phone">289-752-9388</span>
+              <span className="loc-phone">289-674-8220</span>
               <div className="loc-divider" />
               <div className="hours-row">
                 <span className="h-day">Mon – Fri</span>

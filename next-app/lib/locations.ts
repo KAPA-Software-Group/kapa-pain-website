@@ -39,7 +39,7 @@ export const locations: Location[] = [
     coordinates: "43.2557° N, 79.8711° W",
     googleMapsUrl:
       "https://www.google.com/maps/search/25+Charlton+Avenue+East,+Hamilton,+ON+L8N+1Y2",
-    phone: "289-674-822",
+    phone: "289-674-8220",
     email: "hamilton@precisioncare.ca",
   },
   {

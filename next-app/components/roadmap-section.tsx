@@ -5,8 +5,8 @@ import Link from "next/link"
 
 const FRAME_COUNT = 149
 const FRAME_PATH = (i: number) =>
-  `/media/road-scrub-frames-optimized/f${String(i).padStart(3, "0")}.webp`
-const MAX_CANVAS_WIDTH = 1440
+  `/media/road-scrub-frames/f${String(i).padStart(3, "0")}.webp`
+const MAX_CANVAS_WIDTH = 1920
 const SCRUB_LERP = 0.115
 const SCRUB_SETTLE_EPSILON = 0.00025
 
@@ -65,6 +65,25 @@ export function RoadmapSection() {
   const cardsRef = useRef<(HTMLDivElement | null)[]>([])
   const progressRefs = useRef<(HTMLDivElement | null)[]>([])
 
+  const scrollToStep = (stepIndex: number) => {
+    const container = containerRef.current
+    if (!container) return
+
+    const maxProgress = MILESTONES.length - 1
+    const targetProgress =
+      maxProgress <= 0 ? 0 : Math.max(0, Math.min(1, stepIndex / maxProgress))
+    const scrubLength = container.offsetHeight - window.innerHeight
+    const targetTop =
+      window.scrollY + container.getBoundingClientRect().top + scrubLength * targetProgress
+
+    window.scrollTo({ top: targetTop, behavior: "smooth" })
+  }
+
+  const scrollToNextStep = () => {
+    const currentStep = Math.round(targetRef.current * (MILESTONES.length - 1))
+    scrollToStep(Math.min(MILESTONES.length - 1, currentStep + 1))
+  }
+
   useEffect(() => {
     const containerEl = containerRef.current
     let disposed = false
@@ -95,7 +114,7 @@ export function RoadmapSection() {
       const ch = canvas.clientHeight
       if (cw <= 0 || ch <= 0) return
 
-      const pixelRatio = Math.min(window.devicePixelRatio || 1, 1.25)
+      const pixelRatio = Math.min(window.devicePixelRatio || 1, 1.5)
       const targetW = Math.round(Math.min(cw * pixelRatio, MAX_CANVAS_WIDTH))
       const targetH = Math.round(targetW * (ch / cw))
 
@@ -158,7 +177,7 @@ export function RoadmapSection() {
       const { width: targetW, height: targetH } = canvasSizeRef.current
       if (!targetW || !targetH) return
       ctx.imageSmoothingEnabled = true
-      ctx.imageSmoothingQuality = "low"
+      ctx.imageSmoothingQuality = "high"
 
       ctx.globalAlpha = 1
       drawImageCover(ctx, baseImg, targetW, targetH)
@@ -354,6 +373,15 @@ export function RoadmapSection() {
               </div>
             ))}
           </div>
+
+          <button
+            type="button"
+            className="pj-step-next"
+            onClick={scrollToNextStep}
+          >
+            Next Step
+            <span aria-hidden>→</span>
+          </button>
 
           {/* Full-screen milestone overlays */}
           {MILESTONES.map((m, i) => (

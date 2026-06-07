@@ -224,10 +224,6 @@ export function SiteHeader({ overlay = false }: SiteHeaderProps) {
           )}
         </ul>
 
-        <a href="tel:2897529388" className="nav-cta">
-          289-752-9388
-        </a>
-
         <button
           type="button"
           className="nav-menu-toggle"

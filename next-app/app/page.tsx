@@ -215,7 +215,7 @@ export default function Home() {
                   <br />
                   Hamilton, ON &nbsp; L8N 1Y2
                 </address>
-                <span className="loc-phone">289-674-822</span>
+                <span className="loc-phone">289-674-8220</span>
                 <span className="loc-email">hamilton@precisioncare.ca</span>
                 <span className="loc-fax">Fax: 289-800-9399</span>
                 <div className="loc-divider" />

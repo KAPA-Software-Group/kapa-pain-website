@@ -287,7 +287,7 @@ export function ServiceDetailPage({ page }: { page: ServiceDetailPageData }) {
                 Answers before your appointment.
               </h2>
               <p className="procedure-section-copy">
-                Have more questions? Contact us at info@precisioncare.ca.
+                Have more questions? Contact the clinic location closest to you.
               </p>
             </div>
 

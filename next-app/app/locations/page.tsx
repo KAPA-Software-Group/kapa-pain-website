@@ -40,7 +40,7 @@ const locationCards = [
       "https://www.google.com/maps/search/25+Charlton+Avenue+East,+Hamilton,+ON+L8N+1Y2",
     mapEmbedUrl:
       "https://www.google.com/maps?q=25%20Charlton%20Avenue%20East%2C%20Hamilton%2C%20ON%20L8N%201Y2&output=embed",
-    phone: "289-674-822",
+    phone: "289-674-8220",
     email: "hamilton@precisioncare.ca",
   },
   {
@@ -141,10 +141,10 @@ const locationsPageStyles = `
     gap: 10px;
     margin-bottom: 28px;
     font-family: var(--f-sans);
-    font-size: 13px;
-    font-weight: 300;
+    font-size: 15px;
+    font-weight: 500;
     line-height: 1.8;
-    color: rgba(62, 57, 51, 0.64);
+    color: rgba(62, 57, 51, 0.9);
   }
 
   .locations-page-map {
@@ -347,8 +347,8 @@ const locationsRevealScript = `
           });
         },
         {
-          rootMargin: "0px 0px -12% 0px",
-          threshold: 0.14,
+          rootMargin: "0px 0px -4% 0px",
+          threshold: 0.32,
         }
       );
 
@@ -397,14 +397,14 @@ function LocationCard({
             <div className="loc-divider" />
 
             <div className="locations-page-meta">
-              {email ? (
-                <a href={`mailto:${email}`} className="loc-phone">
-                  {email}
-                </a>
-              ) : null}
               {phone && phoneHref ? (
                 <a href={phoneHref} className="loc-phone">
                   {phone}
+                </a>
+              ) : null}
+              {email ? (
+                <a href={`mailto:${email}`} className="loc-phone loc-email-link">
+                  {email}
                 </a>
               ) : null}
               <span>Fax: {SHARED_FAX}</span>

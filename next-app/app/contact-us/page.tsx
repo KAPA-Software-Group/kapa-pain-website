@@ -5,12 +5,9 @@ import { SiteHeader } from "@/components/site-header"
 export const metadata: Metadata = {
   title: "Contact Us | Precision Pain Centre",
   description:
-    "Get in touch with Precision Care Centre. Reach the clinic by phone, email, or through our contact form.",
+    "Get in touch with Precision Care Centre. Choose a clinic location or send a message through the contact form.",
 }
 
-const contactEmail = "info@precisioncare.ca"
-const contactPhone = "289-752-9388"
-const contactPhoneHref = "tel:2897529388"
 const contactFax = "289-800-9399"
 
 const contactPageStyles = `
@@ -84,11 +81,11 @@ const contactPageStyles = `
 
   .contact-info-copy {
     font-family: var(--f-sans);
-    font-size: 14px;
-    font-weight: 300;
+    font-size: 15px;
+    font-weight: 400;
     line-height: 1.85;
     color: var(--mahogany);
-    opacity: 0.7;
+    opacity: 0.88;
     max-width: 420px;
   }
 
@@ -115,8 +112,8 @@ const contactPageStyles = `
 
   .contact-info-value {
     font-family: var(--f-sans);
-    font-size: 15px;
-    font-weight: 400;
+    font-size: 16px;
+    font-weight: 500;
     color: var(--mahogany);
     text-decoration: none;
     transition: color 0.3s ease;
@@ -128,11 +125,11 @@ const contactPageStyles = `
 
   .contact-info-fineprint {
     font-family: var(--f-sans);
-    font-size: 12px;
-    font-weight: 300;
+    font-size: 13px;
+    font-weight: 400;
     line-height: 1.7;
     color: var(--mahogany);
-    opacity: 0.55;
+    opacity: 0.78;
   }
 
   .contact-form-panel {
@@ -171,11 +168,11 @@ const contactPageStyles = `
 
   .contact-form-sub {
     font-family: var(--f-sans);
-    font-size: 13px;
-    font-weight: 300;
+    font-size: 14px;
+    font-weight: 400;
     line-height: 1.8;
     color: var(--mahogany);
-    opacity: 0.65;
+    opacity: 0.84;
     max-width: 480px;
   }
 
@@ -198,12 +195,12 @@ const contactPageStyles = `
 
   .contact-field-label {
     font-family: var(--f-sans);
-    font-size: 10px;
-    font-weight: 600;
+    font-size: 11px;
+    font-weight: 700;
     letter-spacing: 0.18em;
     text-transform: uppercase;
     color: var(--mahogany);
-    opacity: 0.78;
+    opacity: 1;
     display: flex;
     align-items: center;
     gap: 8px;
@@ -211,19 +208,20 @@ const contactPageStyles = `
 
   .contact-field-optional {
     font-family: var(--f-sans);
-    font-size: 9px;
-    font-weight: 500;
+    font-size: 10px;
+    font-weight: 600;
     letter-spacing: 0.16em;
     text-transform: uppercase;
     color: var(--clay-dark);
-    opacity: 0.7;
+    opacity: 0.88;
   }
 
   .contact-input,
+  .contact-select,
   .contact-textarea {
     font-family: var(--f-sans);
-    font-size: 14px;
-    font-weight: 400;
+    font-size: 15px;
+    font-weight: 500;
     color: var(--mahogany);
     background: transparent;
     border: none;
@@ -239,16 +237,18 @@ const contactPageStyles = `
 
   .contact-input::placeholder,
   .contact-textarea::placeholder {
-    color: rgba(62, 57, 51, 0.35);
-    font-weight: 300;
+    color: rgba(62, 57, 51, 0.54);
+    font-weight: 400;
   }
 
   .contact-input:hover,
+  .contact-select:hover,
   .contact-textarea:hover {
     border-bottom-color: rgba(62, 57, 51, 0.4);
   }
 
   .contact-input:focus,
+  .contact-select:focus,
   .contact-textarea:focus {
     border-bottom-color: var(--clay);
     background: rgba(246, 239, 227, 0.5);
@@ -284,12 +284,28 @@ const contactPageStyles = `
 
   .contact-form-note {
     font-family: var(--f-sans);
-    font-size: 11px;
-    font-weight: 300;
+    font-size: 12px;
+    font-weight: 400;
     line-height: 1.7;
     color: var(--mahogany);
-    opacity: 0.55;
+    opacity: 0.78;
     max-width: 380px;
+  }
+
+  .contact-select {
+    appearance: none;
+    cursor: pointer;
+    background:
+      linear-gradient(45deg, transparent 50%, var(--mahogany) 50%),
+      linear-gradient(135deg, var(--mahogany) 50%, transparent 50%);
+    background-position:
+      calc(100% - 14px) 50%,
+      calc(100% - 8px) 50%;
+    background-size:
+      6px 6px,
+      6px 6px;
+    background-repeat: no-repeat;
+    padding-right: 28px;
   }
 
   .contact-submit {
@@ -403,9 +419,6 @@ export default function ContactUsPage() {
                 touch.
               </p>
               <div className="procedure-hero-actions">
-                <a href={contactPhoneHref} className="btn-primary">
-                  Call the Clinic
-                </a>
                 <a href="#contact-form" className="btn-ghost">
                   Send a Message
                 </a>
@@ -425,33 +438,23 @@ export default function ContactUsPage() {
                   </h2>
                   <p className="contact-info-copy">
                     Our front desk team is available Monday through Friday to
-                    answer questions, confirm referrals, and help schedule your
-                    initial assessment.
+                    answer questions, confirm referrals, and help route your
+                    message to the correct clinic.
                   </p>
                 </div>
 
                 <dl className="contact-info-list">
                   <div className="contact-info-row">
-                    <dt className="contact-info-label">Phone</dt>
-                    <dd>
-                      <a
-                        href={contactPhoneHref}
-                        className="contact-info-value"
-                      >
-                        {contactPhone}
-                      </a>
-                    </dd>
+                    <dt className="contact-info-label">Brampton</dt>
+                    <dd className="contact-info-value">289-752-9388</dd>
                   </div>
                   <div className="contact-info-row">
-                    <dt className="contact-info-label">Email</dt>
-                    <dd>
-                      <a
-                        href={`mailto:${contactEmail}`}
-                        className="contact-info-value"
-                      >
-                        {contactEmail}
-                      </a>
-                    </dd>
+                    <dt className="contact-info-label">Hamilton</dt>
+                    <dd className="contact-info-value">289-674-8220</dd>
+                  </div>
+                  <div className="contact-info-row">
+                    <dt className="contact-info-label">Guelph</dt>
+                    <dd className="contact-info-value">519-265-9622</dd>
                   </div>
                   <div className="contact-info-row">
                     <dt className="contact-info-label">Fax</dt>
@@ -518,6 +521,28 @@ export default function ContactUsPage() {
                         className="contact-input"
                       />
                     </div>
+                  </div>
+
+                  <div className="contact-field">
+                    <label
+                      htmlFor="contact-location"
+                      className="contact-field-label"
+                    >
+                      Preferred Location
+                    </label>
+                    <select
+                      id="contact-location"
+                      name="preferredLocation"
+                      className="contact-select"
+                      defaultValue=""
+                    >
+                      <option value="" disabled>
+                        Select a clinic location
+                      </option>
+                      <option value="brampton">Brampton</option>
+                      <option value="hamilton">Hamilton</option>
+                      <option value="guelph">Guelph</option>
+                    </select>
                   </div>
 
                   <div className="contact-form-row">

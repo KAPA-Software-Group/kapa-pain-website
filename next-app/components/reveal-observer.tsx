@@ -10,7 +10,7 @@ export function RevealObserver() {
           if (entry.isIntersecting) entry.target.classList.add("in-view")
         })
       },
-      { threshold: 0.12 }
+      { rootMargin: "0px 0px -18% 0px", threshold: 0.22 }
     )
     document.querySelectorAll(".reveal").forEach((el) => observer.observe(el))
     return () => observer.disconnect()

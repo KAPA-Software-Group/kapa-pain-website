@@ -68,11 +68,11 @@ const referralsPageStyles = `
   .referral-security-note {
     margin: 0;
     font-family: var(--f-sans);
-    font-size: 14px;
-    font-weight: 300;
+    font-size: 15px;
+    font-weight: 400;
     line-height: 1.85;
     color: var(--mahogany);
-    opacity: 0.72;
+    opacity: 0.88;
   }
 
   .referrals-contact-card {
@@ -86,7 +86,7 @@ const referralsPageStyles = `
   .referral-card-label {
     font-family: var(--f-sans);
     font-size: 11px;
-    font-weight: 600;
+    font-weight: 700;
     text-transform: uppercase;
     color: var(--clay-dark);
   }
@@ -121,8 +121,8 @@ const referralsPageStyles = `
   .referrals-contact-row dd {
     margin: 0;
     font-family: var(--f-sans);
-    font-size: 15px;
-    font-weight: 400;
+    font-size: 16px;
+    font-weight: 500;
     color: var(--mahogany);
   }
 
@@ -168,7 +168,7 @@ const referralsPageStyles = `
     font-family: var(--f-serif);
     font-size: 20px;
     font-style: italic;
-    font-weight: 300;
+    font-weight: 400;
     color: var(--clay-dark);
   }
 
@@ -185,11 +185,11 @@ const referralsPageStyles = `
   .referrals-process-copy {
     margin: 0;
     font-family: var(--f-sans);
-    font-size: 13px;
-    font-weight: 300;
+    font-size: 14px;
+    font-weight: 400;
     line-height: 1.8;
     color: var(--mahogany);
-    opacity: 0.68;
+    opacity: 0.86;
   }
 
   .referral-form-section {
@@ -260,14 +260,32 @@ const referralsPageStyles = `
     gap: 16px;
   }
 
+  .referral-direct-link {
+    justify-self: start;
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 13px 22px;
+    border: 1px solid rgba(118, 83, 61, 0.32);
+    border-radius: 6px;
+    background: var(--charcoal);
+    color: var(--vanilla);
+    font-family: var(--f-sans);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+
   .referral-embed-loading {
     border: 1px solid rgba(159, 118, 87, 0.24);
     border-radius: 8px;
     background: rgba(246, 239, 227, 0.78);
     padding: 16px 18px;
     font-family: var(--f-sans);
-    font-size: 13px;
-    font-weight: 300;
+    font-size: 14px;
+    font-weight: 400;
     line-height: 1.65;
     color: var(--mahogany);
   }
@@ -282,6 +300,7 @@ const referralsPageStyles = `
     background: rgba(255, 252, 247, 0.62);
     padding: clamp(18px, 3vw, 40px);
     box-shadow: 0 14px 36px rgba(31, 29, 26, 0.05);
+    pointer-events: auto;
   }
 
   .referral-embed-frame iframe {

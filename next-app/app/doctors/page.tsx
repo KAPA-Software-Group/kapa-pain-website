@@ -355,7 +355,6 @@ function DoctorProfile({
               {practice}
             </h2>
           </div>
-          <p className="doctors-profile-role">Clinical Practice</p>
         </div>
 
         <div className="doctors-profile-bio">

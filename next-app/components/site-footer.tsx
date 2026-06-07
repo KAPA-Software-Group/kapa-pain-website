@@ -30,7 +30,7 @@ const LOCATIONS = [
   {
     city: "Hamilton",
     address: ["25 Charlton Avenue East, Unit 101", "Hamilton, ON  L8N 1Y2"],
-    phone: "289-674-822",
+    phone: "289-674-8220",
     email: "hamilton@precisioncare.ca",
   },
   {
@@ -40,8 +40,6 @@ const LOCATIONS = [
     email: "guelph@precisioncare.ca",
   },
 ]
-
-const SHARED_FAX = "289-800-9399"
 
 const HOURS = [
   { day: "Mon – Fri", time: "9:00 am – 5:00 pm" },
@@ -154,9 +152,9 @@ export function SiteFooter() {
                 >
                   {loc.email}
                 </a>
+                <span className="sf-contact-fax">Fax: 289-800-9399</span>
               </div>
             ))}
-            <span className="sf-contact-fax">Fax (all clinics): {SHARED_FAX}</span>
           </div>
 
         </div>
@@ -176,8 +174,6 @@ export function SiteFooter() {
         </Link>
 
         <div className="sf-bar-meta">
-          <a href="tel:2897529388" className="sf-bar-phone">289-752-9388</a>
-          <span className="sf-bar-sep" aria-hidden="true" />
           <span className="sf-bar-locs">Brampton &nbsp;·&nbsp; Hamilton &nbsp;·&nbsp; Guelph</span>
         </div>
 

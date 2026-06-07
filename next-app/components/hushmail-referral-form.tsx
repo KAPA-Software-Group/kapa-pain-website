@@ -2,6 +2,8 @@
 
 import Script from "next/script"
 
+const referralFormUrl = "https://hushforms.com/precisioncare-4137"
+
 export function HushmailReferralForm() {
   return (
     <section className="referral-embed" aria-labelledby="secure-referral-form">
@@ -9,6 +11,15 @@ export function HushmailReferralForm() {
         Secure referral form loading below. Please complete the form through
         the encrypted Hushmail portal.
       </div>
+
+      <a
+        href={referralFormUrl}
+        className="referral-direct-link"
+        target="_blank"
+        rel="noreferrer"
+      >
+        Open referral form
+      </a>
 
       <div
         className="hushmail-form-container referral-embed-frame"

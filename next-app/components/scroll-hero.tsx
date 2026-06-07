@@ -156,7 +156,7 @@ export function ScrollHero({ className = "" }: ScrollHeroProps) {
       className={`sh-root relative w-full ${className}`}
       style={{ height: "600vh", zIndex: 0 }}
     >
-      <div className="sticky top-0 h-screen w-full overflow-hidden bg-black">
+      <div className="sticky top-0 h-screen w-full overflow-hidden bg-[#d8cbbb]">
         <canvas
           ref={canvasRef}
           aria-hidden="true"
@@ -251,6 +251,8 @@ export function ScrollHero({ className = "" }: ScrollHeroProps) {
           transition: opacity 90ms linear;
         }
         .sh-headline,
+        .sh-kicker,
+        .sh-index,
         .sh-headline span,
         .sh-meta,
         .sh-sub,
@@ -269,7 +271,10 @@ export function ScrollHero({ className = "" }: ScrollHeroProps) {
           backdrop-filter: none;
         }
         .sh-sub,
+        .sh-kicker,
+        .sh-index,
         .sh-b-eyebrow,
+        .sh-portal-h,
         .sh-bridge,
         .sh-disciplines,
         .sh-body {
@@ -291,7 +296,6 @@ export function ScrollHero({ className = "" }: ScrollHeroProps) {
           letter-spacing: 0.34em;
           text-transform: uppercase;
           color: var(--sh-cream-soft);
-          text-shadow: 0 2px 12px rgba(0, 0, 0, 0.55);
           display: inline-flex;
           align-items: center;
           gap: 16px;
@@ -312,7 +316,6 @@ export function ScrollHero({ className = "" }: ScrollHeroProps) {
           letter-spacing: 0.28em;
           text-transform: uppercase;
           color: var(--sh-cream-soft);
-          text-shadow: 0 2px 12px rgba(0, 0, 0, 0.55);
         }
         .sh-index-num {
           font-family: var(--font-sans, "DM Sans", system-ui, sans-serif);
@@ -358,9 +361,7 @@ export function ScrollHero({ className = "" }: ScrollHeroProps) {
           margin: 0;
           display: flex;
           flex-direction: column;
-          text-shadow:
-            0 14px 80px rgba(0, 0, 0, 0.5),
-            0 2px 14px rgba(0, 0, 0, 0.42);
+          text-shadow: none;
         }
         .sh-line {
           display: block;
@@ -368,11 +369,8 @@ export function ScrollHero({ className = "" }: ScrollHeroProps) {
         }
         .sh-line > span {
           display: inline-block;
-          transform: translateY(110%);
-          opacity: 0;
-          transition:
-            transform 1100ms cubic-bezier(0.2, 0.62, 0.2, 1),
-            opacity 1100ms cubic-bezier(0.2, 0.62, 0.2, 1);
+          transform: translateY(0);
+          opacity: 1;
         }
         .sh-line:nth-child(1) > span { transition-delay: 80ms; }
         .sh-line:nth-child(2) > span { transition-delay: 220ms; }
@@ -402,7 +400,6 @@ export function ScrollHero({ className = "" }: ScrollHeroProps) {
           line-height: 1.6;
           color: rgba(246, 239, 227, 0.9);
           margin: 0;
-          text-shadow: 0 2px 12px rgba(0, 0, 0, 0.55);
           max-width: 38ch;
         }
         .sh-actions {
@@ -519,7 +516,6 @@ export function ScrollHero({ className = "" }: ScrollHeroProps) {
           letter-spacing: 0.34em;
           text-transform: uppercase;
           margin: 0 0 clamp(24px, 3vw, 36px);
-          text-shadow: 0 2px 10px rgba(0, 0, 0, 0.55);
           opacity: 0;
           transform: translateY(12px);
           transition:
@@ -543,9 +539,7 @@ export function ScrollHero({ className = "" }: ScrollHeroProps) {
           letter-spacing: -0.015em;
           text-transform: uppercase;
           font-size: clamp(48px, 9vw, 140px);
-          text-shadow:
-            0 14px 80px rgba(0, 0, 0, 0.5),
-            0 2px 14px rgba(0, 0, 0, 0.42);
+          text-shadow: none;
         }
         .sh-portal-line {
           display: block;
@@ -579,7 +573,6 @@ export function ScrollHero({ className = "" }: ScrollHeroProps) {
           line-height: 1.4;
           color: rgba(246, 239, 227, 0.86);
           margin: clamp(24px, 3vw, 36px) 0 0 0;
-          text-shadow: 0 2px 14px rgba(0, 0, 0, 0.55);
           max-width: 36ch;
           opacity: 0;
           transform: translateY(14px);
@@ -612,7 +605,6 @@ export function ScrollHero({ className = "" }: ScrollHeroProps) {
           letter-spacing: 0.28em;
           text-transform: uppercase;
           color: rgba(246, 239, 227, 0.74);
-          text-shadow: 0 2px 10px rgba(0, 0, 0, 0.55);
           opacity: 0;
           transform: translateY(14px);
           transition:
@@ -628,7 +620,6 @@ export function ScrollHero({ className = "" }: ScrollHeroProps) {
           color: rgba(246, 239, 227, 0.82);
           margin: 0;
           max-width: 44ch;
-          text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
           opacity: 0;
           transform: translateY(14px);
           transition:
