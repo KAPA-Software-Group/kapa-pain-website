@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next"
+import Script from "next/script"
 import { DM_Sans, Spectral, JetBrains_Mono } from "next/font/google"
 import "./globals.css"
 import { RouteTransition } from "@/components/route-transition"
@@ -57,6 +58,20 @@ export default function RootLayout({
       lang="en"
       className={`${dmSans.variable} ${spectral.variable} ${jetbrainsMono.variable}`}
     >
+      <Script
+        async
+        strategy="beforeInteractive"
+        src="https://www.googletagmanager.com/gtag/js?id=G-RSJ8V9EVF7"
+      />
+      <Script id="google-tag" strategy="beforeInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'G-RSJ8V9EVF7');
+        `}
+      </Script>
       <body className="antialiased">
         <RouteTransition />
         {children}
