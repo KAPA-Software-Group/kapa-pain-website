@@ -172,7 +172,7 @@ export default function Home() {
             </h2>
             <div className="loc-grid">
               <Link
-                href="/locations/brampton"
+                href="/locations#brampton"
                 className="loc-card reveal reveal-delay-2"
               >
                 <span className="loc-tag">Main Clinic</span>
@@ -203,7 +203,7 @@ export default function Home() {
                 <span className="loc-cta">View location →</span>
               </Link>
               <Link
-                href="/locations/hamilton"
+                href="/locations#hamilton"
                 className="loc-card reveal reveal-delay-3"
               >
                 <span className="loc-tag">Second Location</span>
@@ -234,7 +234,7 @@ export default function Home() {
                 <span className="loc-cta">View location →</span>
               </Link>
               <Link
-                href="/locations/guelph"
+                href="/locations#guelph"
                 className="loc-card reveal reveal-delay-4"
               >
                 <span className="loc-tag">Third Location</span>

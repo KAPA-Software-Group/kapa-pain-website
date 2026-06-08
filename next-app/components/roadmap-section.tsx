@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import Link from "next/link"
 
 const FRAME_COUNT = 149
@@ -55,7 +55,7 @@ function smoothstep(a: number, b: number, x: number) {
 export function RoadmapSection() {
   const containerRef = useRef<HTMLDivElement | null>(null)
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
-  const framesRef = useRef<HTMLImageElement[]>([])
+  const framesRef = useRef<(HTMLImageElement | undefined)[]>([])
   const targetRef = useRef(0)
   const currentRef = useRef(0)
   const drawnFrameRef = useRef(-1)
@@ -64,6 +64,25 @@ export function RoadmapSection() {
   const canvasSizeRef = useRef({ width: 0, height: 0 })
   const cardsRef = useRef<(HTMLDivElement | null)[]>([])
   const progressRefs = useRef<(HTMLDivElement | null)[]>([])
+  const setProgressRef = useRef<((progress: number) => void) | null>(null)
+  const activeStepRef = useRef(0)
+  const isMobileRef = useRef(false)
+  const [activeStep, setActiveStep] = useState(0)
+
+  useEffect(() => {
+    activeStepRef.current = activeStep
+  }, [activeStep])
+
+  useEffect(() => {
+    const media = window.matchMedia("(max-width: 768px)")
+    const update = () => {
+      isMobileRef.current = media.matches
+    }
+
+    update()
+    media.addEventListener("change", update)
+    return () => media.removeEventListener("change", update)
+  }, [])
 
   const scrollToStep = (stepIndex: number) => {
     const container = containerRef.current
@@ -79,15 +98,88 @@ export function RoadmapSection() {
     window.scrollTo({ top: targetTop, behavior: "smooth" })
   }
 
+  const goToStep = (stepIndex: number) => {
+    const nextStep = Math.max(0, Math.min(MILESTONES.length - 1, stepIndex))
+    setActiveStep(nextStep)
+    const progress =
+      MILESTONES.length <= 1 ? 0 : nextStep / (MILESTONES.length - 1)
+    setProgressRef.current?.(progress)
+
+    if (!isMobileRef.current) {
+      scrollToStep(nextStep)
+    }
+  }
+
+  const scrollToNextSection = () => {
+    const nextSection = document.querySelector(".pj-outro")
+    if (nextSection) {
+      nextSection.scrollIntoView({ behavior: "smooth", block: "start" })
+      return
+    }
+
+    const container = containerRef.current
+    if (!container) return
+    const targetTop =
+      window.scrollY + container.getBoundingClientRect().bottom + 1
+    window.scrollTo({ top: targetTop, behavior: "smooth" })
+  }
+
   const scrollToNextStep = () => {
-    const currentStep = Math.round(targetRef.current * (MILESTONES.length - 1))
-    scrollToStep(Math.min(MILESTONES.length - 1, currentStep + 1))
+    const currentStep = isMobileRef.current
+      ? activeStepRef.current
+      : Math.round(targetRef.current * (MILESTONES.length - 1))
+
+    if (currentStep >= MILESTONES.length - 1) {
+      scrollToNextSection()
+      return
+    }
+
+    goToStep(currentStep + 1)
+  }
+
+  const scrollToPreviousStep = () => {
+    goToStep(activeStepRef.current - 1)
   }
 
   useEffect(() => {
     const containerEl = containerRef.current
     let disposed = false
     const wakeTimers: number[] = []
+    const imgs: (HTMLImageElement | undefined)[] = Array.from(
+      { length: FRAME_COUNT },
+      () => undefined
+    )
+    framesRef.current = imgs
+
+    const clearPrepinnedState = () => {
+      containerEl?.classList.remove("is-prepinned")
+      containerEl?.style.removeProperty("--pj-road-drawer")
+    }
+
+    const loadFrame = (index: number, priority: "high" | "low" = "low") => {
+      if (index < 0 || index >= FRAME_COUNT) return
+      if (imgs[index]) return
+
+      const img = new Image()
+      img.decoding = "async"
+      img.fetchPriority = priority
+      img.onload = () => {
+        if (disposed) return
+        const targetIndex = Math.round(targetRef.current * (FRAME_COUNT - 1))
+        if (index === 0 || Math.abs(index - targetIndex) <= 2) {
+          drawnFrameRef.current = -1
+          wake()
+        }
+      }
+      img.src = FRAME_PATH(index + 1)
+      imgs[index] = img
+    }
+
+    const loadNearbyFrames = (index: number) => {
+      loadFrame(index, index < 4 ? "high" : "low")
+      loadFrame(index - 1)
+      loadFrame(index + 1)
+    }
 
     const findNearestLoadedFrame = (index: number) => {
       const frames = framesRef.current
@@ -156,6 +248,8 @@ export function RoadmapSection() {
 
       const baseIndex = Math.floor(exactFrame)
       const nextIndex = Math.min(FRAME_COUNT - 1, baseIndex + 1)
+      loadNearbyFrames(baseIndex)
+      loadFrame(nextIndex)
       let baseImg = framesRef.current[baseIndex]
       let nextImg: HTMLImageElement | undefined = framesRef.current[nextIndex]
       let canBlend = true
@@ -167,6 +261,7 @@ export function RoadmapSection() {
         nextImg = undefined
         canBlend = false
       }
+      if (!baseImg) return
 
       const ctx = ctxRef.current ?? canvas.getContext("2d", { alpha: false })
       if (!ctx) return
@@ -198,6 +293,11 @@ export function RoadmapSection() {
     }
 
     const computeProgress = () => {
+      if (isMobileRef.current) {
+        const maxProgress = MILESTONES.length - 1
+        return maxProgress <= 0 ? 0 : activeStepRef.current / maxProgress
+      }
+
       const container = containerRef.current
       if (!container) return 0
       const rect = container.getBoundingClientRect()
@@ -220,6 +320,7 @@ export function RoadmapSection() {
 
     const applyMilestones = (p: number) => {
       const n = MILESTONES.length
+      const mobileActiveStep = Math.round(p * (n - 1))
       MILESTONES.forEach((m, i) => {
         const start = i / n
         const end = (i + 1) / n
@@ -229,11 +330,17 @@ export function RoadmapSection() {
         const fadeIn = i === 0 ? 1 : smoothstep(start - CARD_FADE, start, p)
         const fadeOut =
           i === n - 1 ? 1 : 1 - smoothstep(end - CARD_FADE, end, p)
-        const alpha = Math.max(0, Math.min(1, fadeIn * fadeOut))
+        const alpha = isMobileRef.current
+          ? i === mobileActiveStep
+            ? 1
+            : 0
+          : Math.max(0, Math.min(1, fadeIn * fadeOut))
         const card = cardsRef.current[i]
         if (card) {
           card.style.opacity = String(alpha)
-          card.style.transform = `translateY(${(1 - alpha) * 32}px)`
+          card.style.transform = isMobileRef.current
+            ? "translateY(0)"
+            : `translateY(${(1 - alpha) * 32}px)`
           card.style.pointerEvents = alpha > 0.5 ? "auto" : "none"
         }
         const progressItem = progressRefs.current[i]
@@ -247,6 +354,23 @@ export function RoadmapSection() {
           )
         }
       })
+      const nextActiveStep = mobileActiveStep
+      if (nextActiveStep !== activeStepRef.current) {
+        activeStepRef.current = nextActiveStep
+        setActiveStep(nextActiveStep)
+      }
+    }
+
+    setProgressRef.current = (progress: number) => {
+      targetRef.current = Math.max(0, Math.min(1, progress))
+      currentRef.current = targetRef.current
+      drawnFrameRef.current = -1
+      drawScrubFrame(currentRef.current)
+      applyMilestones(currentRef.current)
+      if (rafRef.current !== null) {
+        window.cancelAnimationFrame(rafRef.current)
+        rafRef.current = null
+      }
     }
 
     const tick = () => {
@@ -303,44 +427,58 @@ export function RoadmapSection() {
     const onVisibilityChange = () => {
       if (document.visibilityState === "visible") queueWake()
     }
-
-    const imgs = Array.from({ length: FRAME_COUNT }, () => new Image())
-    framesRef.current = imgs
-    imgs.forEach((img, index) => {
-      img.decoding = "async"
-      img.fetchPriority = index < 12 ? "high" : "low"
-      img.onload = () => {
-        if (disposed) return
-        const targetIndex = Math.round(targetRef.current * (FRAME_COUNT - 1))
-        if (index === 0 || Math.abs(index - targetIndex) <= 2) {
-          drawnFrameRef.current = -1
-          wake()
-        }
-      }
-      img.src = FRAME_PATH(index + 1)
-    })
+    const onPageHide = () => {
+      clearPrepinnedState()
+    }
+    const onPageShow = () => {
+      clearPrepinnedState()
+      resizeCanvas()
+      queueWake()
+    }
 
     resizeCanvas()
+    loadFrame(0, "high")
+    const startRoadLoading = () => {
+      const targetIndex = Math.round(targetRef.current * (FRAME_COUNT - 1))
+      loadNearbyFrames(targetIndex)
+    }
+    let observer: IntersectionObserver | null = null
+    if (containerEl && "IntersectionObserver" in window) {
+      observer = new IntersectionObserver(
+        (entries) => {
+          if (entries.some((entry) => entry.isIntersecting)) {
+            startRoadLoading()
+          }
+        },
+        { rootMargin: "1200px 0px" }
+      )
+      observer.observe(containerEl)
+    } else {
+      startRoadLoading()
+    }
     queueWake()
     window.addEventListener("scroll", onScroll, { passive: true })
     document.addEventListener("scroll", onScroll, { passive: true })
     window.addEventListener("resize", onResize)
-    window.addEventListener("pageshow", queueWake)
+    window.addEventListener("pageshow", onPageShow)
+    window.addEventListener("pagehide", onPageHide)
     document.addEventListener("visibilitychange", onVisibilityChange)
     return () => {
       disposed = true
       wakeTimers.forEach((timer) => window.clearTimeout(timer))
       if (rafRef.current !== null) window.cancelAnimationFrame(rafRef.current)
       imgs.forEach((img) => {
-        img.onload = null
+        if (img) img.onload = null
       })
+      observer?.disconnect()
       ctxRef.current = null
-      containerEl?.classList.remove("is-prepinned")
-      containerEl?.style.removeProperty("--pj-road-drawer")
+      setProgressRef.current = null
+      clearPrepinnedState()
       window.removeEventListener("scroll", onScroll)
       document.removeEventListener("scroll", onScroll)
       window.removeEventListener("resize", onResize)
-      window.removeEventListener("pageshow", queueWake)
+      window.removeEventListener("pageshow", onPageShow)
+      window.removeEventListener("pagehide", onPageHide)
       document.removeEventListener("visibilitychange", onVisibilityChange)
     }
   }, [])
@@ -382,6 +520,46 @@ export function RoadmapSection() {
             Next Step
             <span aria-hidden>→</span>
           </button>
+
+          <div className="pj-mobile-controls" aria-label="Journey step controls">
+            <div className="pj-mobile-step-count">
+              Step {activeStep + 1} of {MILESTONES.length}
+            </div>
+            <div className="pj-mobile-buttons">
+              <button
+                type="button"
+                className="pj-mobile-step-button"
+                onClick={scrollToPreviousStep}
+                disabled={activeStep === 0}
+              >
+                Previous
+              </button>
+              <button
+                type="button"
+                className="pj-mobile-step-button is-primary"
+                onClick={scrollToNextStep}
+              >
+                {activeStep === MILESTONES.length - 1 ? "Continue" : "Next"}
+              </button>
+            </div>
+            <div className="pj-mobile-dots" aria-label="Choose a step">
+              {MILESTONES.map((m, i) => (
+                <button
+                  key={m.title}
+                  type="button"
+                  className={[
+                    "pj-mobile-dot",
+                    activeStep === i ? "is-active" : "",
+                  ]
+                    .filter(Boolean)
+                    .join(" ")}
+                  aria-label={`Go to step ${i + 1}: ${m.title}`}
+                  aria-current={activeStep === i ? "step" : undefined}
+                  onClick={() => goToStep(i)}
+                />
+              ))}
+            </div>
+          </div>
 
           {/* Full-screen milestone overlays */}
           {MILESTONES.map((m, i) => (

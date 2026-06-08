@@ -118,6 +118,36 @@ const locationsPageStyles = `
       border-color 280ms ease,
       box-shadow 280ms ease,
       transform 520ms var(--ease);
+    scroll-margin-top: 108px;
+  }
+
+  .locations-page-card:target {
+    border-color: rgba(159, 118, 87, 0.58);
+    box-shadow:
+      0 30px 80px rgba(31, 29, 26, 0.12),
+      0 0 0 1px rgba(159, 118, 87, 0.32);
+    animation: location-target-glow 1800ms ease-out 1;
+  }
+
+  .locations-page-card:target .loc-city {
+    color: var(--clay-dark);
+  }
+
+  @keyframes location-target-glow {
+    0% {
+      transform: translateY(-4px);
+      background: rgba(232, 178, 122, 0.22);
+      box-shadow:
+        0 34px 86px rgba(31, 29, 26, 0.14),
+        0 0 0 3px rgba(159, 118, 87, 0.32);
+    }
+    55% {
+      background: rgba(232, 178, 122, 0.12);
+    }
+    100% {
+      transform: translateY(0);
+      background: transparent;
+    }
   }
 
   .locations-page-card:nth-child(2n) {
@@ -372,9 +402,11 @@ function LocationCard({
 }: LocationCardProps) {
   const isComingSoon = !mapEmbedUrl
   const phoneHref = phone ? `tel:${phone.replace(/[^0-9]/g, "")}` : undefined
+  const id = name.toLowerCase()
 
   return (
     <article
+      id={id}
       className="loc-card locations-page-card"
       data-coming-soon={isComingSoon}
       data-locations-reveal="card"

@@ -122,7 +122,7 @@ export function SiteHeader({ overlay = false }: SiteHeaderProps) {
     <nav className={navClassName}>
       <Link href="/" className="nav-logo">
         <Image
-          src="/media/logo/Logo.png"
+          src="/media/logo/Logo-header.webp"
           alt="Precision Pain Centre"
           width={96}
           height={64}

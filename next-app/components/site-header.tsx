@@ -63,6 +63,50 @@ export function SiteHeader({ overlay = false }: SiteHeaderProps) {
   const isActivePath = (href: string) =>
     pathname === href || pathname.startsWith(`${href}/`)
 
+  const handleLogoClick = () => {
+    setMenuOpen(false)
+    if (pathname !== "/") {
+      window.sessionStorage.setItem("precision-home-logo-reset", "1")
+      window.location.assign("/")
+    }
+  }
+
+  useEffect(() => {
+    if (pathname !== "/") return
+
+    const shouldScrollTop =
+      window.sessionStorage.getItem("precision-home-logo-reset") === "1"
+    window.sessionStorage.removeItem("precision-home-logo-reset")
+
+    const resetHomeScrollState = () => {
+      document.documentElement.style.removeProperty("overflow")
+      document.documentElement.style.removeProperty("position")
+      document.body.style.removeProperty("overflow")
+      document.body.style.removeProperty("position")
+      document.body.style.removeProperty("top")
+
+      document.querySelectorAll(".pj-road-scroll").forEach((el) => {
+        el.classList.remove("is-prepinned")
+        ;(el as HTMLElement).style.removeProperty("--pj-road-drawer")
+      })
+
+      if (shouldScrollTop) {
+        window.scrollTo({ top: 0, left: 0, behavior: "auto" })
+      }
+    }
+
+    resetHomeScrollState()
+    const raf = window.requestAnimationFrame(resetHomeScrollState)
+    const timers = [80, 250, 600].map((delay) =>
+      window.setTimeout(resetHomeScrollState, delay)
+    )
+
+    return () => {
+      window.cancelAnimationFrame(raf)
+      timers.forEach((timer) => window.clearTimeout(timer))
+    }
+  }, [pathname])
+
   useEffect(() => {
     if (!overlay) return
     const getScrubBottom = () => {
@@ -112,9 +156,17 @@ export function SiteHeader({ overlay = false }: SiteHeaderProps) {
 
   return (
     <nav className={navClassName}>
-      <Link href="/" className="nav-logo">
+      <Link
+        href="/"
+        className="nav-logo"
+        scroll
+        onClick={(event) => {
+          if (pathname !== "/") event.preventDefault()
+          handleLogoClick()
+        }}
+      >
         <Image
-          src="/media/logo/Logo.png"
+          src="/media/logo/Logo-header.webp"
           alt="Precision Pain Centre"
           width={96}
           height={64}
@@ -237,21 +289,91 @@ export function SiteHeader({ overlay = false }: SiteHeaderProps) {
         className={["mobile-nav", menuOpen ? "is-open" : ""].filter(Boolean).join(" ")}
       >
         <div className="mobile-nav-links">
-          {NAV_ITEMS.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={[
-                "mobile-nav-link",
-                isActivePath(item.href) ? "is-active" : "",
-              ]
-                .filter(Boolean)
-                .join(" ")}
-              onClick={() => setMenuOpen(false)}
-            >
-              {item.label}
-            </Link>
-          ))}
+          {NAV_ITEMS.map((item) =>
+            item.dropdown ? (
+              <details
+                key={item.href}
+                className="mobile-nav-group"
+                open={isActivePath(item.href)}
+              >
+                <summary
+                  className={[
+                    "mobile-nav-link",
+                    "mobile-nav-summary",
+                    isActivePath(item.href) ? "is-active" : "",
+                  ]
+                    .filter(Boolean)
+                    .join(" ")}
+                >
+                  <span>{item.label}</span>
+                  <span className="mobile-nav-plus" aria-hidden="true" />
+                </summary>
+                <div className="mobile-nav-sublinks">
+                  <Link
+                    href={item.href}
+                    className="mobile-nav-sublink mobile-nav-overview"
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    All {item.label}
+                  </Link>
+                  {item.dropdown === "procedures" ? (
+                    PROCEDURE_GROUPS.map((group) => (
+                      <div key={group.label} className="mobile-nav-subgroup">
+                        <span className="mobile-nav-subgroup-label">{group.label}</span>
+                        {group.items.map((sub) => (
+                          <Link
+                            key={sub.href}
+                            href={sub.href}
+                            className={[
+                              "mobile-nav-sublink",
+                              pathname === sub.href ? "is-active" : "",
+                            ]
+                              .filter(Boolean)
+                              .join(" ")}
+                            onClick={() => setMenuOpen(false)}
+                          >
+                            {sub.label}
+                          </Link>
+                        ))}
+                      </div>
+                    ))
+                  ) : (
+                    <div className="mobile-nav-subgroup">
+                      {SERVICES_ITEMS.map((sub) => (
+                        <Link
+                          key={sub.href}
+                          href={sub.href}
+                          className={[
+                            "mobile-nav-sublink",
+                            pathname === sub.href ? "is-active" : "",
+                          ]
+                            .filter(Boolean)
+                            .join(" ")}
+                          onClick={() => setMenuOpen(false)}
+                        >
+                          {sub.label}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </details>
+            ) : (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={[
+                  "mobile-nav-link",
+                  isActivePath(item.href) ? "is-active" : "",
+                ]
+                  .filter(Boolean)
+                  .join(" ")}
+                onClick={() => setMenuOpen(false)}
+              >
+                {item.label}
+              </Link>
+            )
+          )}
         </div>
         <Link href="/contact-us" className="mobile-nav-cta">
           Contact the Clinic

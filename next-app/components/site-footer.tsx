@@ -57,6 +57,17 @@ export function SiteFooter() {
     const prefersReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     ).matches
+    const isMobile = window.matchMedia("(max-width: 680px)").matches
+
+    if (isMobile) {
+      window.requestAnimationFrame(() => {
+        footerRef.current?.scrollIntoView({
+          block: "start",
+          behavior: prefersReducedMotion ? "auto" : "smooth",
+        })
+      })
+      return
+    }
 
     if (prefersReducedMotion) {
       footerRef.current?.scrollIntoView({ block: "end" })
@@ -164,7 +175,7 @@ export function SiteFooter() {
       <div className="sf-bar">
         <Link href="/" className="sf-logo">
           <Image
-            src="/media/logo/Logo.png"
+            src="/media/logo/Logo-header.webp"
             alt="Precision Care Centre"
             width={36}
             height={24}

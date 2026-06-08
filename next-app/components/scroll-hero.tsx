@@ -28,7 +28,7 @@ export function ScrollHero({ className = "" }: ScrollHeroProps) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
   const overlayARef = useRef<HTMLDivElement | null>(null)
   const overlayBRef = useRef<HTMLDivElement | null>(null)
-  const framesRef = useRef<HTMLImageElement[]>([])
+  const framesRef = useRef<(HTMLImageElement | undefined)[]>([])
   const targetRef = useRef(0)
   const currentRef = useRef(0)
   const drawnIndexRef = useRef(-1)
@@ -37,25 +37,48 @@ export function ScrollHero({ className = "" }: ScrollHeroProps) {
   const [introIn, setIntroIn] = useState(false)
 
   useEffect(() => {
-    const imgs: HTMLImageElement[] = []
-    for (let i = 1; i <= FRAME_COUNT; i++) {
+    let disposed = false
+    const imgs: (HTMLImageElement | undefined)[] = Array.from(
+      { length: FRAME_COUNT },
+      () => undefined
+    )
+    framesRef.current = imgs
+
+    const loadFrame = (idx: number, priority: "high" | "low" = "low") => {
+      if (idx < 0 || idx >= FRAME_COUNT) return
+      if (imgs[idx]) return
+
       const img = new Image()
       img.decoding = "async"
-      img.src = FRAME_PATH(i)
-      if (i === 1) {
-        img.onload = () => {
+      img.fetchPriority = priority
+      img.onload = () => {
+        if (disposed) return
+        if (idx === 0) {
           drawFrame(0)
           setMounted(true)
           requestAnimationFrame(() => setIntroIn(true))
+        } else {
+          const targetIndex = Math.round(targetRef.current * (FRAME_COUNT - 1))
+          if (Math.abs(idx - targetIndex) <= 2) {
+            drawnIndexRef.current = -1
+            wake()
+          }
         }
       }
-      imgs.push(img)
+      img.src = FRAME_PATH(idx + 1)
+      imgs[idx] = img
     }
-    framesRef.current = imgs
+
+    const warmNearbyFrames = (idx: number) => {
+      loadFrame(idx, idx < 4 ? "high" : "low")
+      loadFrame(idx - 1)
+      loadFrame(idx + 1)
+    }
 
     const drawFrame = (idx: number) => {
       const canvas = canvasRef.current
       const img = framesRef.current[idx]
+      warmNearbyFrames(idx)
       if (!canvas || !img || !img.complete || img.naturalWidth === 0) return
       if (drawnIndexRef.current === idx) return
       const ctx = canvas.getContext("2d", { alpha: false })
@@ -139,14 +162,28 @@ export function ScrollHero({ className = "" }: ScrollHeroProps) {
       drawnIndexRef.current = -1
       wake()
     }
+    const onPageShow = () => {
+      drawnIndexRef.current = -1
+      wake()
+      requestAnimationFrame(() => {
+        if (!disposed) wake()
+      })
+    }
 
+    loadFrame(0, "high")
     wake()
     window.addEventListener("scroll", onScroll, { passive: true })
     window.addEventListener("resize", onResize)
+    window.addEventListener("pageshow", onPageShow)
     return () => {
+      disposed = true
       if (rafRef.current !== null) window.cancelAnimationFrame(rafRef.current)
+      imgs.forEach((img) => {
+        if (img) img.onload = null
+      })
       window.removeEventListener("scroll", onScroll)
       window.removeEventListener("resize", onResize)
+      window.removeEventListener("pageshow", onPageShow)
     }
   }, [])
 
@@ -223,11 +260,6 @@ export function ScrollHero({ className = "" }: ScrollHeroProps) {
                 <span key={d} className="sh-discipline">{d}</span>
               ))}
             </div>
-            <p className="sh-body">
-              Five stops. One road. Your story, told the way it actually unfolds - 
-              from the bumpy uncertainty of the first referral to the steady
-              ground of lasting relief.
-            </p>
           </div>
         </div>
       </div>
@@ -483,6 +515,27 @@ export function ScrollHero({ className = "" }: ScrollHeroProps) {
         .sh-phase-b {
           grid-template-rows: 1fr auto;
           align-items: center;
+          isolation: isolate;
+        }
+        .sh-phase-b::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          z-index: -1;
+          pointer-events: none;
+          background:
+            linear-gradient(
+              180deg,
+              rgba(10, 8, 6, 0.48) 0%,
+              rgba(10, 8, 6, 0.58) 45%,
+              rgba(10, 8, 6, 0.66) 100%
+            ),
+            linear-gradient(
+              90deg,
+              rgba(10, 8, 6, 0.38) 0%,
+              rgba(10, 8, 6, 0.2) 50%,
+              rgba(10, 8, 6, 0.38) 100%
+            );
         }
         .sh-b-kicker,
         .sh-b-index {
@@ -587,7 +640,7 @@ export function ScrollHero({ className = "" }: ScrollHeroProps) {
 
         .sh-b-bottom {
           display: grid;
-          grid-template-columns: minmax(0, 1fr) minmax(280px, 460px);
+          grid-template-columns: 1fr;
           gap: clamp(32px, 6vw, 96px);
           align-items: end;
           padding-top: 32px;
@@ -598,20 +651,20 @@ export function ScrollHero({ className = "" }: ScrollHeroProps) {
         .sh-disciplines {
           display: flex;
           flex-direction: column;
-          gap: 8px;
+          gap: clamp(10px, 1.4vw, 18px);
           font-family: var(--font-sans, "DM Sans", system-ui, sans-serif);
-          font-size: 11px;
-          font-weight: 500;
-          letter-spacing: 0.28em;
+          font-size: clamp(18px, 2.4vw, 34px);
+          font-weight: 650;
+          letter-spacing: 0.12em;
           text-transform: uppercase;
-          color: rgba(246, 239, 227, 0.74);
+          color: rgba(246, 239, 227, 0.94);
           opacity: 0;
           transform: translateY(14px);
           transition:
             opacity 900ms cubic-bezier(0.2, 0.62, 0.2, 1) 820ms,
             transform 900ms cubic-bezier(0.2, 0.62, 0.2, 1) 820ms;
         }
-        .sh-discipline { line-height: 1.7; }
+        .sh-discipline { line-height: 1.18; }
         .sh-body {
           font-family: var(--font-sans, "DM Sans", system-ui, sans-serif);
           font-weight: 400;
