@@ -20,11 +20,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const loc = getLocationBySlug(slug)
   if (!loc) return {}
   return {
-    title: `${loc.name} - Precision Pain Centre`,
+    title: `${loc.name} - Precision Care Centre`,
     description:
       loc.status === "open"
-        ? `Precision Pain Centre ${loc.name} - ${loc.addressLines.join(", ")}.`
-        : `Precision Pain Centre is opening a ${loc.name} clinic soon.`,
+        ? `Precision Care Centre ${loc.name} - ${loc.addressLines.join(", ")}.`
+        : `Precision Care Centre is opening a ${loc.name} clinic soon.`,
   }
 }
 

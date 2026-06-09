@@ -57,7 +57,7 @@ const hubPathwaySteps = [
 ]
 
 export const metadata: Metadata = {
-  title: "Patient Procedures | Precision Pain Centre",
+  title: "Patient Procedures | Precision Care Centre",
   description:
     "Explore patient procedure information from Precision Care Centre, including nerve procedures, epidural injections, joint injections, SGB, and chronic pain assessment.",
 }

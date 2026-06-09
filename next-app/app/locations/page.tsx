@@ -5,7 +5,7 @@ import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
 
 export const metadata: Metadata = {
-  title: "Locations | Precision Pain Centre",
+  title: "Locations | Precision Care Centre",
   description:
     "Browse Precision Care Centre locations in Brampton, Hamilton, Guelph, and Toronto, with contact information and booking access.",
 }

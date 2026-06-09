@@ -6,7 +6,7 @@ import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
 
 export const metadata: Metadata = {
-  title: "FAQ | Precision Pain Centre",
+  title: "FAQ | Precision Care Centre",
   description:
     "Browse frequently asked questions about Precision Care Centre services, referrals, appointments, and clinic visits.",
 }

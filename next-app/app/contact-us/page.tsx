@@ -3,7 +3,7 @@ import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
 
 export const metadata: Metadata = {
-  title: "Contact Us | Precision Pain Centre",
+  title: "Contact Us | Precision Care Centre",
   description:
     "Get in touch with Precision Care Centre. Choose a clinic location or send a message through the contact form.",
 }

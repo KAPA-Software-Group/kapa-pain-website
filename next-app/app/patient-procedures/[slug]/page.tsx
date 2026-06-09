@@ -26,12 +26,12 @@ export async function generateMetadata({
 
   if (!page) {
     return {
-      title: "Patient Procedures | Precision Pain Centre",
+      title: "Patient Procedures | Precision Care Centre",
     }
   }
 
   return {
-    title: `${page.title} | Precision Pain Centre`,
+    title: `${page.title} | Precision Care Centre`,
     description: page.metaDescription,
   }
 }

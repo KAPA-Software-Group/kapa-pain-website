@@ -6,7 +6,7 @@ import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
 
 export const metadata: Metadata = {
-  title: "Referrals | Precision Pain Centre",
+  title: "Referrals | Precision Care Centre",
   description:
     "Refer a patient to Precision Care Centre through our secure Hushmail referral form.",
 }
