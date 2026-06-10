@@ -40,6 +40,9 @@ export const metadata: Metadata = {
     "pain management",
     "multidisciplinary",
   ],
+  verification: {
+    google: "PN5GaB-_F5HfFncqxSUgUuAcwIl5EZ8mQQePjNRM4Ys",
+  },
 }
 
 export const viewport: Viewport = {
