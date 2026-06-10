@@ -39,7 +39,7 @@ export function HeroSection() {
       {/* ─── NAV ──────────────────────────────────────────── */}
       <nav ref={navRef} className="nav">
         <a href="#" className="nav-logo">
-          Precision Pain Centre
+          Precision Care Centre
         </a>
         <div className="nav-right">
           <ul className="nav-links">
@@ -64,7 +64,7 @@ export function HeroSection() {
         {/* Content sits above shader */}
         <div className="hero-inner" style={{ position: "relative", zIndex: 1 }}>
           <p className="hero-label">
-            Precision Pain Centre - Brampton &amp; Hamilton
+            Precision Care Centre - Brampton &amp; Hamilton
           </p>
           <h1 className="hero-headline">
             Where precision

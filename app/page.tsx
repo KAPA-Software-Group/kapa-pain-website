@@ -18,7 +18,7 @@ export default function Home() {
                 Chronic pain deserves more than a prescription. It deserves a plan.
               </h2>
               <p className="phil-body reveal reveal-delay-2">
-                We built Precision Pain Centre around a single conviction: every
+                We built Precision Care Centre around a single conviction: every
                 patient deserves specialist-led, evidence-based care - without
                 financial barriers, without excessive wait times, and without
                 compromise. Our multidisciplinary team works together to
@@ -134,7 +134,7 @@ export default function Home() {
               {
                 n: "01",
                 title: "Referral",
-                desc: "Ask your family physician for a referral to Precision Pain Centre. Most treatments are covered by OHIP once referred.",
+                desc: "Ask your family physician for a referral to Precision Care Centre. Most treatments are covered by OHIP once referred.",
               },
               {
                 n: "02",
@@ -264,7 +264,7 @@ export default function Home() {
       {/* ─── FOOTER ──────────────────────────────────────── */}
       <footer className="footer" style={{ borderTop: "1px solid var(--sand)" }}>
         <span className="footer-left">
-          © 2024 Precision Pain Centre. All rights reserved.
+          © 2024 Precision Care Centre. All rights reserved.
         </span>
         <div className="footer-right">
           <a href="tel:2897529388">289-752-9388</a>
